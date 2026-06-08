@@ -23,38 +23,46 @@
 
 ## 🧠 About Me
 
-<img align="right" width="380" src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/code.gif"/>
+<table>
+<tr>
+<td valign="top" width="60%">
 
-```
-
+```python
 class MohammadReyaz:
 
-    name        = "Mohammad Reyaz Mohammad Rafi"
-    location    = "Melbourne, VIC, Australia 🇦🇺"
-    degree      = "Master of Data Science @ RMIT University"
+    name     = "Mohammad Reyaz Mohammad Rafi"
+    location = "Melbourne, VIC, Australia 🇦🇺"
+    degree   = "Master of Data Science @ RMIT"
 
     stack = [
-        "Python", "TensorFlow", "PyTorch", "YOLOv8",
-        "RF-DETR", "RTMPose", "OpenCV", "AWS",
-        "Scikit-Learn", "XGBoost", "Docker", "SQL"
+        "Python", "TensorFlow", "PyTorch",
+        "YOLOv8", "RF-DETR", "RTMPose",
+        "OpenCV", "AWS", "XGBoost", "SQL"
     ]
 
     currently_learning = [
         "Transformer-based Vision Models",
         "MLOps & Model Serving at Scale",
-        "Real-Time Computer Vision Pipelines",
-        "Large Language Model Fine-Tuning"
+        "Real-Time CV Pipelines",
+        "LLM Fine-Tuning (LoRA / QLoRA)"
     ]
 
-    fun_fact = "I built a 95% mAP@50 sports CV pipeline \
-                tracking basketball players in real-time 🏀"
+    fun_fact = "Built a 95% mAP@50 sports CV \
+    pipeline tracking basketball players 🏀"
 
     def motto(self):
-        return "Every problem has multiple solutions — \
-                find the simplest one that actually works."
+        return (
+            "Every problem has multiple solutions"
+            " — find the simplest one that works."
+        )
 ```
 
-<br clear="right"/>
+</td>
+<td valign="top" align="center" width="40%">
+  <img src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/code.gif" width="340" alt="Coding gif"/>
+</td>
+</tr>
+</table>
 
 ---
 
