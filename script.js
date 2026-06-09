@@ -1,191 +1,209 @@
-/* ════════════════════════════════════
-   Mohammad Reyaz · Portfolio · script.js
-════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   Mohammad Reyaz — Portfolio · script.js
+═══════════════════════════════════════════ */
 
-/* ── Year ── */
+/* year */
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-/* ── Nav sticky ── */
-const nav = document.getElementById('nav');
+/* ── NAV active tab ── */
+const navTabs = document.querySelectorAll('.tb-tabs .tab');
+const allSections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('stuck', window.scrollY > 20);
+  const y = window.scrollY + 80;
+  allSections.forEach(s => {
+    if (y >= s.offsetTop && y < s.offsetTop + s.offsetHeight)
+      navTabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + s.id));
+  });
 }, { passive: true });
 
 /* ── Burger ── */
-const burger    = document.getElementById('burger');
+const burger = document.getElementById('burger');
 const mobileNav = document.getElementById('mobileNav');
 burger.addEventListener('click', () => mobileNav.classList.toggle('open'));
-mobileNav.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => mobileNav.classList.remove('open'));
-});
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
 
 /* ── Scroll reveal ── */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('on');
-      io.unobserve(e.target);
-    }
-  });
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.reveal').forEach((el, i) => {
-  // stagger siblings in same parent
-  const siblings = el.parentElement.querySelectorAll('.reveal');
-  let idx = Array.from(siblings).indexOf(el);
-  el.style.transitionDelay = (idx * 0.08) + 's';
+document.querySelectorAll('.reveal').forEach((el, _, arr) => {
+  const siblings = Array.from(el.parentElement.querySelectorAll('.reveal'));
+  el.style.transitionDelay = (siblings.indexOf(el) * 0.1) + 's';
   io.observe(el);
 });
 
-/* ── Detection canvas background ── */
-(function initCanvas() {
-  const canvas = document.getElementById('detCanvas');
+/* ── Flip cards ── */
+document.querySelectorAll('.flip-card').forEach(card => {
+  let flipped = false;
+  const toggle = () => { flipped = !flipped; card.classList.toggle('flipped', flipped); };
+  card.addEventListener('click', toggle);
+  card.querySelectorAll('.fc-hint').forEach(h => h.addEventListener('click', e => { e.stopPropagation(); toggle(); }));
+  card.addEventListener('touchstart', () => {}, { passive: true });
+});
+
+/* ── Line numbers ── */
+(function() {
+  const code = document.getElementById('codeEditor');
+  const nums = document.getElementById('lineNums');
+  if (!code || !nums) return;
+  const lines = code.textContent.split('\n').length;
+  nums.innerHTML = Array.from({ length: lines }, (_, i) => '<div>' + (i + 1) + '</div>').join('');
+})();
+
+/* ── Particle background ── */
+(function() {
+  const canvas = document.getElementById('bgCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let W, H, nodes, boxes;
+  let W, H, pts;
+  const COLS = ['rgba(0,255,148,', 'rgba(14,165,233,', 'rgba(124,58,237,'];
 
   function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-    initScene();
-  }
-
-  const GREEN = 'rgba(10,255,138,';
-
-  /* floating nodes = "keypoints" */
-  function initScene() {
-    nodes = Array.from({ length: 28 }, () => ({
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    pts = Array.from({ length: 55 }, () => ({
       x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - .5) * .4,
-      vy: (Math.random() - .5) * .4,
+      vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35,
       r: Math.random() * 1.5 + .5,
+      col: COLS[Math.floor(Math.random() * COLS.length)]
     }));
-    /* static detection boxes */
-    boxes = [
-      { x: W*.10, y: H*.18, w: W*.18, h: H*.55, label: 'player',   conf: 0.97, col: GREEN },
-      { x: W*.55, y: H*.12, w: W*.16, h: H*.48, label: 'referee',  conf: 0.91, col: 'rgba(93,164,255,' },
-      { x: W*.74, y: H*.40, w: W*.10, h: H*.18, label: 'ball',     conf: 0.93, col: GREEN },
-      { x: W*.32, y: H*.20, w: W*.19, h: H*.52, label: 'player',   conf: 0.95, col: GREEN },
-    ];
   }
 
-  let t = 0;
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    t++;
-
-    /* grid lines */
-    ctx.strokeStyle = 'rgba(255,255,255,.025)';
-    ctx.lineWidth = 1;
-    for (let x = 0; x < W; x += 80) {
-      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
-    }
-    for (let y = 0; y < H; y += 80) {
-      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-    }
-
-    /* connection lines between close nodes */
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].x - nodes[j].x;
-        const dy = nodes[i].y - nodes[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 130) {
-          ctx.strokeStyle = `rgba(10,255,138,${.06 * (1 - dist/130)})`;
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 140) {
+          ctx.strokeStyle = pts[i].col + (.05 * (1 - d / 140)) + ')';
           ctx.lineWidth = .6;
-          ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
         }
       }
     }
-
-    /* nodes */
-    nodes.forEach(n => {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > W) n.vx *= -1;
-      if (n.y < 0 || n.y > H) n.vy *= -1;
-      ctx.fillStyle = GREEN + '.55)';
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.fillStyle = p.col + '.6)';
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
     });
-
-    /* detection boxes */
-    boxes.forEach((b, idx) => {
-      const pulse = .35 + .15 * Math.sin(t * .02 + idx);
-      ctx.strokeStyle = b.col + pulse + ')';
-      ctx.lineWidth = 1;
-      ctx.setLineDash([6, 4]);
-      ctx.strokeRect(b.x, b.y, b.w, b.h);
-      ctx.setLineDash([]);
-
-      /* label chip */
-      ctx.fillStyle = b.col + '.85)';
-      ctx.fillRect(b.x, b.y - 16, 90, 16);
-      ctx.fillStyle = '#04060c';
-      ctx.font = '9px JetBrains Mono, monospace';
-      ctx.fillText(`${b.label} ${b.conf}`, b.x + 4, b.y - 4);
-
-      /* corner ticks */
-      const tl = 12;
-      ctx.strokeStyle = b.col + '.9)';
-      ctx.lineWidth = 1.5;
-      [[b.x, b.y, 1, 1], [b.x+b.w, b.y, -1, 1], [b.x, b.y+b.h, 1, -1], [b.x+b.w, b.y+b.h, -1, -1]].forEach(([cx, cy, sx, sy]) => {
-        ctx.beginPath();
-        ctx.moveTo(cx + sx*tl, cy); ctx.lineTo(cx, cy); ctx.lineTo(cx, cy + sy*tl);
-        ctx.stroke();
-      });
-    });
-
     requestAnimationFrame(draw);
   }
 
   window.addEventListener('resize', resize);
-  resize();
-  draw();
+  resize(); draw();
 })();
 
-/* ── FPS counter (fake but fun) ── */
-(function fpsAnim() {
-  const el = document.getElementById('fpsCounter');
-  if (!el) return;
-  setInterval(() => {
-    el.textContent = 58 + Math.floor(Math.random() * 4);
-  }, 800);
-})();
-
-/* ── Progress bar animate on scroll ── */
-(function animateBars() {
-  const bars = document.querySelectorAll('.pb-fill');
-  const barIO = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.width = e.target.style.getPropertyValue('--w') || e.target.style.cssText.match(/--w:\s*([^;]+)/)?.[1] || '0%';
-        barIO.unobserve(e.target);
-      }
-    });
-  }, { threshold: .5 });
-  bars.forEach(b => { b.style.width = '0%'; barIO.observe(b); });
-})();
-
-/* ── Skill pill random accent on hover ── */
-(function pillColors() {
-  const accents = ['var(--green)', 'var(--blue)', '#c87eff'];
-  document.querySelectorAll('.sg-pills span:not(.accent-group span)').forEach(p => {
-    const c = accents[Math.floor(Math.random() * accents.length)];
-    p.addEventListener('mouseenter', () => { p.style.color = c; p.style.borderColor = c; p.style.background = c.replace(')', ',.08)').replace('var(--green)', 'rgba(10,255,138,.08)').replace('var(--blue)', 'rgba(93,164,255,.08)').replace('#c87eff', 'rgba(200,126,255,.08)'); });
-    p.addEventListener('mouseleave', () => { p.style.color = ''; p.style.borderColor = ''; p.style.background = ''; });
+/* ── Terminal boot animation ── */
+(function() {
+  document.querySelectorAll('.tl.to').forEach((line, i) => {
+    line.style.opacity = '0';
+    setTimeout(() => { line.style.transition = 'opacity .3s'; line.style.opacity = '1'; }, 300 + i * 160);
   });
 })();
 
-/* ── Active nav link ── */
-(function navHighlight() {
-  const secs = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY + 80;
-    secs.forEach(s => {
-      if (y >= s.offsetTop && y < s.offsetTop + s.offsetHeight) {
-        links.forEach(a => {
-          a.style.color = a.getAttribute('href') === '#' + s.id ? 'var(--green)' : '';
-        });
-      }
-    });
+/* ── PROJECT SIDEBAR + MATRIX RAIN ── */
+(function() {
+  const tabs    = document.querySelectorAll('.proj-tab');
+  const panels  = document.querySelectorAll('.proj-panel');
+  const stage   = document.getElementById('matrixStage');
+  const canvas  = document.getElementById('matrixCanvas');
+  const label   = document.getElementById('matrixLabel');
+  const edTabs  = document.getElementById('projEditorTabs');
+  if (!tabs.length || !canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let rafId = null, drops = [];
+
+  const cfg = {
+    trainstop: {
+      label: '> trainstop.py',
+      chars: 'YOLOv8RF-DETRByteTrackBoT-SORTRTMPoseOpenCVCVATPython0195mAP',
+      color: '#00FF94', glow: 'rgba(0,255,148,', icon: '🏀'
+    },
+    entailment: {
+      label: '> visual_entailment.py',
+      chars: 'EfficientNetB4BERTUSETensorFlowKerasSageMakerentailneutral01',
+      color: '#A78BFA', glow: 'rgba(167,139,250,', icon: '🧠'
+    },
+    forecast: {
+      label: '> forecasting.py',
+      chars: 'XGBoostSARIMAADFlag1lag3lag12saleserosion24mopatent01',
+      color: '#0EA5E9', glow: 'rgba(14,165,233,', icon: '💊'
+    }
+  };
+
+  function startMatrix(proj) {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    const c = cfg[proj]; if (!c) return;
+    const W = canvas.width  = stage.offsetWidth  || 800;
+    const H = canvas.height = stage.offsetHeight || 180;
+    const FS = 13, COLS = Math.floor(W / FS);
+    drops = Array.from({ length: COLS }, () => Math.random() * -30);
+    const chars = c.chars.split('');
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0,0,0,0.05)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.font = FS + 'px JetBrains Mono, monospace';
+      drops.forEach((y, i) => {
+        const ch = chars[Math.floor(Math.random() * chars.length)];
+        if (Math.random() > 0.93) { ctx.fillStyle = '#fff'; ctx.shadowColor = c.color; ctx.shadowBlur = 8; }
+        else { ctx.fillStyle = c.glow + (.15 + Math.random() * .6) + ')'; ctx.shadowBlur = 0; }
+        ctx.fillText(ch, i * FS, y * FS);
+        ctx.shadowBlur = 0;
+        if (y * FS > H && Math.random() > .975) drops[i] = 0;
+        drops[i] += 0.65;
+      });
+      rafId = requestAnimationFrame(draw);
+    }
+    draw();
+    label.textContent = c.label;
+    label.style.color = c.color;
+    label.style.textShadow = '0 0 18px ' + c.glow + '.8), 0 0 50px ' + c.glow + '.3)';
+    setTimeout(() => label.classList.add('show'), 100);
+  }
+
+  function stopMatrix() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    label.classList.remove('show');
+  }
+
+  function setEditorTab(proj) {
+    if (!edTabs) return;
+    const c = cfg[proj];
+    edTabs.innerHTML = '<div class="pet active">' + c.icon + ' ' + proj + '.py <span class="pet-x">×</span></div>';
+    edTabs.querySelector('.pet-x').addEventListener('click', e => { e.stopPropagation(); activate('trainstop'); });
+  }
+
+  function activate(proj) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.proj === proj));
+    panels.forEach(p => p.classList.toggle('active', p.dataset.proj === proj));
+    if (cfg[proj]) { stage.classList.add('visible'); startMatrix(proj); }
+    else { stage.classList.remove('visible'); stopMatrix(); }
+    setEditorTab(proj);
+    const active = document.querySelector('.proj-panel[data-proj="' + proj + '"]');
+    if (active) setTimeout(() => active.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 150);
+  }
+
+  tabs.forEach(tab => tab.addEventListener('click', () => activate(tab.dataset.proj)));
+  window.addEventListener('resize', () => {
+    if (stage.classList.contains('visible')) {
+      const a = document.querySelector('.psb-file.active');
+      if (a && cfg[a.dataset.proj]) startMatrix(a.dataset.proj);
+    }
   }, { passive: true });
+
+  activate('trainstop');
 })();
+
+/* ── Badge hover glow ── */
+document.querySelectorAll('.bw-b img').forEach(img => {
+  img.addEventListener('mouseenter', () => img.style.filter = 'brightness(1.25) drop-shadow(0 0 6px rgba(0,255,148,.3))');
+  img.addEventListener('mouseleave', () => img.style.filter = '');
+});
+
+console.log('%c MohammadReyaz.portfolio() ✓', 'color:#00FF94;font-family:monospace;font-size:13px');
