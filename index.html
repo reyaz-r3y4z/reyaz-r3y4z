@@ -3,477 +3,590 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Mohammad Reyaz — Data Scientist · ML Engineer · Computer Vision</title>
-  <meta name="description" content="Portfolio of Mohammad Reyaz — ML Engineer & Computer Vision specialist. 95% mAP@50 · 3.5yr TCS · RMIT MSc."/>
+  <title>Mohammad Reyaz | Data Scientist · ML · Computer Vision</title>
+  <meta name="description" content="Portfolio of Mohammad Reyaz — ML Engineer, Computer Vision Specialist, RMIT MSc Data Science."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- scanline overlay -->
-<div class="scanlines" aria-hidden="true"></div>
+<canvas id="bgCanvas"></canvas>
 
-<!-- ░░ NAV ░░ -->
-<header class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#" class="wordmark">REYAZ<span class="blink">_</span></a>
-    <nav class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#stack">Stack</a>
-      <a href="#experience">XP</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <a href="mailto:reyazrmr@gmail.com" class="nav-cta">Open to roles ↗</a>
-    <button class="burger" id="burger" aria-label="Toggle menu">
-      <span></span><span></span>
-    </button>
+<!-- ░░ TITLEBAR NAV ░░ -->
+<header class="titlebar" id="nav">
+  <div class="tb-left">
+    <div class="tb-dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <span class="tb-app">VS · REYAZ</span>
   </div>
-  <div class="mobile-nav" id="mobileNav">
-    <a href="#work">Work</a>
-    <a href="#stack">Stack</a>
-    <a href="#experience">XP</a>
-    <a href="#contact">Contact</a>
+  <nav class="tb-tabs">
+    <a href="#hero"       class="tab active">hero.py</a>
+    <a href="#about"      class="tab">about.py</a>
+    <a href="#stack"      class="tab">stack.json</a>
+    <a href="#projects"   class="tab">projects/</a>
+    <a href="#experience" class="tab">experience.log</a>
+    <a href="#contact"    class="tab">contact.sh</a>
+  </nav>
+  <div class="tb-right">
+    <span class="tb-status"><span class="status-dot"></span>Open to work</span>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about">about.py</a><a href="#stack">stack.json</a>
+  <a href="#projects">projects/</a><a href="#experience">experience.log</a>
+  <a href="#contact">contact.sh</a>
+</div>
 
-<!-- ░░░░░░░░░░░░░░░░░░░░░░ HERO ░░░░░░░░░░░░░░░░░░░░░░ -->
+<!-- ══════════════════════════════════════════ HERO ══════════════════════════════════════════ -->
 <section class="hero" id="hero">
-
-  <!-- detection canvas background -->
-  <canvas id="detCanvas" class="det-canvas" aria-hidden="true"></canvas>
-
-  <!-- corner markers -->
-  <div class="corner tl" aria-hidden="true"></div>
-  <div class="corner tr" aria-hidden="true"></div>
-  <div class="corner bl" aria-hidden="true"></div>
-  <div class="corner br" aria-hidden="true"></div>
-
-  <!-- system readout strip -->
-  <div class="readout-strip" aria-hidden="true">
-    <span class="ro-item">SYS:<span class="ro-val">ONLINE</span></span>
-    <span class="ro-item">MODEL:<span class="ro-val">YOLOv8+RF-DETR</span></span>
-    <span class="ro-item">mAP@50:<span class="ro-val hi">95%</span></span>
-    <span class="ro-item">FPS:<span class="ro-val" id="fpsCounter">60</span></span>
-    <span class="ro-item">LOC:<span class="ro-val">MELBOURNE AU</span></span>
+  <div class="hero-corners">
+    <div class="hc tl"></div><div class="hc tr"></div>
+    <div class="hc bl"></div><div class="hc br"></div>
   </div>
-
-  <div class="hero-body">
-    <!-- profile block -->
-    <div class="profile-block">
-      <!-- ═══════════════════════════════════════
-           PROFILE PHOTO
-           Place your photo at assets/profile.jpg
-           Square crop, min 400×400 px.
-           ═══════════════════════════════════════ -->
-      <div class="profile-frame" id="profileFrame">
-        <img src="assets/profile.jpg" alt="Mohammad Reyaz" class="profile-img"
-             onerror="document.getElementById('profileFrame').classList.add('no-img')"/>
-        <div class="profile-fallback">
-          <span class="fi-initials">MR</span>
-          <span class="fi-hint">assets/profile.jpg</span>
-        </div>
-        <!-- bounding box overlay -->
-        <div class="bbox-overlay" aria-hidden="true">
-          <span class="bbox-label">Mohammad_Reyaz conf:1.00</span>
-        </div>
-        <div class="profile-glow"></div>
+  <div class="scanline-hero"></div>
+  <div class="sys-bar">
+    <span>SYS<span class="sv">:ONLINE</span></span>
+    <span>MODEL<span class="sv">:YOLOv8+RF-DETR</span></span>
+    <span>mAP@50<span class="sv hi">:95%</span></span>
+    <span>STATUS<span class="sv hi">:OPEN_TO_WORK</span></span>
+    <span>LOC<span class="sv">:MELBOURNE_AU</span></span>
+  </div>
+  <div class="hero-wrap">
+    <!-- terminal -->
+    <div class="term-block">
+      <div class="term-header">
+        <span class="tc r"></span><span class="tc y"></span><span class="tc g"></span>
+        <span class="term-title">~  bash — reyaz@portfolio</span>
+      </div>
+      <div class="term-body">
+        <div class="tl"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> python reyaz.py</div>
+        <div class="tl to">Initialising <span class="tg">MohammadReyaz</span><span class="tb2">...</span></div>
+        <div class="tl to">Loading modules: <span class="tb2">computer_vision</span>, <span class="tpurp">deep_learning</span>, <span class="torange">big_data</span></div>
+        <div class="tl to">Degree      : <span class="tpurp">MSc Data Science</span> · RMIT University</div>
+        <div class="tl to">Experience  : <span class="tg">3.5 yrs</span> @ TCS + <span class="tg">Trainstop</span> internship</div>
+        <div class="tl to">Best model  : <span class="tg">95% mAP@50</span> (sports CV pipeline)</div>
+        <div class="tl to">Annotations : <span class="tg">4,000+</span> bounding boxes curated</div>
+        <div class="tl to">Frames      : <span class="tg">60,000+</span> processed</div>
+        <div class="tl to">Location    : <span class="tb2">Melbourne, VIC 🇦🇺</span></div>
+        <div class="tl to">Email       : <span class="tb2">reyazrmr@gmail.com</span></div>
+        <div class="tl to">GitHub      : <span class="tb2">github.com/reyaz-r3y4z</span></div>
+        <div class="tl to">Status      : <span class="tg blink-g">● OPEN_TO_WORK</span></div>
+        <div class="tl">&nbsp;</div>
+        <div class="tl"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> <span class="cursor-blink">█</span></div>
       </div>
     </div>
-
-    <!-- name + role -->
-    <div class="hero-text">
-      <p class="hero-tag">// Data Scientist · ML Engineer · Computer Vision</p>
-      <h1 class="hero-name">
-        <span class="hn-first">Mohammad</span><br>
-        <span class="hn-last">Reyaz</span>
+    <!-- headline -->
+    <div class="hero-headline">
+      <p class="hl-eye">// Data Scientist · ML Engineer · Computer Vision</p>
+      <h1>
+        <span class="hn1">Mohammad</span><br>
+        <span class="hn2">Reyaz<span class="hl-dot">.</span></span>
       </h1>
-      <p class="hero-desc">
-        I build computer vision systems that <em>actually ship</em> —
-        from 60 000-frame sports analytics pipelines to multimodal neural networks
-        and enterprise big-data infrastructure.
-      </p>
-      <div class="hero-btns">
-        <a href="#work" class="btn-primary">See my work</a>
+      <p class="hl-sub">I build CV systems that <em>ship</em> — from real-time
+        95% mAP@50 sports pipelines to multimodal neural networks
+        and distributed big-data infrastructure.</p>
+      <div class="hl-actions">
+        <a href="#projects" class="btn-g">View Projects</a>
         <a href="https://github.com/reyaz-r3y4z" class="btn-ghost" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://linkedin.com/in/mdreyaz7755" class="btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>
-
-    <!-- live metrics panel -->
-    <div class="metrics-panel">
-      <p class="mp-head">// live_stats.json</p>
-      <div class="mp-row">
-        <span class="mp-key">accuracy</span>
-        <span class="mp-val green">95% mAP@50</span>
-      </div>
-      <div class="mp-row">
-        <span class="mp-key">annotations</span>
-        <span class="mp-val">4 000+</span>
-      </div>
-      <div class="mp-row">
-        <span class="mp-key">exp_years</span>
-        <span class="mp-val">3.5 yrs TCS</span>
-      </div>
-      <div class="mp-row">
-        <span class="mp-key">degree</span>
-        <span class="mp-val">MSc · RMIT</span>
-      </div>
-      <div class="mp-row">
-        <span class="mp-key">status</span>
-        <span class="mp-val green blink-slow">● open_to_work</span>
-      </div>
-      <div class="mp-progress">
-        <span class="mp-key">cv_pipeline</span>
-        <div class="progress-bar"><div class="pb-fill" style="--w:95%"></div></div>
-        <span class="mp-pct">95%</span>
-      </div>
-      <div class="mp-progress">
-        <span class="mp-key">deep_learning</span>
-        <div class="progress-bar"><div class="pb-fill" style="--w:88%"></div></div>
-        <span class="mp-pct">88%</span>
-      </div>
-      <div class="mp-progress">
-        <span class="mp-key">mlops_cloud</span>
-        <div class="progress-bar"><div class="pb-fill" style="--w:80%"></div></div>
-        <span class="mp-pct">80%</span>
-      </div>
+    <!-- metric cards -->
+    <div class="hero-metrics">
+      <div class="m-card"><span class="mv">95%</span><span class="ml">mAP@50</span></div>
+      <div class="m-card"><span class="mv">4K+</span><span class="ml">Annotations</span></div>
+      <div class="m-card"><span class="mv">3.5yr</span><span class="ml">TCS XP</span></div>
+      <div class="m-card"><span class="mv">5+</span><span class="ml">ML Projects</span></div>
     </div>
   </div>
 </section>
 
-<!-- ░░░░░░░░░░░░░░░░░░░░░░ WORK ░░░░░░░░░░░░░░░░░░░░░░ -->
-<section id="work" class="section">
+<!-- ══════════════════════════════════════════ ABOUT ══════════════════════════════════════════ -->
+<section class="section" id="about">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-tag">// projects</span>
-      <h2 class="sec-title">Selected Work</h2>
-      <p class="sec-sub">Production systems, research pipelines, and competition models — all real outcomes.</p>
-    </div>
+    <div class="file-tab-row"><div class="file-tab active"><span class="ft-ic">🐍</span>about.py</div></div>
+    <div class="ide-pane about-pane">
+      <div class="code-area">
+        <div class="line-nums" id="lineNums"></div>
+        <pre class="code-editor" id="codeEditor"><span class="ck">class</span> <span class="ccls">MohammadReyaz</span><span class="cpu">:</span>
+    <span class="ccm">"""</span>
+<span class="ccm">    Data Scientist · ML Engineer · Computer Vision Specialist</span>
+<span class="ccm">    Master of Data Science — RMIT University, Melbourne</span>
+<span class="ccm">    3.5+ years enterprise experience @ Tata Consultancy Services</span>
+<span class="ccm">    """</span>
 
-    <!-- ── FEATURED: Trainstop ── -->
-    <div class="feat-card reveal">
-      <div class="fc-media">
-        <!-- ═══════════════════════════════════════════════════════════
-             TRAINSTOP DEMO VIDEO
-             OPTION A (recommended) — YouTube:
-               Upload video to YouTube (can be unlisted).
-               Get the video ID from the URL, e.g. youtu.be/ABC123 → ABC123
-               Replace YOUR_YOUTUBE_VIDEO_ID below.
+    <span class="ck">def</span> <span class="cfn">__init__</span><span class="cpu">(</span><span class="cvar">self</span><span class="cpu">):</span>
+        <span class="cvar">self</span><span class="cpu">.</span><span class="cprop">name</span>     <span class="cop">=</span> <span class="cstr">"Mohammad Reyaz Mohammad Rafi"</span>
+        <span class="cvar">self</span><span class="cpu">.</span><span class="cprop">location</span> <span class="cop">=</span> <span class="cstr">"Melbourne, VIC, Australia 🇦🇺"</span>
+        <span class="cvar">self</span><span class="cpu">.</span><span class="cprop">degree</span>   <span class="cop">=</span> <span class="cstr">"MSc Data Science · RMIT University"</span>
+        <span class="cvar">self</span><span class="cpu">.</span><span class="cprop">email</span>    <span class="cop">=</span> <span class="cstr">"reyazrmr@gmail.com"</span>
+        <span class="cvar">self</span><span class="cpu">.</span><span class="cprop">linkedin</span> <span class="cop">=</span> <span class="cstr">"linkedin.com/in/mdreyaz7755"</span>
+        <span class="cvar">self</span><span class="cpu">.</span><span class="cprop">github</span>   <span class="cop">=</span> <span class="cstr">"github.com/reyaz-r3y4z"</span>
 
-             OPTION B — Self-hosted MP4 (under ~20 MB):
-               Place at assets/trainstop/demo.mp4
-               Comment out the <iframe>, uncomment the <video>.
+        <span class="cvar">self</span><span class="cpu">.</span><span class="cprop">stack</span> <span class="cop">=</span> <span class="cpu">[</span>
+            <span class="cstr">"Python"</span><span class="cpu">,</span> <span class="cstr">"TensorFlow"</span><span class="cpu">,</span> <span class="cstr">"PyTorch"</span><span class="cpu">,</span>
+            <span class="cstr">"YOLOv8"</span><span class="cpu">,</span>  <span class="cstr">"RF-DETR"</span><span class="cpu">,</span>   <span class="cstr">"RTMPose"</span><span class="cpu">,</span>
+            <span class="cstr">"OpenCV"</span><span class="cpu">,</span>  <span class="cstr">"ByteTrack"</span><span class="cpu">,</span> <span class="cstr">"BoT-SORT"</span><span class="cpu">,</span>
+            <span class="cstr">"XGBoost"</span><span class="cpu">,</span> <span class="cstr">"AWS"</span><span class="cpu">,</span>       <span class="cstr">"Docker"</span><span class="cpu">,</span> <span class="cstr">"SQL"</span>
+        <span class="cpu">]</span>
 
-             OPTION C — Animated GIF:
-               Place at assets/trainstop/demo.gif
-               Comment out the <iframe>, uncomment the <img>.
-             ═══════════════════════════════════════════════════════════ -->
-        <div class="video-shell">
-          <iframe
-            src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID?rel=0&modestbranding=1&color=white"
-            title="Basketball tracking demo"
-            frameborder="0"
-            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
-            allowfullscreen>
-          </iframe>
-          <!-- OPTION B:
-          <video controls playsinline poster="assets/trainstop/poster.jpg">
-            <source src="assets/trainstop/demo.mp4" type="video/mp4"/>
-          </video>
-          -->
-          <!-- OPTION C:
-          <img src="assets/trainstop/demo.gif" alt="Tracking demo"/>
-          -->
-        </div>
-        <div class="video-hint">
-          📽 Replace <code>YOUR_YOUTUBE_VIDEO_ID</code> with your video ID, or use the MP4 / GIF options commented above.
-        </div>
-        <!-- detection overlay decoration -->
-        <div class="fc-overlay" aria-hidden="true">
-          <span class="fc-conf">player conf:0.97</span>
-          <span class="fc-conf" style="top:52%;left:58%">ball conf:0.93</span>
-          <span class="fc-conf" style="top:25%;left:70%">referee conf:0.91</span>
-        </div>
-      </div>
-      <div class="fc-info">
-        <span class="fc-org">Trainstop / Superstat · Jul–Dec 2025</span>
-        <h3 class="fc-title">Basketball Player &amp; Ball Tracking Pipeline</h3>
-        <p class="fc-desc">
-          End-to-end computer vision pipeline transforming raw match footage into actionable
-          sports analytics. Detects &amp; persistently tracks players, referees, hoops, and
-          the ball across full-match video — even under heavy occlusion.
-        </p>
-        <div class="fc-kpis">
-          <div class="kpi"><span class="kv">95%</span><span class="kl">mAP@50</span></div>
-          <div class="kpi"><span class="kv">4K+</span><span class="kl">Annotations</span></div>
-          <div class="kpi"><span class="kv">4</span><span class="kl">Classes tracked</span></div>
-          <div class="kpi"><span class="kv">60K+</span><span class="kl">Frames</span></div>
-        </div>
-        <div class="fc-tags">
-          <span>YOLOv8</span><span>RF-DETR</span><span>RTMPose</span>
-          <span>ByteTrack</span><span>BoT-SORT</span><span>OpenCV</span>
-          <span>CVAT</span><span>Roboflow</span><span>Python</span>
-        </div>
-        <a href="https://github.com/reyaz-r3y4z" class="btn-primary sm" target="_blank" rel="noopener">View Code ↗</a>
-      </div>
-    </div>
+        <span class="cvar">self</span><span class="cpu">.</span><span class="cprop">learning</span> <span class="cop">=</span> <span class="cpu">[</span>
+            <span class="cstr">"Transformer Vision Models (ViT, DINO, SAM2)"</span><span class="cpu">,</span>
+            <span class="cstr">"MLOps &amp; Model Serving at Scale"</span><span class="cpu">,</span>
+            <span class="cstr">"LLM Fine-Tuning (LoRA, QLoRA, RAG)"</span>
+        <span class="cpu">]</span>
 
-    <!-- ── FEATURED: Visual Entailment ── -->
-    <div class="feat-card feat-flip reveal">
-      <div class="fc-media">
-        <!-- ═══════════════════════════════════════════════════════════
-             VISUAL ENTAILMENT ARCHITECTURE DIAGRAM
-             Export your pipeline diagram from your report / notebook.
-             Save as assets/ve/pipeline.png (or .jpg)
-             ═══════════════════════════════════════════════════════════ -->
-        <div class="img-shell">
-          <img src="assets/ve/pipeline.png" alt="Visual Entailment architecture"
-               onerror="this.closest('.img-shell').classList.add('img-empty')"/>
-          <div class="img-empty-msg">📐 Add diagram → <code>assets/ve/pipeline.png</code></div>
-        </div>
-      </div>
-      <div class="fc-info">
-        <span class="fc-org">RMIT University · 2025</span>
-        <h3 class="fc-title">Visual Entailment Multimodal AI</h3>
-        <p class="fc-desc">
-          Multimodal neural network fusing <strong>EfficientNetB4</strong> visual encodings with
-          <strong>BERT / Universal Sentence Encoder</strong> text embeddings to classify
-          entailment relationships between images and captions on SNLI-VE.
-        </p>
-        <div class="fc-kpis">
-          <div class="kpi"><span class="kv">~82.5%</span><span class="kl">Val Accuracy</span></div>
-          <div class="kpi"><span class="kv">3-phase</span><span class="kl">Training</span></div>
-          <div class="kpi"><span class="kv">Fusion</span><span class="kl">Architecture</span></div>
-        </div>
-        <div class="fc-tags">
-          <span>TensorFlow</span><span>Keras</span><span>EfficientNetB4</span>
-          <span>BERT</span><span>USE</span><span>Multi-Modal</span><span>AWS SageMaker</span>
-        </div>
-        <a href="https://github.com/reyaz-r3y4z" class="btn-primary sm" target="_blank" rel="noopener">View Code ↗</a>
-      </div>
-    </div>
+    <span class="ck">def</span> <span class="cfn">fun_fact</span><span class="cpu">(</span><span class="cvar">self</span><span class="cpu">):</span>
+        <span class="ck">return</span> <span class="cstr">"Built 95% mAP@50 real-time CV pipeline tracking basketball 🏀"</span>
 
-    <!-- ── MINI GRID ── -->
-    <div class="mini-row">
+    <span class="ck">def</span> <span class="cfn">work_style</span><span class="cpu">(</span><span class="cvar">self</span><span class="cpu">):</span>
+        <span class="ck">return</span> <span class="cpu">{</span>
+            <span class="cstr">"approach"</span> <span class="cpu">:</span> <span class="cstr">"pragmatic — simplest solution that ships"</span><span class="cpu">,</span>
+            <span class="cstr">"strength"</span> <span class="cpu">:</span> <span class="cstr">"bridging ML research and production systems"</span><span class="cpu">,</span>
+            <span class="cstr">"collab"</span>   <span class="cpu">:</span> <span class="cstr">"agile teams, stakeholder comms, sprint delivery"</span>
+        <span class="cpu">}</span>
 
-      <div class="mini-card reveal">
-        <div class="mc-img-wrap">
-          <!-- ═══════════════════════════════════════
-               WBC Grad-CAM image
-               Save as assets/wbc/gradcam.png
-               ═══════════════════════════════════════ -->
-          <img src="assets/wbc/gradcam.png" alt="Grad-CAM WBC"
-               onerror="this.closest('.mc-img-wrap').classList.add('img-empty')"/>
-          <div class="img-empty-msg sm">assets/wbc/gradcam.png</div>
-          <div class="mc-badge">Biomedical AI</div>
-        </div>
-        <div class="mc-body">
-          <h3>WBC Biomedical Classifier</h3>
-          <p>Multi-task CNN for white blood cell classification with <strong>Grad-CAM</strong> explainability for clinical transparency.</p>
-          <div class="mc-tags"><span>TensorFlow</span><span>Keras</span><span>Grad-CAM</span><span>OpenCV</span></div>
-          <div class="mc-links">
-            <a href="https://github.com/reyaz-r3y4z" target="_blank" rel="noopener">Code ↗</a>
-            <a href="assets/wbc/gradcam.png" target="_blank" rel="noopener">Grad-CAM ↗</a>
-            <a href="assets/wbc/confusion_matrix.png" target="_blank" rel="noopener">Confusion Matrix ↗</a>
-          </div>
-        </div>
-      </div>
+    <span class="ck">def</span> <span class="cfn">motto</span><span class="cpu">(</span><span class="cvar">self</span><span class="cpu">):</span>
+        <span class="ck">return</span> <span class="cstr">"Every problem has multiple solutions — find the simplest one that ships."</span>
 
-      <div class="mini-card reveal">
-        <div class="mc-img-wrap code-card">
-          <pre class="code-pre">XGBoost + SARIMA
-<span class="cp">→</span> rolling lag features
-<span class="cp">→</span> ADF stationarity
-<span class="cp">→</span> 24-month post-patent
-<span class="cp">→</span> generic erosion curve</pre>
-          <div class="mc-badge">Novartis Datathon 2024</div>
-        </div>
-        <div class="mc-body">
-          <h3>Generic Drug Sales Forecasting</h3>
-          <p>Pharmaceutical sales erosion prediction post-patent expiry. Gradient-boosted ensembles + SARIMA across cross-sectional markets.</p>
-          <div class="mc-tags"><span>XGBoost</span><span>SARIMA</span><span>Python</span><span>Time-Series</span><span>EDA</span></div>
-          <div class="mc-links"><a href="https://github.com/reyaz-r3y4z" target="_blank" rel="noopener">Code ↗</a></div>
-        </div>
+<span class="cvar">me</span> <span class="cop">=</span> <span class="ccls">MohammadReyaz</span><span class="cpu">()</span>
+<span class="cfn">print</span><span class="cpu">(</span><span class="cvar">me</span><span class="cpu">.</span><span class="cfn">motto</span><span class="cpu">())</span></pre>
       </div>
-
-      <div class="mini-card reveal">
-        <div class="mc-img-wrap code-card">
-          <pre class="code-pre">AWS EMR cluster
-<span class="cp">→</span> Java MapReduce jobs
-<span class="cp">→</span> Apache Pig scripts
-<span class="cp">→</span> S3 distributed joins
-<span class="cp">→</span> large-scale aggregation</pre>
-          <div class="mc-badge">Big Data</div>
+      <!-- profile side panel -->
+      <div class="profile-panel">
+        <div class="pp-img-wrap" id="ppWrap">
+          <img src="assets/profile.jpg" alt="Mohammad Reyaz"
+               onerror="document.getElementById('ppWrap').classList.add('no-img')"/>
+          <div class="pp-fallback"><span class="pp-init">MR</span><span class="pp-hint">assets/profile.jpg</span></div>
+          <div class="pp-bbox"><span class="pp-conf">conf: 1.00</span></div>
         </div>
-        <div class="mc-body">
-          <h3>Hadoop &amp; AWS EMR Pipeline</h3>
-          <p>Multi-stage distributed data pipeline on AWS EMR clusters. Complex DB joins and filtering over large-scale cloud storage.</p>
-          <div class="mc-tags"><span>Java</span><span>MapReduce</span><span>Apache Pig</span><span>AWS EMR</span><span>S3</span></div>
-          <div class="mc-links"><a href="https://github.com/reyaz-r3y4z" target="_blank" rel="noopener">Code ↗</a></div>
+        <div class="pp-rows">
+          <div class="pp-row"><span class="pp-k">name</span><span class="pp-v">Mohammad Reyaz</span></div>
+          <div class="pp-row"><span class="pp-k">role</span><span class="pp-v g">ML / CV Engineer</span></div>
+          <div class="pp-row"><span class="pp-k">loc</span><span class="pp-v">Melbourne 🇦🇺</span></div>
+          <div class="pp-row"><span class="pp-k">exp</span><span class="pp-v">3.5 yrs TCS</span></div>
+          <div class="pp-row"><span class="pp-k">degree</span><span class="pp-v">MSc · RMIT</span></div>
+          <div class="pp-row"><span class="pp-k">status</span><span class="pp-v g blink-g">● open_to_work</span></div>
         </div>
-      </div>
-
-    </div><!-- /mini-row -->
-  </div>
-</section>
-
-<!-- ░░░░░░░░░░░░░░░░░░░░░░ STACK ░░░░░░░░░░░░░░░░░░░░░░ -->
-<section id="stack" class="section dark-alt">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-tag">// tech_stack.json</span>
-      <h2 class="sec-title">Stack</h2>
-    </div>
-
-    <div class="stack-grid">
-      <div class="sg-group reveal">
-        <span class="sg-cat">Languages</span>
-        <div class="sg-pills">
-          <span>Python</span><span>SQL</span><span>R</span><span>Java</span><span>Bash</span>
-        </div>
-      </div>
-      <div class="sg-group reveal">
-        <span class="sg-cat">ML / DL</span>
-        <div class="sg-pills">
-          <span>TensorFlow</span><span>Keras</span><span>PyTorch</span>
-          <span>Scikit-Learn</span><span>XGBoost</span><span>Statsmodels</span>
-        </div>
-      </div>
-      <div class="sg-group reveal">
-        <span class="sg-cat">Computer Vision</span>
-        <div class="sg-pills accent-group">
-          <span>YOLOv8</span><span>RF-DETR</span><span>RTMPose</span>
-          <span>ByteTrack</span><span>BoT-SORT</span><span>OpenCV</span>
-          <span>CVAT</span><span>Roboflow</span>
-        </div>
-      </div>
-      <div class="sg-group reveal">
-        <span class="sg-cat">Cloud &amp; DevOps</span>
-        <div class="sg-pills">
-          <span>AWS S3</span><span>AWS EMR</span><span>Lambda</span>
-          <span>API Gateway</span><span>DynamoDB</span><span>Docker</span><span>Git</span>
-        </div>
-      </div>
-      <div class="sg-group reveal">
-        <span class="sg-cat">Big Data</span>
-        <div class="sg-pills">
-          <span>Hadoop</span><span>MapReduce</span><span>Apache Pig</span>
-        </div>
-      </div>
-      <div class="sg-group reveal">
-        <span class="sg-cat">Data &amp; Tools</span>
-        <div class="sg-pills">
-          <span>Pandas</span><span>NumPy</span><span>Matplotlib</span>
-          <span>Jira</span><span>Agile/Scrum</span>
+        <div class="pp-actions">
+          <a href="mailto:reyazrmr@gmail.com" class="pp-btn">Email</a>
+          <a href="https://linkedin.com/in/mdreyaz7755" class="pp-btn ghost" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ░░░░░░░░░░░░░░░░░░░░░░ EXPERIENCE ░░░░░░░░░░░░░░░░░░░░░░ -->
-<section id="experience" class="section">
+<!-- ══════════════════════════════════════════ STACK ══════════════════════════════════════════ -->
+<section class="section alt" id="stack">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-tag">// experience</span>
-      <h2 class="sec-title">Where I've Worked</h2>
+    <div class="file-tab-row"><div class="file-tab active"><span class="ft-ic">📦</span>stack.json</div></div>
+    <div class="ide-pane stack-pane">
+      <div class="stack-json">
+        <div class="sj"><span class="cpu">{</span></div>
+        <div class="sj ind"><span class="cstr">"languages"</span><span class="cpu">: [...]</span><span class="cpu">,</span></div>
+        <div class="sj ind"><span class="cstr">"ml_dl"</span><span class="cpu">: [...]</span><span class="cpu">,</span></div>
+        <div class="sj ind"><span class="cstr">"cv_tools"</span><span class="cpu">: [...]</span><span class="cpu">,</span></div>
+        <div class="sj ind"><span class="cstr">"cloud"</span><span class="cpu">: [...]</span><span class="cpu">,</span></div>
+        <div class="sj ind"><span class="cstr">"bigdata"</span><span class="cpu">: [...]</span><span class="cpu">,</span></div>
+        <div class="sj ind"><span class="cstr">"tools"</span><span class="cpu">: [...]</span></div>
+        <div class="sj"><span class="cpu">}</span></div>
+      </div>
+      <div class="badge-wall">
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">01</span>Languages</h3><div class="bw-b">
+          <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
+          <img src="https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="SQL"/>
+          <img src="https://img.shields.io/badge/R-276DC3?style=flat-square&logo=r&logoColor=white" alt="R"/>
+          <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white" alt="Java"/>
+          <img src="https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white" alt="Bash"/>
+        </div></div>
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">02</span>ML / DL Frameworks &amp; Libraries</h3><div class="bw-b">
+          <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white" alt="TensorFlow"/>
+          <img src="https://img.shields.io/badge/Keras-D00000?style=flat-square&logo=keras&logoColor=white" alt="Keras"/>
+          <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"/>
+          <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white" alt="OpenCV"/>
+          <img src="https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white" alt="Scikit-Learn"/>
+          <img src="https://img.shields.io/badge/XGBoost-00897B?style=flat-square&logo=xgboost&logoColor=white" alt="XGBoost"/>
+          <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="Pandas"/>
+          <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy"/>
+          <img src="https://img.shields.io/badge/Statsmodels-3B4D98?style=flat-square&logo=python&logoColor=white" alt="Statsmodels"/>
+        </div></div>
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">03</span>Computer Vision Specialist Tools</h3><div class="bw-b">
+          <img src="https://img.shields.io/badge/YOLOv8-00FFFF?style=flat-square&logo=yolo&logoColor=black" alt="YOLOv8"/>
+          <img src="https://img.shields.io/badge/RF--DETR-BF91F3?style=flat-square&logo=python&logoColor=white" alt="RF-DETR"/>
+          <img src="https://img.shields.io/badge/RTMPose-38BDAE?style=flat-square&logo=python&logoColor=white" alt="RTMPose"/>
+          <img src="https://img.shields.io/badge/ByteTrack-70A5FD?style=flat-square&logo=python&logoColor=white" alt="ByteTrack"/>
+          <img src="https://img.shields.io/badge/BoT--SORT-FF6D00?style=flat-square&logo=python&logoColor=white" alt="BoT-SORT"/>
+          <img src="https://img.shields.io/badge/Roboflow-6706CE?style=flat-square&logo=roboflow&logoColor=white" alt="Roboflow"/>
+          <img src="https://img.shields.io/badge/CVAT-FF6D00?style=flat-square&logo=opencv&logoColor=white" alt="CVAT"/>
+        </div></div>
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">04</span>Cloud &amp; DevOps</h3><div class="bw-b">
+          <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white" alt="AWS"/>
+          <img src="https://img.shields.io/badge/S3-569A31?style=flat-square&logo=amazons3&logoColor=white" alt="S3"/>
+          <img src="https://img.shields.io/badge/Lambda-FF9900?style=flat-square&logo=awslambda&logoColor=white" alt="Lambda"/>
+          <img src="https://img.shields.io/badge/EMR-FF9900?style=flat-square&logo=amazonaws&logoColor=white" alt="EMR"/>
+          <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker"/>
+          <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git"/>
+        </div></div>
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">05</span>Databases &amp; Big Data</h3><div class="bw-b">
+          <img src="https://img.shields.io/badge/DynamoDB-4053D6?style=flat-square&logo=amazondynamodb&logoColor=white" alt="DynamoDB"/>
+          <img src="https://img.shields.io/badge/Hadoop-66CCFF?style=flat-square&logo=apachehadoop&logoColor=black" alt="Hadoop"/>
+          <img src="https://img.shields.io/badge/Apache%20Pig-CC0200?style=flat-square&logo=apache&logoColor=white" alt="Apache Pig"/>
+        </div></div>
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">06</span>Tools &amp; Workflow</h3><div class="bw-b">
+          <img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=jira&logoColor=white" alt="Jira"/>
+          <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white" alt="Jupyter"/>
+          <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white" alt="VS Code"/>
+        </div></div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="xp-list">
-
-      <div class="xp-card reveal">
-        <div class="xp-left">
-          <span class="xp-period">Jul 2025<br>Dec 2025</span>
-          <span class="xp-line"></span>
+<!-- ══════════════════════════════════════════ PROJECTS ══════════════════════════════════════════ -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="proj-ide">
+      <!-- SIDEBAR -->
+      <div class="proj-sidebar">
+        <div class="psb-title"><span class="psb-chev">▾</span> PROJECTS</div>
+        <div class="psb-tree">
+          <div class="psb-folder open"><span class="psb-chev">▾</span><span>📁</span> featured/</div>
+          <button class="psb-file proj-tab active" data-proj="trainstop"><span>🏀</span><span class="psb-fname">trainstop.py</span><span class="psb-dot cv-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="entailment"><span>🧠</span><span class="psb-fname">visual_entailment.py</span><span class="psb-dot mm-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="forecast"><span>💊</span><span class="psb-fname">forecasting.py</span><span class="psb-dot ts-dot"></span></button>
+          <div class="psb-folder"><span class="psb-chev">▸</span><span>📁</span> more/</div>
+          <div class="psb-sub"><span>⚕️</span> wbc_classifier.py</div>
+          <div class="psb-sub"><span>☁️</span> hadoop_emr.java</div>
         </div>
-        <div class="xp-right">
-          <div class="xp-top">
-            <div>
-              <h3 class="xp-role">Data Science Intern &amp; Team Lead</h3>
-              <p class="xp-company">Trainstop / Superstat — Melbourne, VIC</p>
+        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>3 files</span></div>
+      </div>
+      <!-- MAIN -->
+      <div class="proj-main">
+        <div class="proj-editor-tabs" id="projEditorTabs">
+          <div class="pet active">🏀 trainstop.py <span class="pet-x">×</span></div>
+        </div>
+        <!-- MATRIX RAIN -->
+        <div class="matrix-stage" id="matrixStage">
+          <canvas id="matrixCanvas"></canvas>
+          <div class="matrix-overlay"></div>
+          <div class="matrix-label" id="matrixLabel"></div>
+        </div>
+        <!-- PANELS -->
+        <div class="proj-panels">
+
+          <!-- PROJECT 1 -->
+          <div class="proj-panel active" data-proj="trainstop">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc1">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">01</span><span class="fc-badge cv">Computer Vision</span></div>
+                  <h3 class="fc-title">Basketball Player &amp; Ball Tracking</h3>
+                  <p class="fc-org">Trainstop / Superstat · Jul–Dec 2025</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">95%</span><span class="kl">mAP@50</span></div>
+                    <div class="kpi"><span class="kv">4K+</span><span class="kl">Annotations</span></div>
+                    <div class="kpi"><span class="kv">60K+</span><span class="kl">Frames</span></div>
+                    <div class="kpi"><span class="kv">4</span><span class="kl">Classes</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">→</span>End-to-end CV sports analytics pipeline</div>
+                    <div class="hli"><span class="hla">→</span>YOLOv8 + RF-DETR object detection</div>
+                    <div class="hli"><span class="hla">→</span>ByteTrack + BoT-SORT identity tracking</div>
+                    <div class="hli"><span class="hla">→</span>RTMPose skeleton &amp; pose estimation</div>
+                    <div class="hli"><span class="hla">→</span>Presented to corporate stakeholders</div>
+                  </div>
+                  <div class="fc-tags"><span>YOLOv8</span><span>RF-DETR</span><span>ByteTrack</span><span>BoT-SORT</span><span>RTMPose</span><span>OpenCV</span><span>CVAT</span><span>Roboflow</span></div>
+                  <div class="fc-hint">flip for full breakdown →</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">How it works</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Ingestion</strong> — Raw match footage ingested frame-by-frame via OpenCV. Frames sampled and queued for detection.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Detection</strong> — YOLOv8 &amp; RF-DETR run multi-class inference: players, referees, hoops, and ball simultaneously.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Tracking</strong> — ByteTrack &amp; BoT-SORT assign persistent IDs across frames, surviving occlusion and fast motion.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Pose</strong> — RTMPose estimates skeleton keypoints per player for action recognition and spatial analytics.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Output</strong> — Tracking data aggregated into dashboards: player heatmaps, possession stats, coaching insights.</div></div>
+                  </div>
+                  <div class="fcb-links"><a href="https://github.com/reyaz-r3y4z" class="btn-g sm" target="_blank">Code ↗</a></div>
+                  <div class="fc-hint" style="color:var(--green)">← flip back</div>
+                </div>
+              </div>
+              <!-- MEDIA -->
+              <div class="pmp">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">demo_output.mp4</span></div>
+                <div class="pmp-video">
+                  <!-- ═══════════════════════════════════════════════════════════
+                       TRAINSTOP DEMO VIDEO — choose ONE option:
+
+                       OPTION A (YouTube — recommended):
+                         Upload to YouTube (can be Unlisted).
+                         Get the video ID from the URL: youtu.be/XXXX → ID = XXXX
+                         Replace YOUR_YOUTUBE_VIDEO_ID below.
+
+                       OPTION B (Self-hosted MP4 — only if file < 20 MB):
+                         Comment out the iframe block.
+                         Uncomment the video block below it.
+                         Place file at: assets/trainstop/demo.mp4
+
+                       OPTION C (Animated GIF):
+                         Comment out the iframe block.
+                         Uncomment the img block below it.
+                         Place file at: assets/trainstop/demo.gif
+                       ═══════════════════════════════════════════════════════════ -->
+                  <iframe
+                    src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID?rel=0&modestbranding=1"
+                    title="Basketball Tracking Demo"
+                    frameborder="0"
+                    allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
+                    allowfullscreen>
+                  </iframe>
+                  <!-- OPTION B — uncomment and comment out iframe above:
+                  <video controls playsinline poster="assets/trainstop/poster.jpg">
+                    <source src="assets/trainstop/demo.mp4" type="video/mp4"/>
+                  </video>
+                  -->
+                  <!-- OPTION C — uncomment and comment out iframe above:
+                  <img src="assets/trainstop/demo.gif" alt="Tracking demo"/>
+                  -->
+                </div>
+                <div class="pmp-hint">📽 Replace <code>YOUR_YOUTUBE_VIDEO_ID</code> with your video ID</div>
+              </div>
             </div>
-            <span class="xp-pill">WIL Internship</span>
           </div>
-          <ul class="xp-bullets">
-            <li>Spearheaded agile team to architect end-to-end multi-object sports analytics pipeline</li>
-            <li>Engineered <strong>YOLOv8 &amp; RF-DETR</strong> architectures tracking players, referees, hoops &amp; ball</li>
-            <li>Implemented <strong>ByteTrack, BoT-SORT &amp; Norfair</strong> for robust identity tracking under occlusion</li>
-            <li>Curated <strong>4,000+ bounding-box annotations</strong> in CVAT &amp; Roboflow</li>
-            <li>Achieved <strong>95% mAP@50</strong> — presented findings to corporate stakeholders</li>
-          </ul>
-          <div class="xp-tags">
-            <span>YOLOv8</span><span>RF-DETR</span><span>ByteTrack</span><span>BoT-SORT</span><span>OpenCV</span><span>CVAT</span>
-          </div>
-        </div>
-      </div>
 
-      <div class="xp-card reveal">
-        <div class="xp-left">
-          <span class="xp-period">Jan 2020<br>Jan 2024</span>
-          <span class="xp-line"></span>
-        </div>
-        <div class="xp-right">
-          <div class="xp-top">
-            <div>
-              <h3 class="xp-role">Assistant System Engineer / Business Analyst</h3>
-              <p class="xp-company">Tata Consultancy Services — Chennai, India</p>
+          <!-- PROJECT 2 -->
+          <div class="proj-panel" data-proj="entailment">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc2">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">02</span><span class="fc-badge mm">Multimodal AI</span></div>
+                  <h3 class="fc-title">Visual Entailment System</h3>
+                  <p class="fc-org">RMIT University · 2025</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">~82.5%</span><span class="kl">Val Accuracy</span></div>
+                    <div class="kpi"><span class="kv">3-phase</span><span class="kl">Training</span></div>
+                    <div class="kpi"><span class="kv">Fusion</span><span class="kl">Architecture</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">→</span>EfficientNetB4 visual encoder</div>
+                    <div class="hli"><span class="hla">→</span>BERT + Universal Sentence Encoder</div>
+                    <div class="hli"><span class="hla">→</span>Custom cross-modal fusion layer</div>
+                    <div class="hli"><span class="hla">→</span>Binary entailment classification</div>
+                    <div class="hli"><span class="hla">→</span>AWS SageMaker deployment</div>
+                  </div>
+                  <div class="fc-tags"><span>TensorFlow</span><span>Keras</span><span>EfficientNetB4</span><span>BERT</span><span>USE</span><span>SageMaker</span></div>
+                  <div class="fc-hint">flip for full breakdown →</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">How it works</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Input</strong> — Image + text caption pair. Classify as entailment, neutral, or contradiction.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Visual Encoding</strong> — EfficientNetB4 (ImageNet pre-trained) extracts rich spatial feature maps from the image.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Text Encoding</strong> — BERT / Universal Sentence Encoder produces dense semantic embeddings for the caption.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Fusion</strong> — Custom cross-modal attention layer concatenates and aligns visual + text representations.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Classification</strong> — 3-phase training: frozen → partial fine-tune → full fine-tune. ~82.5% val accuracy.</div></div>
+                  </div>
+                  <div class="fcb-links"><a href="https://github.com/reyaz-r3y4z" class="btn-g sm" target="_blank">Code ↗</a></div>
+                  <div class="fc-hint" style="color:var(--green)">← flip back</div>
+                </div>
+              </div>
+              <div class="pmp">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">pipeline.png</span></div>
+                <!-- ═══════════════════════════════════════════
+                     Add your architecture diagram at:
+                     assets/ve/pipeline.png
+                     Export from your report / Jupyter notebook.
+                     ═══════════════════════════════════════════ -->
+                <div class="pmp-img">
+                  <img src="assets/ve/pipeline.png" alt="Visual Entailment pipeline"
+                       onerror="this.closest('.pmp-img').classList.add('img-empty')"/>
+                  <div class="pmp-empty">📐 Add diagram → <code>assets/ve/pipeline.png</code></div>
+                </div>
+              </div>
             </div>
-            <span class="xp-pill">3.5 yrs</span>
           </div>
-          <ul class="xp-bullets">
-            <li>Central analytical lead for major US insurance client — translated risk matrices into system requirements</li>
-            <li>Built EDA &amp; data pipelines automating premium calculation logic, drastically reducing manual errors</li>
-            <li>Authored BRDs &amp; coordinated agile sprints — increased delivery velocity by <strong>15%</strong></li>
-            <li>Bridged ML development and senior executive stakeholder requirements across global enterprise</li>
+
+          <!-- PROJECT 3 -->
+          <div class="proj-panel" data-proj="forecast">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc3">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">03</span><span class="fc-badge ts">Time-Series</span></div>
+                  <h3 class="fc-title">Generic Drug Sales Forecasting</h3>
+                  <p class="fc-org">Novartis Datathon 2024</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">24-mo</span><span class="kl">Window</span></div>
+                    <div class="kpi"><span class="kv">XGBoost</span><span class="kl">+ SARIMA</span></div>
+                    <div class="kpi"><span class="kv">ADF</span><span class="kl">Tested</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">→</span>Post-patent generic erosion prediction</div>
+                    <div class="hli"><span class="hla">→</span>Custom rolling lag feature engineering</div>
+                    <div class="hli"><span class="hla">→</span>XGBoost gradient-boosted ensembles</div>
+                    <div class="hli"><span class="hla">→</span>SARIMA stationarity + ADF testing</div>
+                    <div class="hli"><span class="hla">→</span>Cross-sectional pharmaceutical markets</div>
+                  </div>
+                  <div class="fc-tags"><span>XGBoost</span><span>SARIMA</span><span>Statsmodels</span><span>Pandas</span><span>Python</span></div>
+                  <div class="fc-hint">flip for full breakdown →</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">How it works</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Data</strong> — Sales across pharma markets before/after patent expiry. High-erosion cases weighted 2×.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Feature Engineering</strong> — Rolling statistical means, multi-interval lag variables, scenario matrices per market.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Stationarity</strong> — ADF testing before SARIMA fitting. Differencing applied where needed.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Modelling</strong> — XGBoost handles non-linear interactions. SARIMA captures seasonality. Ensemble minimises MSE.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Output</strong> — 24-month post-patent trajectory projections per segment, cross-sectional validation.</div></div>
+                  </div>
+                  <div class="fcb-links"><a href="https://github.com/reyaz-r3y4z" class="btn-g sm" target="_blank">Code ↗</a></div>
+                  <div class="fc-hint" style="color:var(--green)">← flip back</div>
+                </div>
+              </div>
+              <div class="pmp">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">model_pipeline.py</span></div>
+                <div class="pmp-code"><pre><span class="ccm"># Novartis Datathon 2024</span>
+<span class="ck">import</span> xgboost <span class="ck">as</span> xgb
+<span class="ck">from</span> statsmodels.tsa.statespace <span class="ck">import</span> SARIMAX
+<span class="ck">from</span> statsmodels.tsa.stattools <span class="ck">import</span> adfuller
+
+<span class="ccm"># ADF stationarity test</span>
+result <span class="cop">=</span> adfuller(sales_series)
+<span class="ck">if</span> result[<span class="cstr">1</span>] <span class="cop">&gt;</span> <span class="cstr">0.05</span><span class="cpu">:</span>
+    series <span class="cop">=</span> series.diff().dropna()
+
+<span class="ccm"># Rolling lag features</span>
+<span class="ck">for</span> lag <span class="ck">in</span> [<span class="cstr">1</span>,<span class="cstr">3</span>,<span class="cstr">6</span>,<span class="cstr">12</span>]<span class="cpu">:</span>
+    df[<span class="cstr">f'lag_{lag}'</span>] <span class="cop">=</span> df[<span class="cstr">'sales'</span>].shift(lag)
+
+<span class="ccm"># XGBoost ensemble</span>
+model <span class="cop">=</span> xgb.XGBRegressor(
+    n_estimators<span class="cop">=</span><span class="cstr">400</span>,
+    max_depth<span class="cop">=</span><span class="cstr">6</span>,
+    scale_pos_weight<span class="cop">=</span><span class="cstr">2</span>
+)
+model.fit(X_train, y_train)</pre></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /proj-panels -->
+      </div><!-- /proj-main -->
+    </div><!-- /proj-ide -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ EXPERIENCE ══════════════════════════════════════════ -->
+<section class="section alt" id="experience">
+  <div class="wrap">
+    <div class="file-tab-row"><div class="file-tab active"><span class="ft-ic">📋</span>experience.log</div></div>
+    <div class="git-log">
+      <div class="git-hd"><span class="gcmd">$ git log --oneline --author="MohammadReyaz" --all</span></div>
+
+      <div class="commit-block reveal">
+        <div class="commit-meta"><span class="chash">a4f9c3e</span><span class="ctag intern">internship</span><span class="ctag cv-t">computer-vision</span></div>
+        <div class="commit-card">
+          <div class="cc-top">
+            <div><h3>Data Science Intern &amp; Team Lead</h3><p class="cc-co">🏀 Trainstop / Superstat · Melbourne, VIC</p></div>
+            <div class="cc-date">Jul 2025 – Dec 2025</div>
+          </div>
+          <div class="env-block">
+            <span class="env-lbl">// work environment</span>
+            <p>Agile research team of data scientists. Daily standups, sprint planning, direct stakeholder presentations. Fast-paced sports-tech startup culture with high ownership and real product impact.</p>
+          </div>
+          <ul class="cc-bullets">
+            <li><span class="csym">+</span>Spearheaded agile team to architect end-to-end multi-object CV sports analytics pipeline from scratch</li>
+            <li><span class="csym">+</span>Engineered <strong>YOLOv8 &amp; RF-DETR</strong> for multi-class detection: players, referees, hoops, ball</li>
+            <li><span class="csym">+</span>Implemented <strong>ByteTrack, BoT-SORT &amp; Norfair</strong> for persistent identity tracking under occlusion</li>
+            <li><span class="csym">+</span>Curated <strong>4,000+ bounding-box annotations</strong> in CVAT &amp; Roboflow programmatically</li>
+            <li><span class="csym">+</span>Delivered <strong>95% mAP@50</strong> — presented findings directly to corporate stakeholders</li>
           </ul>
-          <div class="xp-tags">
-            <span>Python</span><span>SQL</span><span>AWS</span><span>Jira</span><span>Agile</span>
+          <div class="cc-tags"><span>YOLOv8</span><span>RF-DETR</span><span>ByteTrack</span><span>BoT-SORT</span><span>RTMPose</span><span>OpenCV</span><span>CVAT</span></div>
+          <div class="cc-impact">
+            <div class="imp"><span class="iv g">95%</span><span class="il">mAP@50</span></div>
+            <div class="imp"><span class="iv">4K+</span><span class="il">Annotations</span></div>
+            <div class="imp"><span class="iv">60K+</span><span class="il">Frames</span></div>
           </div>
         </div>
       </div>
 
+      <div class="commit-block reveal">
+        <div class="commit-meta"><span class="chash">3b82d17</span><span class="ctag fulltime">full-time</span><span class="ctag ent-t">enterprise</span></div>
+        <div class="commit-card">
+          <div class="cc-top">
+            <div><h3>Assistant System Engineer / Business Analyst</h3><p class="cc-co">🏢 Tata Consultancy Services (TCS) · Chennai, India</p></div>
+            <div class="cc-date">Jan 2020 – Jan 2024</div>
+          </div>
+          <div class="env-block">
+            <span class="env-lbl">// work environment</span>
+            <p>Global enterprise consultancy (top 3 worldwide). Cross-functional teams of 50+ engineers, client-facing delivery across US insurance verticals. Agile/Scrum sprints with direct executive stakeholder reporting. High accountability, structured delivery culture with deep technical ownership.</p>
+          </div>
+          <ul class="cc-bullets">
+            <li><span class="csym">+</span>Central analytical lead for a major US-based Insurance client across 3.5 years</li>
+            <li><span class="csym">+</span>Translated intricate risk matrices into programmatic system requirements and backend data validation rules</li>
+            <li><span class="csym">+</span>Built EDA &amp; data pipelines to automate premium calculation logic — drastically reducing manual errors</li>
+            <li><span class="csym">+</span>Authored comprehensive BRDs and coordinated agile engineering sprints</li>
+            <li><span class="csym">+</span>Increased deployment delivery velocity by <strong>15%</strong> through sprint optimisation</li>
+          </ul>
+          <div class="cc-tags"><span>Python</span><span>SQL</span><span>AWS</span><span>Jira</span><span>Agile/Scrum</span><span>EDA</span></div>
+          <div class="cc-impact">
+            <div class="imp"><span class="iv g">15%</span><span class="il">Velocity ↑</span></div>
+            <div class="imp"><span class="iv">3.5yr</span><span class="il">Tenure</span></div>
+            <div class="imp"><span class="iv">US</span><span class="il">Insurance client</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ░░░░░░░░░░░░░░░░░░░░░░ EDUCATION ░░░░░░░░░░░░░░░░░░░░░░ -->
-<section class="section dark-alt">
+<!-- ══════════════════════════════════════════ EDUCATION ══════════════════════════════════════════ -->
+<section class="section" id="education">
   <div class="wrap">
-    <div class="sec-head reveal">
-      
-      <span class="sec-tag">// education</span>
-      <h2 class="sec-title">Education</h2>
-    </div>
-    <div class="edu-row">
+    <div class="file-tab-row"><div class="file-tab active"><span class="ft-ic">🎓</span>education.md</div></div>
+    <div class="edu-grid">
       <div class="edu-card reveal">
-        <p class="edu-year">2024 – 2025</p>
+        <p class="edu-yr">2024 – 2025</p>
         <h3>Master of Data Science</h3>
         <p class="edu-inst">RMIT University · Melbourne, VIC 🇦🇺</p>
-        <p class="edu-core">Multimodal Architectures · Computer Vision · Deep Learning · Big Data · Time-Series</p>
+        <p class="edu-focus">Multimodal AI · Computer Vision · Deep Learning · Big Data · Time-Series</p>
       </div>
       <div class="edu-card reveal">
-        <p class="edu-year">2016 – 2020</p>
+        <p class="edu-yr">2016 – 2020</p>
         <h3>Bachelor of Engineering (CSE)</h3>
         <p class="edu-inst">Anna University · Tamil Nadu, India 🇮🇳</p>
-        <p class="edu-core">OOP · Data Structures &amp; Algorithms · RDBMS · Operating Systems</p>
+        <p class="edu-focus">OOP · Data Structures &amp; Algorithms · RDBMS · Operating Systems</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ░░░░░░░░░░░░░░░░░░░░░░ CONTACT ░░░░░░░░░░░░░░░░░░░░░░ -->
-<section id="contact" class="section contact-section">
+<!-- ══════════════════════════════════════════ CONTACT ══════════════════════════════════════════ -->
+<section class="section alt" id="contact">
   <div class="wrap">
-    <div class="contact-inner reveal">
-      <span class="sec-tag">// contact</span>
-      <h2 class="contact-head">Available for<br><span class="ch-accent">the right role.</span></h2>
-      <p class="contact-sub">
-        Looking for full-time roles in Data Science, ML Engineering, or Computer Vision in Melbourne or remote.
-        Let's talk.
-      </p>
-      <div class="contact-btns">
-        <a href="mailto:reyazrmr@gmail.com" class="btn-primary lg">reyazrmr@gmail.com</a>
+    <div class="file-tab-row"><div class="file-tab active"><span class="ft-ic">📡</span>contact.sh</div></div>
+    <div class="contact-term">
+      <div class="ct-hd"><span class="tc r"></span><span class="tc y"></span><span class="tc g"></span><span style="font-size:11px;color:var(--muted);margin-left:8px">~  bash</span></div>
+      <div class="ct-body">
+        <div class="ctl"><span class="tp">reyaz@ml</span>:<span class="tpath">~</span>$ echo "Available for the right role"</div>
+        <div class="cto">Available for the right role</div>
+        <div class="ctl"><span class="tp">reyaz@ml</span>:<span class="tpath">~</span>$ cat roles.txt</div>
+        <div class="cto"><span class="tg">→</span> Data Scientist</div>
+        <div class="cto"><span class="tg">→</span> ML Engineer</div>
+        <div class="cto"><span class="tg">→</span> Computer Vision Engineer</div>
+        <div class="cto"><span class="tb2">→</span> Melbourne-based or remote</div>
+        <div class="ctl"><span class="tp">reyaz@ml</span>:<span class="tpath">~</span>$ cat contact.json</div>
+        <div class="cto cto-json">
+          <span class="cpu">{</span><br>
+          &nbsp;&nbsp;<span class="cstr">"email"</span><span class="cpu">:</span> <span class="cstr">"reyazrmr@gmail.com"</span><span class="cpu">,</span><br>
+          &nbsp;&nbsp;<span class="cstr">"linkedin"</span><span class="cpu">:</span> <span class="cstr">"linkedin.com/in/mdreyaz7755"</span><span class="cpu">,</span><br>
+          &nbsp;&nbsp;<span class="cstr">"github"</span><span class="cpu">:</span> <span class="cstr">"github.com/reyaz-r3y4z"</span><br>
+          <span class="cpu">}</span>
+        </div>
+      </div>
+      <div class="ct-actions">
+        <a href="mailto:reyazrmr@gmail.com" class="btn-g lg">reyazrmr@gmail.com</a>
         <a href="https://linkedin.com/in/mdreyaz7755" class="btn-ghost lg" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a href="https://github.com/reyaz-r3y4z" class="btn-ghost lg" target="_blank" rel="noopener">GitHub ↗</a>
       </div>
@@ -483,9 +596,8 @@
 
 <footer class="footer">
   <div class="wrap footer-inner">
-    <span class="wordmark sm">REYAZ<span class="blink">_</span></span>
-    <small>© <span id="yr"></span> Mohammad Reyaz · Melbourne, AU</small>
-    <small>Built with GitHub Pages</small>
+    <span class="ft-word">REYAZ<span style="color:var(--green)">_</span></span>
+    <small>© <span id="yr"></span> Mohammad Reyaz · Melbourne, AU · Built with GitHub Pages</small>
   </div>
 </footer>
 
