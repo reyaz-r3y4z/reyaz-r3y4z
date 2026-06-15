@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ML Interview Prep · Reyaz</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<script>window.MathJax={tex:{inlineMath:[['$','$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root{
+  --bg:#0D0F1A;--panel:#141829;--panel2:#1A1F35;
+  --border:#252D4A;--border2:#3A4468;
+  --green:#00FF94;--orange:#FF6B35;--purple:#A78BFA;
+  --cyan:#38BDF8;--red:#F87171;--yellow:#FCD34D;
+  --text:#E2E8F0;--muted:#64748B;--faint:#1E2540;
+  --mono:'JetBrains Mono',monospace;--sans:'Space Grotesk',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.7;display:flex;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* SIDEBAR */
+.sidebar{width:220px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.sb-logo{padding:18px 16px 14px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11px}
+.sb-logo-top{color:var(--green);font-weight:700;letter-spacing:1px}
+.sb-logo-sub{color:var(--muted);font-size:10px;margin-top:2px}
+.sb-section{padding:10px 16px 4px;font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;border-left:2px solid transparent;font-size:12px;color:var(--muted);transition:all .15s;border-bottom:1px solid transparent}
+.sb-item:hover{color:var(--text);background:rgba(255,255,255,.03);border-left-color:var(--border2)}
+.sb-item.active{color:var(--green);border-left-color:var(--green);background:rgba(0,255,148,.05)}
+.sb-num{font-family:var(--mono);font-size:9px;width:18px;flex-shrink:0;opacity:.5}
+.sb-item.active .sb-num{opacity:1;color:var(--green)}
+.sb-divider{height:1px;background:var(--border);margin:8px 0}
+
+/* MAIN */
+.main{margin-left:220px;flex:1;padding:36px 40px 80px;max-width:900px}
+
+/* TOP PROGRESS */
+.top-bar{position:fixed;top:0;left:220px;right:0;height:3px;background:var(--border);z-index:200}
+.top-bar-fill{height:100%;background:var(--green);width:0%;transition:width .2s}
+
+/* MODULE PANEL */
+.mod{display:none}.mod.active{display:block}
+.mod-eyebrow{font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.mod-eyebrow::before{content:'// '}
+.mod-title{font-size:26px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.5px}
+.mod-desc{color:var(--muted);font-size:14px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+
+/* CONCEPT CARDS */
+.cc{background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden}
+.cc-hd{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;background:var(--panel2);user-select:none;transition:background .15s}
+.cc-hd:hover{background:rgba(255,255,255,.03)}
+.cc-icon{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.cc-name{font-size:14px;font-weight:600;color:#fff;flex:1}
+.cc-chev{color:var(--muted);font-size:12px;transition:transform .25s}
+.cc.open .cc-chev{transform:rotate(180deg)}
+.cc-body{display:none;padding:20px}
+.cc.open .cc-body{display:block}
+
+/* ANALOGY */
+.analogy{background:rgba(0,255,148,.05);border:1px solid rgba(0,255,148,.15);border-radius:8px;padding:14px 16px;margin-bottom:16px}
+.analogy-lbl{font-family:var(--mono);font-size:9px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.analogy p{color:#CBD5E1;font-size:13px;margin:0}
+
+/* FORMULA */
+.formula{background:#070A14;border:1px solid var(--faint);border-radius:6px;padding:14px 16px;margin:12px 0;overflow-x:auto}
+.formula-lbl{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+
+/* SEC HEADING */
+.sh{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:1.5px;text-transform:uppercase;margin:18px 0 10px;padding-top:14px;border-top:1px solid var(--faint)}
+.sh:first-child{margin-top:0;padding-top:0;border-top:none}
+
+/* PARA */
+.cc-body p{font-size:13.5px;color:#CBD5E1;line-height:1.8;margin-bottom:10px}
+.cc-body p:last-child{margin-bottom:0}
+.cc-body p em{color:var(--cyan);font-style:normal;font-weight:500}
+.cc-body p strong{color:#fff}
+
+/* TIPS */
+.tip{display:flex;gap:10px;background:rgba(252,211,77,.06);border:1px solid rgba(252,211,77,.2);border-radius:8px;padding:12px 14px;margin-top:14px}
+.tip-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.tip p{font-size:12.5px;color:#CBD5E1;margin:0;line-height:1.7}
+.tip p strong{color:var(--yellow)}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.mc{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:14px}
+.mc-lbl{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:1px;margin-bottom:6px}
+.mc-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:5px}
+.mc-body{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tag{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:4px;border:1px solid}
+.tg{background:rgba(0,255,148,.08);border-color:rgba(0,255,148,.2);color:var(--green)}
+.tc{background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.2);color:var(--cyan)}
+.tp{background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.2);color:var(--purple)}
+.to{background:rgba(255,107,53,.08);border-color:rgba(255,107,53,.2);color:var(--orange)}
+.ty{background:rgba(252,211,77,.08);border-color:rgba(252,211,77,.2);color:var(--yellow)}
+.tr{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.2);color:var(--red)}
+
+/* K-FOLD DIAGRAM */
+.kf-diagram{background:#070A14;border:1px solid var(--border);border-radius:8px;padding:18px;margin:14px 0}
+.kf-controls{display:flex;gap:8px;margin-bottom:14px;align-items:center}
+.kf-btn{font-family:var(--mono);font-size:11px;padding:5px 14px;background:var(--panel2);border:1px solid var(--border2);color:var(--cyan);border-radius:5px;cursor:pointer;transition:all .15s}
+.kf-btn:hover{background:rgba(56,189,248,.1);border-color:var(--cyan)}
+.kf-info{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto}
+.kf-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.kf-lbl{font-family:var(--mono);font-size:10px;color:var(--muted);width:46px;flex-shrink:0}
+.kf-blocks{display:flex;gap:3px;flex:1}
+.kf-blk{flex:1;height:26px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;transition:all .3s}
+.kf-train{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);color:var(--cyan)}
+.kf-valid{background:rgba(0,255,148,.2);border:1px solid rgba(0,255,148,.4);color:var(--green);font-weight:700}
+.kf-score{font-family:var(--mono);font-size:10px;color:var(--green);width:60px;text-align:right;flex-shrink:0}
+
+/* TIME SERIES */
+.ts-diagram{background:#070A14;border:1px solid var(--border);border-radius:8px;padding:18px;margin:14px 0}
+.ts-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.ts-t{background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.25);border-radius:4px;height:26px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;color:var(--cyan);transition:width .5s ease}
+.ts-v{background:rgba(255,107,53,.2);border:1px solid rgba(255,107,53,.35);border-radius:4px;height:26px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;color:var(--orange);width:56px;flex-shrink:0}
+.ts-bar{display:flex;gap:3px;flex:1}
+
+/* CONFUSION MATRIX */
+.cm-wrap{display:flex;gap:20px;flex-wrap:wrap;margin:14px 0;align-items:flex-start}
+.cm-grid{display:grid;grid-template-columns:80px 80px 80px;gap:4px}
+.cm-cell{width:80px;height:72px;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid transparent;cursor:pointer;transition:all .2s}
+.cm-hdr{background:transparent;border:none;font-family:var(--mono);font-size:9px;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.tp-cell{background:rgba(0,255,148,.12);border-color:rgba(0,255,148,.25)}
+.tn-cell{background:rgba(0,255,148,.07);border-color:rgba(0,255,148,.15)}
+.fp-cell{background:rgba(248,113,113,.12);border-color:rgba(248,113,113,.25)}
+.fn-cell{background:rgba(255,107,53,.12);border-color:rgba(255,107,53,.25)}
+.cm-cell:not(.cm-hdr):hover{transform:scale(1.06)}
+.tp-cell:hover{border-color:var(--green);box-shadow:0 0 12px rgba(0,255,148,.2)}
+.tn-cell:hover{border-color:var(--green)}
+.fp-cell:hover{border-color:var(--red);box-shadow:0 0 12px rgba(248,113,113,.2)}
+.fn-cell:hover{border-color:var(--orange);box-shadow:0 0 12px rgba(255,107,53,.2)}
+.cm-ab{font-family:var(--mono);font-size:18px;font-weight:700}
+.tp-cell .cm-ab{color:var(--green)}.tn-cell .cm-ab{color:#4ADE80}.fp-cell .cm-ab{color:var(--red)}.fn-cell .cm-ab{color:var(--orange)}
+.cm-desc{font-size:10px;color:var(--muted);text-align:center;margin-top:3px;line-height:1.3}
+.cm-metrics{flex:1;min-width:200px;display:flex;flex-direction:column;gap:7px}
+.cm-met{background:var(--panel2);border:1px solid var(--border);border-radius:6px;padding:9px 12px;cursor:pointer;transition:border-color .15s}
+.cm-met:hover,.cm-met.hi{border-color:var(--cyan);background:rgba(56,189,248,.06)}
+.cm-met-name{font-family:var(--mono);font-size:10px;color:var(--cyan);margin-bottom:3px}
+.cm-met-form{font-size:12px;color:var(--muted)}
+.cm-met-use{font-size:11px;color:var(--green);margin-top:4px;display:none}
+.cm-met.hi .cm-met-use{display:block}
+
+/* ENSEMBLE */
+.ens-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.ens-box{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:18px}
+.ens-title{font-family:var(--mono);font-size:11px;font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ens-bag .ens-title{color:var(--cyan)}.ens-bst .ens-title{color:var(--orange)}
+.ens-trees{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.ens-tree{background:var(--panel);border:1px solid;border-radius:5px;padding:6px 8px;font-family:var(--mono);font-size:9px;text-align:center}
+.ens-bag .ens-tree{color:var(--cyan);border-color:rgba(56,189,248,.25)}
+.ens-bst .ens-tree{color:var(--orange);border-color:rgba(255,107,53,.25)}
+.ens-arrow{text-align:center;color:var(--muted);font-size:20px;margin:6px 0}
+.ens-goal{text-align:center;font-family:var(--mono);font-size:10px;margin-top:8px;padding:5px;border-radius:4px}
+.ens-bag .ens-goal{background:rgba(56,189,248,.1);color:var(--cyan)}
+.ens-bst .ens-goal{background:rgba(255,107,53,.1);color:var(--orange)}
+.ens-seq{display:flex;align-items:center;gap:4px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.ens-seq-tree{background:var(--panel);border:1px solid rgba(255,107,53,.3);border-radius:4px;padding:4px 7px;font-family:var(--mono);font-size:9px;color:var(--orange);text-align:center}
+.ens-seq-arrow{color:rgba(255,107,53,.5);font-size:12px}
+
+/* RAG PIPELINE */
+.rag-step{display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;margin-bottom:6px;transition:border-color .15s}
+.rag-step:hover{border-color:var(--border2)}
+.rag-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:700;flex-shrink:0}
+.rag-content{flex:1}
+.rag-t{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.rag-d{font-size:12px;color:var(--muted)}
+.rag-arrow{text-align:center;color:rgba(56,189,248,.3);font-size:14px;margin:2px 0 2px 19px}
+
+/* BIAS-VARIANCE */
+.bv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.bv-card{border-radius:8px;padding:16px;border:1px solid}
+.bv-over{background:rgba(248,113,113,.07);border-color:rgba(248,113,113,.2)}
+.bv-under{background:rgba(255,107,53,.07);border-color:rgba(255,107,53,.2)}
+.bv-t{font-weight:700;margin-bottom:6px;font-size:14px}
+.bv-over .bv-t{color:var(--red)}.bv-under .bv-t{color:var(--orange)}
+.bv-d{font-size:12.5px;color:var(--muted);margin-bottom:8px}
+.bv-fix{font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:3px;display:inline-block;margin-top:4px}
+.bv-over .bv-fix{background:rgba(248,113,113,.1);color:var(--red)}
+.bv-under .bv-fix{background:rgba(255,107,53,.1);color:var(--orange)}
+
+/* VIF SCALE */
+.vif-bar{display:flex;gap:2px;height:8px;margin:10px 0;border-radius:4px;overflow:hidden}
+.vif-s1{background:var(--green);flex:1}.vif-s2{background:var(--yellow);flex:2}.vif-s3{background:var(--orange);flex:2}.vif-s4{background:var(--red);flex:1}
+.vif-lbls{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:3px}
+
+/* QUIZ */
+.quiz{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px;margin:14px 0}
+.quiz-q{font-size:14px;font-weight:600;color:#fff;margin-bottom:12px}
+.quiz-opts{display:flex;flex-direction:column;gap:7px}
+.quiz-o{background:var(--panel2);border:1px solid var(--border);border-radius:6px;padding:9px 13px;cursor:pointer;font-size:13px;color:var(--muted);transition:all .15s}
+.quiz-o:hover{border-color:var(--border2);color:var(--text)}
+.quiz-o.correct{background:rgba(0,255,148,.1);border-color:var(--green);color:var(--green)}
+.quiz-o.wrong{background:rgba(248,113,113,.1);border-color:var(--red);color:var(--red)}
+.quiz-o.disabled{pointer-events:none}
+.quiz-exp{display:none;margin-top:10px;padding:10px 12px;background:rgba(0,255,148,.04);border:1px solid rgba(0,255,148,.12);border-radius:6px;font-size:12.5px;color:#CBD5E1;line-height:1.7}
+.quiz-exp.show{display:block}
+.quiz-reset{font-family:var(--mono);font-size:11px;margin-top:10px;padding:5px 12px;background:none;border:1px solid var(--border2);color:var(--muted);border-radius:4px;cursor:pointer;display:none;transition:all .15s}
+.quiz-reset:hover{color:var(--text);border-color:var(--text)}
+.quiz-reset.show{display:inline-block}
+
+/* SUMMARY TABLE */
+.sum-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0}
+.sum-table th{background:var(--panel2);color:var(--cyan);font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:10px 13px;text-align:left;border-bottom:1px solid var(--border2)}
+.sum-table td{padding:9px 13px;border-bottom:1px solid var(--faint);vertical-align:top;color:#CBD5E1}
+.sum-table tr:hover td{background:rgba(255,255,255,.02)}
+.sum-table td:first-child{color:var(--green);font-weight:600}
+.sum-table td:nth-child(2){color:var(--muted)}
+
+/* LEGEND */
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.legend-i{display:flex;align-items:center;gap:5px}
+.legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* MOBILE */
+@media(max-width:680px){
+  .sidebar{display:none}
+  .main{margin-left:0;padding:20px}
+  .g2,.g3,.ens-grid,.bv-grid{grid-template-columns:1fr}
+  .cm-wrap{flex-direction:column}
+  .top-bar{left:0}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar"><div class="top-bar-fill" id="topFill"></div></div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-top">ML_PREP.py</div>
+    <div class="sb-logo-sub">Interview Mastery · Reyaz</div>
+  </div>
+  <div class="sb-section">Modules</div>
+  <div class="sb-item active" onclick="show('m1')" data-mod="m1"><span class="sb-num">01</span>Resampling & CV</div>
+  <div class="sb-item" onclick="show('m2')" data-mod="m2"><span class="sb-num">02</span>Parametric Models</div>
+  <div class="sb-item" onclick="show('m3')" data-mod="m3"><span class="sb-num">03</span>Classifiers</div>
+  <div class="sb-item" onclick="show('m4')" data-mod="m4"><span class="sb-num">04</span>Tree Ensembles</div>
+  <div class="sb-item" onclick="show('m5')" data-mod="m5"><span class="sb-num">05</span>Unsupervised</div>
+  <div class="sb-item" onclick="show('m6')" data-mod="m6"><span class="sb-num">06</span>Reinforcement RL</div>
+  <div class="sb-item" onclick="show('m7')" data-mod="m7"><span class="sb-num">07</span>Multi-Modal & Agents</div>
+  <div class="sb-item" onclick="show('m8')" data-mod="m8"><span class="sb-num">08</span>LLMs & RAG</div>
+  <div class="sb-divider"></div>
+  <div class="sb-section">Tools</div>
+  <div class="sb-item" onclick="show('quiz')" data-mod="quiz"><span class="sb-num">★</span>Quick Quiz</div>
+  <div class="sb-item" onclick="show('summary')" data-mod="summary"><span class="sb-num">≡</span>Master Summary</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ══════════ MODULE 1 ══════════ -->
+<div class="mod active" id="m1">
+  <div class="mod-eyebrow">Module 01</div>
+  <div class="mod-title">Resampling & Cross-Validation</div>
+  <div class="mod-desc">How to evaluate models honestly — protecting against overfitting and data leakage.</div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(56,189,248,.15)">🔀</div>
+      <div class="cc-name">Standard K-Fold Cross-Validation</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="analogy">
+        <div class="analogy-lbl">Analogy</div>
+        <p>Like grading an exam by testing students on 5 different question sets in rotation — each time one set is the exam, the others are study material. The final grade is the average across all 5 rotations.</p>
+      </div>
+      <p>The full dataset $\mathcal{D}$ is split into $K$ equal non-overlapping folds. Each iteration holds out one fold as <em>validation</em> and trains on the remaining $K-1$. The final score is the mean across all $K$ iterations:</p>
+      <div class="formula">
+        <div class="formula-lbl">Mean CV Score</div>
+        $\mathbb{E}[\mathcal{M}] = \frac{1}{K} \sum_{i=1}^{K} \mathcal{M}_i$
+      </div>
+      <div class="kf-diagram">
+        <div class="kf-controls">
+          <button class="kf-btn" onclick="kfPrev()">◀ Prev</button>
+          <button class="kf-btn" onclick="kfNext()">Next ▶</button>
+          <span class="kf-info" id="kfInfo">Fold 1 is the validation set</span>
+        </div>
+        <div id="kfRows"></div>
+        <div class="legend">
+          <div class="legend-i"><div class="legend-dot" style="background:rgba(0,255,148,.4)"></div>Validation fold</div>
+          <div class="legend-i"><div class="legend-dot" style="background:rgba(56,189,248,.2)"></div>Training folds</div>
+        </div>
+      </div>
+      <div class="sh">When to use</div>
+      <p>Default baseline for <em>i.i.d. tabular data</em> where observations are independent. Use $K=5$ or $K=10$. Not appropriate for time-series or heavily imbalanced data.</p>
+      <div class="tip"><div class="tip-icon">⚡</div><div><p><strong>Interview answer:</strong> K-Fold gives a lower-variance estimate of generalisation error than a single train/test split. The trade-off is $K$× the compute cost.</p></div></div>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(167,139,250,.15)">⚖️</div>
+      <div class="cc-name">Stratified K-Fold</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <p><em>The problem:</em> With a 99%/1% class imbalance, a random fold could contain zero minority-class examples — making precision and recall undefined and the fold useless.</p>
+      <p><strong>Stratified K-Fold</strong> mathematically forces every fold to mirror the exact class distribution of the parent dataset. If the dataset is 10% positive, every fold is exactly 10% positive.</p>
+      <div class="tags">
+        <span class="tag tg">Fraud detection</span><span class="tag tg">Medical diagnosis</span><span class="tag tc">Imbalanced datasets</span>
+      </div>
+      <div class="tip"><div class="tip-icon">⚡</div><div><p><strong>Interview trigger:</strong> Any time you see class imbalance, immediately mention Stratified K-Fold before anything else.</p></div></div>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(255,107,53,.15)">📈</div>
+      <div class="cc-name">Time-Series Split (Forward Chaining)</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="analogy">
+        <div class="analogy-lbl">Analogy</div>
+        <p>A financial analyst forecasting next month's revenue using only historical data up to that point — never peeking at future months to calibrate the model.</p>
+      </div>
+      <p>Standard K-Fold would cause <em>data leakage</em> — training on future data to predict the past. Time-series split uses a <strong>chronological expanding window</strong>: the validation set is always strictly ahead of the training set in time.</p>
+      <div class="ts-diagram">
+        <div class="ts-row">
+          <span class="kf-lbl">Split 1</span>
+          <div class="ts-bar"><div class="ts-t" style="width:20%">Train</div><div class="ts-v">Valid</div></div>
+        </div>
+        <div class="ts-row">
+          <span class="kf-lbl">Split 2</span>
+          <div class="ts-bar"><div class="ts-t" style="width:37%">Train</div><div class="ts-v">Valid</div></div>
+        </div>
+        <div class="ts-row">
+          <span class="kf-lbl">Split 3</span>
+          <div class="ts-bar"><div class="ts-t" style="width:54%">Train</div><div class="ts-v">Valid</div></div>
+        </div>
+        <div class="ts-row">
+          <span class="kf-lbl">Split 4</span>
+          <div class="ts-bar"><div class="ts-t" style="width:71%">Train</div><div class="ts-v">Valid</div></div>
+        </div>
+        <div class="legend" style="margin-top:8px">
+          <div class="legend-i"><div class="legend-dot" style="background:rgba(56,189,248,.25)"></div>Expanding training window</div>
+          <div class="legend-i"><div class="legend-dot" style="background:rgba(255,107,53,.3)"></div>Validation (always future)</div>
+        </div>
+      </div>
+      <div class="tip"><div class="tip-icon">⚡</div><div><p><strong>Key rule:</strong> Validation must always be <strong>chronologically ahead</strong> of training. Shuffling time-series data is always wrong.</p></div></div>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(252,211,77,.12)">🔗</div>
+      <div class="cc-name">Multicollinearity & VIF</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <p>When two or more independent features are highly correlated, the OLS engine cannot isolate their individual contributions. The matrix inversion $(\mathbf{X}^T\mathbf{X})^{-1}$ approaches near-singularity, <em>inflating coefficient standard errors</em>.</p>
+      <p><strong>Predictive paradox:</strong> Multicollinearity does NOT degrade the model's overall $R^2$ or predictive power. It only destroys parameter interpretation and model stability.</p>
+      <div class="sh">Variance Inflation Factor</div>
+      <div class="formula">
+        <div class="formula-lbl">VIF Formula</div>
+        $\text{VIF}(X_i) = \frac{1}{1 - R_i^2}$
+      </div>
+      <p>$R_i^2$ = the $R^2$ from regressing feature $X_i$ against all other features. High $R_i^2$ means other features explain $X_i$ well — severe multicollinearity.</p>
+      <div class="vif-bar">
+        <div class="vif-s1"></div><div class="vif-s2"></div><div class="vif-s3"></div><div class="vif-s4"></div>
+      </div>
+      <div class="vif-lbls"><span>VIF = 1 (orthogonal)</span><span>VIF = 5</span><span>VIF ≥ 10 (severe)</span></div>
+      <div class="g3" style="margin-top:14px">
+        <div class="mc"><div class="mc-lbl">VIF = 1</div><div class="mc-title" style="color:var(--green)">No Collinearity</div><div class="mc-body">Feature is completely independent of all others.</div></div>
+        <div class="mc"><div class="mc-lbl">VIF 1–5</div><div class="mc-title" style="color:var(--yellow)">Moderate</div><div class="mc-body">Some correlation. Monitor but often acceptable.</div></div>
+        <div class="mc"><div class="mc-lbl">VIF ≥ 10</div><div class="mc-title" style="color:var(--red)">Severe</div><div class="mc-body">Drop one feature, apply PCA, or switch to Ridge.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODULE 2 ══════════ -->
+<div class="mod" id="m2">
+  <div class="mod-eyebrow">Module 02</div>
+  <div class="mod-title">Parametric Models</div>
+  <div class="mod-desc">Linear and logistic regression — assumptions, diagnostics, and failure modes.</div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(56,189,248,.15)">📐</div>
+      <div class="cc-name">Linear Regression — Gauss-Markov Assumptions</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="analogy">
+        <div class="analogy-lbl">Analogy</div>
+        <p>A tailor fitting a rigid wooden ramp over stepping stones — they can only tilt it (slope) and shift it up/down (intercept) to minimise the vertical gap to each stone. The ramp cannot bend.</p>
+      </div>
+      <div class="sh">The 4 Gauss-Markov Assumptions (B.L.U.E.)</div>
+      <div class="g2">
+        <div class="mc"><div class="mc-lbl">Assumption 1</div><div class="mc-title">Linearity</div><div class="mc-body">Relationship between $X$ and $\mathbb{E}[Y]$ must be linear. <strong>Check:</strong> Residuals vs Fitted plot — look for curved patterns.</div></div>
+        <div class="mc"><div class="mc-lbl">Assumption 2</div><div class="mc-title">Independence of Errors</div><div class="mc-body">No autocorrelation. <strong>Check:</strong> Durbin-Watson test. Value ≈ 2 = no autocorrelation. Values near 0 = positive autocorrelation.</div></div>
+        <div class="mc"><div class="mc-lbl">Assumption 3</div><div class="mc-title">Homoscedasticity</div><div class="mc-body">Constant error variance. <strong>Check:</strong> Residuals vs Fitted — funnel shape = heteroscedasticity. <strong>Fix:</strong> log or Box-Cox transform on Y.</div></div>
+        <div class="mc"><div class="mc-lbl">Assumption 4</div><div class="mc-title">Normality of Residuals</div><div class="mc-body">Errors must be normally distributed for valid hypothesis tests. <strong>Check:</strong> Q-Q plot — points should lie on the 45° diagonal line.</div></div>
+      </div>
+      <div class="sh">Evaluation Metrics</div>
+      <div class="formula"><div class="formula-lbl">MAE — Robust to outliers</div>$\text{MAE} = \frac{1}{n}\sum_{i=1}^{n}|y_i - \hat{y}_i|$</div>
+      <div class="formula"><div class="formula-lbl">RMSE — Penalises large errors heavily</div>$\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}$</div>
+      <div class="formula"><div class="formula-lbl">Adjusted R² — Penalises for adding useless features</div>$R^2_{\text{adj}} = 1 - \left[\frac{(1-R^2)(n-1)}{n-p-1}\right]$</div>
+      <div class="tip"><div class="tip-icon">⚡</div><div><p><strong>Key point:</strong> Standard $R^2$ always increases when you add features. <strong>Adjusted $R^2$</strong> penalises for feature count — use it to compare models of different complexity.</p></div></div>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(0,255,148,.12)">📊</div>
+      <div class="cc-name">Logistic Regression — Core Mechanics</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="analogy">
+        <div class="analogy-lbl">Analogy</div>
+        <p>A credit card fraud system with a dimmer switch — instead of abruptly blocking or allowing a transaction, it smoothly scales a fraud probability from 0 to 1 based on incoming signals.</p>
+      </div>
+      <p>Logistic regression models <em>probability</em> $P$ that an observation belongs to a class. It maps a linear combination of features to the non-linear [0,1] range using the <strong>Logit Link Function</strong>:</p>
+      <div class="formula"><div class="formula-lbl">Logit (Log-Odds)</div>$\text{logit}(P) = \ln\left(\frac{P}{1-P}\right) = \beta_0 + \beta_1 X_1 + \dots + \beta_p X_p$</div>
+      <div class="formula"><div class="formula-lbl">Sigmoid — inverse of logit, solving for P</div>$P = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \dots + \beta_p X_p)}}$</div>
+      <div class="sh">Critical Assumption — Linearity of the Logit</div>
+      <p>Logistic regression does NOT need a linear relationship between $X$ and $P$. It needs linearity between $X$ and the <em>log-odds</em>. <strong>Check:</strong> Box-Tidwell test — adds $X \cdot \ln(X)$ interaction terms.</p>
+      <div class="sh">Complete Separation — Classic Interview Trap</div>
+      <div class="tip" style="background:rgba(248,113,113,.06);border-color:rgba(248,113,113,.2)">
+        <div class="tip-icon">🔥</div>
+        <div><p><strong>The problem:</strong> If a feature perfectly separates classes (e.g. every patient with BP > 180 is sick), MLE drives the coefficient toward infinity. The algorithm fails to converge.</p>
+        <p style="margin-top:6px"><strong>Fix:</strong> Apply L2 (Ridge) regularisation to constrain coefficient magnitudes.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(167,139,250,.12)">🎯</div>
+      <div class="cc-name">Partial Correlation — Isolating Variables</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <p>In multiple regression, $\beta_1$ is a <em>partial coefficient</em> — the expected change in $Y$ per 1-unit increase in $X_1$ after removing the linear influence of all other features from both $X_1$ and $Y$.</p>
+      <div class="sh">3-Step Partial Correlation Routine</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(167,139,250,.15);color:var(--purple)">1</div><div class="rag-content"><div class="rag-t">Regress Y on X₂</div><div class="rag-d">Collect residuals $e_{Y \cdot X_2}$ — the variance in Y that X₂ cannot explain.</div></div></div>
+      <div class="rag-arrow">↓</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(167,139,250,.15);color:var(--purple)">2</div><div class="rag-content"><div class="rag-t">Regress X₁ on X₂</div><div class="rag-d">Collect residuals $e_{X_1 \cdot X_2}$ — the variance in X₁ that X₂ cannot explain.</div></div></div>
+      <div class="rag-arrow">↓</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(167,139,250,.15);color:var(--purple)">3</div><div class="rag-content"><div class="rag-t">Correlate the two residuals</div><div class="rag-d">$r_{YX_1 \cdot X_2} = \text{corr}(e_{Y \cdot X_2},\; e_{X_1 \cdot X_2})$ — the pure X₁↔Y relationship with X₂ held constant.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODULE 3 ══════════ -->
+<div class="mod" id="m3">
+  <div class="mod-eyebrow">Module 03</div>
+  <div class="mod-title">Distance & Probabilistic Classifiers</div>
+  <div class="mod-desc">SVM, Naive Bayes, KNN — and mastering the confusion matrix.</div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(56,189,248,.15)">🗺️</div>
+      <div class="cc-name">SVM, Naive Bayes, KNN — Mental Models</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="g3">
+        <div class="mc"><div class="mc-lbl">SVM</div><div class="mc-title">The Surveyor</div><div class="mc-body">Draws the widest possible margin border between two classes. Only the support vectors (boundary points) matter. Kernel trick maps to higher dimensions for non-linear separation.</div></div>
+        <div class="mc"><div class="mc-lbl">Naive Bayes</div><div class="mc-title">The Quick Clerk</div><div class="mc-body">Calculates a running probability tally based on feature frequencies assuming all features are independent given the class. "Naive" because this independence assumption is almost always false.</div></div>
+        <div class="mc"><div class="mc-lbl">KNN</div><div class="mc-title">The Local Vote</div><div class="mc-body">Assigns a label by majority vote among the K nearest neighbours in feature space. No training phase — all computation happens at prediction time (lazy learner).</div></div>
+      </div>
+      <div class="sh">Feature Scaling — Critical for SVM and KNN</div>
+      <p>Distance-based algorithms (SVM, KNN) are dominated by features with large ranges. Income ($500K) will completely overwhelm Age (100) in Euclidean distance.</p>
+      <p><strong>Always apply:</strong> Z-score standardisation (mean=0, std=1) or Min-Max scaling [0,1] before using distance-based models.</p>
+      <div class="tip"><div class="tip-icon">⚡</div><div><p><strong>Naive Bayes paradox:</strong> Despite its unrealistic independence assumption, it performs <strong>remarkably well</strong> for text classification — it ranks class probabilities correctly even if the exact probabilities are wrong.</p></div></div>
+    </div>
+  </div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(0,255,148,.12)">📋</div>
+      <div class="cc-name">Confusion Matrix — Interactive Breakdown</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <p>Hover a cell to see which metrics it affects. Click a metric card to pin it.</p>
+      <div class="cm-wrap">
+        <div>
+          <div class="cm-grid">
+            <div class="cm-hdr"></div>
+            <div class="cm-hdr">Predicted +</div>
+            <div class="cm-hdr">Predicted −</div>
+            <div class="cm-hdr">Actual +</div>
+            <div class="cm-cell tp-cell" onmouseenter="cmHL(['pre','rec','f1','acc'])" onmouseleave="cmClear()">
+              <div class="cm-ab">TP</div><div class="cm-desc">True<br>Positive</div>
+            </div>
+            <div class="cm-cell fn-cell" onmouseenter="cmHL(['rec','acc'])" onmouseleave="cmClear()">
+              <div class="cm-ab">FN</div><div class="cm-desc">False<br>Negative</div>
+            </div>
+            <div class="cm-hdr">Actual −</div>
+            <div class="cm-cell fp-cell" onmouseenter="cmHL(['pre','acc'])" onmouseleave="cmClear()">
+              <div class="cm-ab">FP</div><div class="cm-desc">False<br>Positive</div>
+            </div>
+            <div class="cm-cell tn-cell" onmouseenter="cmHL(['acc'])" onmouseleave="cmClear()">
+              <div class="cm-ab">TN</div><div class="cm-desc">True<br>Negative</div>
+            </div>
+          </div>
+        </div>
+        <div class="cm-metrics">
+          <div class="cm-met" id="cm-pre" onclick="cmToggle('pre')"><div class="cm-met-name">Precision</div><div class="cm-met-form">TP / (TP + FP)</div><div class="cm-met-use">Minimise false alarms. Use when FP is costly (spam filter, ad targeting).</div></div>
+          <div class="cm-met" id="cm-rec" onclick="cmToggle('rec')"><div class="cm-met-name">Recall (Sensitivity)</div><div class="cm-met-form">TP / (TP + FN)</div><div class="cm-met-use">Catch all positives. Use when FN is dangerous (cancer screening, fraud).</div></div>
+          <div class="cm-met" id="cm-f1" onclick="cmToggle('f1')"><div class="cm-met-name">F1-Score</div><div class="cm-met-form">2 × (P × R) / (P + R)</div><div class="cm-met-use">Harmonic mean of P & R. Best single metric for imbalanced tasks.</div></div>
+          <div class="cm-met" id="cm-acc" onclick="cmToggle('acc')"><div class="cm-met-name">Accuracy</div><div class="cm-met-form">(TP + TN) / Total</div><div class="cm-met-use">⚠ Misleading on imbalanced data. A dummy model predicting only majority class can score 99%.</div></div>
+          <div class="cm-met"><div class="cm-met-name">ROC-AUC</div><div class="cm-met-form">Area under TPR vs FPR curve</div></div>
+        </div>
+      </div>
+      <div class="tip"><div class="tip-icon">⚡</div><div><p><strong>Interview rule:</strong> Never use Accuracy as your primary metric on an imbalanced dataset. A dummy model that predicts the majority class 100% of the time can score 99% accuracy on a 99/1 dataset.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODULE 4 ══════════ -->
+<div class="mod" id="m4">
+  <div class="mod-eyebrow">Module 04</div>
+  <div class="mod-title">Tree Ensembles & Boosting</div>
+  <div class="mod-desc">Bagging vs Boosting — the two paradigms that power most Kaggle winners.</div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(56,189,248,.15)">🌲</div>
+      <div class="cc-name">Bagging vs Boosting — Visual Architecture</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="ens-grid">
+        <div class="ens-box ens-bag">
+          <div class="ens-title">BAGGING (Parallel)</div>
+          <div class="ens-trees">
+            <div class="ens-tree">Tree 1<br><span style="opacity:.5">Bootstrap A</span></div>
+            <div class="ens-tree">Tree 2<br><span style="opacity:.5">Bootstrap B</span></div>
+            <div class="ens-tree">Tree 3<br><span style="opacity:.5">Bootstrap C</span></div>
+          </div>
+          <div class="ens-arrow">↓ ↓ ↓</div>
+          <div style="text-align:center;font-family:var(--mono);font-size:10px;color:var(--muted)">Vote / Average</div>
+          <div class="ens-goal">↓ Reduce VARIANCE</div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--muted);text-align:center;margin-top:8px">Example: Random Forest</div>
+        </div>
+        <div class="ens-box ens-bst">
+          <div class="ens-title">BOOSTING (Sequential)</div>
+          <div class="ens-seq">
+            <div class="ens-seq-tree">Tree 1</div>
+            <div class="ens-seq-arrow">→ errors →</div>
+            <div class="ens-seq-tree">Tree 2</div>
+            <div class="ens-seq-arrow">→ errors →</div>
+            <div class="ens-seq-tree">Tree 3</div>
+          </div>
+          <div style="text-align:center;font-size:11px;color:var(--muted);font-family:var(--mono);margin:8px 0">Each tree corrects residuals of prior</div>
+          <div class="ens-goal">↓ Reduce BIAS</div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--muted);text-align:center;margin-top:8px">XGBoost · LightGBM · CatBoost</div>
+        </div>
+      </div>
+      <div class="sh">Bias-Variance Diagnosis — Learning Curves</div>
+      <div class="bv-grid">
+        <div class="bv-card bv-over">
+          <div class="bv-t">Overfitting (High Variance)</div>
+          <div class="bv-d">Low training error, high validation error. The model memorised noise.</div>
+          <div><span class="bv-fix">L1/L2 regularisation</span></div>
+          <div><span class="bv-fix">Early stopping</span></div>
+          <div><span class="bv-fix">More training data</span></div>
+        </div>
+        <div class="bv-card bv-under">
+          <div class="bv-t">Underfitting (High Bias)</div>
+          <div class="bv-d">High training error and high validation error. The model is too simple.</div>
+          <div><span class="bv-fix">Increase model capacity</span></div>
+          <div><span class="bv-fix">Add interaction terms</span></div>
+          <div><span class="bv-fix">Reduce regularisation</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(255,107,53,.15)">⚡</div>
+      <div class="cc-name">XGBoost · LightGBM · CatBoost — Key Differences</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="g3">
+        <div class="mc"><div class="mc-lbl" style="color:var(--orange)">XGBoost</div><div class="mc-title">Regularised GB</div><div class="mc-body">L1+L2 regularisation in objective. Uses second-order derivatives (Hessians) for faster convergence. Pre-sorted block system for split-finding. Gold standard for tabular data.</div></div>
+        <div class="mc"><div class="mc-lbl" style="color:var(--green)">LightGBM</div><div class="mc-title">Leaf-Wise Growth</div><div class="mc-body">Grows the single leaf that reduces loss the most regardless of depth. GOSS samples high-gradient instances. EFB bundles sparse features. Fastest and most memory-efficient on large datasets.</div></div>
+        <div class="mc"><div class="mc-lbl" style="color:var(--purple)">CatBoost</div><div class="mc-title">Ordered Boosting</div><div class="mc-body">Handles raw categoricals natively — no encoding needed. Ordered boosting uses dataset permutations to evaluate splits, completely preventing target leakage on categoricals.</div></div>
+      </div>
+      <div class="sh">SHAP Values — Beyond Feature Importance</div>
+      <p>Traditional feature importance is unstable — if two features are correlated, a tree may assign all importance to one and ignore the other.</p>
+      <p><strong>SHAP (Shapley Additive Explanations)</strong> — based on cooperative game theory — computes each feature's unique marginal contribution across <em>all possible feature combinations</em>. Provides both global and local (per-prediction) explanations.</p>
+      <div class="tags"><span class="tag tg">Model explainability</span><span class="tag tc">Feature attribution</span><span class="tag tp">Local explanations</span></div>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(167,139,250,.15)">🔧</div>
+      <div class="cc-name">Hyperparameter Optimisation</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="g3">
+        <div class="mc"><div class="mc-lbl">Grid Search</div><div class="mc-title">Exhaustive</div><div class="mc-body">Tests every combination in a predefined grid. Guaranteed to find the best within grid bounds. Computationally expensive — scales exponentially with dimensionality.</div></div>
+        <div class="mc"><div class="mc-lbl">Random Search</div><div class="mc-title">Probabilistic</div><div class="mc-body">Randomly samples combinations from distributions. Mathematically proven to find near-optimal results much faster by skipping irrelevant parameter regions.</div></div>
+        <div class="mc"><div class="mc-lbl">Bayesian Opt.</div><div class="mc-title">Surrogate Model</div><div class="mc-body">Builds a Gaussian Process to predict performance from past runs. Uses an acquisition function to balance exploration vs exploitation. Most sample-efficient method.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODULE 5 ══════════ -->
+<div class="mod" id="m5">
+  <div class="mod-eyebrow">Module 05</div>
+  <div class="mod-title">Unsupervised Learning</div>
+  <div class="mod-desc">Clustering and dimensionality reduction — finding structure without labels.</div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(0,255,148,.12)">🔵</div>
+      <div class="cc-name">K-Means vs DBSCAN</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="g2">
+        <div class="mc">
+          <div class="mc-lbl" style="color:var(--cyan)">K-Means</div><div class="mc-title">Centroid-Based</div>
+          <div class="mc-body"><p style="font-size:12px;margin-bottom:8px">Iteratively assigns points to nearest centroid, then recomputes centroids as cluster means. Repeats until convergence.</p>
+          <p style="font-size:12px;margin-bottom:4px"><strong style="color:#fff">Limitations:</strong></p>
+          <p style="font-size:12px;margin-bottom:2px">• Requires pre-specifying K</p>
+          <p style="font-size:12px;margin-bottom:2px">• Only works on spherical clusters</p>
+          <p style="font-size:12px">• Sensitive to outliers (pulls centroids)</p></div>
+        </div>
+        <div class="mc">
+          <div class="mc-lbl" style="color:var(--purple)">DBSCAN</div><div class="mc-title">Density-Based</div>
+          <div class="mc-body"><p style="font-size:12px;margin-bottom:8px">Groups points by density — uses a search radius ε and minimum sample threshold. Classifies each point as Core, Border, or Noise.</p>
+          <p style="font-size:12px;margin-bottom:4px"><strong style="color:#fff">Advantages:</strong></p>
+          <p style="font-size:12px;margin-bottom:2px">• No need to specify K upfront</p>
+          <p style="font-size:12px;margin-bottom:2px">• Handles non-spherical geometries</p>
+          <p style="font-size:12px">• Automatically identifies outliers as Noise</p></div>
+        </div>
+      </div>
+      <div class="sh">Evaluation Methods</div>
+      <div class="g2">
+        <div class="mc"><div class="mc-lbl">Elbow Method</div><div class="mc-body">Plot Within-Cluster Sum of Squares (WCSS) against K. Look for the "elbow" — the inflection point where adding more clusters gives diminishing returns.</div></div>
+        <div class="mc"><div class="mc-lbl">Silhouette Score</div><div class="mc-body">Measures how similar each point is to its own cluster vs neighbouring clusters. Range: −1 (wrong cluster) to +1 (well-matched). Target > 0.5.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(56,189,248,.15)">📉</div>
+      <div class="cc-name">PCA vs t-SNE</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="g2">
+        <div class="mc"><div class="mc-lbl" style="color:var(--cyan)">PCA</div><div class="mc-title">Linear · Transformative</div><div class="mc-body">Finds orthogonal axes (principal components) that maximise variance. Plot Cumulative Explained Variance Ratio — use enough components to capture ≥85–90% of total variance. Can transform new unseen data.</div></div>
+        <div class="mc"><div class="mc-lbl" style="color:var(--orange)">t-SNE</div><div class="mc-title">Non-linear · Visualisation Only</div><div class="mc-body">Probabilistically maps high-dimensional data to 2D/3D while preserving local neighbourhoods. Does NOT preserve global distances. Cannot transform new data points. Strictly a visualisation tool.</div></div>
+      </div>
+      <div class="tip"><div class="tip-icon">⚡</div><div><p><strong>Interview trap:</strong> "Can you use t-SNE in a production pipeline?" — No. t-SNE cannot transform unseen data and distorts global distances. Use PCA or UMAP for production dimensionality reduction.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODULE 6 ══════════ -->
+<div class="mod" id="m6">
+  <div class="mod-eyebrow">Module 06</div>
+  <div class="mod-title">Reinforcement Learning</div>
+  <div class="mod-desc">Agents, environments, rewards, and the exploration-exploitation dilemma.</div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(252,211,77,.12)">🐕</div>
+      <div class="cc-name">RL Framework — Agent, Environment, Reward</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="analogy">
+        <div class="analogy-lbl">Analogy</div>
+        <p>A puppy learning an obstacle course through treats and whistles — it observes its position (State), chooses to jump or run (Action), and receives a treat (Reward+) or whistle (Reward−). Over time it learns which sequence of actions maximises treats.</p>
+      </div>
+      <div style="background:#070A14;border:1px solid var(--border);border-radius:8px;padding:18px;margin:14px 0;font-family:var(--mono);font-size:11px;line-height:2.2;color:var(--muted)">
+        <span style="color:var(--cyan)">[ ENVIRONMENT ]</span><br>
+        &nbsp;&nbsp;&nbsp;State($S_t$) ↙&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↘ Reward($R_t$)<br>
+        <span style="color:var(--green)">[ AGENT ]</span> ──────────────────→ <span style="color:var(--orange)">[ ACTION ($A_t$) ]</span>
+      </div>
+      <div class="formula"><div class="formula-lbl">Cumulative Discounted Reward (Goal)</div>$G_t = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1}$</div>
+      <p>$\gamma \in [0,1]$ is the <em>discount factor</em>. $\gamma = 0$ means the agent is myopic (only cares about immediate reward). $\gamma \approx 1$ means it values all future rewards equally.</p>
+      <div class="sh">The 3 Major Bottlenecks</div>
+      <div class="g3">
+        <div class="mc"><div class="mc-lbl" style="color:var(--red)">Sample Inefficiency</div><div class="mc-body">Requires millions of simulated interactions to learn basic policies. Expensive and impractical for real-world deployment without simulation.</div></div>
+        <div class="mc"><div class="mc-lbl" style="color:var(--orange)">Credit Assignment</div><div class="mc-body">When a reward comes at the end of a long action sequence, it's hard to identify which specific past action caused the success or failure.</div></div>
+        <div class="mc"><div class="mc-lbl" style="color:var(--yellow)">Explore vs Exploit</div><div class="mc-body">Balance testing unknown actions (explore for potentially better long-term rewards) vs repeating known good actions (exploit for reliable payouts).</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODULE 7 ══════════ -->
+<div class="mod" id="m7">
+  <div class="mod-eyebrow">Module 07</div>
+  <div class="mod-title">Multi-Modal Models & Multi-Agent Systems</div>
+  <div class="mod-desc">CLIP architecture, contrastive loss, and collaborative AI pipelines.</div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(167,139,250,.15)">🖼️</div>
+      <div class="cc-name">CLIP — Multi-Modal Alignment</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <p>CLIP connects images and text in a single shared embedding space using dual encoders and contrastive learning — enabling zero-shot image classification.</p>
+      <div style="background:#070A14;border:1px solid var(--border);border-radius:8px;padding:18px;margin:14px 0;font-family:var(--mono);font-size:11px;line-height:2.2;color:var(--muted)">
+        Image Input → <span style="color:var(--cyan)">[ Vision Transformer Encoder ]</span> ──→<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--green)">[ Shared Embedding Space ]</span><br>
+        Text Input &nbsp;→ <span style="color:var(--purple)">[ Text Transformer Encoder ]</span>&nbsp; ──→
+      </div>
+      <div class="g2">
+        <div class="mc"><div class="mc-lbl">Training Objective</div><div class="mc-title">Contrastive Loss</div><div class="mc-body">Maximise cosine similarity between matching image-text pairs (diagonal of batch matrix). Minimise similarity for all mismatched pairs in the same batch.</div></div>
+        <div class="mc"><div class="mc-lbl">Superpower</div><div class="mc-title">Zero-Shot Transfer</div><div class="mc-body">At inference, compute similarity between an image embedding and all candidate text class embeddings. No fine-tuning needed on target task.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(0,255,148,.12)">🤝</div>
+      <div class="cc-name">Multi-Agent Systems</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <p>Instead of one large model handling a complex task end-to-end, a <em>multi-agent system</em> distributes work across specialised autonomous agents collaborating via structured message passing.</p>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(56,189,248,.15);color:var(--cyan)">1</div><div class="rag-content"><div class="rag-t">Architect Agent</div><div class="rag-d">Receives goal. Writes technical specification with system prompt + tools (e.g. web search).</div></div></div>
+      <div class="rag-arrow">↓ passes spec</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(0,255,148,.12);color:var(--green)">2</div><div class="rag-content"><div class="rag-t">Developer Agent</div><div class="rag-d">Receives spec. Generates code with dedicated terminal/execution tools.</div></div></div>
+      <div class="rag-arrow">↓ passes code</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(167,139,250,.12);color:var(--purple)">3</div><div class="rag-content"><div class="rag-t">Reviewer Agent</div><div class="rag-d">Tests code. If bugs found, sends structured feedback back to Developer Agent. Loop until passing.</div></div></div>
+      <div class="tip"><div class="tip-icon">⚡</div><div><p>Each agent has a <strong>distinct persona</strong>, custom system prompt, and <strong>tailored tool access</strong>. They communicate via structured messages — not raw text.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MODULE 8 ══════════ -->
+<div class="mod" id="m8">
+  <div class="mod-eyebrow">Module 08</div>
+  <div class="mod-title">LLMs & Retrieval-Augmented Generation</div>
+  <div class="mod-desc">How large language models work — and how RAG fixes hallucination at its root.</div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(56,189,248,.15)">🧠</div>
+      <div class="cc-name">LLMs — Architecture & Root Cause of Hallucination</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <p>Modern LLMs are <strong>Transformer Decoder</strong> architectures. They process tokens in parallel using self-attention and are pre-trained via <em>autoregressive next-token prediction</em> on massive datasets.</p>
+      <div class="tip" style="background:rgba(248,113,113,.06);border-color:rgba(248,113,113,.2)">
+        <div class="tip-icon">🔥</div>
+        <div><p><strong>Root cause of hallucination:</strong> LLMs are probabilistic text-generation engines, not factual databases. They optimise for <em>linguistic plausibility</em> — the most statistically likely next token given context — not for factual correctness. They have no internal truth-verification mechanism.</p></div>
+      </div>
+      <div class="sh">Key Terminology</div>
+      <div class="g2">
+        <div class="mc"><div class="mc-lbl">Context Window</div><div class="mc-body">Maximum number of tokens an LLM can process in a single forward pass. Everything outside this window is invisible to the model.</div></div>
+        <div class="mc"><div class="mc-lbl">Temperature</div><div class="mc-body">Controls sampling randomness. Low (~0.1) = deterministic/factual. High (~1.0) = creative/variable. Temperature=0 = always pick the highest probability token.</div></div>
+        <div class="mc"><div class="mc-lbl">Fine-Tuning</div><div class="mc-body">Updating model weights on domain-specific data. Expensive. Teaches style/format well but doesn't reliably inject current facts.</div></div>
+        <div class="mc"><div class="mc-lbl">RAG</div><div class="mc-body">Retrieval-Augmented Generation — inject external verified facts at inference time. Cheaper and more updatable than fine-tuning for factual grounding.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cc open">
+    <div class="cc-hd" onclick="toggle(this)">
+      <div class="cc-icon" style="background:rgba(0,255,148,.12)">🔍</div>
+      <div class="cc-name">RAG Pipeline — End-to-End</div>
+      <div class="cc-chev">▾</div>
+    </div>
+    <div class="cc-body">
+      <div class="sh" style="margin-top:0;padding-top:0;border-top:none">Phase 1 — Ingestion Pipeline</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(56,189,248,.12);color:var(--cyan)">1</div><div class="rag-content"><div class="rag-t">Chunking</div><div class="rag-d">Raw documents split into small coherent segments using fixed-size or semantic boundaries to preserve local context.</div></div></div>
+      <div class="rag-arrow">↓</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(56,189,248,.12);color:var(--cyan)">2</div><div class="rag-content"><div class="rag-t">Dense Embedding</div><div class="rag-d">Each chunk passed through an embedding model → high-dimensional vector capturing semantic meaning.</div></div></div>
+      <div class="rag-arrow">↓</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(56,189,248,.12);color:var(--cyan)">3</div><div class="rag-content"><div class="rag-t">Vector Database Storage</div><div class="rag-d">Vectors indexed in Pinecone / Milvus / FAISS with original text metadata attached.</div></div></div>
+      <div class="sh">Phase 2 — Inference Loop</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(0,255,148,.12);color:var(--green)">4</div><div class="rag-content"><div class="rag-t">Query Embedding</div><div class="rag-d">User query converted to vector using the same embedding model. Cosine similarity search retrieves Top-K most relevant chunks.</div></div></div>
+      <div class="rag-arrow">↓</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(0,255,148,.12);color:var(--green)">5</div><div class="rag-content"><div class="rag-t">Prompt Augmentation</div><div class="rag-d">Retrieved chunks injected directly into the system prompt as reference context alongside the user's query.</div></div></div>
+      <div class="rag-arrow">↓</div>
+      <div class="rag-step"><div class="rag-num" style="background:rgba(0,255,148,.12);color:var(--green)">6</div><div class="rag-content"><div class="rag-t">Grounded Generation</div><div class="rag-d">LLM generates an answer using only the provided context — preventing hallucination from internal weights.</div></div></div>
+      <div class="sh">RAG Triad Evaluation</div>
+      <div class="g3">
+        <div class="mc"><div class="mc-lbl" style="color:var(--cyan)">Context Relevance</div><div class="mc-body">Are the retrieved chunks focused and relevant to the query? Measures retrieval quality — is the vector DB returning signal or noise?</div></div>
+        <div class="mc"><div class="mc-lbl" style="color:var(--green)">Groundedness</div><div class="mc-body">Is the LLM's response derived strictly from retrieved context? Detects when the model hallucinates from its training weights instead of the provided source.</div></div>
+        <div class="mc"><div class="mc-lbl" style="color:var(--purple)">Answer Relevance</div><div class="mc-body">Does the final output actually answer the user's question? The retrieved context can be perfect but the response can still miss the point.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ QUIZ ══════════ -->
+<div class="mod" id="quiz">
+  <div class="mod-eyebrow">Quick Fire</div>
+  <div class="mod-title">Interview Quiz</div>
+  <div class="mod-desc">Test yourself on the most commonly asked ML interview questions.</div>
+  <div id="quizContainer"></div>
+</div>
+
+<!-- ══════════ SUMMARY ══════════ -->
+<div class="mod" id="summary">
+  <div class="mod-eyebrow">Master Reference</div>
+  <div class="mod-title">Summary Table</div>
+  <div class="mod-desc">One-stop cheat sheet — model paradigm → diagnostic focus → primary tools.</div>
+
+  <table class="sum-table">
+    <thead><tr><th>Model Paradigm</th><th>Key Diagnostic Focus</th><th>Primary Evaluation Tools</th></tr></thead>
+    <tbody>
+      <tr><td>Linear Regression</td><td>Heteroscedasticity & Multicollinearity</td><td>VIF, Residual Plots, Adjusted R², RMSE</td></tr>
+      <tr><td>Logistic Regression</td><td>Logit Linearity & Complete Separation</td><td>Box-Tidwell Test, Binary Log Loss, AUC</td></tr>
+      <tr><td>SVM / KNN</td><td>Feature Scaling & Class Balance</td><td>F1-Score, Stratified CV, ROC-AUC</td></tr>
+      <tr><td>Naive Bayes</td><td>Conditional Independence Assumption</td><td>Log Loss, Precision-Recall Curve</td></tr>
+      <tr><td>Random Forest</td><td>Variance Reduction & Feature Allocation</td><td>OOB Error, SHAP Values, Validation Curves</td></tr>
+      <tr><td>XGBoost / LightGBM</td><td>Overfitting & Hyperparameter Tuning</td><td>Early Stopping, Validation Loss, SHAP</td></tr>
+      <tr><td>K-Means</td><td>Cluster Geometry & K Selection</td><td>Elbow Method, Silhouette Score</td></tr>
+      <tr><td>DBSCAN</td><td>Density Parameters (ε, MinPts)</td><td>Silhouette Score, Noise Point Ratio</td></tr>
+      <tr><td>PCA</td><td>Explained Variance & Linearity</td><td>Cumulative Variance Ratio Plot</td></tr>
+      <tr><td>RL Systems</td><td>Sample Efficiency & Exploration Policy</td><td>Cumulative Reward Curves, Convergence</td></tr>
+      <tr><td>LLMs (RAG)</td><td>Hallucinations & Retrieval Precision</td><td>Context Relevance, Groundedness, Answer Relevance</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:32px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px">
+    <div class="mod-eyebrow" style="margin-bottom:12px">Quick-Fire Formula Sheet</div>
+    <div class="g2">
+      <div>
+        <div class="formula"><div class="formula-lbl">K-Fold CV Score</div>$\mathbb{E}[\mathcal{M}] = \frac{1}{K}\sum_{i=1}^{K}\mathcal{M}_i$</div>
+        <div class="formula"><div class="formula-lbl">VIF</div>$\text{VIF}(X_i) = \frac{1}{1-R_i^2}$</div>
+        <div class="formula"><div class="formula-lbl">Sigmoid</div>$P = \frac{1}{1+e^{-z}}$</div>
+        <div class="formula"><div class="formula-lbl">MAE</div>$\frac{1}{n}\sum|y_i-\hat{y}_i|$</div>
+        <div class="formula"><div class="formula-lbl">RMSE</div>$\sqrt{\frac{1}{n}\sum(y_i-\hat{y}_i)^2}$</div>
+      </div>
+      <div>
+        <div class="formula"><div class="formula-lbl">Precision</div>$\frac{TP}{TP+FP}$</div>
+        <div class="formula"><div class="formula-lbl">Recall</div>$\frac{TP}{TP+FN}$</div>
+        <div class="formula"><div class="formula-lbl">F1</div>$2\times\frac{P\times R}{P+R}$</div>
+        <div class="formula"><div class="formula-lbl">Adjusted R²</div>$1-\left[\frac{(1-R^2)(n-1)}{n-p-1}\right]$</div>
+        <div class="formula"><div class="formula-lbl">RL Return</div>$G_t=\sum_{k=0}^{\infty}\gamma^k R_{t+k+1}$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+function show(id){
+  document.querySelectorAll('.mod').forEach(m=>m.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(s=>s.classList.toggle('active',s.dataset.mod===id));
+  const el=document.getElementById(id);
+  if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+  if(id==='quiz')buildQuiz();
+}
+
+function toggle(hd){hd.parentElement.classList.toggle('open');}
+
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('topFill').style.width=Math.min(pct,100)+'%';
+},{passive:true});
+
+const K=5;let kfActive=0;
+function kfRender(){
+  const c=document.getElementById('kfRows');if(!c)return;
+  const scores=['0.913','0.897','0.921','0.908','0.935'];
+  let html='';
+  for(let f=0;f<K;f++){
+    html+=`<div class="kf-row"><span class="kf-lbl">Fold ${f+1}</span><div class="kf-blocks">`;
+    for(let b=0;b<K;b++){
+      const isV=b===kfActive&&f===kfActive;
+      html+=`<div class="${isV?'kf-blk kf-valid':'kf-blk kf-train'}">${isV?'VALIDATE':'TRAIN'}</div>`;
+    }
+    html+=`</div><span class="kf-score">${f===kfActive?'✓ '+scores[f]:''}</span></div>`;
+  }
+  const avg=(scores.map(Number).reduce((a,b)=>a+b,0)/K).toFixed(3);
+  html+=`<div style="font-family:var(--mono);font-size:11px;color:var(--green);margin-top:10px;text-align:right">Mean CV Score = ${avg}</div>`;
+  c.innerHTML=html;
+  document.getElementById('kfInfo').textContent=`Fold ${kfActive+1} is the validation set`;
+}
+function kfNext(){kfActive=(kfActive+1)%K;kfRender();}
+function kfPrev(){kfActive=(kfActive+K-1)%K;kfRender();}
+kfRender();
+
+let cmSel=null;
+function cmHL(ids){
+  document.querySelectorAll('.cm-met').forEach(m=>{
+    const active=ids.includes(m.id.replace('cm-',''));
+    m.classList.toggle('hi',active);
+    m.querySelector('.cm-met-use').style.display=active?'block':'none';
+  });
+}
+function cmClear(){
+  if(cmSel)return;
+  document.querySelectorAll('.cm-met').forEach(m=>{
+    m.classList.remove('hi');
+    m.querySelector('.cm-met-use').style.display='none';
+  });
+}
+function cmToggle(id){
+  const el=document.getElementById('cm-'+id);
+  if(cmSel===id){
+    cmSel=null;el.classList.remove('hi');el.querySelector('.cm-met-use').style.display='none';
+  } else {
+    cmSel=id;
+    document.querySelectorAll('.cm-met').forEach(m=>{m.classList.remove('hi');m.querySelector('.cm-met-use').style.display='none';});
+    el.classList.add('hi');el.querySelector('.cm-met-use').style.display='block';
+  }
+}
+
+const QUIZ=[
+  {q:'A dataset has 99% class A and 1% class B. A model predicts class A for every sample and achieves 99% accuracy. What metric should you actually use?',
+   opts:['Accuracy — 99% is fine','F1-Score or PR-AUC — these penalise ignoring the minority class','ROC-AUC — it handles imbalance natively','Precision alone'],
+   ans:1,exp:'Accuracy is completely misleading on imbalanced datasets. F1-Score or the Precision-Recall AUC are the correct choices because they explicitly measure the model\'s ability to detect the minority class.'},
+  {q:'Your Random Forest shows high training accuracy but poor validation accuracy. What is happening and what should you do?',
+   opts:['Underfitting — add more trees','Overfitting (high variance) — introduce regularisation, reduce max_depth, or get more data','Data leakage — shuffle the data','Multicollinearity — apply PCA'],
+   ans:1,exp:'Low training error + high validation error = overfitting (high variance). The model memorised training noise. Fix: reduce tree depth, increase min_samples_leaf, add more training data, or use early stopping.'},
+  {q:'You want to use K-Fold cross-validation on a time-series dataset to predict next-month sales. Is this valid?',
+   opts:['Yes — K-Fold is the standard method','No — random K-Fold causes data leakage by training on future data to predict the past. Use Time-Series Split instead.','Yes — as long as you shuffle first','No — use Stratified K-Fold instead'],
+   ans:1,exp:'Time-series data has temporal dependencies. Random K-Fold violates this by letting the model train on future observations to predict past ones (data leakage). Time-Series Split with an expanding training window is mandatory.'},
+  {q:'In a logistic regression model, what does "complete separation" mean and why is it a problem?',
+   opts:['The model achieves 100% accuracy — no problem here','A feature perfectly separates the classes, causing MLE to drive the coefficient to infinity and the algorithm fails to converge','The classes are perfectly balanced','The model has zero variance'],
+   ans:1,exp:'Complete separation means MLE tries to set the coefficient to ±∞ to achieve perfect 0/1 probabilities. The algorithm diverges. Fix: apply L2 (Ridge) regularisation to constrain the coefficient magnitude.'},
+  {q:'What is the key difference between SHAP values and standard tree feature importance?',
+   opts:['SHAP is faster to compute','Standard importance is always correct; SHAP is just an approximation','Standard importance is unstable when features are correlated — SHAP computes each feature\'s unique marginal contribution across all feature combinations, giving unbiased explanations.','SHAP only works for XGBoost'],
+   ans:2,exp:'Standard tree importance is unstable under feature correlation. SHAP (based on cooperative game theory) computes each feature\'s Shapley value — its unique average marginal contribution across all possible feature subsets — giving unbiased, robust explanations for both global and local interpretability.'},
+  {q:'What does the VIF score measure, and what threshold indicates a serious problem?',
+   opts:['How much variance a feature explains in Y — VIF > 0.5 is a problem','How much the variance of a coefficient is inflated by multicollinearity — VIF ≥ 5 or 10 indicates a serious problem','The correlation between X and Y — VIF > 0.8 is a problem','The regularisation strength needed — VIF > 100 is a problem'],
+   ans:1,exp:'VIF = 1/(1 − R²_i) where R²_i comes from regressing feature X_i against all other features. It measures how much multicollinearity inflates that coefficient\'s variance estimate. VIF ≥ 5 is concerning; VIF ≥ 10 is severe. Fix: drop one of the collinear features, apply PCA, or use Ridge regression.'},
+  {q:'What is the "groundedness" metric in the RAG Triad, and what does it detect?',
+   opts:['Whether the retrieved chunks are relevant to the query','Whether the LLM\'s generated answer is derived strictly from the retrieved context — detecting hallucinations from internal weights','Whether the user\'s query is clear','Whether the vector database indexed correctly'],
+   ans:1,exp:'Groundedness (Faithfulness) verifies that every claim in the LLM\'s generated response can be traced back to the retrieved context chunks. If the model adds information from its training weights that isn\'t in the context, that is flagged as a hallucination — even if that information happens to be factually correct.'},
+  {q:'Why is t-SNE unsuitable for use in a production ML pipeline as a preprocessing step?',
+   opts:['It is too slow to train','It cannot transform new unseen data points and does not preserve global distances — it is strictly a visualisation tool','It only works for image data','It requires more than 100,000 data points'],
+   ans:1,exp:'t-SNE is a non-parametric method — it does not learn a transformation function that can be applied to new data. It also distorts global distances while preserving local neighbourhoods. For production dimensionality reduction, use PCA (linear) or UMAP (non-linear, has out-of-sample transform).'},
+];
+
+function buildQuiz(){
+  const c=document.getElementById('quizContainer');
+  if(c.dataset.built)return;
+  c.dataset.built='1';
+  let html='';
+  QUIZ.forEach((q,qi)=>{
+    html+=`<div class="quiz" id="quiz-${qi}"><div class="quiz-q">Q${qi+1}. ${q.q}</div><div class="quiz-opts">`;
+    q.opts.forEach((o,oi)=>{html+=`<div class="quiz-o" onclick="quizAnswer(${qi},${oi},${q.ans})">${o}</div>`;});
+    html+=`</div><div class="quiz-exp" id="qexp-${qi}">${q.exp}</div><button class="quiz-reset" id="qrst-${qi}" onclick="quizReset(${qi})">↺ Try again</button></div>`;
+  });
+  c.innerHTML=html;
+}
+
+function quizAnswer(qi,oi,ans){
+  document.querySelectorAll(`#quiz-${qi} .quiz-o`).forEach((o,i)=>{
+    o.classList.add('disabled');
+    if(i===ans)o.classList.add('correct');
+    else if(i===oi&&oi!==ans)o.classList.add('wrong');
+  });
+  document.getElementById('qexp-'+qi).classList.add('show');
+  document.getElementById('qrst-'+qi).classList.add('show');
+}
+
+function quizReset(qi){
+  document.querySelectorAll(`#quiz-${qi} .quiz-o`).forEach(o=>{o.className='quiz-o';});
+  document.getElementById('qexp-'+qi).classList.remove('show');
+  document.getElementById('qrst-'+qi).classList.remove('show');
+}
+</script>
+</body>
+</html>
