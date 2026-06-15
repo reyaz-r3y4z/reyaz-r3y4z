@@ -8,6 +8,54 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ── TERMINAL HINT ── */
+    .t-hint { font-family: var(--mono); font-size: 12px; color: #3A4468; }
+    .t-hint-pulse { color: #00FF94; animation: hintPulse 3s ease-in-out infinite; }
+    @keyframes hintPulse { 0%,100%{opacity:.35} 50%{opacity:.85} }
+    #termTyped { font-family: var(--mono); font-size: 13px; color: #00FF94; }
+
+    /* ── RESEARCH OVERLAY ── */
+    #researchOverlay {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; flex-direction: column;
+      background: #0d1117;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s ease;
+    }
+    #researchOverlay.open { opacity: 1; pointer-events: all; }
+    .ro-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #161b22; border-bottom: 1px solid #30363d;
+      padding: 0 20px; height: 48px; flex-shrink: 0;
+    }
+    .ro-bar-left {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8b949e;
+    }
+    .ro-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .ro-dot.r{background:#ff5f57}.ro-dot.y{background:#febc2e}.ro-dot.g{background:#28c840}
+    .ro-title { font-size: 11px; color: #8b949e; font-family: 'JetBrains Mono',monospace; }
+    #researchClose {
+      background: rgba(248,81,73,0.12); border: 1px solid rgba(248,81,73,0.4);
+      color: #f85149; font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; padding: 5px 16px; cursor: pointer; letter-spacing: .04em;
+      transition: background .2s, border-color .2s;
+    }
+    #researchClose:hover { background: rgba(248,81,73,0.25); border-color: #f85149; }
+    #researchFrame {
+      flex: 1; width: 100%; border: none;
+      transform: translateY(20px); transition: transform .4s ease .1s;
+    }
+    #researchOverlay.open #researchFrame { transform: translateY(0); }
+
+    /* ── TERMINAL UNLOCK FLASH ── */
+    @keyframes termFlash {
+      0%{box-shadow:0 0 0 rgba(0,255,148,0)} 30%{box-shadow:0 0 40px rgba(0,255,148,.5),0 0 80px rgba(0,255,148,.2)}
+      100%{box-shadow:0 0 40px rgba(0,255,148,.05),0 20px 60px rgba(0,0,0,.5)}
+    }
+    .term-block.flash { animation: termFlash 1s ease forwards; }
+  </style>
 </head>
 <body>
 
@@ -73,7 +121,10 @@
         <div class="tl to">GitHub      : <span class="tb2">github.com/reyaz-r3y4z</span></div>
         <div class="tl to">Status      : <span class="tg blink-g">● OPEN_TO_WORK</span></div>
         <div class="tl">&nbsp;</div>
-        <div class="tl"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> <span class="cursor-blink">█</span></div>
+        <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">unlock more → type: </span><span class="t-hint-pulse">Research Reyaz</span><span style="color:#3A4468"> ↵</span></div>
+        <div class="tl" id="termInputLine"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> <span id="termTyped"></span><span class="cursor-blink" id="termCursor">█</span></div>
+        <input id="termHiddenInput" tabindex="-1" autocomplete="off" autocorrect="off" spellcheck="false"
+          style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;left:-9999px" />
       </div>
     </div>
     <!-- headline -->
@@ -156,9 +207,9 @@
       <!-- profile side panel -->
       <div class="profile-panel">
         <div class="pp-img-wrap" id="ppWrap">
-          <img src="assets/prof.png" alt="Mohammad Reyaz"
+          <img src="assets/profile.jpg" alt="Mohammad Reyaz"
                onerror="document.getElementById('ppWrap').classList.add('no-img')"/>
-          <div class="pp-fallback"><span class="pp-init">MR</span><span class="pp-hint">assets/prof.jpeg</span></div>
+          <div class="pp-fallback"><span class="pp-init">MR</span><span class="pp-hint">assets/profile.jpg</span></div>
           <div class="pp-bbox"><span class="pp-conf">conf: 1.00</span></div>
         </div>
         <div class="pp-rows">
@@ -602,5 +653,96 @@ model.fit(X_train, y_train)</pre></div>
 </footer>
 
 <script src="script.js"></script>
+
+<!-- ══ RESEARCH REYAZ OVERLAY ══ -->
+<div id="researchOverlay">
+  <div class="ro-bar">
+    <div class="ro-bar-left">
+      <div class="ro-dot r"></div><div class="ro-dot y"></div><div class="ro-dot g"></div>
+      <span class="ro-title">understand_reyaz.html — Maincode Interview · <span style="color:#38bdf8">Research Reyaz</span></span>
+    </div>
+    <button id="researchClose" onclick="closeResearch()">✕ &nbsp;Close</button>
+  </div>
+  <iframe id="researchFrame" src="understand reyaz_maincode.html" title="Understand Reyaz"></iframe>
+</div>
+
+<script>
+/* ── INTERACTIVE HERO TERMINAL ── */
+(function() {
+  const termBlock = document.querySelector('.term-block');
+  const typedEl   = document.getElementById('termTyped');
+  if (!termBlock || !typedEl) return;
+
+  let buffer = '';
+
+  // Global keydown — no click/focus required
+  document.addEventListener('keydown', function(e) {
+    // Don't hijack when overlay is open or user is in a real input
+    if (document.getElementById('researchOverlay').classList.contains('open')) return;
+    if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
+
+    if (e.key === 'Enter') {
+      const cmd = buffer.trim().toLowerCase().replace(/\s+/g,' ');
+      if (cmd === 'research reyaz') {
+        typedEl.textContent = 'Research Reyaz';
+        termBlock.classList.remove('flash');
+        void termBlock.offsetWidth; // reflow to restart animation
+        termBlock.classList.add('flash');
+        buffer = '';
+        setTimeout(openResearch, 700);
+      } else {
+        // Unknown command: shake and clear
+        if (buffer.trim()) {
+          termBlock.style.transition = 'transform .08s';
+          termBlock.style.transform = 'translateX(-5px)';
+          setTimeout(() => { termBlock.style.transform = 'translateX(5px)'; }, 80);
+          setTimeout(() => { termBlock.style.transform = ''; }, 160);
+        }
+        buffer = '';
+        typedEl.textContent = '';
+      }
+      e.preventDefault();
+      return;
+    }
+
+    if (e.key === 'Escape') {
+      buffer = ''; typedEl.textContent = '';
+      return;
+    }
+
+    if (e.key === 'Backspace') {
+      buffer = buffer.slice(0, -1);
+      typedEl.textContent = buffer;
+      e.preventDefault();
+      return;
+    }
+
+    // Only accept printable characters
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      buffer += e.key;
+      typedEl.textContent = buffer;
+    }
+  });
+})();
+
+function openResearch() {
+  document.getElementById('researchOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeResearch() {
+  document.getElementById('researchOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  const t = document.getElementById('termTyped');
+  if (t) t.textContent = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('researchOverlay').classList.contains('open')) {
+    closeResearch();
+  }
+});
+</script>
+
 </body>
 </html>
