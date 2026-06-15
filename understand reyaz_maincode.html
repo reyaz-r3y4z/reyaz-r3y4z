@@ -695,6 +695,35 @@
   </div>
 </div>
 
+<!-- ── BACK TO PORTFOLIO BUTTON ── -->
+<button id="backBtn" onclick="goBack()" style="
+  position: fixed;
+  top: 16px;
+  right: 24px;
+  z-index: 999;
+  background: rgba(248,81,73,0.12);
+  border: 1px solid rgba(248,81,73,0.4);
+  color: #f85149;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 6px 18px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.2s;
+">✕ &nbsp;Close</button>
+
+<script>
+function goBack() {
+  // If loaded inside the portfolio iframe, close the overlay
+  if (window.parent && window.parent !== window && typeof window.parent.closeResearch === 'function') {
+    window.parent.closeResearch();
+  } else {
+    // If opened directly (e.g. someone navigated here), go to main page
+    window.location.href = 'index.html';
+  }
+}
+</script>
+
 <script>
   // ── FILES the terminal can "cat" ──
   const FILES = {
