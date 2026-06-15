@@ -8,13 +8,16 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 /* ── NAV active tab ── */
 const navTabs = document.querySelectorAll('.tb-tabs .tab');
 const allSections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
+function updateActiveTab() {
   const y = window.scrollY + 80;
+  let current = 'hero';
   allSections.forEach(s => {
-    if (y >= s.offsetTop && y < s.offsetTop + s.offsetHeight)
-      navTabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + s.id));
+    if (y >= s.offsetTop) current = s.id;
   });
-}, { passive: true });
+  navTabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + current));
+}
+window.addEventListener('scroll', updateActiveTab, { passive: true });
+updateActiveTab(); // set correct tab on page load
 
 /* ── Burger ── */
 const burger = document.getElementById('burger');
