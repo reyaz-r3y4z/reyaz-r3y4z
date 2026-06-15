@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammad Reyaz · Who I Am</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --bg:         #0d1117;
+      --bg-card:    #161b22;
+      --bg-card2:   #1c2128;
+      --border:     #30363d;
+      --border-dim: #21262d;
+      --cyan:       #38bdf8;
+      --cyan-glow:  rgba(56,189,248,0.18);
+      --cyan-dim:   #0ea5e9;
+      --purple:     #bf91f3;
+      --green:      #4ade80;
+      --amber:      #fbbf24;
+      --text:       #c9d1d9;
+      --text-dim:   #8b949e;
+      --text-faint: #484f58;
+      --white:      #f0f6fc;
+      --mono:       'JetBrains Mono', monospace;
+      --sans:       'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dim);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--cyan);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--text-dim); }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.3);
+      color: var(--green);
+      padding: 3px 10px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 80px 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--cyan);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before { content: '$ '; color: var(--text-faint); }
+    .hero-name {
+      font-family: var(--sans);
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .hero-name .accent { color: var(--cyan); }
+    .hero-tagline {
+      font-size: 18px;
+      color: var(--text-dim);
+      font-weight: 300;
+      max-width: 560px;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+    .hero-meta span { color: var(--text-dim); }
+    .hero-meta .val { color: var(--amber); }
+
+    /* ── SECTIONS ── */
+    .section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 40px;
+      border-top: 1px solid var(--border-dim);
+      transition: box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .section.highlight {
+      box-shadow: 0 0 0 2px var(--cyan), 0 0 32px var(--cyan-glow);
+      background: rgba(56,189,248,0.03);
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .section-label::before { content: '// '; color: var(--text-faint); }
+
+    .section-title {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .section p {
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.8;
+      max-width: 680px;
+      margin-bottom: 16px;
+    }
+    .section p em {
+      color: var(--cyan);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ── CARDS GRID ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      border-color: var(--cyan-dim);
+      box-shadow: 0 0 16px rgba(56,189,248,0.08);
+    }
+    .card-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      letter-spacing: 0.08em;
+    }
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .card-body {
+      font-size: 13.5px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* ── QUOTE BLOCK ── */
+    .quote {
+      border-left: 2px solid var(--cyan);
+      padding: 12px 20px;
+      margin: 24px 0;
+      background: var(--bg-card);
+    }
+    .quote p {
+      color: var(--text-dim) !important;
+      font-size: 14px !important;
+      font-style: italic;
+      margin: 0 !important;
+    }
+
+    /* ── TAGS ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .tag {
+      background: rgba(56,189,248,0.07);
+      border: 1px solid rgba(56,189,248,0.18);
+      color: var(--cyan-dim);
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 3px 12px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── STAT ROW ── */
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin: 28px 0;
+    }
+    .stat-val {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--cyan);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-faint);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ──────────────────────────────────────
+       TERMINAL — bottom right
+    ────────────────────────────────────── */
+    #terminal-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 8px 16px;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      transition: background 0.2s, border-color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #terminal-toggle:hover {
+      background: var(--bg-card2);
+      border-color: var(--cyan);
+    }
+    #terminal-toggle .t-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    #terminal-panel {
+      position: fixed;
+      bottom: 68px;
+      right: 24px;
+      width: 480px;
+      max-width: calc(100vw - 32px);
+      z-index: 199;
+      background: #0a0e13;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      display: none;
+      flex-direction: column;
+      max-height: 400px;
+    }
+    #terminal-panel.open { display: flex; }
+
+    .term-topbar {
+      background: #1c2128;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .term-dot.r { background: #ff5f57; }
+    .term-dot.y { background: #febc2e; }
+    .term-dot.g { background: #28c840; }
+    .term-title {
+      margin-left: 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-faint);
+      flex: 1;
+    }
+    .term-close {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-faint);
+      cursor: pointer;
+      padding: 0 4px;
+    }
+    .term-close:hover { color: var(--white); }
+
+    /* Quick command chips */
+    .term-chips {
+      padding: 10px 14px 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-bottom: 1px solid var(--border-dim);
+      flex-shrink: 0;
+      background: #0d1117;
+    }
+    .chip {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 10px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: border-color 0.15s, color 0.15s;
+      user-select: none;
+    }
+    .chip:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .term-output {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.7;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .term-line { margin-bottom: 2px; }
+    .term-line.cmd  { color: var(--white); }
+    .term-line.cmd::before { content: '$ '; color: var(--cyan); }
+    .term-line.out  { color: var(--text-dim); }
+    .term-line.ok   { color: var(--green); }
+    .term-line.err  { color: #f87171; }
+    .term-line.info { color: var(--amber); }
+    .term-line.blank { height: 6px; }
+    .term-line.file { color: var(--purple); }
+
+    .term-input-row {
+      display: flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-top: 1px solid var(--border);
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .term-prompt-sym {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--cyan);
+      flex-shrink: 0;
+    }
+    #term-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 12px;
+      caret-color: var(--cyan);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 40px 100px;
+      border-top: 1px solid var(--border-dim);
+    }
+    footer p {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      #hero { padding: 60px 24px 40px; }
+      .section { padding: 52px 24px; }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      footer { padding: 32px 24px 100px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">reyaz<span>@ml</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#think">How I Think</a></li>
+    <li><a href="#work">How I Work</a></li>
+    <li><a href="#why">Why AI</a></li>
+    <li><a href="#principles">Principles</a></li>
+  </ul>
+  <div class="nav-badge">● OPEN TO WORK</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">python reyaz.py — Maincode Interview</div>
+  <h1 class="hero-name">Mohammad<br><span class="accent">Reyaz.</span></h1>
+  <p class="hero-tagline">
+    Data Scientist &amp; ML Engineer based in Melbourne — I build systems that see, reason, and act.
+    This page is about how I think and why I do what I do.
+  </p>
+  <div class="hero-meta">
+    <div>ROLE &nbsp;<span class="val">Data Scientist · ML Engineer · Computer Vision</span></div>
+    <div>LOC &nbsp;&nbsp;<span class="val">Melbourne, VIC 🇦🇺</span></div>
+    <div>EDU &nbsp;&nbsp;<span class="val">MSc Data Science · RMIT</span></div>
+    <div>EXP &nbsp;&nbsp;<span class="val">3.5 yrs @ TCS + Trainstop</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-label">about me</div>
+  <h2 class="section-title">Who I Am</h2>
+  <p>
+    I'm Mohammad Reyaz — a Data Scientist and ML Engineer who came to this field not just to build models,
+    but to <em>teach machines how to think</em>. I completed my Master's in Data Science at RMIT University
+    in Melbourne, and before that I spent 3.5 years at Tata Consultancy Services working as a Systems Engineer
+    and Business Analyst.
+  </p>
+  <p>
+    Most recently I built a real-time computer vision sports analytics pipeline during my internship at Trainstop,
+    tracking basketball players and ball movement with <em>95% accuracy</em> across 60,000+ video frames.
+  </p>
+  <div class="stats">
+    <div><div class="stat-val">95%</div><div class="stat-label">mAP@50 · Sports CV Pipeline</div></div>
+    <div><div class="stat-val">60K+</div><div class="stat-label">Frames Processed</div></div>
+    <div><div class="stat-val">3.5yr</div><div class="stat-label">Enterprise Experience · TCS</div></div>
+    <div><div class="stat-val">MSc</div><div class="stat-label">Data Science · RMIT</div></div>
+  </div>
+  <div class="tags">
+    <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">TensorFlow</span>
+    <span class="tag">YOLOv8</span><span class="tag">RF-DETR</span><span class="tag">Computer Vision</span>
+    <span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">SQL</span>
+  </div>
+</section>
+
+<!-- HOW I THINK -->
+<section class="section" id="think">
+  <div class="section-label">how i think</div>
+  <h2 class="section-title">My Way of Thinking</h2>
+
+  <p>
+    Before I write a single line of code or build anything, I need to understand the
+    <em>core problem</em> — not the surface-level request, but the real underlying issue.
+    The wrong solution to the right problem is something you can fix. The right solution
+    to the wrong problem is wasted time for everyone.
+  </p>
+
+  <div class="quote"><p>"Understand the problem fully, then bring everything you have to solve it."</p></div>
+
+  <p>
+    I believe the <em>simplest solution is usually the best one</em>. But here is the important part —
+    simple is not easy to find. A lot of analytical work happens in my head before I arrive at something
+    clean. I do the complexity so the solution does not have to carry it. Sometimes the simple answer
+    is technically involved, but if you understand the fundamentals, even that feels natural.
+  </p>
+
+  <p>
+    Everything we build in AI and data science is <em>mathematics wearing different clothes</em>.
+    I love maths — not as an abstract subject, but as the language that explains why things work.
+    Understanding the maths underneath means I can reason about models instead of just running them.
+    That is the difference between using a tool and understanding it.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">PRINCIPLE 01</div>
+      <div class="card-title">Problem First</div>
+      <div class="card-body">I never start building until I fully understand what the problem actually is. Not what someone asked for — what they need.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">PRINCIPLE 02</div>
+      <div class="card-title">Simple is Earned</div>
+      <div class="card-body">Clean solutions don't happen by accident. They come after doing the hard analytical work upfront and removing everything that isn't necessary.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">PRINCIPLE 03</div>
+      <div class="card-title">Maths is the Foundation</div>
+      <div class="card-body">I trust the mathematics underneath. Understanding it means I can reason about why something works, not just whether it does.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW I WORK -->
+<section class="section" id="work">
+  <div class="section-label">how i work</div>
+  <h2 class="section-title">The Way I Work</h2>
+
+  <p>
+    I ask more questions than most people are comfortable with at the start of a project.
+    That is intentional. The clarity I get upfront saves an enormous amount of effort downstream.
+    I would rather spend twenty minutes understanding something properly than two hours building
+    the wrong thing.
+  </p>
+
+  <p>
+    I am also <em>honest about what I don't know</em>. If there is a gap in my knowledge,
+    my first instinct is to say so and go fill it. I will not pretend to know something I don't.
+    I go understand it properly, then come back. That is how I have always worked and it is how
+    I teach as well.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">HOW 01</div>
+      <div class="card-title">Think Before Building</div>
+      <div class="card-body">Most of the heavy work happens analytically before I open an editor. I map the solution first, then implement it.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">HOW 02</div>
+      <div class="card-title">Honest About Gaps</div>
+      <div class="card-body">If I don't know something I say so directly, go and understand it, then come back. No guessing. No bluffing.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">HOW 03</div>
+      <div class="card-title">Teach to Confirm</div>
+      <div class="card-body">Teaching is how I test my own understanding. If I cannot explain something clearly to someone else, I am not done learning it yet.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">HOW 04</div>
+      <div class="card-title">No Overengineering</div>
+      <div class="card-body">I start with the minimum thing that works. Complexity is only added when simplicity provably cannot do the job.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY AI -->
+<section class="section" id="why">
+  <div class="section-label">why data science · why ai</div>
+  <h2 class="section-title">Why I Chose This Path</h2>
+
+  <p>
+    I chose this field because I want to be the kind of teacher who gives the computer <em>sense</em> —
+    not just instructions, but genuine understanding. How to think. Why something is true.
+    What is ethical. How to arrive at an answer safely and responsibly.
+  </p>
+
+  <p>
+    I want to transfer what I know into code, into models, into systems — so those systems can one day
+    help someone else learn. Whether that is a child making sense of mathematics, or a team making
+    sense of complex data, the goal is the same: <em>knowledge that travels forward</em>.
+  </p>
+
+  <p>
+    Mathematics and computers are the same thing to me. Both are languages for expressing truth.
+    I want machines to speak that language well. And I want to be part of the team that teaches them.
+  </p>
+
+  <div class="quote"><p>"I don't just want to use AI. I want to be someone who shapes how it thinks."</p></div>
+
+  <p>
+    That is why Maincode's work interests me. Building AI that <em>understands context</em>,
+    earns trust, and is held to a higher standard — that is the kind of work I want to be part of.
+    Not just shipping models, but getting the thinking right.
+  </p>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="section" id="principles">
+  <div class="section-label">principles</div>
+  <h2 class="section-title">What I Stand By</h2>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">01</div>
+      <div class="card-title">Understand the problem.</div>
+      <div class="card-body">All of it, before anything else. The problem is the most important thing.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <div class="card-title">Simple is earned, not assumed.</div>
+      <div class="card-body">Do the analytical work to arrive at a clean answer. Simplicity is the result of effort, not a shortcut.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <div class="card-title">Mathematics is the ground truth.</div>
+      <div class="card-body">Reason from first principles. Trust the maths. Everything else follows from that.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">04</div>
+      <div class="card-title">Know what you know. Say what you don't.</div>
+      <div class="card-body">Honesty about knowledge gaps is a strength, not a weakness. No ego. No bluffing.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">05</div>
+      <div class="card-title">Teach to understand.</div>
+      <div class="card-body">If you cannot explain it clearly to someone else, you are not done learning it yet.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">06</div>
+      <div class="card-title">Build responsibly.</div>
+      <div class="card-body">Safe, explainable, and made with intent. AI that earns trust every time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>reyaz@ml:~/maincode-interview — <a href="https://github.com/reyaz-r3y4z" target="_blank">github.com/reyaz-r3y4z</a> · <a href="mailto:reyazrmr@gmail.com">reyazrmr@gmail.com</a></p>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     TERMINAL — bottom right
+═══════════════════════════════════════════ -->
+
+<button id="terminal-toggle" onclick="toggleTerminal()">
+  <div class="t-dot"></div>
+  &gt;_ terminal
+</button>
+
+<div id="terminal-panel">
+  <div class="term-topbar">
+    <div class="term-dot r"></div>
+    <div class="term-dot y"></div>
+    <div class="term-dot g"></div>
+    <span class="term-title">reyaz@ml:~/maincode-interview</span>
+    <span class="term-close" onclick="toggleTerminal()">✕</span>
+  </div>
+
+  <!-- Quick chips -->
+  <div class="term-chips">
+    <span class="chip" onclick="runChip('help')">help</span>
+    <span class="chip" onclick="runChip('status')">status</span>
+    <span class="chip" onclick="runChip('ls')">ls</span>
+    <span class="chip" onclick="runChip('about')">about</span>
+    <span class="chip" onclick="runChip('think')">think</span>
+    <span class="chip" onclick="runChip('work')">work</span>
+    <span class="chip" onclick="runChip('why')">why</span>
+    <span class="chip" onclick="runChip('principles')">principles</span>
+    <span class="chip" onclick="runChip('cat reyaz.py')">cat reyaz.py</span>
+    <span class="chip" onclick="runChip('cat mindset.md')">cat mindset.md</span>
+    <span class="chip" onclick="runChip('clear')">clear</span>
+  </div>
+
+  <div class="term-output" id="term-output"></div>
+
+  <div class="term-input-row">
+    <span class="term-prompt-sym">$</span>
+    <input id="term-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="type a command or use the buttons above…" onkeydown="handleKey(event)" />
+  </div>
+</div>
+
+<script>
+  // ── FILES the terminal can "cat" ──
+  const FILES = {
+    'reyaz.py': [
+      { t:'file', v:'# reyaz.py' },
+      { t:'file', v:'name     = "Mohammad Reyaz"' },
+      { t:'file', v:'role     = "Data Scientist · ML Engineer · Computer Vision"' },
+      { t:'file', v:'location = "Melbourne, VIC, Australia"' },
+      { t:'file', v:'degree   = "MSc Data Science · RMIT University"' },
+      { t:'file', v:'exp      = "3.5 yrs @ TCS + Trainstop internship"' },
+      { t:'file', v:'best     = "95% mAP@50 sports CV pipeline"' },
+      { t:'file', v:'email    = "reyazrmr@gmail.com"' },
+      { t:'file', v:'github   = "github.com/reyaz-r3y4z"' },
+    ],
+    'mindset.md': [
+      { t:'file', v:'# mindset.md' },
+      { t:'file', v:'' },
+      { t:'file', v:'> Understand the core problem first.' },
+      { t:'file', v:'> Simple solutions are earned through hard analytical work.' },
+      { t:'file', v:'> Mathematics is the ground truth of everything.' },
+      { t:'file', v:'> If I don\'t know something, I say so and go learn it.' },
+      { t:'file', v:'> Teaching is how I confirm I truly understand.' },
+    ],
+    'principles.log': [
+      { t:'file', v:'01  Understand the problem — all of it, before anything else.' },
+      { t:'file', v:'02  Simple is earned, not assumed.' },
+      { t:'file', v:'03  Mathematics is the ground truth.' },
+      { t:'file', v:'04  Know what you know. Say what you don\'t.' },
+      { t:'file', v:'05  Teach to understand.' },
+      { t:'file', v:'06  Build responsibly.' },
+    ],
+    'why_ai.txt': [
+      { t:'file', v:'I chose this field to teach computers sense —' },
+      { t:'file', v:'not just instructions, but understanding.' },
+      { t:'file', v:'Knowledge that travels forward.' },
+    ],
+  };
+
+  // ── COMMANDS ──
+  const COMMANDS = {
+    help: () => [
+      { t:'ok',   v:'Available commands:' },
+      { t:'blank' },
+      { t:'info', v:'  about       → scroll to About Me section' },
+      { t:'info', v:'  think       → scroll to How I Think section' },
+      { t:'info', v:'  work        → scroll to How I Work section' },
+      { t:'info', v:'  why         → scroll to Why AI section' },
+      { t:'info', v:'  principles  → scroll to Principles section' },
+      { t:'blank' },
+      { t:'out',  v:'  ls                → list all files' },
+      { t:'out',  v:'  cat <filename>    → read a file' },
+      { t:'out',  v:'  status            → show current status' },
+      { t:'out',  v:'  clear             → clear terminal' },
+      { t:'blank' },
+      { t:'out',  v:'Tip: use the quick-buttons above to run commands.' },
+    ],
+
+    status: () => [
+      { t:'ok',   v:'● STATUS: ONLINE' },
+      { t:'blank' },
+      { t:'info', v:'  name     Mohammad Reyaz' },
+      { t:'info', v:'  role     Data Scientist · ML Engineer · CV' },
+      { t:'info', v:'  location Melbourne, VIC, Australia 🇦🇺' },
+      { t:'info', v:'  degree   MSc Data Science · RMIT' },
+      { t:'info', v:'  exp      3.5 yrs @ TCS + Trainstop' },
+      { t:'info', v:'  best     95% mAP@50 · Basketball CV Pipeline' },
+      { t:'info', v:'  seeking  ML Engineering · Data Science · CV Roles' },
+      { t:'blank' },
+      { t:'ok',   v:'  ● OPEN_TO_WORK → true' },
+    ],
+
+    ls: () => {
+      const lines = [
+        { t:'out', v:'total ' + Object.keys(FILES).length },
+        { t:'blank' },
+      ];
+      for (const f of Object.keys(FILES)) {
+        lines.push({ t:'file', v:'  📄 ' + f });
+      }
+      lines.push({ t:'blank' });
+      lines.push({ t:'out', v:'Use  cat <filename>  to read any file.' });
+      return lines;
+    },
+
+    about:      () => { scrollTo('about');      return [{ t:'ok', v:'↓ Scrolled to → About Me' }]; },
+    think:      () => { scrollTo('think');      return [{ t:'ok', v:'↓ Scrolled to → How I Think' }]; },
+    work:       () => { scrollTo('work');       return [{ t:'ok', v:'↓ Scrolled to → How I Work' }]; },
+    why:        () => { scrollTo('why');        return [{ t:'ok', v:'↓ Scrolled to → Why AI / Why Data Science' }]; },
+    principles: () => { scrollTo('principles'); return [{ t:'ok', v:'↓ Scrolled to → Principles' }]; },
+    clear:      () => { document.getElementById('term-output').innerHTML = ''; return null; },
+  };
+
+  // ── SCROLL + HIGHLIGHT ──
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.classList.add('highlight');
+    setTimeout(() => el.classList.remove('highlight'), 2000);
+  }
+
+  // ── PRINT LINES ──
+  function print(lines) {
+    if (!lines) return;
+    const out = document.getElementById('term-output');
+    for (const l of lines) {
+      const div = document.createElement('div');
+      div.className = 'term-line ' + (l.t || 'out');
+      div.textContent = l.v || '';
+      out.appendChild(div);
+    }
+    out.scrollTop = out.scrollHeight;
+  }
+
+  function printCmd(cmd) {
+    const out = document.getElementById('term-output');
+    const div = document.createElement('div');
+    div.className = 'term-line cmd';
+    div.textContent = cmd;
+    out.appendChild(div);
+  }
+
+  // ── RUN COMMAND ──
+  function run(raw) {
+    const cmd = raw.trim().toLowerCase();
+    if (!cmd) return;
+
+    printCmd(raw.trim());
+
+    // cat command
+    if (cmd.startsWith('cat ')) {
+      const fname = raw.trim().slice(4).trim();
+      const fkey  = Object.keys(FILES).find(k => k.toLowerCase() === fname.toLowerCase());
+      if (fkey) {
+        print(FILES[fkey]);
+      } else {
+        print([{ t:'err', v:'cat: ' + fname + ': No such file. Try  ls  to see available files.' }]);
+      }
+      print([{ t:'blank' }]);
+      return;
+    }
+
+    if (COMMANDS[cmd]) {
+      const result = COMMANDS[cmd]();
+      print(result);
+      if (result) print([{ t:'blank' }]);
+    } else {
+      print([
+        { t:'err', v:'command not found: ' + cmd },
+        { t:'out', v:'Type  help  to see available commands.' },
+        { t:'blank' },
+      ]);
+    }
+  }
+
+  // ── CHIP CLICK ──
+  function runChip(cmd) {
+    const input = document.getElementById('term-input');
+    input.value = cmd;
+    run(cmd);
+    input.value = '';
+    input.focus();
+  }
+
+  // ── KEY HANDLER ──
+  function handleKey(e) {
+    if (e.key === 'Enter') {
+      const input = document.getElementById('term-input');
+      run(input.value);
+      input.value = '';
+    }
+  }
+
+  // ── TOGGLE ──
+  function toggleTerminal() {
+    const panel = document.getElementById('terminal-panel');
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) {
+      // Boot message on first open
+      if (!panel.dataset.booted) {
+        panel.dataset.booted = '1';
+        print([
+          { t:'ok',   v:'reyaz_os v1.0.0 — Maincode Interview' },
+          { t:'out',  v:'Type  help  or use the quick buttons above.' },
+          { t:'blank' },
+        ]);
+      }
+      setTimeout(() => document.getElementById('term-input').focus(), 50);
+    }
+  }
+</script>
+
+</body>
+</html>
