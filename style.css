@@ -320,7 +320,7 @@ ul{list-style:none;padding:0}
   .psb-file{padding:10px 16px;white-space:nowrap;border-left:none}
   .psb-file.active{border-left:none;border-bottom:2px solid var(--green)}
   .psb-status{display:none}
-}
+} 
 @media(max-width:768px){
   .proj-wrap{grid-template-columns:1fr}
   .flip-card{min-height:480px}
