@@ -220,7 +220,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
   // silent initial setup only — no scroll, so the page always loads on the hero section
   activate('trainstop');
 })();
-
+ 
 /* ── Badge hover glow ── */
 document.querySelectorAll('.bw-b img').forEach(img => {
   img.addEventListener('mouseenter', () => img.style.filter = 'brightness(1.25) drop-shadow(0 0 6px rgba(0,255,148,.3))');
