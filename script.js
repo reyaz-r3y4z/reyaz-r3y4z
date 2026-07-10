@@ -99,11 +99,13 @@ document.querySelectorAll('.flip-card').forEach(card => {
   resize(); draw();
 })();
 
-/* ── Terminal boot animation ── */
+/* ── Terminal boot animation: reveal every line in sequence, like a real boot log ── */
 (function() {
-  document.querySelectorAll('.tl.to').forEach((line, i) => {
+  const lines = document.querySelectorAll('.term-body > .tl');
+  lines.forEach((line, i) => {
     line.style.opacity = '0';
-    setTimeout(() => { line.style.transition = 'opacity .3s'; line.style.opacity = '1'; }, 300 + i * 160);
+    line.style.transition = 'opacity .25s ease';
+    setTimeout(() => { line.style.opacity = '1'; }, 200 + i * 220);
   });
 })();
 
@@ -122,19 +124,29 @@ document.querySelectorAll('.flip-card').forEach(card => {
 
   const cfg = {
     trainstop: {
-      label: '> trainstop.py',
+      label: '> trainstop.py', file: 'trainstop.py',
       chars: 'YOLOv8RF-DETRByteTrackBoT-SORTRTMPoseOpenCVCVATPython0195mAP',
       color: '#00FF94', glow: 'rgba(0,255,148,', icon: '🏀'
     },
     entailment: {
-      label: '> visual_entailment.py',
+      label: '> visual_entailment.py', file: 'visual_entailment.py',
       chars: 'EfficientNetB4BERTUSETensorFlowKerasSageMakerentailneutral01',
       color: '#A78BFA', glow: 'rgba(167,139,250,', icon: '🧠'
     },
     forecast: {
-      label: '> forecasting.py',
+      label: '> forecasting.py', file: 'forecasting.py',
       chars: 'XGBoostSARIMAADFlag1lag3lag12saleserosion24mopatent01',
       color: '#0EA5E9', glow: 'rgba(14,165,233,', icon: '💊'
+    },
+    gptscratch: {
+      label: '> gpt_from_scratch.py', file: 'gpt_from_scratch.py',
+      chars: 'GPT2TransformerAttentionTokenEmbeddingLossAdamWCosineWarmup01',
+      color: '#FF6B35', glow: 'rgba(255,107,53,', icon: '🤖'
+    },
+    mlnotes: {
+      label: '> all_about_ml.md', file: 'all_about_ml.md',
+      chars: 'BackpropGradientDescentCNNRNNTransformerAdamSGDLossFunction01',
+      color: '#FBBF24', glow: 'rgba(251,191,36,', icon: '📚'
     }
   };
 
@@ -178,21 +190,26 @@ document.querySelectorAll('.flip-card').forEach(card => {
   function setEditorTab(proj) {
     if (!edTabs) return;
     const c = cfg[proj];
-    edTabs.innerHTML = '<div class="pet active">' + c.icon + ' ' + proj + '.py <span class="pet-x">×</span></div>';
-    edTabs.querySelector('.pet-x').addEventListener('click', e => { e.stopPropagation(); activate('trainstop'); });
+    edTabs.innerHTML = '<div class="pet active">' + c.icon + ' ' + c.file + ' <span class="pet-x">×</span></div>';
+    edTabs.querySelector('.pet-x').addEventListener('click', e => { e.stopPropagation(); activate('trainstop', { scroll: true }); });
   }
 
-  function activate(proj) {
+  // scroll defaults to false so silent/initial setup calls never move the page —
+  // only real user clicks (sidebar tabs, editor tab close) should scroll the projects panel into view
+  function activate(proj, opts) {
+    const scroll = !!(opts && opts.scroll);
     tabs.forEach(t => t.classList.toggle('active', t.dataset.proj === proj));
     panels.forEach(p => p.classList.toggle('active', p.dataset.proj === proj));
     if (cfg[proj]) { stage.classList.add('visible'); startMatrix(proj); }
     else { stage.classList.remove('visible'); stopMatrix(); }
     setEditorTab(proj);
-    const active = document.querySelector('.proj-panel[data-proj="' + proj + '"]');
-    if (active) setTimeout(() => active.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 150);
+    if (scroll) {
+      const active = document.querySelector('.proj-panel[data-proj="' + proj + '"]');
+      if (active) setTimeout(() => active.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 150);
+    }
   }
 
-  tabs.forEach(tab => tab.addEventListener('click', () => activate(tab.dataset.proj)));
+  tabs.forEach(tab => tab.addEventListener('click', () => activate(tab.dataset.proj, { scroll: true })));
   window.addEventListener('resize', () => {
     if (stage.classList.contains('visible')) {
       const a = document.querySelector('.psb-file.active');
@@ -200,6 +217,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
     }
   }, { passive: true });
 
+  // silent initial setup only — no scroll, so the page always loads on the hero section
   activate('trainstop');
 })();
 

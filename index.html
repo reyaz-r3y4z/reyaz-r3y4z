@@ -11,7 +11,7 @@
   <style>
     /* ── TERMINAL HINT ── */
     .t-hint { font-family: var(--mono); font-size: 12px; color: #3A4468; }
-    .t-hint-pulse { color: #00FF94; animation: hintPulse 3s ease-in-out infinite; }
+    .t-hint-pulse { animation: hintPulse 3s ease-in-out infinite; }
     @keyframes hintPulse { 0%,100%{opacity:.35} 50%{opacity:.85} }
     #termTyped { font-family: var(--mono); font-size: 13px; color: #00FF94; }
 
@@ -121,34 +121,42 @@
         <div class="tl to">GitHub      : <span class="tb2">github.com/reyaz-r3y4z</span></div>
         <div class="tl to">Status      : <span class="tg blink-g">● OPEN_TO_WORK</span></div>
         <div class="tl">&nbsp;</div>
-        <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">unlock more → type: </span><span class="t-hint-pulse">Research Reyaz</span><span style="color:#3A4468"> ↵</span></div>
+        <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">unlock more → type: </span><span class="t-hint-pulse" style="color:#00FF94">Research Reyaz</span><span style="color:#3A4468"> ↵</span></div>
+        <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">view a project → type its name: </span><span class="t-hint-pulse" style="color:#00FF94">trainstop</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#A78BFA">entailment</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#0EA5E9">forecast</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FF6B35">gptscratch</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FBBF24">mlnotes</span><span style="color:#3A4468"> ↵</span></div>
         <div class="tl" id="termInputLine"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> <span id="termTyped"></span><span class="cursor-blink" id="termCursor">█</span></div>
         <input id="termHiddenInput" tabindex="-1" autocomplete="off" autocorrect="off" spellcheck="false"
           style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;left:-9999px" />
       </div>
     </div>
-    <!-- headline -->
-    <div class="hero-headline">
-      <p class="hl-eye">// Data Scientist · ML Engineer · Computer Vision</p>
-      <h1>
-        <span class="hn1">Mohammad</span><br>
-        <span class="hn2">Reyaz<span class="hl-dot">.</span></span>
-      </h1>
-      <p class="hl-sub">I build CV systems that <em>ship</em> — from real-time
-        95% mAP@50 sports pipelines to multimodal neural networks
-        and distributed big-data infrastructure.</p>
-      <div class="hl-actions">
-        <a href="#projects" class="btn-g">View Projects</a>
-        <a href="https://github.com/reyaz-r3y4z" class="btn-ghost" target="_blank" rel="noopener">GitHub ↗</a>
-        <a href="https://linkedin.com/in/mdreyaz7755" class="btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <!-- right side: default bio, swapped for project preview via terminal commands -->
+    <div class="hero-right" id="heroRight">
+      <div class="hero-right-default" id="heroRightDefault">
+        <!-- headline -->
+        <div class="hero-headline">
+          <p class="hl-eye">// Data Scientist · ML Engineer · Computer Vision</p>
+          <h1>
+            <span class="hn1">Mohammad</span><br>
+            <span class="hn2">Reyaz<span class="hl-dot">.</span></span>
+          </h1>
+          <p class="hl-sub">I build CV systems that <em>ship</em> — from real-time
+            95% mAP@50 sports pipelines to multimodal neural networks
+            and distributed big-data infrastructure.</p>
+          <div class="hl-actions">
+            <a href="#projects" class="btn-g">View Projects</a>
+            <a href="https://github.com/reyaz-r3y4z" class="btn-ghost" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://linkedin.com/in/mdreyaz7755" class="btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+        <!-- metric cards -->
+        <div class="hero-metrics">
+          <div class="m-card"><span class="mv">95%</span><span class="ml">mAP@50</span></div>
+          <div class="m-card"><span class="mv">4K+</span><span class="ml">Annotations</span></div>
+          <div class="m-card"><span class="mv">3.5yr</span><span class="ml">TCS XP</span></div>
+          <div class="m-card"><span class="mv">5+</span><span class="ml">ML Projects</span></div>
+        </div>
       </div>
-    </div>
-    <!-- metric cards -->
-    <div class="hero-metrics">
-      <div class="m-card"><span class="mv">95%</span><span class="ml">mAP@50</span></div>
-      <div class="m-card"><span class="mv">4K+</span><span class="ml">Annotations</span></div>
-      <div class="m-card"><span class="mv">3.5yr</span><span class="ml">TCS XP</span></div>
-      <div class="m-card"><span class="mv">5+</span><span class="ml">ML Projects</span></div>
+      <!-- populated by terminal project commands, see script at bottom of page -->
+      <div class="hero-right-project" id="heroRightProject"></div>
     </div>
   </div>
 </section>
@@ -307,11 +315,13 @@
           <button class="psb-file proj-tab active" data-proj="trainstop"><span>🏀</span><span class="psb-fname">trainstop.py</span><span class="psb-dot cv-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="entailment"><span>🧠</span><span class="psb-fname">visual_entailment.py</span><span class="psb-dot mm-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="forecast"><span>💊</span><span class="psb-fname">forecasting.py</span><span class="psb-dot ts-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="gptscratch"><span>🤖</span><span class="psb-fname">gpt_from_scratch.py</span><span class="psb-dot gpt-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="mlnotes"><span>📚</span><span class="psb-fname">all_about_ml.md</span><span class="psb-dot ml-dot"></span></button>
           <div class="psb-folder"><span class="psb-chev">▸</span><span>📁</span> more/</div>
           <div class="psb-sub"><span>⚕️</span> wbc_classifier.py</div>
           <div class="psb-sub"><span>☁️</span> hadoop_emr.java</div>
         </div>
-        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>3 files</span></div>
+        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>5 files</span></div>
       </div>
       <!-- MAIN -->
       <div class="proj-main">
@@ -522,6 +532,103 @@ model.fit(X_train, y_train)</pre></div>
             </div>
           </div>
 
+          <!-- PROJECT 4 -->
+          <div class="proj-panel" data-proj="gptscratch">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc4">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">04</span><span class="fc-badge llm">Language Model</span></div>
+                  <h3 class="fc-title">GPT-2-Scale Transformer, From Scratch</h3>
+                  <p class="fc-org">Personal Project · nanoGPT-style architecture</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">124M</span><span class="kl">Parameters</span></div>
+                    <div class="kpi"><span class="kv">8GB</span><span class="kl">VRAM (4060 Ti)</span></div>
+                    <div class="kpi"><span class="kv">13,700</span><span class="kl">Total Steps</span></div>
+                    <div class="kpi"><span class="kv">3.11</span><span class="kl">Loss (Run 1)</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">→</span>Full pipeline built &amp; run from scratch, not fine-tuned</div>
+                    <div class="hli"><span class="hla">→</span>GPT-2-small config: 12 layers, 12 heads, 768d embeddings</div>
+                    <div class="hli"><span class="hla">→</span>Trained on TinyStories + WikiText-103 + OpenWebText</div>
+                    <div class="hli"><span class="hla">→</span>Two-run schedule under real 8GB VRAM + time constraints</div>
+                    <div class="hli"><span class="hla">→</span>Every hyperparameter documented in a full deep-dive writeup</div>
+                  </div>
+                  <div class="fc-tags"><span>PyTorch</span><span>nanoGPT</span><span>tiktoken</span><span>AdamW</span><span>CUDA</span><span>WSL2</span></div>
+                  <div class="fc-hint">flip for full breakdown →</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">How it works</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Tokenization</strong> — GPT-2 BPE via tiktoken converts raw text into a 50,257-token vocabulary stream.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Embeddings</strong> — Token + position embeddings combine into 768-dim vectors feeding the transformer stack.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Attention</strong> — 12 causal self-attention heads let each token learn from everything before it, never after.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Training</strong> — AdamW, cosine LR schedule, gradient accumulation to fit a 64-sequence effective batch in 8GB VRAM.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Two runs</strong> — 3,000-step run reached loss 3.11; a 48-hour continuation extended training to 13,700 total steps.</div></div>
+                  </div>
+                  <div class="fcb-links"><a href="https://github.com/reyaz-r3y4z/from_scratch_GPT_like" class="btn-g sm" target="_blank">Code ↗</a><a href="https://reyaz-r3y4z.github.io/from_scratch_GPT_like/" class="btn-ghost sm" target="_blank">Live ↗</a></div>
+                  <div class="fc-hint" style="color:var(--green)">← flip back</div>
+                </div>
+              </div>
+              <div class="pmp">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">gpt_config.py</span></div>
+                <div class="pmp-code"><pre><span class="ccm"># GPT-2-small, from scratch</span>
+<span class="ck">@dataclass</span>
+<span class="ck">class</span> <span class="ccls">GPTConfig</span><span class="cpu">:</span>
+    block_size<span class="cpu">:</span> <span class="ccls">int</span> <span class="cop">=</span> <span class="cvar">1024</span>
+    vocab_size<span class="cpu">:</span> <span class="ccls">int</span> <span class="cop">=</span> <span class="cvar">50257</span>
+    n_layer<span class="cpu">:</span> <span class="ccls">int</span> <span class="cop">=</span> <span class="cvar">12</span>
+    n_head<span class="cpu">:</span> <span class="ccls">int</span> <span class="cop">=</span> <span class="cvar">12</span>
+    n_embd<span class="cpu">:</span> <span class="ccls">int</span> <span class="cop">=</span> <span class="cvar">768</span>
+
+model <span class="cop">=</span> <span class="cfn">GPT</span>(config)  <span class="ccm"># 124.4M params</span>
+optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
+    model.parameters(), lr<span class="cop">=</span><span class="cstr">6e-4</span>,
+    weight_decay<span class="cop">=</span><span class="cstr">0.1</span>, betas<span class="cop">=</span>(<span class="cstr">0.9</span>, <span class="cstr">0.95</span>)
+)</pre></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROJECT 5 -->
+          <div class="proj-panel" data-proj="mlnotes">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc5">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">05</span><span class="fc-badge ref">Reference Site</span></div>
+                  <h3 class="fc-title">all_about_ML — ML Concepts Reference</h3>
+                  <p class="fc-org">Personal Project · self-authored study notes as a web reference</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">44</span><span class="kl">Topic Pages</span></div>
+                    <div class="kpi"><span class="kv">6</span><span class="kl">Subject Areas</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">→</span>Foundations: gradient descent, backprop, loss functions, optimizers</div>
+                    <div class="hli"><span class="hla">→</span>Architectures: CNNs, RNNs, transformers, autograd internals</div>
+                    <div class="hli"><span class="hla">→</span>Reinforcement learning: Q-learning, policy gradients</div>
+                    <div class="hli"><span class="hla">→</span>Hardware: CPU/GPU/TPU history &amp; specs, JAX + JIT/XLA</div>
+                    <div class="hli"><span class="hla">→</span>Written and maintained as a personal knowledge base, published as a static site</div>
+                  </div>
+                  <div class="fc-tags"><span>HTML/CSS</span><span>Static Site</span><span>ML Theory</span><span>JAX</span></div>
+                  <div class="fc-hint">flip for full breakdown →</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">How it works</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Scope</strong> — A from-zero map of modern AI: math foundations through JAX/XLA internals, written in my own words while learning.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Structure</strong> — Each concept gets its own page: concept explanation, code where relevant, and links to related topics.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Format</strong> — Plain HTML/CSS pages, no build step — easy to keep adding to as I learn more.</div></div>
+                  </div>
+                  <div class="fcb-links"><a href="https://github.com/reyaz-r3y4z/all_about_ML" class="btn-g sm" target="_blank">Code ↗</a></div>
+                  <div class="fc-hint" style="color:var(--green)">← flip back</div>
+                </div>
+              </div>
+              <div class="pmp">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">all_about_ml/index.html</span></div>
+                <div class="pmp-empty" style="display:block">📖 GitHub Pages not yet enabled for this repo — <code>github.com/reyaz-r3y4z/all_about_ML</code></div>
+              </div>
+            </div>
+          </div>
+
         </div><!-- /proj-panels -->
       </div><!-- /proj-main -->
     </div><!-- /proj-ide -->
@@ -673,6 +780,33 @@ model.fit(X_train, y_train)</pre></div>
   const typedEl   = document.getElementById('termTyped');
   if (!termBlock || !typedEl) return;
 
+  // project commands → matched against data-proj on the existing .proj-panel elements
+  const PROJECTS = ['trainstop', 'entailment', 'forecast', 'gptscratch', 'mlnotes'];
+  const heroDefault = document.getElementById('heroRightDefault');
+  const heroProject = document.getElementById('heroRightProject');
+
+  function showProjectInHero(proj) {
+    const front = document.querySelector('.proj-panel[data-proj="' + proj + '"] .fc-front');
+    if (!front || !heroProject || !heroDefault) return false;
+    const clone = front.cloneNode(true);
+    const hint = clone.querySelector('.fc-hint');
+    if (hint) hint.remove();
+    heroProject.innerHTML = '';
+    const back = document.createElement('div');
+    back.className = 'hrp-back';
+    back.textContent = "← type 'home' to go back · full breakdown in projects/ below";
+    heroProject.appendChild(back);
+    heroProject.appendChild(clone);
+    heroDefault.style.display = 'none';
+    heroProject.classList.add('active');
+    return true;
+  }
+
+  function showHeroDefault() {
+    if (heroDefault) heroDefault.style.display = '';
+    if (heroProject) heroProject.classList.remove('active');
+  }
+
   let buffer = '';
 
   // Global keydown — no click/focus required
@@ -690,6 +824,16 @@ model.fit(X_train, y_train)</pre></div>
         termBlock.classList.add('flash');
         buffer = '';
         setTimeout(openResearch, 700);
+      } else if (PROJECTS.includes(cmd) && showProjectInHero(cmd)) {
+        typedEl.textContent = cmd;
+        termBlock.classList.remove('flash');
+        void termBlock.offsetWidth;
+        termBlock.classList.add('flash');
+        buffer = '';
+      } else if (cmd === 'home' || cmd === 'back' || cmd === 'clear') {
+        showHeroDefault();
+        buffer = '';
+        typedEl.textContent = '';
       } else {
         // Unknown command: shake and clear
         if (buffer.trim()) {
@@ -707,6 +851,7 @@ model.fit(X_train, y_train)</pre></div>
 
     if (e.key === 'Escape') {
       buffer = ''; typedEl.textContent = '';
+      showHeroDefault();
       return;
     }
 
