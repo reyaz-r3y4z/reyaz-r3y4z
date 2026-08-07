@@ -147,6 +147,11 @@ document.querySelectorAll('.flip-card').forEach(card => {
       label: '> all_about_ml.md', file: 'all_about_ml.md',
       chars: 'BackpropGradientDescentCNNRNNTransformerAdamSGDLossFunction01',
       color: '#FBBF24', glow: 'rgba(251,191,36,', icon: '📚'
+    },
+    bigquery: {
+      label: '> taxi_fare_bqml.sql', file: 'taxi_fare_bqml.sql',
+      chars: 'BigQueryMLSQLTaxiFareRMSELinearRegressionFeatureEngineering01',
+      color: '#4285F4', glow: 'rgba(66,133,244,', icon: '📊'
     }
   };
 

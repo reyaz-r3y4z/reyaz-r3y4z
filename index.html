@@ -122,7 +122,7 @@
         <div class="tl to">Status      : <span class="tg blink-g">● OPEN_TO_WORK</span></div>
         <div class="tl">&nbsp;</div>
         <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">unlock more → type: </span><span class="t-hint-pulse" style="color:#00FF94">Research Reyaz</span><span style="color:#3A4468"> ↵</span></div>
-        <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">view a project → type its name: </span><span class="t-hint-pulse" style="color:#00FF94">trainstop</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#A78BFA">entailment</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#0EA5E9">forecast</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FF6B35">gptscratch</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FBBF24">mlnotes</span><span style="color:#3A4468"> ↵</span></div>
+        <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">view a project → type its name: </span><span class="t-hint-pulse" style="color:#00FF94">trainstop</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#A78BFA">entailment</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#0EA5E9">forecast</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FF6B35">gptscratch</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FBBF24">mlnotes</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#4285F4">bigquery</span><span style="color:#3A4468"> ↵</span></div>
         <div class="tl" id="termInputLine"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> <span id="termTyped"></span><span class="cursor-blink" id="termCursor">█</span></div>
         <input id="termHiddenInput"tabindex="-1" autocomplete="off" autocorrect="off" spellcheck="false"
           style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;left:-9999px" />
@@ -315,11 +315,12 @@
           <button class="psb-file proj-tab" data-proj="forecast"><span>💊</span><span class="psb-fname">forecasting.py</span><span class="psb-dot ts-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="gptscratch"><span>🤖</span><span class="psb-fname">gpt_from_scratch.py</span><span class="psb-dot gpt-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="mlnotes"><span>📚</span><span class="psb-fname">all_about_ml.md</span><span class="psb-dot ml-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="bigquery"><span>📊</span><span class="psb-fname">taxi_fare_bqml.sql</span><span class="psb-dot bq-dot"></span></button>
           <div class="psb-folder"><span class="psb-chev">▸</span><span>📁</span> more/</div>
           <div class="psb-sub"><span>⚕️</span> wbc_classifier.py</div>
           <div class="psb-sub"><span>☁️</span> hadoop_emr.java</div>
         </div>
-        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>5 files</span></div>
+        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>6 files</span></div>
       </div>
       <!-- MAIN -->
       <div class="proj-main">
@@ -627,6 +628,71 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             </div>
           </div>
 
+          <!-- PROJECT 6 -->
+          <div class="proj-panel" data-proj="bigquery">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc6">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">06</span><span class="fc-badge bqml">BigQuery ML</span></div>
+                  <h3 class="fc-title">NYC Taxi Fare Prediction with BigQuery ML</h3>
+                  <p class="fc-org">Google Cloud &middot; End-to-end SQL machine learning</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">1.1B+</span><span class="kl">Raw Fares</span></div>
+                    <div class="kpi"><span class="kv">827M+</span><span class="kl">Clean Fares</span></div>
+                    <div class="kpi"><span class="kv">2</span><span class="kl">Model Iterations</span></div>
+                    <div class="kpi"><span class="kv">4.39</span><span class="kl">Final RMSE</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">→</span>Explored 2015 NYC Yellow Taxi trip volume and hourly speed</div>
+                    <div class="hli"><span class="hla">→</span>Built deterministic train/evaluation samples with FARM_FINGERPRINT</div>
+                    <div class="hli"><span class="hla">→</span>Trained linear regression directly in BigQuery using SQL</div>
+                    <div class="hli"><span class="hla">→</span>Reduced MSE by 78.2% through feature engineering</div>
+                    <div class="hli"><span class="hla">→</span>Engineered route-distance features and geographic quality filters</div>
+                  </div>
+                  <div class="fc-tags"><span>BigQuery</span><span>BigQuery ML</span><span>GoogleSQL</span><span>Linear Regression</span><span>Feature Engineering</span><span>Google Cloud</span></div>
+                  <div class="fc-hint">flip for full breakdown →</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">How it works</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Explore</strong> &mdash; Profile monthly demand, hourly average speed, fare distributions, and more than 1.1 billion NYC taxi records.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Prepare</strong> &mdash; Create reproducible train/evaluation splits and select time, passenger, pickup, and drop-off features.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Train</strong> &mdash; Fit <code>taxifare_model</code> with BigQuery ML linear regression, keeping the entire workflow in GoogleSQL.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Baseline</strong> &mdash; The first model produced MAE 5.8416, MSE 88.4566, RMSE 9.4051, and R&sup2; 0.0007 on held-out trips.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Improve</strong> &mdash; Geographic filters and engineered route-distance features reduced MAE to 2.5371 and RMSE to 4.3882, while lifting R&sup2; to 0.8066.</div></div>
+                  </div>
+                  <div class="fcb-links"><a href="https://github.com/reyaz-r3y4z" class="btn-g sm" target="_blank" rel="noopener">GitHub ↗</a></div>
+                  <div class="fc-hint" style="color:var(--green)">← flip back</div>
+                </div>
+              </div>
+              <div class="pmp">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">taxi_fare_bqml.sql</span></div>
+                <div class="bq-results" aria-label="BigQuery ML model evaluation comparison">
+                  <div class="bqr-head"><span>Evaluation metric</span><span>Baseline</span><span>Feature engineered</span><span>Change</span></div>
+                  <div class="bqr-row"><span>MAE</span><span>5.8416</span><span>2.5371</span><strong>&darr; 56.6%</strong></div>
+                  <div class="bqr-row"><span>MSE</span><span>88.4566</span><span>19.2565</span><strong>&darr; 78.2%</strong></div>
+                  <div class="bqr-row"><span>RMSE</span><span>9.4051</span><span>4.3882</span><strong>&darr; 53.3%</strong></div>
+                  <div class="bqr-row"><span>Median AE</span><span>4.4476</span><span>1.7495</span><strong>&darr; 60.7%</strong></div>
+                  <div class="bqr-row"><span>R&sup2;</span><span>0.0007</span><span>0.8066</span><strong>&uarr; 0.8059</strong></div>
+                </div>
+                <div class="pmp-code"><pre><span class="ccm">-- Train a fare-regression model in BigQuery</span>
+<span class="ck">CREATE OR REPLACE MODEL</span> taxi.taxifare_model_2
+<span class="ck">OPTIONS</span> (
+  model_type<span class="cop">=</span><span class="cstr">'linear_reg'</span>,
+  labels<span class="cop">=</span>[<span class="cstr">'total_fare'</span>]
+) <span class="ck">AS SELECT</span>
+  tolls_amount <span class="cop">+</span> fare_amount <span class="ck">AS</span> total_fare,
+  EXTRACT(HOUR <span class="ck">FROM</span> pickup_datetime) <span class="ck">AS</span> hourofday,
+  SQRT(POW(pickup_longitude <span class="cop">-</span> dropoff_longitude, <span class="cvar">2</span>) <span class="cop">+</span>
+       POW(pickup_latitude <span class="cop">-</span> dropoff_latitude, <span class="cvar">2</span>)) <span class="ck">AS</span> dist,
+  passenger_count <span class="ck">AS</span> passengers
+<span class="ck">FROM</span> <span class="cstr">`nyc-tlc.yellow.trips`</span>
+<span class="ck">WHERE</span> trip_distance <span class="cop">&gt;</span> <span class="cvar">0</span>
+  <span class="ck">AND</span> fare_amount <span class="ck">BETWEEN</span> <span class="cvar">6</span> <span class="ck">AND</span> <span class="cvar">200</span>;</pre></div>
+              </div>
+            </div>
+          </div>
+
         </div><!-- /proj-panels -->
       </div><!-- /proj-main -->
     </div><!-- /proj-ide -->
@@ -779,7 +845,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
   if (!termBlock || !typedEl) return;
 
   // project commands → matched against data-proj on the existing .proj-panel elements
-  const PROJECTS = ['trainstop', 'entailment', 'forecast', 'gptscratch', 'mlnotes'];
+  const PROJECTS = ['trainstop', 'entailment', 'forecast', 'gptscratch', 'mlnotes', 'bigquery'];
   const heroDefault = document.getElementById('heroRightDefault');
   const heroProject = document.getElementById('heroRightProject');
 
