@@ -1,8 +1,8 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Mohammad%20Reyaz&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=Data%20Scientist%20%7C%20ML%20Engineer%20%7C%20Computer%20Vision%20Specialist&descAlignY=62&descSize=16" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Mohammad%20Reyaz&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=Data%20Scientist%20%7C%20AI%20%26%20NLP%20%7C%20Machine%20Learning&descAlignY=62&descSize=16" width="100%"/>
 
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&duration=3000&pause=1000&color=70A5FD&center=true&vCenter=true&width=750&lines=Data+Scientist+%7C+ML+Engineer;Computer+Vision+%26+Deep+Learning;MSc+Data+Science+%40+RMIT+University;Building+AI+that+moves+the+real+world" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&duration=3000&pause=1000&color=70A5FD&center=true&vCenter=true&width=750&lines=Data+Scientist+%7C+ML+Engineer;AI%2C+NLP+%26+Computer+Vision;Master+of+Data+Science+%40+RMIT;Building+responsible+AI+systems" alt="Typing SVG" />
   </a>
 </div>
 
@@ -35,20 +35,22 @@ class MohammadReyaz:
     degree   = "Master of Data Science @ RMIT"
 
     stack = [
-        "Python", "TensorFlow", "PyTorch",
-        "YOLOv8", "RF-DETR", "RTMPose",
-        "OpenCV", "AWS", "XGBoost", "SQL"
+        "Python", "SQL", "Scikit-learn",
+        "NLP", "RAG", "Computer Vision",
+        "PyTorch", "TensorFlow", "AWS", "Docker"
     ]
 
     currently_learning = [
         "Transformer-based Vision Models",
         "MLOps & Model Serving at Scale",
         "Real-Time CV Pipelines",
-        "LLM Fine-Tuning (LoRA / QLoRA)"
+        "LLM Evaluation & Fine-Tuning"
     ]
 
-    fun_fact = "Built a 95% mAP@50 sports CV \
-    pipeline tracking basketball players 🏀"
+    fun_fact = (
+        "Built a 95% mAP@50 sports CV pipeline "
+        "for basketball analytics 🏀"
+    )
 
     def motto(self):
         return (
@@ -59,7 +61,7 @@ class MohammadReyaz:
 
 </td>
 <td valign="top" align="center" width="40%">
-  <img src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/code.gif" width="340" alt="Coding gif"/>
+  <img src="assets/profile.jpeg" width="300" alt="Mohammad Reyaz"/>
 </td>
 </tr>
 </table>
@@ -192,11 +194,11 @@ class MohammadReyaz:
 
 | Project | Stack | Highlights |
 |:--------|:------|:-----------|
-| 🏀 [**Sports CV Analytics Pipeline**](https://github.com/reyaz-r3y4z) | YOLOv8 · RF-DETR · RTMPose · BoT-SORT · ByteTrack · OpenCV · Python | End-to-end multi-object sports analytics pipeline · **95% mAP@50** · 4,000+ annotations curated · Real-time player, referee & court tracking |
-| 🧠 [**Visual Entailment Multimodal AI**](https://github.com/reyaz-r3y4z) | EfficientNetB4 · BERT · Universal Sentence Encoder · TensorFlow · Keras | Multimodal neural network fusing deep vision + language embeddings · Custom feature fusion layer · ~82.5% validation accuracy on vision-language pairs |
-| 💊 [**Generic Drug Sales Forecasting**](https://github.com/reyaz-r3y4z) | XGBoost · SARIMA · Statsmodels · Pandas · Python | Pharmaceutical sales erosion prediction post-patent expiry · Custom rolling lag features · ADF stationarity testing · Novartis Datathon 2024 portfolio piece |
-| 🩸 [**White Blood Cell CNN Classifier**](https://github.com/reyaz-r3y4z) | TensorFlow · Keras · OpenCV · Grad-CAM · Python | Multi-task CNN for clinical WBC classification · Simultaneous branch heads for cell type + morphology · Grad-CAM explainability for clinical transparency |
-| ☁️ [**Hadoop + AWS EMR Big Data Pipeline**](https://github.com/reyaz-r3y4z) | Java · MapReduce · Apache Pig · AWS EMR · S3 | Multi-stage distributed data pipeline on EMR clusters · Complex DB joins over large-scale cloud storage · Optimized Pig relational scripts |
+| 🧠 [**GPT-Style Language Model From Scratch**](https://github.com/reyaz-r3y4z/from_scratch_GPT_like) | PyTorch · Transformers · Hugging Face data · Python | Trained a 124M-parameter GPT-2-scale model from scratch on a consumer GPU; documented architecture, training runs, evaluation, and generation |
+| 🧹 [**Automated Data Preparation**](https://github.com/reyaz-r3y4z/Data_Preparation) | Python · Pandas · Data Quality | Reusable module for automated exploratory analysis, cleaning, and preprocessing |
+| 🏀 **Sports CV Analytics Pipeline** | YOLOv8 · RF-DETR · BoT-SORT · ByteTrack · OpenCV | Enterprise internship project: **95% mAP@50**, 4,000+ verified annotations, and multi-object basketball tracking |
+| 🧠 **Visual Entailment Multimodal AI** | EfficientNetB4 · BERT · Universal Sentence Encoder · TensorFlow | Academic multimodal system combining visual and language embeddings for image-text entailment |
+| 🩸 **White Blood Cell CNN Classifier** | TensorFlow · Keras · OpenCV · Grad-CAM | Private portfolio project using multi-task classification and explainability for cell morphology |
 
 </div>
 
