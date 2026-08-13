@@ -194,6 +194,7 @@ class MohammadReyaz:
 
 | Project | Stack | Highlights |
 |:--------|:------|:-----------|
+| ☁️ [**Google Cloud Dataflow Learning Lab**](https://github.com/reyaz-r3y4z/gcp-dataflow-learning-lab) | Google Cloud · Dataflow · Apache Beam · Python · Pub/Sub · BigQuery | Zero-to-expert workbook with a tested batch pipeline, streaming labs, event-time concepts, operations practice, Flex Templates, and a production capstone |
 | 🧠 [**GPT-Style Language Model From Scratch**](https://github.com/reyaz-r3y4z/from_scratch_GPT_like) | PyTorch · Transformers · Hugging Face data · Python | Trained a 124M-parameter GPT-2-scale model from scratch on a consumer GPU; documented architecture, training runs, evaluation, and generation |
 | 🧹 [**Automated Data Preparation**](https://github.com/reyaz-r3y4z/Data_Preparation) | Python · Pandas · Data Quality | Reusable module for automated exploratory analysis, cleaning, and preprocessing |
 | 🏀 **Sports CV Analytics Pipeline** | YOLOv8 · RF-DETR · BoT-SORT · ByteTrack · OpenCV | Enterprise internship project: **95% mAP@50**, 4,000+ verified annotations, and multi-object basketball tracking |

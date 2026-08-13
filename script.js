@@ -152,6 +152,11 @@ document.querySelectorAll('.flip-card').forEach(card => {
       label: '> taxi_fare_bqml.sql', file: 'taxi_fare_bqml.sql',
       chars: 'BigQueryMLSQLTaxiFareRMSELinearRegressionFeatureEngineering01',
       color: '#4285F4', glow: 'rgba(66,133,244,', icon: '📊'
+    },
+    dataflow: {
+      label: '> dataflow_lab.py', file: 'dataflow_lab.py',
+      chars: 'DataflowApacheBeamPythonPubSubBigQueryWindowWatermark01',
+      color: '#57E3D1', glow: 'rgba(87,227,209,', icon: '🌊'
     }
   };
 
