@@ -122,7 +122,7 @@
         <div class="tl to">Status      : <span class="tg blink-g">● OPEN_TO_WORK</span></div>
         <div class="tl">&nbsp;</div>
         <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">unlock more → type: </span><span class="t-hint-pulse" style="color:#00FF94">Research Reyaz</span><span style="color:#3A4468"> ↵</span></div>
-        <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">view a project → type its name: </span><span class="t-hint-pulse" style="color:#00FF94">trainstop</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#A78BFA">entailment</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#0EA5E9">forecast</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FF6B35">gptscratch</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FBBF24">mlnotes</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#4285F4">bigquery</span><span style="color:#3A4468"> ↵</span></div>
+        <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">view a project → type its name: </span><span class="t-hint-pulse" style="color:#00FF94">trainstop</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#A78BFA">entailment</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#0EA5E9">forecast</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FF6B35">gptscratch</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#FBBF24">mlnotes</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#4285F4">bigquery</span><span style="color:#3A4468">, </span><span class="t-hint-pulse" style="color:#57E3D1">dataflow</span><span style="color:#3A4468"> ↵</span></div>
         <div class="tl" id="termInputLine"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> <span id="termTyped"></span><span class="cursor-blink" id="termCursor">█</span></div>
         <input id="termHiddenInput"tabindex="-1" autocomplete="off" autocorrect="off" spellcheck="false"
           style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;left:-9999px" />
@@ -316,11 +316,12 @@
           <button class="psb-file proj-tab" data-proj="gptscratch"><span>🤖</span><span class="psb-fname">gpt_from_scratch.py</span><span class="psb-dot gpt-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="mlnotes"><span>📚</span><span class="psb-fname">all_about_ml.md</span><span class="psb-dot ml-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="bigquery"><span>📊</span><span class="psb-fname">taxi_fare_bqml.sql</span><span class="psb-dot bq-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="dataflow"><span>🌊</span><span class="psb-fname">dataflow_lab.py</span><span class="psb-dot bq-dot"></span></button>
           <div class="psb-folder"><span class="psb-chev">▸</span><span>📁</span> more/</div>
           <div class="psb-sub"><span>⚕️</span> wbc_classifier.py</div>
           <div class="psb-sub"><span>☁️</span> hadoop_emr.java</div>
         </div>
-        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>6 files</span></div>
+        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>7 files</span></div>
       </div>
       <!-- MAIN -->
       <div class="proj-main">
@@ -693,6 +694,58 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             </div>
           </div>
 
+          <!-- PROJECT 7 -->
+          <div class="proj-panel" data-proj="dataflow">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc7">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">07</span><span class="fc-badge bqml">Data Engineering</span></div>
+                  <h3 class="fc-title">Google Cloud Dataflow Learning Lab</h3>
+                  <p class="fc-org">Google Cloud &middot; Apache Beam &middot; Hands-on engineering workbook</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">14</span><span class="kl">Modules</span></div>
+                    <div class="kpi"><span class="kv">8+</span><span class="kl">Practical Labs</span></div>
+                    <div class="kpi"><span class="kv">2</span><span class="kl">Processing Modes</span></div>
+                    <div class="kpi"><span class="kv">1</span><span class="kl">Capstone</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">&rarr;</span>Built and tested a local Apache Beam batch pipeline with the Direct Runner</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Designed Cloud Storage-to-BigQuery batch and Pub/Sub streaming labs</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Covered event time, windows, watermarks, triggers, late data, and delivery semantics</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Added debugging, observability, IAM, cost, Flex Template, and CI/CD practice</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Created an interactive GitHub Pages course tracker and production capstone</div>
+                  </div>
+                  <div class="fc-tags"><span>Dataflow</span><span>Apache Beam</span><span>Python</span><span>Pub/Sub</span><span>BigQuery</span><span>Google Cloud</span></div>
+                  <div class="fc-hint">flip for full breakdown &rarr;</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">Learning architecture</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Develop</strong> &mdash; Define portable pipeline graphs with PCollections, transforms, schemas, and Beam testing utilities.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Run</strong> &mdash; Execute locally with Direct Runner, then deploy managed batch and streaming jobs with Dataflow Runner.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Stream</strong> &mdash; Process Pub/Sub events correctly using event-time windows, watermarks, triggers, and late-data policies.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Operate</strong> &mdash; Diagnose logs and metrics, handle hot keys, compare drain and cancel, and control cost.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Deliver</strong> &mdash; Package Flex Templates with least-privilege IAM, release gates, rollback, and a production runbook.</div></div>
+                  </div>
+                  <div class="fcb-links"><a href="https://github.com/reyaz-r3y4z/gcp-dataflow-learning-lab" class="btn-g sm" target="_blank" rel="noopener">View project &nearr;</a></div>
+                  <div class="fc-hint" style="color:var(--green)">&larr; flip back</div>
+                </div>
+              </div>
+              <div class="pmp">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">sales_batch.py</span></div>
+                <div class="pmp-code"><pre><span class="ccm"># Apache Beam: revenue by store</span>
+(
+  pipeline
+  | <span class="cstr">"Read CSV"</span> &gt;&gt; beam.io.ReadFromText(input_path)
+  | <span class="cstr">"Parse sales"</span> &gt;&gt; beam.ParDo(ParseSale())
+  | <span class="cstr">"Calculate revenue"</span> &gt;&gt; beam.Map(to_store_revenue)
+  | <span class="cstr">"Sum per store"</span> &gt;&gt; beam.CombinePerKey(sum)
+  | <span class="cstr">"Write output"</span> &gt;&gt; beam.io.WriteToText(output_path)
+)</pre></div>
+              </div>
+            </div>
+          </div>
+
         </div><!-- /proj-panels -->
       </div><!-- /proj-main -->
     </div><!-- /proj-ide -->
@@ -845,7 +898,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
   if (!termBlock || !typedEl) return;
 
   // project commands → matched against data-proj on the existing .proj-panel elements
-  const PROJECTS = ['trainstop', 'entailment', 'forecast', 'gptscratch', 'mlnotes', 'bigquery'];
+  const PROJECTS = ['trainstop', 'entailment', 'forecast', 'gptscratch', 'mlnotes', 'bigquery', 'dataflow'];
   const heroDefault = document.getElementById('heroRightDefault');
   const heroProject = document.getElementById('heroRightProject');
 
