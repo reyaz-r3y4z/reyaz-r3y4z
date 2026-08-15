@@ -72,6 +72,7 @@
     <a href="#about"      class="tab">about.py</a>
     <a href="#stack"      class="tab">stack.json</a>
     <a href="#projects"   class="tab">projects/</a>
+    <a href="#work-in-progress" class="tab">wip.md</a>
     <a href="#experience" class="tab">experience.log</a>
     <a href="#contact"    class="tab">contact.sh</a>
   </nav>
@@ -82,7 +83,7 @@
 </header>
 <div class="mobile-nav" id="mobileNav">
   <a href="#about">about.py</a><a href="#stack">stack.json</a>
-  <a href="#projects">projects/</a><a href="#experience">experience.log</a>
+  <a href="#projects">projects/</a><a href="#work-in-progress">wip.md</a><a href="#experience">experience.log</a>
   <a href="#contact">contact.sh</a>
 </div>
 
@@ -772,6 +773,83 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
         </div><!-- /proj-panels -->
       </div><!-- /proj-main -->
     </div><!-- /proj-ide -->
+  </div>
+</section>
+
+<!-- WORK IN PROGRESS -->
+<section class="section wip-section" id="work-in-progress">
+  <div class="wrap">
+    <div class="file-tab-row"><div class="file-tab active"><span class="ft-ic">&#9881;</span>work_in_progress.md</div></div>
+    <article class="wip-shell">
+      <header class="wip-hero">
+        <div class="wip-copy">
+          <div class="wip-kicker"><span class="wip-live"><i></i> ACTIVE BUILD</span><span>STARTED AUG 2026</span></div>
+          <h2>Volleyball Match Analysis<br><span>&amp; Player Tracking</span></h2>
+          <p>I am designing an end-to-end computer-vision system that turns raw volleyball match footage into structured, reviewable performance data. The goal is to follow players and the ball through rallies, understand where actions happen on court, and surface insights that are useful to coaches rather than producing detection boxes alone.</p>
+        </div>
+        <aside class="wip-phase-card">
+          <span class="wpc-label">CURRENT_PHASE</span>
+          <strong><span>01</span> Discovery &amp; system design</strong>
+          <p>Defining the annotation schema, camera assumptions, evaluation protocol and smallest useful baseline before model training begins.</p>
+          <div class="wpc-meter"><i></i></div>
+          <div class="wpc-meta"><span>PHASE 1 / 5</span><span>FOUNDATION</span></div>
+        </aside>
+      </header>
+
+      <div class="wip-grid">
+        <section class="wip-plan">
+          <div class="wip-block-title"><span>01</span><div><strong>BUILD PLAN</strong><small>From match video to coaching insight</small></div></div>
+          <ol class="wip-roadmap">
+            <li class="active">
+              <span class="wr-index">01</span>
+              <div><strong>Discovery &amp; data foundation</strong><p>Define player, ball, referee, net and court classes; collect representative footage; establish annotation rules; create train, validation and test splits that avoid match leakage.</p></div>
+              <span class="wr-state">IN PROGRESS</span>
+            </li>
+            <li>
+              <span class="wr-index">02</span>
+              <div><strong>Detection baseline</strong><p>Train and compare real-time object detectors for players, ball and court landmarks. Measure precision, recall and mAP, with special attention to the small, fast-moving ball.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li>
+              <span class="wr-index">03</span>
+              <div><strong>Tracking &amp; court calibration</strong><p>Maintain player identities through motion and occlusion, map image coordinates to court zones, and quantify identity switches and track stability.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li>
+              <span class="wr-index">04</span>
+              <div><strong>Actions, rallies &amp; events</strong><p>Combine trajectories, pose and temporal rules to segment rallies and investigate serve, set, attack, block and reception events without overstating uncertain predictions.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li>
+              <span class="wr-index">05</span>
+              <div><strong>Analytics &amp; productisation</strong><p>Produce annotated video, player movement summaries, court heatmaps and a review interface; profile inference speed and document limitations for real deployment.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+          </ol>
+        </section>
+
+        <aside class="wip-sidebar">
+          <section class="wip-expect">
+            <div class="wip-block-title"><span>02</span><div><strong>WHAT TO EXPECT</strong><small>Planned project outputs</small></div></div>
+            <ul>
+              <li><i>VIDEO</i><span>Annotated match footage with stable player and ball tracks</span></li>
+              <li><i>DATA</i><span>Frame-level trajectories and rally-level event records</span></li>
+              <li><i>MAPS</i><span>Court-zone movement and positional heatmaps</span></li>
+              <li><i>APP</i><span>A match-review dashboard for filtering and inspecting plays</span></li>
+              <li><i>REPORT</i><span>Detection, tracking and runtime evaluation with failure cases</span></li>
+            </ul>
+          </section>
+          <section class="wip-stack">
+            <div class="wip-block-title"><span>03</span><div><strong>PLANNED STACK</strong><small>Subject to baseline results</small></div></div>
+            <div class="wip-tags"><span>Python</span><span>PyTorch</span><span>YOLO</span><span>RT-DETR</span><span>ByteTrack</span><span>BoT-SORT</span><span>OpenCV</span><span>CVAT</span><span>Pose Estimation</span></div>
+          </section>
+          <section class="wip-note">
+            <span>// BUILD PRINCIPLE</span>
+            <p>Ship the smallest measurable baseline first. Metrics, demos and architecture decisions will be added here only after they are reproduced on held-out match footage.</p>
+          </section>
+        </aside>
+      </div>
+    </article>
   </div>
 </section>
 
