@@ -88,6 +88,7 @@
 
 <!-- ══════════════════════════════════════════ HERO ══════════════════════════════════════════ -->
 <section class="hero" id="hero">
+  <div class="hero-data-grid" aria-hidden="true"></div>
   <div class="hero-corners">
     <div class="hc tl"></div><div class="hc tr"></div>
     <div class="hc bl"></div><div class="hc br"></div>
@@ -145,12 +146,32 @@
             <a href="https://linkedin.com/in/mdreyaz7755" class="btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
           </div>
         </div>
+        <!-- compact machine-learning workflow graphic -->
+        <div class="ml-flow" aria-label="Machine learning workflow: data, features, models, and insight">
+          <div class="ml-flow-head"><span>ACTIVE_PIPELINE</span><span class="ml-flow-live"><i></i> running</span></div>
+          <div class="ml-flow-track">
+            <div class="ml-node"><span class="ml-node-icon">01</span><span><strong>DATA</strong><small>ingest</small></span></div>
+            <div class="ml-link"><i></i></div>
+            <div class="ml-node"><span class="ml-node-icon">02</span><span><strong>FEATURES</strong><small>engineer</small></span></div>
+            <div class="ml-link"><i></i></div>
+            <div class="ml-node"><span class="ml-node-icon">03</span><span><strong>MODEL</strong><small>learn</small></span></div>
+            <div class="ml-link"><i></i></div>
+            <div class="ml-node"><span class="ml-node-icon">04</span><span><strong>INSIGHT</strong><small>deploy</small></span></div>
+          </div>
+        </div>
         <!-- metric cards -->
         <div class="hero-metrics">
-          <div class="m-card"><span class="mv">95%</span><span class="ml">mAP@50</span></div>
-          <div class="m-card"><span class="mv">4K+</span><span class="ml">Annotations</span></div>
-          <div class="m-card"><span class="mv">3.5yr</span><span class="ml">TCS XP</span></div>
-          <div class="m-card"><span class="mv">5+</span><span class="ml">ML Projects</span></div>
+          <div class="m-card"><span class="m-viz m-ring" style="--p:95"></span><span class="mv">95%</span><span class="ml">mAP@50</span></div>
+          <div class="m-card"><span class="m-viz m-bars"><i></i><i></i><i></i><i></i></span><span class="mv">4K+</span><span class="ml">Annotations</span></div>
+          <div class="m-card"><span class="m-viz m-timeline"><i></i></span><span class="mv">3.5yr</span><span class="ml">TCS XP</span></div>
+          <div class="m-card"><span class="m-viz m-dots"><i></i><i></i><i></i><i></i><i></i></span><span class="mv">7</span><span class="ml">ML Projects</span></div>
+        </div>
+        <div class="focus-signal">
+          <span class="focus-pulse"></span>
+          <span class="focus-label">CURRENTLY_BUILDING</span>
+          <strong>Volleyball vision analytics</strong>
+          <span class="focus-tech">detection / tracking / pose</span>
+          <a href="#projects" aria-label="Explore current projects">explore &darr;</a>
         </div>
       </div>
       <!-- populated by terminal project commands, see script at bottom of page -->
