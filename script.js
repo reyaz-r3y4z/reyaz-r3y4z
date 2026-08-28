@@ -157,6 +157,11 @@ document.querySelectorAll('.flip-card').forEach(card => {
       label: '> dataflow_lab.py', file: 'dataflow_lab.py',
       chars: 'DataflowApacheBeamPythonPubSubBigQueryWindowWatermark01',
       color: '#57E3D1', glow: 'rgba(87,227,209,', icon: '🌊'
+    },
+    financial10k: {
+      label: '> financial_10k.py', file: 'financial_10k.py',
+      chars: 'SEC10KAppleMicrosoftTeslaRevenueNetIncomeAssetsCashFlowMiniLM01',
+      color: '#F472B6', glow: 'rgba(244,114,182,', icon: '💹'
     }
   };
 

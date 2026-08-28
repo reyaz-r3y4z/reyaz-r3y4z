@@ -126,8 +126,9 @@
         <div class="tl">&nbsp;</div>
         <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">unlock more → type: </span><span class="t-hint-pulse" style="color:#00FF94">Research Reyaz</span><span style="color:#3A4468"> ↵</span></div>
         <div class="tl t-hint project-hint"><span class="hint-label"># projects [1/2] →</span><span class="t-hint-pulse" style="color:#00FF94">trainstop</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#A78BFA">entailment</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#0EA5E9">forecast</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#FF6B35">gptscratch</span></div>
-        <div class="tl t-hint project-hint"><span class="hint-label"># projects [2/2] →</span><span class="t-hint-pulse" style="color:#FBBF24">mlnotes</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#4285F4">bigquery</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#57E3D1">dataflow</span><span class="hint-label"> ↵</span></div>
-        <div class="tl" id="termInputLine"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> <span id="termTyped"></span><span class="cursor-blink" id="termCursor">█</span></div>
+        <div class="tl t-hint project-hint"><span class="hint-label"># projects [2/2] →</span><span class="t-hint-pulse" style="color:#FBBF24">mlnotes</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#4285F4">bigquery</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#57E3D1">dataflow</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#F472B6">10k</span><span class="hint-label"> ↵</span></div>
+        <div id="termCliOutput" class="term-cli-output" hidden aria-live="polite"></div>
+        <div class="tl" id="termInputLine"><span id="termPrompt"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> </span><span id="termTyped"></span><span class="cursor-blink" id="termCursor">█</span></div>
         <input id="termHiddenInput"tabindex="-1" autocomplete="off" autocorrect="off" spellcheck="false"
           style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;left:-9999px" />
       </div>
@@ -167,7 +168,7 @@
           <div class="m-card"><span class="m-viz m-ring" style="--p:95"></span><span class="mv">95%</span><span class="ml">mAP@50</span></div>
           <div class="m-card"><span class="m-viz m-bars"><i></i><i></i><i></i><i></i></span><span class="mv">4K+</span><span class="ml">Annotations</span></div>
           <div class="m-card"><span class="m-viz m-timeline"><i></i></span><span class="mv">3.5yr</span><span class="ml">TCS XP</span></div>
-          <div class="m-card"><span class="m-viz m-dots"><i></i><i></i><i></i><i></i><i></i></span><span class="mv">7</span><span class="ml">ML Projects</span></div>
+          <div class="m-card"><span class="m-viz m-dots"><i></i><i></i><i></i><i></i><i></i></span><span class="mv">8</span><span class="ml">ML Projects</span></div>
         </div>
         <div class="focus-signal">
           <span class="focus-pulse"></span>
@@ -341,11 +342,12 @@
           <button class="psb-file proj-tab" data-proj="mlnotes"><span>📚</span><span class="psb-fname">all_about_ml.md</span><span class="psb-dot ml-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="bigquery"><span>📊</span><span class="psb-fname">taxi_fare_bqml.sql</span><span class="psb-dot bq-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="dataflow"><span>🌊</span><span class="psb-fname">dataflow_lab.py</span><span class="psb-dot bq-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="financial10k"><span>💹</span><span class="psb-fname">financial_10k.py</span><span class="psb-dot fin-dot"></span></button>
           <div class="psb-folder"><span class="psb-chev">▸</span><span>📁</span> more/</div>
           <div class="psb-sub"><span>⚕️</span> wbc_classifier.py</div>
           <div class="psb-sub"><span>☁️</span> hadoop_emr.java</div>
         </div>
-        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>7 files</span></div>
+        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>8 files</span></div>
       </div>
       <!-- MAIN -->
       <div class="proj-main">
@@ -770,6 +772,62 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             </div>
           </div>
 
+          <!-- PROJECT 8 -->
+          <div class="proj-panel" data-proj="financial10k">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc8">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">08</span><span class="fc-badge fin">Financial NLP</span></div>
+                  <h3 class="fc-title">10-K Financial Analysis Chatbot</h3>
+                  <p class="fc-org">BCG portfolio task &middot; SEC filings &middot; Semantic CLI</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">3</span><span class="kl">Companies</span></div>
+                    <div class="kpi"><span class="kv">3</span><span class="kl">Fiscal Years</span></div>
+                    <div class="kpi"><span class="kv">7</span><span class="kl">Query Intents</span></div>
+                    <div class="kpi"><span class="kv">5</span><span class="kl">Core Metrics</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">&rarr;</span>Extracted and standardised financial statements from Apple, Microsoft and Tesla 10-K reports</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Calculated year-over-year changes and cross-company comparisons with pandas</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Built semantic intent routing for lookup, growth, trend, comparison and summary questions</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Interactive CLI stays active for follow-up questions until <code>No Q</code></div>
+                  </div>
+                  <div class="fc-tags"><span>Python</span><span>pandas</span><span>pdfplumber</span><span>pypdf</span><span>Sentence Transformers</span><span>SEC 10-K</span></div>
+                  <div class="fc-hint">flip for full breakdown &rarr;</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">Analysis architecture</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Extract</strong> &mdash; Locate Part II, Item 8 and parse financial-statement tables from local 10-K PDFs.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Standardise</strong> &mdash; Validate revenue, net income, assets, liabilities and operating cash flow in USD millions.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Route</strong> &mdash; Use MiniLM sentence embeddings to classify natural-language questions into seven financial intents.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Analyse</strong> &mdash; Dispatch each question to tested lookup, growth, trend, comparison, extreme or summary handlers.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Interact</strong> &mdash; Keep the command-line conversation active for follow-up questions until <code>No Q</code>.</div></div>
+                  </div>
+                  <div class="fcb-links"><a href="https://github.com/reyaz-r3y4z/bcg-financial-scraper" class="btn-g sm" target="_blank" rel="noopener">View project &nearr;</a></div>
+                  <div class="fc-hint" style="color:var(--green)">&larr; flip back</div>
+                </div>
+              </div>
+              <div class="pmp financial-preview">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">python -m app.cli</span></div>
+                <div class="pmp-code"><pre><span class="fin-cli-title">Financial Analysis Chatbot</span>
+
+<span class="ccm"># Apple, Microsoft &amp; Tesla &middot; FY2023&ndash;2025</span>
+<span class="cvar">You:</span> What was Apple's revenue in 2025?
+<span class="cstr">Chatbot:</span> Apple's total revenue in fiscal 2025
+         was $416,161 million.
+
+<span class="cvar">You:</span> Which company had the highest net income?
+<span class="cstr">Chatbot:</span> Apple had the highest net income in
+         fiscal 2025, at $112,010 million.
+
+<span class="cvar">You:</span> No Q
+<span class="cstr">Chatbot:</span> Thank you. The chatbot is now closing.</pre></div>
+                <div class="pmp-hint">Try it in the hero terminal: type <code>10k</code>, press Enter, then ask a financial question.</div>
+              </div>
+            </div>
+          </div>
+
         </div><!-- /proj-panels -->
       </div><!-- /proj-main -->
     </div><!-- /proj-ide -->
@@ -995,13 +1053,56 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
 /* ── INTERACTIVE HERO TERMINAL ── */
 (function() {
   const termBlock = document.querySelector('.term-block');
+  const termBody  = termBlock && termBlock.querySelector('.term-body');
   const typedEl   = document.getElementById('termTyped');
-  if (!termBlock || !typedEl) return;
+  const promptEl  = document.getElementById('termPrompt');
+  const cliOutput = document.getElementById('termCliOutput');
+  const termTitle = termBlock && termBlock.querySelector('.term-title');
+  const inputLine = document.getElementById('termInputLine');
+  const hiddenInput = document.getElementById('termHiddenInput');
+  if (!termBlock || !termBody || !typedEl || !promptEl || !cliOutput || !inputLine) return;
 
   // project commands → matched against data-proj on the existing .proj-panel elements
-  const PROJECTS = ['trainstop', 'entailment', 'forecast', 'gptscratch', 'mlnotes', 'bigquery', 'dataflow'];
+  const PROJECTS = ['trainstop', 'entailment', 'forecast', 'gptscratch', 'mlnotes', 'bigquery', 'dataflow', 'financial10k'];
+  const PROJECT_ALIASES = {
+    '10k': 'financial10k', '10-k': 'financial10k', financial: 'financial10k',
+    finance: 'financial10k', 'financial 10k': 'financial10k',
+    'financial-10k': 'financial10k', bcg: 'financial10k'
+  };
   const heroDefault = document.getElementById('heroRightDefault');
   const heroProject = document.getElementById('heroRightProject');
+  const introLines = Array.from(termBody.children).filter(el => el.classList.contains('tl') && el !== inputLine);
+  const defaultPrompt = promptEl.innerHTML;
+  const defaultTitle = termTitle ? termTitle.textContent : '';
+
+  const FINANCIALS = {
+    Apple: {
+      2023: { revenue:383285, netIncome:96995, assets:352583, liabilities:290437, operatingCashFlow:110543 },
+      2024: { revenue:391035, netIncome:93736, assets:364980, liabilities:308030, operatingCashFlow:118254 },
+      2025: { revenue:416161, netIncome:112010, assets:359241, liabilities:285508, operatingCashFlow:111482 }
+    },
+    Microsoft: {
+      2023: { revenue:211915, netIncome:72361, assets:411976, liabilities:205753, operatingCashFlow:87582 },
+      2024: { revenue:245122, netIncome:88136, assets:512163, liabilities:243686, operatingCashFlow:118548 },
+      2025: { revenue:281724, netIncome:101832, assets:619003, liabilities:275524, operatingCashFlow:136162 }
+    },
+    Tesla: {
+      2023: { revenue:96773, netIncome:14974, assets:106618, liabilities:43009, operatingCashFlow:13256 },
+      2024: { revenue:97690, netIncome:7153, assets:122070, liabilities:48390, operatingCashFlow:14923 },
+      2025: { revenue:94827, netIncome:3855, assets:137806, liabilities:54941, operatingCashFlow:14747 }
+    }
+  };
+  const METRICS = {
+    revenue: { label:'Total Revenue', phrases:['revenue','sales'] },
+    netIncome: { label:'Net Income', phrases:['net income','profit','earnings'] },
+    assets: { label:'Total Assets', phrases:['total assets','assets'] },
+    liabilities: { label:'Total Liabilities', phrases:['total liabilities','liabilities','liability'] },
+    operatingCashFlow: { label:'Cash Flow from Operating Activities', phrases:['operating cash flow','cash flow from operations','cash from operations','cash flow'] }
+  };
+  const COMPANIES = Object.keys(FINANCIALS);
+  const YEARS = [2023, 2024, 2025];
+  let buffer = '';
+  let cliMode = false;
 
   function showProjectInHero(proj) {
     const front = document.querySelector('.proj-panel[data-proj="' + proj + '"] .fc-front');
@@ -1013,6 +1114,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
     const back = document.createElement('div');
     back.className = 'hrp-back';
     back.textContent = "← type 'home' to go back · full breakdown in projects/ below";
+    back.addEventListener('click', showHeroDefault);
     heroProject.appendChild(back);
     heroProject.appendChild(clone);
     heroDefault.style.display = 'none';
@@ -1023,52 +1125,262 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
   function showHeroDefault() {
     if (heroDefault) heroDefault.style.display = '';
     if (heroProject) heroProject.classList.remove('active');
+    resetTerminal();
   }
 
-  let buffer = '';
+  function appendCliLine(text, kind) {
+    const line = document.createElement('div');
+    line.className = 'term-cli-line' + (kind ? ' cli-' + kind : '');
+    line.textContent = text;
+    cliOutput.appendChild(line);
+    termBody.scrollTop = termBody.scrollHeight;
+  }
+
+  function setShellPrompt() {
+    promptEl.innerHTML = defaultPrompt;
+    if (termTitle) termTitle.textContent = defaultTitle;
+  }
+
+  function resetTerminal() {
+    cliMode = false;
+    buffer = '';
+    typedEl.textContent = '';
+    cliOutput.hidden = true;
+    cliOutput.innerHTML = '';
+    introLines.forEach(line => { line.hidden = false; });
+    termBody.classList.remove('cli-active');
+    setShellPrompt();
+  }
+
+  function startFinancialCli() {
+    showProjectInHero('financial10k');
+    cliMode = true;
+    buffer = '';
+    typedEl.textContent = '';
+    introLines.forEach(line => { line.hidden = true; });
+    cliOutput.innerHTML = '';
+    cliOutput.hidden = false;
+    termBody.classList.add('cli-active');
+    promptEl.textContent = 'You: ';
+    if (termTitle) termTitle.textContent = '~  python -m app.cli — financial analysis';
+    appendCliLine('Loading financial data...');
+    appendCliLine('Loading semantic model...');
+    appendCliLine('Semantic model loaded.');
+    appendCliLine('======================================================================', 'rule');
+    appendCliLine('Financial Analysis Chatbot', 'title');
+    appendCliLine('======================================================================', 'rule');
+    appendCliLine('Ask questions about Apple, Microsoft and Tesla for fiscal years 2023-2025.');
+    appendCliLine('Examples:');
+    appendCliLine("- What was Apple's revenue in 2025?", 'example');
+    appendCliLine("- How much did Tesla's profit change in 2024?", 'example');
+    appendCliLine("- Compare Apple and Microsoft revenue in 2025.", 'example');
+    appendCliLine("- Give me a financial summary of Tesla in 2024.", 'example');
+    appendCliLine("Enter 'No Q' to exit.");
+    appendCliLine('======================================================================', 'rule');
+    termBlock.classList.remove('flash');
+    void termBlock.offsetWidth;
+    termBlock.classList.add('flash');
+  }
+
+  function normalize(value) {
+    return value.toLowerCase().replace(/[’`]/g, "'").replace(/\b([a-z0-9]+)'s\b/g, '$1').replace(/[^a-z0-9.%]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function getCompanies(query) {
+    return COMPANIES.filter(company => new RegExp('\\b' + company.toLowerCase() + '\\b').test(query));
+  }
+
+  function getYears(query) {
+    return [...new Set((query.match(/\b20\d{2}\b/g) || []).map(Number).filter(year => YEARS.includes(year)))];
+  }
+
+  function getMetric(query) {
+    if (/operating cash flow|cash flow from operations|cash from operations|cash flow/.test(query)) return 'operatingCashFlow';
+    for (const [key, cfg] of Object.entries(METRICS)) {
+      if (cfg.phrases.some(phrase => query.includes(phrase))) return key;
+    }
+    return null;
+  }
+
+  function getIntent(query) {
+    if (/summary|summarize|overview|financial health|performance|position/.test(query)) return 'summary';
+    if (/highest|greatest|largest|most|best/.test(query)) return 'highest';
+    if (/lowest|smallest|least|fewest|weakest/.test(query)) return 'lowest';
+    if (/compare|comparison|difference|higher than|side by side/.test(query)) return 'comparison';
+    if (/trend|over time|history|across|through/.test(query) || (query.match(/\b20\d{2}\b/g) || []).length > 1) return 'trend';
+    if (/growth|grow|grew|change|increase|decrease|improve|decline|percentage/.test(query)) return 'growth';
+    return 'lookup';
+  }
+
+  function formatValue(value) {
+    return '$' + Math.round(value).toLocaleString('en-US') + ' million';
+  }
+
+  function resolvedYear(years) {
+    return years.length ? years[0] : 2025;
+  }
+
+  function financialAnswer(rawQuery) {
+    const query = normalize(rawQuery);
+    const companies = getCompanies(query);
+    const years = getYears(query);
+    const metric = getMetric(query);
+    const intent = getIntent(query);
+    const result = { intent, confidence: 0.93, response: '' };
+
+    if (intent !== 'summary' && !metric) {
+      result.response = 'Please specify revenue, net income, assets, liabilities or operating cash flow.';
+      return result;
+    }
+
+    if (intent === 'summary') {
+      if (companies.length !== 1) {
+        result.response = 'Please specify exactly one company for a financial summary.';
+        return result;
+      }
+      const company = companies[0], year = resolvedYear(years), row = FINANCIALS[company][year];
+      const margin = row.netIncome / row.revenue * 100;
+      const leverage = row.liabilities / row.assets * 100;
+      result.response = `${company}'s fiscal ${year} summary: revenue was ${formatValue(row.revenue)}; net income was ${formatValue(row.netIncome)}; total assets were ${formatValue(row.assets)}; total liabilities were ${formatValue(row.liabilities)}; and operating cash flow was ${formatValue(row.operatingCashFlow)}. Net margin was ${margin.toFixed(2)}%, and liabilities represented ${leverage.toFixed(2)}% of assets.`;
+      return result;
+    }
+
+    if (intent === 'highest' || intent === 'lowest') {
+      const year = resolvedYear(years);
+      const ranked = COMPANIES.map(company => ({ company, value: FINANCIALS[company][year][metric] })).sort((a,b) => b.value - a.value);
+      const chosen = intent === 'highest' ? ranked[0] : ranked[ranked.length - 1];
+      result.response = `${chosen.company} had the ${intent} ${METRICS[metric].label.toLowerCase()} in fiscal ${year}, at ${formatValue(chosen.value)}.`;
+      return result;
+    }
+
+    if (intent === 'comparison') {
+      const selected = companies.length ? companies : COMPANIES;
+      if (selected.length < 2) {
+        result.response = 'Please specify at least two companies for a comparison.';
+        return result;
+      }
+      const year = resolvedYear(years);
+      const ranked = selected.map(company => ({ company, value: FINANCIALS[company][year][metric] })).sort((a,b) => b.value - a.value);
+      const values = ranked.map(item => `${item.company}: ${formatValue(item.value)}`).join('; ');
+      result.response = `For fiscal ${year}, the ${METRICS[metric].label.toLowerCase()} comparison was ${values}. ${ranked[0].company} had the highest value, exceeding ${ranked[1].company} by ${formatValue(ranked[0].value - ranked[1].value)}.`;
+      return result;
+    }
+
+    if (companies.length !== 1) {
+      result.response = `Please specify exactly one company for a${intent === 'lookup' ? ' direct lookup' : ' ' + intent + ' analysis'}.`;
+      return result;
+    }
+    const company = companies[0];
+
+    if (intent === 'trend') {
+      let selectedYears = YEARS.slice();
+      if (years.length >= 2) selectedYears = YEARS.filter(year => year >= Math.min(...years) && year <= Math.max(...years));
+      else if (years.length === 1) selectedYears = YEARS.filter(year => year <= years[0]);
+      if (selectedYears.length < 2) {
+        result.response = 'At least two years are required for a trend analysis.';
+        return result;
+      }
+      const values = selectedYears.map(year => `${year}: ${formatValue(FINANCIALS[company][year][metric])}`).join('; ');
+      const first = FINANCIALS[company][selectedYears[0]][metric], last = FINANCIALS[company][selectedYears[selectedYears.length - 1]][metric];
+      const pct = (last - first) / Math.abs(first) * 100;
+      const direction = pct > 0 ? 'increased' : pct < 0 ? 'decreased' : 'was unchanged';
+      result.response = `${company}'s ${METRICS[metric].label.toLowerCase()} trend was ${values}. Overall, it ${direction} from fiscal ${selectedYears[0]} to ${selectedYears[selectedYears.length - 1]}. The total percentage change was ${pct.toFixed(2)}%.`;
+      return result;
+    }
+
+    const year = resolvedYear(years);
+    if (intent === 'growth') {
+      const previous = year - 1;
+      if (!FINANCIALS[company][previous]) {
+        result.response = `Both fiscal ${previous} and ${year} are required.`;
+        return result;
+      }
+      const currentValue = FINANCIALS[company][year][metric], previousValue = FINANCIALS[company][previous][metric];
+      const pct = (currentValue - previousValue) / Math.abs(previousValue) * 100;
+      const direction = pct > 0 ? 'increased' : pct < 0 ? 'decreased' : 'was unchanged';
+      result.response = `${company}'s ${METRICS[metric].label.toLowerCase()} ${direction} from ${formatValue(previousValue)} in fiscal ${previous} to ${formatValue(currentValue)} in fiscal ${year}. The year-over-year change was ${pct.toFixed(2)}%.`;
+      return result;
+    }
+
+    result.response = `${company}'s ${METRICS[metric].label.toLowerCase()} in fiscal ${year} was ${formatValue(FINANCIALS[company][year][metric])}.`;
+    return result;
+  }
+
+  function handleFinancialQuery(query) {
+    appendCliLine(query, 'user');
+    const normalized = normalize(query);
+    if (['no q','noq','quit','exit'].includes(normalized)) {
+      appendCliLine('Thank you. The chatbot is now closing.', 'bot');
+      appendCliLine("Session ended — type 'home' to restore the profile or '10k' to restart.", 'dev');
+      cliMode = false;
+      setShellPrompt();
+      return;
+    }
+    if (!normalized) {
+      appendCliLine("Please enter a question or enter 'No Q' to exit.", 'bot');
+      return;
+    }
+    const analysis = financialAnswer(query);
+    appendCliLine(analysis.response, 'bot');
+    appendCliLine(`[Detected intent: ${analysis.intent} | Confidence: ${analysis.confidence.toFixed(3)}]`, 'dev');
+  }
+
+  // Clicking the terminal gives mobile/assistive keyboards a real focus target.
+  termBlock.addEventListener('click', function() {
+    if (hiddenInput) hiddenInput.focus({ preventScroll: true });
+  });
 
   // Global keydown — no click/focus required
   document.addEventListener('keydown', function(e) {
     // Don't hijack when overlay is open or user is in a real input
     if (document.getElementById('researchOverlay').classList.contains('open')) return;
-    if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
+    if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName) && document.activeElement !== hiddenInput) return;
 
     if (e.key === 'Enter') {
-      const cmd = buffer.trim().toLowerCase().replace(/\s+/g,' ');
-      if (cmd === 'research reyaz') {
+      const raw = buffer.trim();
+      const cmd = raw.toLowerCase().replace(/\s+/g,' ');
+      if (cliMode) {
+        handleFinancialQuery(raw);
+        buffer = '';
+        typedEl.textContent = '';
+      } else if (cmd === 'research reyaz') {
         typedEl.textContent = 'Research Reyaz';
         termBlock.classList.remove('flash');
         void termBlock.offsetWidth; // reflow to restart animation
         termBlock.classList.add('flash');
         buffer = '';
         setTimeout(openResearch, 700);
-      } else if (PROJECTS.includes(cmd) && showProjectInHero(cmd)) {
-        typedEl.textContent = cmd;
-        termBlock.classList.remove('flash');
-        void termBlock.offsetWidth;
-        termBlock.classList.add('flash');
-        buffer = '';
-      } else if (cmd === 'home' || cmd === 'back' || cmd === 'clear') {
-        showHeroDefault();
-        buffer = '';
-        typedEl.textContent = '';
+      } else if (PROJECT_ALIASES[cmd] === 'financial10k' || cmd === 'financial10k') {
+        startFinancialCli();
       } else {
-        // Unknown command: shake and clear
-        if (buffer.trim()) {
-          termBlock.style.transition = 'transform .08s';
-          termBlock.style.transform = 'translateX(-5px)';
-          setTimeout(() => { termBlock.style.transform = 'translateX(5px)'; }, 80);
-          setTimeout(() => { termBlock.style.transform = ''; }, 160);
+        const project = PROJECT_ALIASES[cmd] || cmd;
+        if (PROJECTS.includes(project) && showProjectInHero(project)) {
+          typedEl.textContent = cmd;
+          termBlock.classList.remove('flash');
+          void termBlock.offsetWidth;
+          termBlock.classList.add('flash');
+          buffer = '';
+        } else if (cmd === 'home' || cmd === 'back' || cmd === 'clear') {
+          showHeroDefault();
+          buffer = '';
+          typedEl.textContent = '';
+        } else {
+          // Unknown command: shake and clear
+          if (buffer.trim()) {
+            termBlock.style.transition = 'transform .08s';
+            termBlock.style.transform = 'translateX(-5px)';
+            setTimeout(() => { termBlock.style.transform = 'translateX(5px)'; }, 80);
+            setTimeout(() => { termBlock.style.transform = ''; }, 160);
+          }
+          buffer = '';
+          typedEl.textContent = '';
         }
-        buffer = '';
-        typedEl.textContent = '';
       }
       e.preventDefault();
       return;
     }
 
     if (e.key === 'Escape') {
-      buffer = ''; typedEl.textContent = '';
       showHeroDefault();
       return;
     }
