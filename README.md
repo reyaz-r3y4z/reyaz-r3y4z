@@ -194,7 +194,7 @@ class MohammadReyaz:
 
 | Project | Stack | Highlights |
 |:--------|:------|:-----------|
-| 💹 [**10-K Financial Analysis Chatbot**](https://github.com/reyaz-r3y4z/bcg-financial-scraper) | Python · Pandas · pdfplumber · pypdf · Sentence Transformers | Extracts and standardises Apple, Microsoft, and Tesla 10-K financials for FY2023-2025; answers lookup, growth, trend, comparison, highest, lowest, and summary questions through an interactive semantic CLI |
+| 💹 [**Financial Analyser**](https://github.com/reyaz-r3y4z/bcg-financial-scraper) | Python · Pandas · pdfplumber · pypdf · Sentence Transformers | Extracts and standardises Apple, Microsoft, and Tesla 10-K financials for FY2023-2025; answers lookup, growth, trend, comparison, highest, lowest, and summary questions through an interactive semantic CLI |
 | ☁️ [**Google Cloud Dataflow Learning Lab**](https://github.com/reyaz-r3y4z/gcp-dataflow-learning-lab) | Google Cloud · Dataflow · Apache Beam · Python · Pub/Sub · BigQuery | Zero-to-expert workbook with a tested batch pipeline, streaming labs, event-time concepts, operations practice, Flex Templates, and a production capstone |
 | 🧠 [**GPT-Style Language Model From Scratch**](https://github.com/reyaz-r3y4z/from_scratch_GPT_like) | PyTorch · Transformers · Hugging Face data · Python | Trained a 124M-parameter GPT-2-scale model from scratch on a consumer GPU; documented architecture, training runs, evaluation, and generation |
 | 🧹 [**Automated Data Preparation**](https://github.com/reyaz-r3y4z/Data_Preparation) | Python · Pandas · Data Quality | Reusable module for automated exploratory analysis, cleaning, and preprocessing |

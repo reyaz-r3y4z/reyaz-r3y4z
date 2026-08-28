@@ -125,8 +125,8 @@
         <div class="tl to term-row"><span class="term-key">Status</span><span class="term-sep">:</span><span class="term-val"><span class="tg blink-g">● OPEN_TO_WORK</span></span></div>
         <div class="tl">&nbsp;</div>
         <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">unlock more → type: </span><span class="t-hint-pulse" style="color:#00FF94">Research Reyaz</span><span style="color:#3A4468"> ↵</span></div>
-        <div class="tl t-hint project-hint"><span class="hint-label"># projects [1/2] →</span><span class="t-hint-pulse" style="color:#00FF94">trainstop</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#A78BFA">entailment</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#0EA5E9">forecast</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#FF6B35">gptscratch</span></div>
-        <div class="tl t-hint project-hint"><span class="hint-label"># projects [2/2] →</span><span class="t-hint-pulse" style="color:#FBBF24">mlnotes</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#4285F4">bigquery</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#57E3D1">dataflow</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#F472B6">10k</span><span class="hint-label"> ↵</span></div>
+        <div class="tl t-hint project-hint"><span class="hint-label"># projects [1/2] →</span><span class="t-hint-pulse" style="color:#00FF94">trainstop</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#F472B6">financial analyser</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#FF6B35">gpt scratch</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#57E3D1">dataflow</span></div>
+        <div class="tl t-hint project-hint"><span class="hint-label"># projects [2/2] →</span><span class="t-hint-pulse" style="color:#4285F4">big query</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#A78BFA">entailment</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#0EA5E9">forecast</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#FBBF24">ml notes</span><span class="hint-label"> ↵</span></div>
         <div id="termCliOutput" class="term-cli-output" hidden aria-live="polite"></div>
         <div class="tl" id="termInputLine"><span id="termPrompt"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> </span><span id="termTyped"></span><span class="cursor-blink" id="termCursor">█</span></div>
         <input id="termHiddenInput"tabindex="-1" autocomplete="off" autocorrect="off" spellcheck="false"
@@ -336,13 +336,13 @@
         <div class="psb-tree">
           <div class="psb-folder open"><span class="psb-chev">▾</span><span>📁</span> featured/</div>
           <button class="psb-file proj-tab active" data-proj="trainstop"><span>🏀</span><span class="psb-fname">trainstop.py</span><span class="psb-dot cv-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="financial10k"><span>💹</span><span class="psb-fname">financial_analyser.py</span><span class="psb-dot fin-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="gptscratch"><span>🤖</span><span class="psb-fname">gpt_from_scratch.py</span><span class="psb-dot gpt-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="dataflow"><span>🌊</span><span class="psb-fname">dataflow_lab.py</span><span class="psb-dot bq-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="bigquery"><span>📊</span><span class="psb-fname">taxi_fare_bqml.sql</span><span class="psb-dot bq-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="entailment"><span>🧠</span><span class="psb-fname">visual_entailment.py</span><span class="psb-dot mm-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="forecast"><span>💊</span><span class="psb-fname">forecasting.py</span><span class="psb-dot ts-dot"></span></button>
-          <button class="psb-file proj-tab" data-proj="gptscratch"><span>🤖</span><span class="psb-fname">gpt_from_scratch.py</span><span class="psb-dot gpt-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="mlnotes"><span>📚</span><span class="psb-fname">all_about_ml.md</span><span class="psb-dot ml-dot"></span></button>
-          <button class="psb-file proj-tab" data-proj="bigquery"><span>📊</span><span class="psb-fname">taxi_fare_bqml.sql</span><span class="psb-dot bq-dot"></span></button>
-          <button class="psb-file proj-tab" data-proj="dataflow"><span>🌊</span><span class="psb-fname">dataflow_lab.py</span><span class="psb-dot bq-dot"></span></button>
-          <button class="psb-file proj-tab" data-proj="financial10k"><span>💹</span><span class="psb-fname">financial_10k.py</span><span class="psb-dot fin-dot"></span></button>
           <div class="psb-folder"><span class="psb-chev">▸</span><span>📁</span> more/</div>
           <div class="psb-sub"><span>⚕️</span> wbc_classifier.py</div>
           <div class="psb-sub"><span>☁️</span> hadoop_emr.java</div>
@@ -448,7 +448,7 @@
             <div class="proj-wrap">
               <div class="flip-card" id="fc2">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">02</span><span class="fc-badge mm">Multimodal AI</span></div>
+                  <div class="fc-hd"><span class="fc-idx">06</span><span class="fc-badge mm">Multimodal AI</span></div>
                   <h3 class="fc-title">Visual Entailment System</h3>
                   <p class="fc-org">RMIT University · 2025</p>
                   <div class="fc-kpis">
@@ -500,7 +500,7 @@
             <div class="proj-wrap">
               <div class="flip-card" id="fc3">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">03</span><span class="fc-badge ts">Time-Series</span></div>
+                  <div class="fc-hd"><span class="fc-idx">07</span><span class="fc-badge ts">Time-Series</span></div>
                   <h3 class="fc-title">Generic Drug Sales Forecasting</h3>
                   <p class="fc-org">Novartis Datathon 2024</p>
                   <div class="fc-kpis">
@@ -563,7 +563,7 @@ model.fit(X_train, y_train)</pre></div>
             <div class="proj-wrap">
               <div class="flip-card" id="fc4">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">04</span><span class="fc-badge llm">Language Model</span></div>
+                  <div class="fc-hd"><span class="fc-idx">03</span><span class="fc-badge llm">Language Model</span></div>
                   <h3 class="fc-title">GPT-2-Scale Transformer, From Scratch</h3>
                   <p class="fc-org">Personal Project · nanoGPT-style architecture</p>
                   <div class="fc-kpis">
@@ -620,7 +620,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             <div class="proj-wrap">
               <div class="flip-card" id="fc5">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">05</span><span class="fc-badge ref">Reference Site</span></div>
+                  <div class="fc-hd"><span class="fc-idx">08</span><span class="fc-badge ref">Reference Site</span></div>
                   <h3 class="fc-title">all_about_ML — ML Concepts Reference</h3>
                   <p class="fc-org">Personal Project · self-authored study notes as a web reference</p>
                   <div class="fc-kpis">
@@ -660,7 +660,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             <div class="proj-wrap">
               <div class="flip-card" id="fc6">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">06</span><span class="fc-badge bqml">BigQuery ML</span></div>
+                  <div class="fc-hd"><span class="fc-idx">05</span><span class="fc-badge bqml">BigQuery ML</span></div>
                   <h3 class="fc-title">NYC Taxi Fare Prediction with BigQuery ML</h3>
                   <p class="fc-org">Google Cloud &middot; End-to-end SQL machine learning</p>
                   <div class="fc-kpis">
@@ -725,7 +725,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             <div class="proj-wrap">
               <div class="flip-card" id="fc7">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">07</span><span class="fc-badge bqml">Data Engineering</span></div>
+                  <div class="fc-hd"><span class="fc-idx">04</span><span class="fc-badge bqml">Data Engineering</span></div>
                   <h3 class="fc-title">Google Cloud Dataflow Learning Lab</h3>
                   <p class="fc-org">Google Cloud &middot; Apache Beam &middot; Hands-on engineering workbook</p>
                   <div class="fc-kpis">
@@ -777,8 +777,8 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             <div class="proj-wrap">
               <div class="flip-card" id="fc8">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">08</span><span class="fc-badge fin">Financial NLP</span></div>
-                  <h3 class="fc-title">10-K Financial Analysis Chatbot</h3>
+                  <div class="fc-hd"><span class="fc-idx">02</span><span class="fc-badge fin">Financial NLP</span></div>
+                  <h3 class="fc-title">Financial Analyser</h3>
                   <p class="fc-org">BCG portfolio task &middot; SEC filings &middot; Semantic CLI</p>
                   <div class="fc-kpis">
                     <div class="kpi"><span class="kv g">3</span><span class="kl">Companies</span></div>
@@ -810,7 +810,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
               </div>
               <div class="pmp financial-preview">
                 <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">python -m app.cli</span></div>
-                <div class="pmp-code"><pre><span class="fin-cli-title">Financial Analysis Chatbot</span>
+                <div class="pmp-code"><pre><span class="fin-cli-title">Financial Analyser</span>
 
 <span class="ccm"># Apple, Microsoft &amp; Tesla &middot; FY2023&ndash;2025</span>
 <span class="cvar">You:</span> What was Apple's revenue in 2025?
@@ -823,7 +823,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
 
 <span class="cvar">You:</span> No Q
 <span class="cstr">Chatbot:</span> Thank you. The chatbot is now closing.</pre></div>
-                <div class="pmp-hint">Try it in the hero terminal: type <code>10k</code>, press Enter, then ask a financial question.</div>
+                <div class="pmp-hint">Try it in the hero terminal: type <code>financial analyser</code>, press Enter, then ask a financial question.</div>
               </div>
             </div>
           </div>
@@ -1063,11 +1063,18 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
   if (!termBlock || !termBody || !typedEl || !promptEl || !cliOutput || !inputLine) return;
 
   // project commands → matched against data-proj on the existing .proj-panel elements
-  const PROJECTS = ['trainstop', 'entailment', 'forecast', 'gptscratch', 'mlnotes', 'bigquery', 'dataflow', 'financial10k'];
+  const PROJECTS = ['trainstop', 'financial10k', 'gptscratch', 'dataflow', 'bigquery', 'entailment', 'forecast', 'mlnotes'];
   const PROJECT_ALIASES = {
+    'train stop': 'trainstop',
+    'financial analyser': 'financial10k', 'financial analyzer': 'financial10k',
     '10k': 'financial10k', '10-k': 'financial10k', financial: 'financial10k',
     finance: 'financial10k', 'financial 10k': 'financial10k',
-    'financial-10k': 'financial10k', bcg: 'financial10k'
+    'financial-10k': 'financial10k', bcg: 'financial10k',
+    'gpt scratch': 'gptscratch', 'gpt-scratch': 'gptscratch', 'gpt from scratch': 'gptscratch',
+    'data flow': 'dataflow',
+    'big query': 'bigquery', 'big-query': 'bigquery',
+    'visual entailment': 'entailment',
+    'ml notes': 'mlnotes', 'ml-notes': 'mlnotes', 'all about ml': 'mlnotes'
   };
   const heroDefault = document.getElementById('heroRightDefault');
   const heroProject = document.getElementById('heroRightProject');
@@ -1162,12 +1169,12 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
     cliOutput.hidden = false;
     termBody.classList.add('cli-active');
     promptEl.textContent = 'You: ';
-    if (termTitle) termTitle.textContent = '~  python -m app.cli — financial analysis';
+    if (termTitle) termTitle.textContent = '~  python -m app.cli — financial analyser';
     appendCliLine('Loading financial data...');
     appendCliLine('Loading semantic model...');
     appendCliLine('Semantic model loaded.');
     appendCliLine('======================================================================', 'rule');
-    appendCliLine('Financial Analysis Chatbot', 'title');
+    appendCliLine('Financial Analyser', 'title');
     appendCliLine('======================================================================', 'rule');
     appendCliLine('Ask questions about Apple, Microsoft and Tesla for fiscal years 2023-2025.');
     appendCliLine('Examples:');
@@ -1311,7 +1318,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
     const normalized = normalize(query);
     if (['no q','noq','quit','exit'].includes(normalized)) {
       appendCliLine('Thank you. The chatbot is now closing.', 'bot');
-      appendCliLine("Session ended — type 'home' to restore the profile or '10k' to restart.", 'dev');
+      appendCliLine("Session ended — type 'home' to restore the profile or 'financial analyser' to restart.", 'dev');
       cliMode = false;
       setShellPrompt();
       return;
