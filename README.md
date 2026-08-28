@@ -194,13 +194,14 @@ class MohammadReyaz:
 
 | Project | Stack | Highlights |
 |:--------|:------|:-----------|
+| 🏀 **Trainstop Sports CV Analytics Pipeline** | YOLOv8 · RF-DETR · BoT-SORT · ByteTrack · OpenCV | Enterprise internship project: **95% mAP@50**, 4,000+ verified annotations, and multi-object basketball tracking |
 | 💹 [**Financial Analyser**](https://github.com/reyaz-r3y4z/bcg-financial-scraper) | Python · Pandas · pdfplumber · pypdf · Sentence Transformers | Extracts and standardises Apple, Microsoft, and Tesla 10-K financials for FY2023-2025; answers lookup, growth, trend, comparison, highest, lowest, and summary questions through an interactive semantic CLI |
-| ☁️ [**Google Cloud Dataflow Learning Lab**](https://github.com/reyaz-r3y4z/gcp-dataflow-learning-lab) | Google Cloud · Dataflow · Apache Beam · Python · Pub/Sub · BigQuery | Zero-to-expert workbook with a tested batch pipeline, streaming labs, event-time concepts, operations practice, Flex Templates, and a production capstone |
 | 🧠 [**GPT-Style Language Model From Scratch**](https://github.com/reyaz-r3y4z/from_scratch_GPT_like) | PyTorch · Transformers · Hugging Face data · Python | Trained a 124M-parameter GPT-2-scale model from scratch on a consumer GPU; documented architecture, training runs, evaluation, and generation |
-| 🧹 [**Automated Data Preparation**](https://github.com/reyaz-r3y4z/Data_Preparation) | Python · Pandas · Data Quality | Reusable module for automated exploratory analysis, cleaning, and preprocessing |
-| 🏀 **Sports CV Analytics Pipeline** | YOLOv8 · RF-DETR · BoT-SORT · ByteTrack · OpenCV | Enterprise internship project: **95% mAP@50**, 4,000+ verified annotations, and multi-object basketball tracking |
+| ☁️ [**Google Cloud Dataflow Learning Lab**](https://github.com/reyaz-r3y4z/gcp-dataflow-learning-lab) | Google Cloud · Dataflow · Apache Beam · Python · Pub/Sub · BigQuery | Zero-to-expert workbook with a tested batch pipeline, streaming labs, event-time concepts, operations practice, Flex Templates, and a production capstone |
+| 📊 **NYC Taxi Fare Prediction with BigQuery ML** | BigQuery ML · GoogleSQL · Linear Regression · Feature Engineering | Built and evaluated an end-to-end fare-prediction workflow directly in BigQuery using SQL |
 | 🧠 **Visual Entailment Multimodal AI** | EfficientNetB4 · BERT · Universal Sentence Encoder · TensorFlow | Academic multimodal system combining visual and language embeddings for image-text entailment |
-| 🩸 **White Blood Cell CNN Classifier** | TensorFlow · Keras · OpenCV · Grad-CAM | Private portfolio project using multi-task classification and explainability for cell morphology |
+| 💊 **Generic Drug Sales Forecasting** | XGBoost · SARIMA · ADF Testing · Feature Engineering | Compared machine-learning and statistical forecasting approaches for post-generic-entry pharmaceutical sales erosion |
+| 📚 [**ML Notes and Concepts Reference**](https://github.com/reyaz-r3y4z/all_about_ML) | Machine Learning · Deep Learning · Python · Technical Writing | Self-authored reference covering core ML concepts, model training, evaluation, and practical implementation notes |
 
 </div>
 

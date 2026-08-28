@@ -111,6 +111,21 @@ document.querySelectorAll('.flip-card').forEach(card => {
 
 /* ── PROJECT SIDEBAR + MATRIX RAIN ── */
 (function() {
+  const projectOrder = [
+    'trainstop', 'financial10k', 'gptscratch', 'dataflow',
+    'bigquery', 'entailment', 'forecast', 'mlnotes'
+  ];
+  const panelHost = document.querySelector('.proj-panels');
+
+  // Keep the panel DOM order aligned with the visible sidebar and terminal hints.
+  // Appending an existing node moves it without recreating its content or listeners.
+  if (panelHost) {
+    projectOrder.forEach(proj => {
+      const panel = panelHost.querySelector('.proj-panel[data-proj="' + proj + '"]');
+      if (panel) panelHost.appendChild(panel);
+    });
+  }
+
   const tabs    = document.querySelectorAll('.proj-tab');
   const panels  = document.querySelectorAll('.proj-panel');
   const stage   = document.getElementById('matrixStage');
