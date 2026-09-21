@@ -1,0 +1,67 @@
+{
+  "generatedAt": "2026-09-21T16:36:51.499Z",
+  "methodology": "Progress equals completed configured repository milestones.",
+  "projects": {
+    "volleyball-sport-analysis-tracker": {
+      "label": "🏐 Volleyball CV",
+      "status": "ACTIVE_BUILD",
+      "progress": 0,
+      "completedMilestones": [],
+      "totalMilestones": 5,
+      "updatedAt": "2026-09-10T06:05:01Z",
+      "latestCommit": "Initialize repository",
+      "visibility": "private",
+      "url": null
+    },
+    "project-teacher-ingestion": {
+      "label": "📖 Teacher RAG",
+      "status": "ACTIVE_BUILD",
+      "progress": 100,
+      "completedMilestones": [
+        "README.md",
+        "app",
+        "tests",
+        "docs",
+        "Dockerfile"
+      ],
+      "totalMilestones": 5,
+      "updatedAt": "2026-09-19T18:23:26Z",
+      "latestCommit": "Support PageMaker geometry symbol glyphs",
+      "visibility": "private",
+      "url": null
+    },
+    "pt-zero-care-navigation": {
+      "label": "🏥 Healthcare AI",
+      "status": "MVP_LIVE",
+      "progress": 100,
+      "completedMilestones": [
+        "README.md",
+        "app",
+        "tests",
+        "Dockerfile",
+        ".github/workflows"
+      ],
+      "totalMilestones": 5,
+      "updatedAt": "2026-09-16T05:09:47Z",
+      "latestCommit": "Add synthetic healthcare operations and audit platform",
+      "visibility": "public",
+      "url": "https://github.com/reyaz-r3y4z/pt-zero-care-navigation"
+    },
+    "financial-10k-ingestion-powerbi": {
+      "label": "📈 Financial extraction",
+      "status": "ACTIVE_BUILD",
+      "progress": 80,
+      "completedMilestones": [
+        "README.md",
+        "pipeline",
+        "db",
+        "web"
+      ],
+      "totalMilestones": 5,
+      "updatedAt": "2026-09-21T16:27:58Z",
+      "latestCommit": "Add 10-K ingestion pipeline, data explorer and Power BI dashboard\n\nExtracts text, tables and images from Apple/Microsoft/Tesla 10-K PDFs into\nPostgres (tables + financial facts), JSONL + local embeddings (RAG) and image\nfiles. Includes a Flask console to run ingestion and a Data Explorer page,\nstatement-based fact extraction with fiscal-year detection, SQL views for\nPower BI, and the Power BI report with its DAX measures.\n\nCo-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>",
+      "visibility": "private",
+      "url": null
+    }
+  }
+}

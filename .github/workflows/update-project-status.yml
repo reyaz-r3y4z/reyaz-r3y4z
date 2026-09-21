@@ -1,0 +1,31 @@
+name: Update project status
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Refresh repository activity and milestone progress
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROFILE_REPOS_TOKEN: ${{ secrets.PROFILE_REPOS_TOKEN }}
+        run: node scripts/update-project-status.mjs
+      - name: Commit refreshed status
+        run: |
+          if git diff --quiet -- README.md assets/project-status.json; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md assets/project-status.json
+          git commit -m "chore: refresh project status"
+          git push
