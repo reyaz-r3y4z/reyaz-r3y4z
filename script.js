@@ -113,7 +113,8 @@ document.querySelectorAll('.flip-card').forEach(card => {
 (function() {
   const projectOrder = [
     'trainstop', 'financial10k', 'gptscratch', 'dataflow',
-    'bigquery', 'entailment', 'forecast', 'mlnotes'
+    'bigquery', 'entailment', 'forecast', 'mlnotes',
+    'volleyball', 'teacherrag', 'healthcare', 'financialextract'
   ];
   const panelHost = document.querySelector('.proj-panels');
 
@@ -177,6 +178,26 @@ document.querySelectorAll('.flip-card').forEach(card => {
       label: '> financial_analyser.py', file: 'financial_analyser.py',
       chars: 'SEC10KAppleMicrosoftTeslaRevenueNetIncomeAssetsCashFlowMiniLM01',
       color: '#F472B6', glow: 'rgba(244,114,182,', icon: '💹'
+    },
+    volleyball: {
+      label: '> volleyball_tracker.py', file: 'volleyball_tracker.py',
+      chars: 'VolleyballYOLOTrackingPoseCourtRallyOpenCVByteTrack01',
+      color: '#00FF94', glow: 'rgba(0,255,148,', icon: '🏐'
+    },
+    teacherrag: {
+      label: '> teacher_rag.py', file: 'teacher_rag.py',
+      chars: 'TeacherRAGPyMuPDFOCRFormulaTheoremEmbeddingTraceable01',
+      color: '#A78BFA', glow: 'rgba(167,139,250,', icon: '📖'
+    },
+    healthcare: {
+      label: '> care_navigation.py', file: 'care_navigation.py',
+      chars: 'HealthcareAgentSafetyRAGProviderAuditFastAPISQLite01',
+      color: '#38BDF8', glow: 'rgba(56,189,248,', icon: '🏥'
+    },
+    financialextract: {
+      label: '> 10k_ingestion.py', file: '10k_ingestion.py',
+      chars: 'SEC10KPostgresPowerBIRAGTablesImagesEmbeddingsFlask01',
+      color: '#F472B6', glow: 'rgba(244,114,182,', icon: '📈'
     }
   };
 
@@ -250,6 +271,38 @@ document.querySelectorAll('.flip-card').forEach(card => {
   // silent initial setup only — no scroll, so the page always loads on the hero section
   activate('trainstop');
 })();
+
+/* ── LIVE PROJECT STATUS ── */
+(async function() {
+  const repoNodes = document.querySelectorAll('[data-repo]');
+  if (!repoNodes.length) return;
+  try {
+    const response = await fetch('assets/project-status.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('status unavailable');
+    const payload = await response.json();
+    const projects = payload.projects || {};
+    repoNodes.forEach(node => {
+      const item = projects[node.dataset.repo];
+      if (!item) return;
+      const progress = Math.max(0, Math.min(100, Number(item.progress) || 0));
+      node.querySelectorAll('[data-progress-bar]').forEach(el => { el.style.width = progress + '%'; });
+      node.querySelectorAll('[data-progress-text], .live-progress').forEach(el => { el.textContent = progress + '%'; });
+      node.querySelectorAll('.live-state').forEach(el => { el.textContent = String(item.status || 'IN PROGRESS').replaceAll('_', ' '); });
+      const updated = item.updatedAt ? new Date(item.updatedAt).toLocaleDateString(undefined, { day:'numeric', month:'short', year:'numeric' }) : 'unknown';
+      const message = item.latestCommit ? item.latestCommit.split('\n')[0] : 'Repository activity tracked';
+      node.querySelectorAll('[data-repo-update]').forEach(el => { el.textContent = 'Updated ' + updated + ' · ' + message; });
+    });
+  } catch (error) {
+    document.querySelectorAll('[data-repo-update]').forEach(el => { el.textContent = 'Status snapshot temporarily unavailable'; });
+  }
+})();
+
+document.querySelectorAll('[data-open-project]').forEach(link => {
+  link.addEventListener('click', () => {
+    const tab = document.querySelector('.proj-tab[data-proj="' + link.dataset.openProject + '"]');
+    if (tab) tab.click();
+  });
+});
  
 /* ── Badge hover glow ── */
 document.querySelectorAll('.bw-b img').forEach(img => {

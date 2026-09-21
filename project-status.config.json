@@ -1,0 +1,29 @@
+{
+  "owner": "reyaz-r3y4z",
+  "projects": [
+    {
+      "repo": "volleyball-sport-analysis-tracker",
+      "label": "🏐 Volleyball CV",
+      "defaultStatus": "ACTIVE_BUILD",
+      "milestones": ["README.md", "src", "tests", "models", "demo"]
+    },
+    {
+      "repo": "project-teacher-ingestion",
+      "label": "📖 Teacher RAG",
+      "defaultStatus": "ACTIVE_BUILD",
+      "milestones": ["README.md", "app", "tests", "docs", "Dockerfile"]
+    },
+    {
+      "repo": "pt-zero-care-navigation",
+      "label": "🏥 Healthcare AI",
+      "defaultStatus": "MVP_LIVE",
+      "milestones": ["README.md", "app", "tests", "Dockerfile", ".github/workflows"]
+    },
+    {
+      "repo": "financial-10k-ingestion-powerbi",
+      "label": "📈 Financial extraction",
+      "defaultStatus": "ACTIVE_BUILD",
+      "milestones": ["README.md", "pipeline", "db", "web", "PowerBI"]
+    }
+  ]
+}

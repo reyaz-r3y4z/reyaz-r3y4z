@@ -202,8 +202,25 @@ class MohammadReyaz:
 | 🧠 **Visual Entailment Multimodal AI** | EfficientNetB4 · BERT · Universal Sentence Encoder · TensorFlow | Academic multimodal system combining visual and language embeddings for image-text entailment |
 | 💊 **Generic Drug Sales Forecasting** | XGBoost · SARIMA · ADF Testing · Feature Engineering | Compared machine-learning and statistical forecasting approaches for post-generic-entry pharmaceutical sales erosion |
 | 📚 [**ML Notes and Concepts Reference**](https://github.com/reyaz-r3y4z/all_about_ML) | Machine Learning · Deep Learning · Python · Technical Writing | Self-authored reference covering core ML concepts, model training, evaluation, and practical implementation notes |
+| 🏐 **Volleyball Match Analysis & Tracking** *(private · in progress)* | Python · PyTorch · YOLO · ByteTrack · OpenCV | Building player and ball detection, identity tracking, court calibration, rally understanding, heatmaps, and coach-facing match review |
+| 📖 **Project Teacher — Traceable RAG Ingestion** *(private · in progress)* | FastAPI · PyMuPDF · OCR · SQLite · JSONL · RAG | Converts textbooks and notes into source-grounded records for definitions, formulas, theorems, worked examples, exercises, diagrams, and later vector retrieval |
+| 🏥 [**PT Zero — Explainable Care Navigation**](https://github.com/reyaz-r3y4z/pt-zero-care-navigation) *(MVP live)* | FastAPI · Multi-Agent AI · Local RAG · SQLite · Docker | Synthetic-only healthcare operations MVP with seven narrow agents, a deterministic safety gate, citations, transparent ranking, audit trails, tests, and deployment |
+| 📈 **10-K Ingestion, RAG & Power BI** *(private · in progress)* | Python · PostgreSQL · JSONL · Embeddings · Flask · Power BI | Extracts text, tables, images, and financial facts from Apple, Microsoft, and Tesla 10-Ks into analytics- and retrieval-ready stores |
 
 </div>
+
+### 🔄 Live Build Status
+
+Progress is calculated from delivered repository milestones. Activity, latest-commit details, and progress are refreshed by GitHub Actions when the profile status workflow runs.
+
+<!-- PROJECT_STATUS:START -->
+| Project | Status | Progress | Last repository update |
+|:--|:--|--:|:--|
+| 🏐 Volleyball CV | Active build | 0% | 10 Sept 2026 |
+| 📖 Teacher RAG | Active build | 100% | 19 Sept 2026 |
+| 🏥 Healthcare AI | Mvp live | 100% | 16 Sept 2026 |
+| 📈 Financial extraction | Active build | 80% | 21 Sept 2026 |
+<!-- PROJECT_STATUS:END -->
 
 ---
 
