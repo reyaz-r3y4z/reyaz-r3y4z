@@ -218,7 +218,7 @@ Progress is calculated from delivered repository milestones. Activity, latest-co
 |:--|:--|--:|:--|
 | 🏐 Volleyball CV | Active build | 0% | 10 Sept 2026 |
 | 📖 Teacher RAG | Active build | 100% | 19 Sept 2026 |
-| 🏥 Healthcare AI | Mvp live | 100% | 16 Sept 2026 |
+| 🏥 Healthcare AI | MVP live | 100% | 16 Sept 2026 |
 | 📈 Financial extraction | Active build | 80% | 21 Sept 2026 |
 <!-- PROJECT_STATUS:END -->
 
