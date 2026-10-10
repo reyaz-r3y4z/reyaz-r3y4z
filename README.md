@@ -36,15 +36,17 @@ class MohammadReyaz:
 
     stack = [
         "Python", "SQL", "Scikit-learn",
-        "NLP", "RAG", "Computer Vision",
+        "NLP", "Computer Vision",
+        "RAG", "GraphRAG", "LLM Evaluation",
+        "Neo4j", "Qdrant", "Ollama",
         "PyTorch", "TensorFlow", "AWS", "Docker"
     ]
 
     currently_learning = [
-        "Transformer-based Vision Models",
-        "MLOps & Model Serving at Scale",
-        "Real-Time CV Pipelines",
-        "LLM Evaluation & Fine-Tuning"
+        "GraphRAG & Knowledge Graphs",
+        "Vision-Language Models for Document Ingestion",
+        "LLM Evaluation (LLM judges, citation checks)",
+        "MLOps & Model Serving at Scale"
     ]
 
     fun_fact = (
@@ -90,6 +92,16 @@ class MohammadReyaz:
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
 ![Statsmodels](https://img.shields.io/badge/Statsmodels-3B4D98?style=flat-square&logo=python&logoColor=white)
 
+**LLM, RAG & Evaluation**
+
+![RAG](https://img.shields.io/badge/RAG-70A5FD?style=flat-square)
+![GraphRAG](https://img.shields.io/badge/GraphRAG-BF91F3?style=flat-square)
+![Vision-Language Models](https://img.shields.io/badge/Vision--Language%20Models-38BDAE?style=flat-square)
+![LLM Evaluation](https://img.shields.io/badge/LLM%20Evaluation-FF6D00?style=flat-square)
+![Ollama](https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white)
+![OpenAI API](https://img.shields.io/badge/OpenAI%20API-412991?style=flat-square)
+![pytest](https://img.shields.io/badge/pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white)
+
 **Computer Vision Specialist Tools**
 
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-00FFFF?style=flat-square&logo=yolo&logoColor=black)
@@ -107,6 +119,8 @@ class MohammadReyaz:
 
 **Databases & Big Data**
 
+![Neo4j](https://img.shields.io/badge/Neo4j-4581C3?style=flat-square&logo=neo4j&logoColor=white)
+![Qdrant](https://img.shields.io/badge/Qdrant-DC244C?style=flat-square&logo=qdrant&logoColor=white)
 ![DynamoDB](https://img.shields.io/badge/DynamoDB-4053D6?style=flat-square&logo=amazondynamodb&logoColor=white)
 ![Hadoop](https://img.shields.io/badge/Hadoop-66CCFF?style=flat-square&logo=apachehadoop&logoColor=black)
 ![Apache Pig](https://img.shields.io/badge/Apache%20Pig-CC0200?style=flat-square&logo=apache&logoColor=white)
@@ -194,6 +208,7 @@ class MohammadReyaz:
 
 | Project | Stack | Highlights |
 |:--------|:------|:-----------|
+| 🕸️ **GraphRAG over Math Textbooks** *(private)* | Python · PyMuPDF · Tesseract OCR · Ollama (Qwen3-VL 8B) · OpenAI API · Qdrant · Neo4j · pytest | Cited question answering over NCERT Class 10 Maths (14 chapters, 217 pages). Local PDF ingestion verified against the text layer, a Neo4j knowledge graph, and GraphRAG that retrieved every required unit for **84%** of cross-reference questions against 36% for vector search. Measured results below the table |
 | 🏀 **Trainstop Sports CV Analytics Pipeline** | YOLOv8 · RF-DETR · BoT-SORT · ByteTrack · OpenCV | Enterprise internship project: **95% mAP@50**, 4,000+ verified annotations, and multi-object basketball tracking |
 | 💹 [**Financial Analyser**](https://github.com/reyaz-r3y4z/bcg-financial-scraper) | Python · Pandas · pdfplumber · pypdf · Sentence Transformers | Extracts and standardises Apple, Microsoft, and Tesla 10-K financials for FY2023-2025; answers lookup, growth, trend, comparison, highest, lowest, and summary questions through an interactive semantic CLI |
 | 🧠 [**GPT-Style Language Model From Scratch**](https://github.com/reyaz-r3y4z/from_scratch_GPT_like) | PyTorch · Transformers · Hugging Face data · Python | Trained a 124M-parameter GPT-2-scale model from scratch on a consumer GPU; documented architecture, training runs, evaluation, and generation |
@@ -206,8 +221,24 @@ class MohammadReyaz:
 | 📖 **Project Teacher — Traceable RAG Ingestion** *(private · in progress)* | FastAPI · PyMuPDF · OCR · SQLite · JSONL · RAG | Converts textbooks and notes into source-grounded records for definitions, formulas, theorems, worked examples, exercises, diagrams, and later vector retrieval |
 | 🏥 [**PT Zero — Explainable Care Navigation**](https://github.com/reyaz-r3y4z/pt-zero-care-navigation) *(MVP live)* | FastAPI · Multi-Agent AI · Local RAG · SQLite · Docker | Synthetic-only healthcare operations MVP with seven narrow agents, a deterministic safety gate, citations, transparent ranking, audit trails, tests, and deployment |
 | 📈 **10-K Ingestion, RAG & Power BI** *(private · in progress)* | Python · PostgreSQL · JSONL · Embeddings · Flask · Power BI | Extracts text, tables, images, and financial facts from Apple, Microsoft, and Tesla 10-Ks into analytics- and retrieval-ready stores |
+| 💬 **FinSight 10-K — RAG on Microsoft Fabric** *(private)* | TypeScript · React · Microsoft Rayfin · Fabric SQL · OpenAI API | Cited answers over Apple, Microsoft, and Tesla 10-Ks (FY2023-2025) with a 17-question hand-verified golden set scored by an LLM judge; correctness rose from 71 to 93 with faithfulness at 100 |
 
 </div>
+
+<details>
+<summary><b>🕸️ GraphRAG over Math Textbooks — measured results</b></summary>
+
+<br/>
+
+- **Ingestion (fully local, 8 GB GPU):** PDF pages to Markdown with LaTeX, tables, and figure crops, each page verified against the PDF text layer. 97% of 217 pages passed the automatic checks; three hand-checked pages matched 100% of words, formulas, and table rows.
+- **Chunking by textbook unit** (theorem with proof, example with solution) against fixed-window RAG on a 40-question set: top-1 retrieval 60% → 85%, answer rubric score 86% → 93%.
+- **Knowledge graph in Neo4j:** 645 units, 511 concepts, 276 evidence-backed links.
+- **GraphRAG against vector search on cross-reference questions:** every required unit retrieved for 84% against 36% (100% against 60% on a 10-question held-out set); answer score 55% → 84% on the main set.
+- **Grounding:** answers are restricted to textbook sources, refusals state the reason, and citations go through a deterministic check. Grounded answers on policy questions: 38% → 100%.
+- **Evaluation:** scored by a separate GPT-4o judge; 56 pytest tests.
+- **Limits:** small question sets (25 + 10 cross-reference, 8 policy), one run each.
+
+</details>
 
 ### 🔄 Live Build Status
 
@@ -256,12 +287,15 @@ Progress is calculated from delivered repository milestones. Activity, latest-co
 ## 📚 Currently Learning
 
 ```
+🕸️  GraphRAG & Knowledge Graphs →  Neo4j, Qdrant, Concept & Link Extraction
+👁️  Vision-Language Models      →  Qwen3-VL via Ollama, Verified PDF Ingestion
+🧪  LLM Evaluation              →  LLM Judges, Golden Sets, Citation Checks
 🤖  Transformer Vision Models   →  ViT, DINO, SAM 2, Grounding DINO
 ⚡  MLOps & Model Serving       →  BentoML, TorchServe, AWS SageMaker, FastAPI
 🎯  Advanced Object Detection   →  RT-DETR, Co-DETR, Open-Vocabulary Detection
 📊  Time-Series Deep Learning   →  Temporal Fusion Transformer, N-BEATS, Mamba
 ☁️  Cloud-Native AI Pipelines   →  AWS Step Functions, Lambda, Batch, API Gateway
-🗣️  LLM Fine-Tuning             →  LoRA, QLoRA, RLHF, RAG Architectures
+🗣️  LLM Fine-Tuning             →  LoRA, QLoRA, RLHF
 ```
 
 ---

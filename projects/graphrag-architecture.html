@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="margin:0">
+<title>GraphRAG OKF Architecture</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  /* Layout: a commit-graph rail of pipeline steps on the left (evaluations branch off it),
+     the selected step's card on the right. Dark-first, after the GitHub profile it documents. */
+  :root {
+    color-scheme: dark;
+    --bg: #0d1117; --panel: #161b22; --inset: #010409; --line: #30363d; --line-soft: #21262d;
+    --fg: #e6edf3; --muted: #8b949e; --blue: #58a6ff; --blue-soft: #121d2f; --green: #3fb950; --green-soft: #12261e;
+    --purple: #bc8cff; --purple-soft: #231b36; --amber: #d29922; --amber-soft: #2b2111; --red: #f85149;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      color-scheme: light;
+      --bg: #ffffff; --panel: #f6f8fa; --inset: #ffffff; --line: #d0d7de; --line-soft: #e6e9ed;
+      --fg: #1f2328; --muted: #656d76; --blue: #0969da; --blue-soft: #ddf4ff; --green: #1a7f37; --green-soft: #dafbe1;
+      --purple: #8250df; --purple-soft: #fbefff; --amber: #9a6700; --amber-soft: #fff8c5; --red: #cf222e;
+    }
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #ffffff; --panel: #f6f8fa; --inset: #ffffff; --line: #d0d7de; --line-soft: #e6e9ed;
+    --fg: #1f2328; --muted: #656d76; --blue: #0969da; --blue-soft: #ddf4ff; --green: #1a7f37; --green-soft: #dafbe1;
+    --purple: #8250df; --purple-soft: #fbefff; --amber: #9a6700; --amber-soft: #fff8c5; --red: #cf222e;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font: 14px/1.55 var(--sans); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; gap: 22px; }
+  a { color: var(--blue); text-decoration: none; } a:hover { text-decoration: underline; }
+  code, .mono { font-family: var(--mono); font-size: 12.5px; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  /* header */
+  header { display: grid; gap: 14px; }
+  .typed { font: 700 clamp(20px, 3.2vw, 30px)/1.2 var(--mono); color: var(--blue); text-wrap: balance; margin: 0; }
+  .typed .cursor { display: inline-block; width: .55em; height: 1em; background: var(--blue); vertical-align: -0.12em; margin-left: 4px; animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .typed .cursor { animation: none; } }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; }
+  .badge { display: inline-flex; font: 500 11px/1 var(--mono); border-radius: 3px; overflow: hidden; border: 1px solid var(--line); }
+  .badge b { padding: 5px 7px; background: var(--panel); color: var(--muted); font-weight: 500; }
+  .badge span { padding: 5px 7px; background: var(--blue-soft); color: var(--blue); }
+  .badge.g span { background: var(--green-soft); color: var(--green); }
+  .badge.p span { background: var(--purple-soft); color: var(--purple); }
+  .about { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; }
+  .codebox { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; overflow-x: auto; min-width: 0; }
+  .codebox pre { margin: 0; font: 12.5px/1.6 var(--mono); }
+  .k { color: var(--red); } .s { color: var(--blue); } .c { color: var(--muted); } .f { color: var(--purple); } .n { color: var(--amber); }
+  .how { border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; min-width: 0; }
+  .how h2 { font: 700 13px var(--mono); margin: 0 0 8px; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+  .how p { margin: 0 0 8px; max-width: 62ch; } .how p:last-child { margin: 0; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+  .legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; border: 2px solid var(--blue); background: var(--bg); }
+  .legend i.e { border-color: var(--purple); border-radius: 2px; transform: rotate(45deg); }
+  .legend i.pl { border-style: dashed; border-color: var(--muted); }
+
+  /* main: rail + card */
+  .main { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 22px; align-items: start; }
+  .rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); border: 1px solid var(--line); border-radius: 6px; background: var(--panel); padding: 10px 8px; }
+  .rail h2 { font: 700 12px var(--mono); color: var(--muted); letter-spacing: .05em; text-transform: uppercase; margin: 4px 10px 8px; }
+  .rail ol { list-style: none; margin: 0; padding: 0; position: relative; }
+  .rail ol::before { content: ""; position: absolute; left: 21px; top: 16px; bottom: 16px; width: 2px; background: var(--line); }
+  .node { position: relative; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 8px; align-items: center; width: 100%; text-align: left;
+          background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 7px 8px 7px 8px; cursor: pointer; }
+  .node:hover { background: var(--line-soft); }
+  .node[aria-current="true"] { background: var(--blue-soft); border-color: var(--blue); }
+  .dot { justify-self: center; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--blue); background: var(--panel); z-index: 1; }
+  .node[aria-current="true"] .dot { background: var(--blue); }
+  .node .t { font: 500 13px var(--mono); display: block; }
+  .node .d { font-size: 12px; color: var(--muted); display: block; }
+  .node.eval { margin-left: 26px; width: calc(100% - 26px); }
+  .node.eval::before { content: ""; position: absolute; left: -14px; top: 50%; width: 22px; height: 2px; background: var(--purple); opacity: .7; }
+  .node.eval .dot { border-color: var(--purple); border-radius: 2px; transform: rotate(45deg); width: 12px; height: 12px; }
+  .node.eval[aria-current="true"] { background: var(--purple-soft); border-color: var(--purple); }
+  .node.eval[aria-current="true"] .dot { background: var(--purple); }
+  .node.eval .t { color: var(--purple); }
+  .node.planned .dot { border-style: dashed; border-color: var(--muted); }
+  .node.planned .t { color: var(--muted); }
+
+  /* card */
+  .card { border: 1px solid var(--line); border-radius: 6px; min-width: 0; }
+  .card > header { display: block; padding: 14px 18px; border-bottom: 1px solid var(--line); background: var(--panel); border-radius: 6px 6px 0 0; }
+  .crumb { font: 12px var(--mono); color: var(--muted); }
+  .card h2 { font: 700 20px/1.25 var(--mono); margin: 4px 0 6px; text-wrap: balance; }
+  .card .sum { margin: 0; max-width: 70ch; color: var(--fg); }
+  .pill { display: inline-block; font: 500 11px var(--mono); padding: 2px 8px; border-radius: 20px; border: 1px solid var(--blue); color: var(--blue); margin-left: 8px; vertical-align: 3px; }
+  .pill.eval { border-color: var(--purple); color: var(--purple); } .pill.planned { border-color: var(--muted); color: var(--muted); }
+  .body { padding: 16px 18px 20px; display: grid; gap: 20px; }
+  .sec > h3 { font: 700 12px var(--mono); color: var(--muted); letter-spacing: .05em; text-transform: uppercase; margin: 0 0 8px; }
+  .cmd { display: flex; gap: 8px; align-items: stretch; }
+  .cmd pre { flex: 1; min-width: 0; margin: 0; background: var(--inset); border: 1px solid var(--line); border-radius: 6px; padding: 9px 12px; overflow-x: auto; font: 12.5px/1.5 var(--mono); }
+  .cmd pre::before { content: "$ "; color: var(--green); }
+  .copy { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 0 12px; cursor: pointer; font: 12px var(--mono); }
+  .copy:hover { border-color: var(--blue); color: var(--blue); }
+  .chain { font: 12.5px/1.9 var(--mono); overflow-x: auto; white-space: nowrap; padding-bottom: 2px; }
+  .chain span { color: var(--purple); } .chain i { color: var(--muted); font-style: normal; padding: 0 6px; }
+  .stages { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: st; }
+  .stage { position: relative; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding-bottom: 14px; counter-increment: st; }
+  .stage::before { content: counter(st); width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); display: grid; place-items: center; font: 500 12px var(--mono); color: var(--muted); z-index: 1; margin-left: 4px; }
+  .stage::after { content: ""; position: absolute; left: 16px; top: 26px; bottom: 0; width: 1px; background: var(--line); }
+  .stage:last-child { padding-bottom: 0; } .stage:last-child::after { display: none; }
+  .stage h4 { font: 700 14px var(--mono); margin: 3px 0 4px; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+  .file { font: 400 11.5px var(--mono); color: var(--muted); }
+  .stage p { margin: 0 0 6px; max-width: 72ch; }
+  .fns { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 6px; }
+  .fn { font: 12px var(--mono); padding: 2px 7px; border-radius: 4px; background: var(--purple-soft); color: var(--purple); border: 1px solid transparent; white-space: nowrap; }
+  .out { font-size: 12.5px; color: var(--muted); } .out b { color: var(--green); font: 500 12px var(--mono); }
+  .branch { margin: 2px 0 8px; display: grid; gap: 6px; }
+  .branch div { border-left: 2px solid var(--amber); padding: 2px 0 2px 10px; font-size: 13px; }
+  .branch b { font: 500 12px var(--mono); color: var(--amber); }
+  .tree { margin: 0; background: var(--inset); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; overflow-x: auto; font: 12.5px/1.6 var(--mono); }
+  .tree .c { color: var(--muted); }
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .fact { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; background: var(--panel); }
+  .fact b { display: block; font: 700 20px var(--mono); color: var(--green); font-variant-numeric: tabular-nums; }
+  .fact span { font-size: 12.5px; color: var(--muted); }
+  .tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  caption { text-align: left; padding: 9px 12px; font: 500 12.5px var(--mono); background: var(--panel); border-bottom: 1px solid var(--line); }
+  th, td { padding: 7px 12px; text-align: left; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+  th { font: 500 11.5px var(--mono); color: var(--muted); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font: 12.5px var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.ours td { background: var(--green-soft); } tr.ours td:first-child { font-weight: 600; }
+  .bar { display: inline-block; height: 7px; border-radius: 4px; background: var(--blue); margin-right: 8px; vertical-align: middle; }
+  tr.ours .bar { background: var(--green); }
+  .notes { margin: 0; padding-left: 18px; display: grid; gap: 6px; max-width: 76ch; }
+  .next { display: flex; flex-wrap: wrap; gap: 8px; }
+  .jump { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 6px 10px; cursor: pointer; font: 12.5px var(--mono); }
+  .jump:hover { border-color: var(--blue); color: var(--blue); }
+  .jump.eval { color: var(--purple); } .jump.eval:hover { border-color: var(--purple); }
+  footer { color: var(--muted); font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 14px; }
+
+  @media (max-width: 900px) {
+    .about, .main { grid-template-columns: minmax(0, 1fr); }
+    .rail { position: static; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1 class="typed">GraphRAG over math textbooks | architecture<span class="cursor" aria-hidden="true"></span></h1>
+    <div class="badges" aria-label="Project facts">
+      <span class="badge"><b>corpus</b><span>NCERT Class 10 Maths</span></span>
+      <span class="badge"><b>pages</b><span>217</span></span>
+      <span class="badge"><b>vision</b><span>qwen3-vl:8b (Ollama)</span></span>
+      <span class="badge"><b>vectors</b><span>Qdrant</span></span>
+      <span class="badge"><b>graph</b><span>Neo4j</span></span>
+      <span class="badge"><b>answers</b><span>gpt-4o-mini</span></span>
+      <span class="badge g"><b>tests</b><span>56 passing</span></span>
+      <span class="badge p"><b>evaluations</b><span>3</span></span>
+    </div>
+    <div class="about">
+      <div class="codebox"><pre><span class="k">class</span> <span class="f">GraphRagOkf</span>:
+
+    corpus   = <span class="s">"data/pdf/maths/class_10/*.pdf"</span>   <span class="c"># 14 chapters</span>
+    pipeline = [
+        <span class="s">"ingest"</span>,  <span class="c"># PDF -> verified Markdown + LaTeX</span>
+        <span class="s">"chunk"</span>,   <span class="c"># by textbook unit</span>
+        <span class="s">"index"</span>,   <span class="c"># embeddings -> Qdrant</span>
+        <span class="s">"graph"</span>,   <span class="c"># links + concepts -> Neo4j</span>
+        <span class="s">"answer"</span>,  <span class="c"># only from the book, with citations</span>
+    ]
+
+    <span class="k">def</span> <span class="f">rule</span>(self):
+        <span class="k">return</span> <span class="s">"measure every stage before building the next"</span></pre></div>
+      <div class="how">
+        <h2>How to read this page</h2>
+        <p>The rail lists the pipeline in the order the data flows. Select a step to open its card: the command that starts it, the chain of calls, each stage with the functions it uses, and what is written to disk.</p>
+        <p>Evaluations branch off the step they measure. Select one to see where it runs and what it measured.</p>
+        <div class="legend"><span><i></i>pipeline step</span><span><i class="e"></i>evaluation</span><span><i class="pl"></i>planned</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <nav class="rail" aria-label="Pipeline steps">
+      <h2>git log --graph pipeline</h2>
+      <ol id="rail"></ol>
+    </nav>
+    <article class="card" id="card" aria-live="polite"></article>
+  </div>
+
+  <footer>Function names are the ones in the repository reyaz-r3y4z/GraphRAG_OKF (private). Results are from the runs of 9 and 10 October 2026.</footer>
+</div>
+
+<script>
+const STEPS = [
+  { id: "setup", n: "0", kind: "step", title: "Setup check", short: "services reachable, settings present",
+    sum: "Before anything runs, one script checks that every service and setting the pipeline needs is there. All settings live in .env; a missing one stops the program with a message naming it.",
+    cmd: "python -m scripts.checkup_setup",
+    chain: ["checkup_setup", "required_env()", "check_*()"],
+    stages: [
+      { name: "Read settings", file: "services/config.py", fns: ["load_dotenv", "required_env", "optional_env"],
+        what: "Loads .env. required_env() raises an error that names the missing setting, so no default can silently differ from the file." },
+      { name: "Check each dependency", file: "scripts/checkup_setup.py",
+        fns: ["check_neo", "check_qdrant", "check_openai", "check_pymupdf", "check_tesseract", "check_tiktoken", "check_vision_settings", "check_vision_model"],
+        what: "Connects to Neo4j and Qdrant (Docker), calls OpenAI once, checks PyMuPDF and the Tesseract language data, and that the Ollama vision model is pulled.",
+        out: ["exit code 1", "if any check fails"] },
+    ],
+    saved: null, next: ["ingest"] },
+
+  { id: "ingest", n: "1", kind: "step", title: "Ingestion", short: "PDF to verified Markdown, page by page",
+    sum: "Each PDF page becomes a Markdown file with LaTeX, tables, figure crops and a citation (chapter, printed page). A local vision model writes the page; the PDF's own text layer checks and repairs what it wrote. One bad page never stops the document.",
+    cmd: "python -m services.ingestion.ingest data\\pdf",
+    chain: ["ingest.main()", "find_pdfs()", "ingest_document()", "process_document()", "process_page()"],
+    stages: [
+      { name: "Find and validate the file", file: "ingest.py, parse.py", fns: ["find_pdfs", "open_document", "take_mupdf_messages"],
+        what: "Finds PDFs in the folder and its subfolders. open_document() rejects what is not a PDF, is corrupt or is locked with a password, and computes doc_id (first 12 hex digits of the file's SHA-256) so a re-run recognises the same file.",
+        out: ["DocReport", "status ok / failed, with the reason"] },
+      { name: "Triage each page", file: "triage.py", fns: ["classify_page", "garbage_ratio", "image_coverage", "count_rotated_lines", "decide_page_type"],
+        what: "Decides what kind of page this is before choosing a method.",
+        branch: [["native", "has a usable text layer"], ["scanned", "an image of a page, no text"], ["broken_text", "text layer present but garbled"], ["empty", "nothing to extract"]] },
+      { name: "Extract with fallback", file: "pipeline.py, extract.py, ocr.py, tables.py, symbols.py",
+        fns: ["extract_with_fallback", "extractor_for", "extract_native", "find_columns", "reading_order", "span_text", "fix_symbol_text", "find_tables", "to_markdown", "extract_ocr", "text_quality"],
+        what: "Each page type has an ordered list of methods (STRATEGIES): native pages try the text layer then OCR, broken text tries OCR first, scans use OCR. If one fails or returns poor text, the next is tried and the page gets a fallback_used warning.",
+        branch: [["native", "PyMuPDF blocks in reading order: columns found by their gutter, Symbol-font characters mapped to Unicode, superscripts kept as x^2, tables detected and written as Markdown"],
+                 ["ocr", "Tesseract through PyMuPDF at 300 dpi, then the same block logic"]],
+        out: ["list[Element]", "type, page, bbox, method, warnings"] },
+      { name: "Clean", file: "clean.py", fns: ["clean_document", "normalize", "dehyphenate", "join_lines", "remove_headers_footers"],
+        what: "Normalises characters, rejoins words hyphenated at line ends, joins lines into paragraphs, and removes headers and footers (text repeated in the top or bottom 15% of pages)." },
+      { name: "Extract figures and tables as images", file: "assets.py", fns: ["DocumentDecor", "extract_assets", "candidate_regions", "merge_overlapping", "find_caption", "group_by_caption", "printed_page_numbers"],
+        what: "Crops figures and tables. Decoration repeated on most pages is ignored; drawings are clustered and grouped under their caption, so Fig. 2.10 with six sub-graphs is one asset. Also reads the printed page number for citations.",
+        out: ["assets/*.png", "221 figures, 22 tables"] },
+      { name: "Vision transcription", file: "vision.py", fns: ["Vision.transcribe", "render_page", "OllamaTranscriber", "OpenAITranscriber", "tidy_transcription", "cut_sentence_loop"],
+        what: "Renders the page as an image and asks the vision model to write it as Markdown with LaTeX (prompt page_v4.txt). Answers are cached by image + model + prompt text. tidy_transcription() removes loops and repeated paragraphs.",
+        out: ["VisionResult", "text, model, cached, done_reason"] },
+      { name: "Repair and verify", file: "ingest.py, verify.py", fns: ["vision_attempt", "reference_text", "restore_spelling", "restore_missing_text", "verify", "verify_cross", "structure_issues"],
+        what: "The transcription is checked against a reference. If it fails, the page is transcribed again at 200 dpi and the better attempt is kept.",
+        branch: [["trusted (text layer)", "the book's spelling is restored word by word, dropped sentences are put back, then word recall, number recall and structure (tables, labels) are checked"],
+                 ["untrusted (scan or photo)", "OCR never edits the page: a second vision model checks for missing text, OCR and that model together for invented text"]],
+        out: ["Verification", "word_recall, number_recall, issues, passed"] },
+      { name: "Write the page", file: "ingest.py, export_pages.py", fns: ["link_assets", "front_matter", "element_markdown", "write_document_md", "write_index", "log_page", "timing_summary"],
+        what: "Writes one Markdown file per page with a front matter block (method, model, verification, warnings, needs_review), the whole document as document.md, a manifest, an index of pages to review, and one log line per page with the seconds each step took." },
+    ],
+    saved: `data/extracted/pdf/maths/class_10/<pdf name>/
+├─ pages/p001.md … pNNN.md   <span class="c"># front matter + Markdown/LaTeX of one page</span>
+├─ assets/p003_figure_2.1.png <span class="c"># figure and table crops</span>
+├─ document.md               <span class="c"># all pages in order</span>
+└─ manifest.json             <span class="c"># doc_id, source, per-page summary</span>
+data/extracted/INDEX.md            <span class="c"># every document, pages needing review</span>
+data/extracted/ingest_log.jsonl    <span class="c"># per page: each step, method, seconds</span>
+data/extracted/timing_summary.txt
+data/cache/vision/                 <span class="c"># model answers, keyed by image + model + prompt</span>`,
+    next: ["eval-ingest", "chunk"] },
+
+  { id: "eval-ingest", n: "E1", kind: "eval", title: "Ingestion quality", short: "every page checked against the text layer",
+    sum: "Ingestion is evaluated in three places: inside the pipeline on every page, against three pages transcribed by hand, and by unit tests on synthetic PDFs built to break extractors.",
+    where: [
+      { name: "On every page, during ingestion", file: "services/ingestion/verify.py", fns: ["verify", "verify_cross", "structure_issues", "recall"],
+        what: "Word recall, number recall, share of extra words and structure against the reference. A page that fails is retried, then flagged needs_review in its front matter." },
+      { name: "Against hand-checked pages", file: "bench/score_golden.py", fns: ["score", "math_parts", "table_rows", "find_extracted"],
+        what: "Compares the output with three golden pages: words, each formula, each table row." },
+      { name: "Unit tests", file: "tests/test_ingestion.py, scripts/make_nasty_pdfs.py", fns: ["make_two_column", "make_table_merged", "make_scanned_bad", "make_rotated", "make_corrupt"],
+        what: "Synthetic PDFs with known ground truth: two columns, merged table cells, bad scans, rotated text, corrupt and encrypted files." },
+    ],
+    cmd: "python -m bench.score_golden",
+    facts: [["217", "pages ingested, 14 chapters"], ["210", "passed the automatic checks; the rest confirmed by a person"], ["99.8%", "mean word recall against the text layer"], ["99.7%", "mean number recall"], ["3 of 3", "golden pages: every word, formula and table row"]],
+    tables: [
+      { caption: "Pages flagged for review after each fix (all 14 chapters, 217 pages)", cols: ["Run", "Flagged"], bar: 1, max: 34,
+        rows: [["First full run", 34], ["\\sin and \\cos counted as words, own comments ignored", 15], ["Loop cut, wordless figure labels, no math-only restores", 11], ["Remaining pages confirmed by a person", 0]] },
+      { caption: "Vision models on the same hand-checked page (RTX 4060 Ti, 8 GB)", cols: ["Model", "s / page", "Result"],
+        rows: [["gemma3:4b", 55, "changed the book's spelling, invented a figure"], ["glm-ocr (0.9B)", 18, "repeated the page 3 times"], ["qwen3-vl:8b (thinking)", 262, "near perfect, far too slow"],
+               ["qwen3-vl:8b-instruct (chosen)", 31, "100% of words, 40/40 formulas"], ["qwen3-vl:4b-instruct", 10, "dropped terms, invented text"]], ours: 3 },
+    ],
+    notes: ["Most early flags were bugs in the checker, not in the model: trigonometry pages failed because \\sin was treated as markup.",
+            "Vision models quietly edit the book (zeroes to zeros, −(7) to −7). The text layer restores the original.",
+            "A page can pass word checks with a whole table missing; the structure check caught that."],
+    next: ["chunk"] },
+
+  { id: "chunk", n: "2", kind: "step", title: "Chunking", short: "cut the book into its own units",
+    sum: "The page files are cut into chunks for retrieval. The main method follows the textbook's structure, so an Example stays with its Solution. A second method cuts fixed windows, kept only as the baseline to compare against.",
+    cmd: "python -m services.chunking.build --source data/extracted --mode units --name vision_units",
+    chain: ["build.main()", "rglob('manifest.json')", "chunk_document()  |  chunk_document_windows()", "save()"],
+    stages: [
+      { name: "Read the pages", file: "units.py", fns: ["read_pages", "chapter_number", "chapter_title", "paragraphs"],
+        what: "Loads pages/p*.md of one document with their front matter (PDF page, printed page, needs_review) and splits the text into paragraphs at blank lines." },
+      { name: "Build units (mode: units)", file: "units.py", fns: ["build_units", "extra_units"],
+        what: "Walks the paragraphs and starts a new unit at each heading the book uses.",
+        branch: [["Section", "2.3 Relationship between Zeroes and Coefficients …"], ["Example", "with its Solution and Remarks"], ["Theorem", "with its Proof"],
+                 ["Exercise question", "each numbered question of EXERCISE 2.1 is its own unit"], ["Figure / Table", "caption plus description, as extra units"]] },
+      { name: "Turn units into chunks", file: "units.py", fns: ["to_chunks", "tokens", "slug"],
+        what: "Each chunk starts with a context line, so it carries its own citation: [NCERT Class 10 Mathematics | Ch. 2 Polynomials > 2.3 … | Example 5 | p. 22]. A unit over 700 tokens is split into parts of about 500.",
+        out: ["Chunk", "chunk_id, chapter, section, unit_type, label, pages, pdf_pages, text, token_count, assets"] },
+      { name: "Baseline (mode: windows)", file: "windows.py", fns: ["chunk_document_windows"],
+        what: "400-token windows with 80 tokens of overlap, the usual RAG default. It cuts through examples and proofs." },
+      { name: "Save", file: "units.py, build.py", fns: ["save", "book_name"], what: "One JSON line per chunk.", out: ["chunks.jsonl", "747 unit chunks from the vision text"] },
+    ],
+    saved: `data/chunks/
+├─ vision_units/chunks.jsonl     <span class="c"># 747 chunks  (full pipeline)</span>
+├─ vision_windows/chunks.jsonl   <span class="c"># 402 chunks</span>
+├─ native_units/chunks.jsonl     <span class="c"># 533 chunks  (text layer only)</span>
+└─ native_windows/chunks.jsonl   <span class="c"># 295 chunks  (typical RAG baseline)</span>`,
+    next: ["index"] },
+
+  { id: "index", n: "3", kind: "step", title: "Embeddings and Qdrant", short: "one vector per chunk",
+    sum: "Every chunk is turned into a vector and stored in Qdrant together with the whole chunk record, so a search returns the text and its citation in one step.",
+    cmd: "python -m services.vector.index vision_units",
+    chain: ["index.build()", "load_chunks()", "llm.embed()", "qdrant().upsert()"],
+    stages: [
+      { name: "Load the chunk file", file: "services/vector/index.py", fns: ["load_chunks"], what: "Reads data/chunks/<name>/chunks.jsonl." },
+      { name: "Embed", file: "services/llm.py", fns: ["embed", "_load_cache", "client"],
+        what: "OpenAI text-embedding-3-small, 1,536 numbers per chunk. Vectors are cached on disk by the SHA-256 of the text, so a text is paid for once.",
+        out: ["data/cache/embeddings/text-embedding-3-small.jsonl", "about 60 MB"] },
+      { name: "Store", file: "services/vector/index.py", fns: ["build", "collection", "qdrant"],
+        what: "Recreates the collection maths_<name> (cosine distance) and upserts one point per chunk: id = uuid5 of chunk_id, payload = the chunk." },
+      { name: "Search", file: "services/vector/index.py", fns: ["search"], what: "Embeds the query and returns the k nearest chunks with their score." },
+      { name: "Inspect one page end to end", file: "bench/inspect_page.py", fns: ["show_chunk", "find_doc"],
+        what: "Prints a page's Markdown, its chunks, each cached vector and the stored Qdrant point, and checks they match." },
+    ],
+    saved: `Qdrant (Docker, port 6333)
+├─ maths_vision_units     <span class="c"># 747 points, 1536 dims, cosine</span>
+├─ maths_vision_windows   <span class="c"># 402</span>
+├─ maths_native_units     <span class="c"># 533</span>
+├─ maths_native_windows   <span class="c"># 295</span>
+└─ maths_concepts         <span class="c"># 511 concept names (written in step 5)</span>`,
+    next: ["eval-rag", "ask"] },
+
+  { id: "eval-rag", n: "E2", kind: "eval", title: "Retrieval and answers", short: "40 questions, four chunk sets",
+    sum: "Two text sources (the PDF text layer, the verified vision text) times two chunking methods, on 40 hand-written questions. This is where unit chunking was shown to matter most.",
+    where: [
+      { name: "Retrieval", file: "bench/eval_rag.py", fns: ["eval_retrieval", "finds", "label_at_line_start"],
+        what: "Hit@k, Recall@k and MRR. A chunk only counts when it starts the expected unit on the right pages; a mention of 'Theorem 6.1' inside another unit does not count." },
+      { name: "Answers", file: "bench/eval_rag.py", fns: ["eval_answers", "contains", "summarise"],
+        what: "gpt-4o-mini answers from the top 5 chunks with numbered citations; a judge marks each rubric statement and counts wrong claims. Closed book is the same model with no sources." },
+      { name: "Questions", file: "eval/class_10_maths_questions.yaml", fns: [],
+        what: "Definitions, worked examples, exercise lookups, tables and figures, connecting units, across chapters. Each lists the expected units, pages, exact tokens and a rubric." },
+    ],
+    cmd: "python -m bench.eval_rag retrieval native_windows native_units vision_windows vision_units",
+    tables: [
+      { caption: "Retrieval (40 questions)", cols: ["Set-up", "Hit@1", "Hit@5", "Recall@5", "MRR"], pct: [1, 2, 3], bar: 1, max: 1,
+        rows: [["Typical RAG: text layer, 400-token windows", 0.60, 0.775, 0.662, 0.68], ["Text layer, textbook units", 0.80, 0.95, 0.863, 0.853],
+               ["Vision text, windows", 0.525, 0.70, 0.60, 0.599], ["Full pipeline: vision text, units", 0.85, 0.975, 0.84, 0.908]], ours: 3 },
+      { caption: "Answers", cols: ["Set-up", "Rubric", "Fully correct", "Wrong claims / answer", "Cites the right unit"], pct: [1, 2, 4], bar: 1, max: 1,
+        rows: [["Closed book (no sources)", 0.604, 0.425, 0.85, 0], ["Typical RAG", 0.863, 0.725, 0.225, 0.725], ["Text layer, units", 0.919, 0.875, 0.25, 0.875],
+               ["Vision text, windows", 0.821, 0.675, 0.35, 0.625], ["Full pipeline", 0.933, 0.875, 0.25, 0.90]], ours: 4 },
+    ],
+    notes: ["Units instead of windows raised Hit@1 from 60% to 80% on the same text.",
+            "The richer vision text is 51% longer; in fixed windows that made retrieval worse, in units it gave the best result.",
+            "Limit: here the judge is the same model that answers."],
+    saved: `data/eval/retrieval_<timestamp>.json   <span class="c"># per question: ranks, top 5</span>
+data/eval/answers_<timestamp>.json     <span class="c"># per question: answer, verdict, citations</span>`,
+    next: ["ask"] },
+
+  { id: "ask", n: "4", kind: "step", title: "Ask the book", short: "plan, retrieve, answer only from sources",
+    sum: "One question in, one cited answer out. The model may only use the retrieved extracts; if they do not contain what is needed, it says so and gives the reason.",
+    cmd: "python -m services.rag.ask --web",
+    chain: ["ask.main()", "terminal()  |  web() → Handler.do_POST()", "answer()"],
+    stages: [
+      { name: "Plan the search", file: "services/rag/answer.py", fns: ["plan"],
+        what: "One small model call rewrites a follow-up ('and its proof?') into a full question and names the textbook concept the question needs, e.g. 'zero of a linear polynomial' for a problem written only in formulas." },
+      { name: "Look up named units", file: "services/rag/answer.py", fns: ["named_units", "label_lookup"],
+        what: "Embeddings match meaning, not names. 'Example 5 of Chapter 2', 'Theorem 6.1' or 'Exercise 4.3 Q2' are fetched from the chunk file by chapter and label." },
+      { name: "Search", file: "services/rag/answer.py, services/vector/index.py", fns: ["retrieve", "search"],
+        what: "Two vector searches, one for the question and one for the concept; the best results fill the remaining places after the named units.",
+        branch: [["vector", "stop here: 5 sources"], ["graph", "hand the seeds to step 6, graph_retrieve()"]] },
+      { name: "Answer under the grounded policy", file: "services/rag/answer.py, services/llm.py", fns: ["format_sources", "chat"],
+        what: "GROUNDED_PROMPT: every definition, theorem, formula and fact must come from a source and be cited as [n]; arithmetic and algebra steps are allowed. The reply is plain text in three parts.",
+        branch: [["STATUS", "answered, partial or out_of_scope"], ["REASON", "what the sources lack, when it does not answer"], ["ANSWER", "Markdown with [n] citations"]] },
+      { name: "Check the citations", file: "services/rag/check.py", fns: ["check_citations", "normalise"],
+        what: "No model involved. Every cited formula relating variables must appear in the source it cites; formulas found in no source are listed as unsourced.",
+        out: ["Result", "answer, sources, cited, status, reason, check"] },
+      { name: "Show it", file: "services/rag/ask.py, chat.html", fns: ["print_result", "Handler.do_GET", "Handler.do_POST"],
+        what: "Terminal chat or a local web page (127.0.0.1:8501) with rendered formulas, clickable citations, a status badge and a vector / graph switch." },
+    ],
+    saved: `<span class="c"># nothing is written: each question is answered from Qdrant (and Neo4j) as they are</span>`,
+    next: ["graph", "eval-cross"] },
+
+  { id: "graph", n: "5", kind: "step", title: "Knowledge graph", short: "links and concepts into Neo4j",
+    sum: "Vector search finds units that look like the question. The graph stores which units refer to each other, so 'where is Theorem 10.1 used?' becomes a lookup.",
+    cmd: "python -m services.graph.extract && python -m services.graph.build",
+    chain: ["extract.main()", "explicit_links() + llm_extract()", "build.main()", "collect()", "merge_concepts()", "write()"],
+    stages: [
+      { name: "Explicit references", file: "services/graph/extract.py", fns: ["explicit_links", "canonical_label", "body"],
+        what: "Regular expressions, no model: 'by Theorem 10.1', '(Theorem 6.1)', 'Table 8.1', 'Example 2, Chapter 8', 'studied in Chapter 6'." },
+      { name: "Links and concepts by LLM", file: "services/graph/extract.py", fns: ["llm_extract", "parse_target", "cache_key"],
+        what: "One call per chunk returns the concepts the unit defines, states or uses, and its links to other units (uses, converse_of, applies, proves, refers_to), each with a quote as evidence." },
+      { name: "Keep only what the text shows", file: "services/graph/extract.py", fns: ["evidence_ok", "concept_in_text"],
+        what: "A link is kept only if its evidence quote or the target's label is in the chunk; a concept only if its words are. The model cannot invent links.",
+        out: ["data/graph/extractions.jsonl", "192 links kept, 26 dropped"] },
+      { name: "Collect units and edges", file: "services/graph/build.py", fns: ["collect", "unit_key"],
+        what: "Chunks with the same chapter and label become one Unit. Links are resolved to units; one edge per pair, the most specific type wins." },
+      { name: "Merge duplicate concepts", file: "services/graph/build.py", fns: ["merge_concepts"],
+        what: "Pairs of concept names with embedding similarity of 0.86 or more are shown to the model, which confirms real synonyms only ('bpt' = 'basic proportionality theorem'). 24 merges." },
+      { name: "Write the graph", file: "services/graph/build.py", fns: ["write", "driver"],
+        what: "Every node carries book = ncert_class10_maths, so a rebuild replaces only this book's nodes and leaves anything else in the database alone. Concept names are also indexed in Qdrant." },
+    ],
+    saved: `Neo4j (Docker, port 7687)
+(:Chapter 14) ─HAS_SECTION→ (:Section 62) ─HAS_UNIT→ (:Unit 645)
+(:Unit) ─USES | CONVERSE_OF | APPLIES | PROVES | REFERS_TO {evidence}→ (:Unit | :Chapter)   <span class="c"># 276 links</span>
+(:Unit) ─DEFINES | STATES | USES_CONCEPT→ (:Concept 511)                                  <span class="c"># 1,539 links</span>
+
+data/graph/extractions.jsonl          <span class="c"># per chunk: concepts, links, what was dropped</span>
+data/graph/canonical_concepts.json    <span class="c"># concept name → merged name</span>
+Qdrant: maths_concepts                <span class="c"># to match a question to concepts</span>`,
+    next: ["graphrag"] },
+
+  { id: "graphrag", n: "6", kind: "step", title: "GraphRAG query", short: "vector seeds expanded through the graph",
+    sum: "Same question flow as step 4, with a different retrieval: the search results are starting points, and the graph adds the units linked to them in either direction.",
+    cmd: "python -m services.rag.ask --retrieval graph",
+    chain: ["answer(retrieval='graph')", "graph_retrieve()", "expand()", "links_source()"],
+    stages: [
+      { name: "Seeds", file: "services/graph/query.py", fns: ["graph_retrieve", "label_lookup", "retrieve", "match_concepts"],
+        what: "Units named in the question, the vector results of step 4, and the concepts whose names match the question (collection maths_concepts)." },
+      { name: "Expand in Neo4j", file: "services/graph/query.py", fns: ["expand", "unit_info", "is_figure"],
+        what: "Cypher along USES, CONVERSE_OF, PROVES, APPLIES and REFERS_TO in both directions, so 'what does X use' and 'where is X used' both reach their units.",
+        branch: [["from named units", "up to 2 links away"], ["from search results", "1 link away"], ["from concepts", "the units that define, state or use them"]] },
+      { name: "Rank", file: "services/graph/query.py", fns: ["chunk_vector", "cosine", "chunks_by_id"],
+        what: "Each candidate gets a prior from how it was reached (named > linked to a named unit > search result > concept) plus the similarity of its best chunk to the question. At most 8 chunks are kept." },
+      { name: "Add the links as a source", file: "services/graph/query.py", fns: ["links_source", "describe"],
+        what: "A last source lists the graph edges around the seeds with the book's own words, and one line per concept naming every unit that uses it. A list of uses can then be complete even when not every unit fits.",
+        out: ["list[dict]", "up to 8 chunks + 1 links source"] },
+      { name: "Answer", file: "services/rag/answer.py", fns: ["answer", "check_citations"], what: "The same grounded prompt and citation check as step 4." },
+    ],
+    saved: `<span class="c"># nothing is written at query time</span>`,
+    next: ["eval-cross"] },
+
+  { id: "eval-cross", n: "E3", kind: "eval", title: "Vector RAG vs GraphRAG", short: "cross-reference and policy questions",
+    sum: "Questions whose answers need linked units, plus questions the book cannot answer. Ordinary RAG, hybrid RAG (vector + label and concept search) and GraphRAG answer the same questions; a different, stronger model grades them.",
+    where: [
+      { name: "Run each configuration", file: "bench/eval_crossref.py", fns: ["run_config", "plain_vector", "evaluate"],
+        what: "Every question goes through the real answer() path of the chat. A control gives vector search 8 sources, as many as GraphRAG may use." },
+      { name: "Grade", file: "bench/eval_crossref.py", fns: ["judge", "unit_found", "check_citations"],
+        what: "gpt-4o sees the same sources as the answer and marks each rubric statement, whether the reply declined with a reason, and every claim the sources do not support." },
+      { name: "Summarise and compare", file: "bench/eval_crossref.py", fns: ["summarise", "report", "load_run"],
+        what: "Per configuration, per question type, per question; several runs can be put side by side." },
+      { name: "Questions", file: "eval/cross_reference_questions.yaml, cross_reference_heldout.yaml", fns: [],
+        what: "25 cross-reference and 8 policy questions, and 10 held-out questions written after the graph retrieval was tuned and before anything was run on them." },
+    ],
+    cmd: "python -m bench.eval_crossref run plain_vector vector_grounded graph_grounded --label mine",
+    tables: [
+      { caption: "Main set: 25 cross-reference questions", cols: ["Set-up", "All needed units found", "Rubric", "Fully correct", "s / answer"], pct: [1, 2, 3], bar: 1, max: 1,
+        rows: [["Ordinary RAG (vector search only)", 0.28, 0.62, 0.44, 2.7], ["Hybrid RAG (vector + label and concept search)", 0.36, 0.55, 0.36, 4.1],
+               ["Hybrid RAG with 8 sources (control)", 0.44, 0.57, 0.40, 3.9], ["GraphRAG (hybrid + knowledge graph)", 0.84, 0.84, 0.68, 5.6]], ours: 3 },
+      { caption: "Rubric score by kind of question (main set)", cols: ["Kind", "Ordinary", "Hybrid", "GraphRAG"], pct: [1, 2, 3], bar: 3, max: 1,
+        rows: [["used by: where is X used? (5)", 0.33, 0.27, 1.00], ["converse (3)", 0.83, 0.33, 1.00], ["chain: two links (3)", 0.67, 0.50, 0.83],
+               ["uses: what does X use? (6)", 0.56, 0.64, 0.83], ["cross chapter (8)", 0.75, 0.75, 0.69]] },
+      { caption: "Held-out set: 10 questions", cols: ["Set-up", "All needed units found", "Rubric", "Fully correct"], pct: [1, 2, 3], bar: 1, max: 1,
+        rows: [["Ordinary RAG", 0.50, 0.80, 0.70], ["Hybrid RAG", 0.60, 0.70, 0.60], ["Hybrid RAG with 8 sources", 0.60, 0.85, 0.80], ["GraphRAG", 1.00, 0.87, 0.70]], ours: 3 },
+      { caption: "Answering only from the book: 8 policy questions", cols: ["Set-up", "Grounded answers", "Policy followed", "Formulas found in no source"], pct: [1, 2], bar: 1, max: 1,
+        rows: [["Hybrid RAG, open prompt (may add its own working)", 0.38, 0.62, 30], ["Hybrid RAG, grounded prompt", 1.00, 0.75, 5], ["GraphRAG, grounded prompt", 1.00, 0.75, 2]], ours: 2 },
+    ],
+    notes: ["The graph finds linked units: 84% of questions had every needed unit among the sources, against 36%. More context alone reached 44%.",
+            "'Where is X used?' went from mostly wrong to all correct.",
+            "On held-out questions retrieval was perfect, but the answer score moved only from 85% to 87%: noise at this size.",
+            "Cross-chapter questions did not improve; one passage usually answers them and vector search already finds it.",
+            "The grounded prompt stopped answers from memory, but it refuses some questions the sources could answer.",
+            "One wrong extracted link reached an answer. The graph retrieval was tuned on the main set, so the held-out numbers are the fairer ones."],
+    saved: `data/eval/crossref/<timestamp>_<label>/
+├─ answers_<config>.jsonl   <span class="c"># every question: sources, answer, status, citation check, verdict, scores</span>
+├─ summary.json             <span class="c"># per configuration and question type</span>
+└─ report.md
+data/eval/crossref/comparison_main.md, comparison_heldout.md
+docs/graphrag_evaluation.md  <span class="c"># the written report</span>`,
+    next: ["report"] },
+
+  { id: "report", n: "7", kind: "step", title: "Evaluation dashboard", short: "every number read from the run files",
+    sum: "The numbers of all three evaluations are collected from the files the pipeline wrote and turned into the datasets of the dashboard, so a new run updates the page.",
+    cmd: "python -m bench.report_data && python -m bench.dashboard_data",
+    chain: ["report_data.main()", "dashboard_data.main()", "crossref()"],
+    stages: [
+      { name: "Collect", file: "bench/report_data.py", fns: ["ingestion", "timing", "golden", "chunks", "latest"],
+        what: "Reads page front matter, manifests, the ingestion log, chunk files and the latest retrieval and answer results.", out: ["data/eval/report_data.json", ""] },
+      { name: "Shape into datasets", file: "bench/dashboard_data.py", fns: ["main", "crossref", "crossref_runs", "write"],
+        what: "One JSON file per chart or table; the findings text takes its numbers from the results." },
+    ],
+    saved: `data/eval/report_data.json
+data/eval/dashboard/*.json   <span class="c"># headline, retrieval, answers, crossref, policy, findings, …</span>`,
+    next: ["planned"] },
+
+  { id: "planned", n: "8", kind: "planned", title: "Not built yet", short: "OKF snapshots, providers, services",
+    sum: "The roadmap's remaining stages. Nothing here has code or results yet.",
+    stages: [
+      { name: "OKF snapshots", file: "services/okf/ (empty)", fns: [], what: "Version-controlled exports of the knowledge graph, so the knowledge itself has a history." },
+      { name: "Provider comparison", file: "services/llm.py", fns: [], what: "Claude and Ollama behind the same chat() function, run on the same question sets as OpenAI." },
+      { name: "Agent routing", file: "services/orchestrator/ (empty)", fns: [], what: "An agent that decides per question whether to use vector search, the graph or both. Today the switch is manual." },
+      { name: "Services", file: "", fns: [], what: "FastAPI per service and RabbitMQ events between them." },
+    ],
+    notes: ["Open issues from the evaluation: two sections are never retrieved (the quadratic formula, the Gauss passage), the grounded prompt is over-cautious, and extracted link types are noisy."],
+    saved: null, next: [] },
+];
+
+// ------------------------------------------------------------------ rendering
+const byId = Object.fromEntries(STEPS.map((s) => [s.id, s]));
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k === "class") el.className = v; else if (k === "html") el.innerHTML = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v);
+  }
+  for (const kid of kids.flat()) if (kid !== null && kid !== undefined && kid !== false) el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+  return el;
+}
+const pct = (v) => Math.round(v * 100) + "%";
+
+function stageItem(st) {
+  return h("li", { class: "stage" }, h("div", {},
+    h("h4", {}, st.name, st.file ? h("span", { class: "file" }, st.file) : null),
+    st.fns && st.fns.length ? h("div", { class: "fns" }, st.fns.map((f) => h("span", { class: "fn" }, /^[A-Z]\w*$/.test(f) ? f : f + "()"))) : null,
+    h("p", {}, st.what),
+    st.branch ? h("div", { class: "branch" }, st.branch.map(([k, v]) => h("div", {}, h("b", {}, k), "  ", v))) : null,
+    st.out ? h("div", { class: "out" }, "returns / writes ", h("b", {}, st.out[0]), st.out[1] ? "  " + st.out[1] : "") : null));
+}
+
+function tableEl(t) {
+  const max = t.max || 1;
+  return h("div", { class: "tw" }, h("table", {},
+    h("caption", {}, t.caption),
+    h("thead", {}, h("tr", {}, t.cols.map((c) => h("th", {}, c)))),
+    h("tbody", {}, t.rows.map((r, i) => h("tr", { class: t.ours === i ? "ours" : "" }, r.map((v, j) => {
+      if (typeof v !== "number") return h("td", {}, v);
+      const text = (t.pct || []).includes(j) ? pct(v) : String(v);
+      const bar = t.bar === j ? h("span", { class: "bar", style: `width:${Math.max(2, Math.round(90 * v / max))}px` }) : null;
+      return h("td", { class: "num" }, bar, text);
+    }))))));
+}
+
+function sec(title, ...kids) { return h("section", { class: "sec" }, h("h3", {}, title), kids); }
+
+function render(id) {
+  const s = byId[id] || STEPS[1];
+  document.querySelectorAll(".node").forEach((n) => n.setAttribute("aria-current", n.dataset.id === s.id ? "true" : "false"));
+  const card = document.getElementById("card");
+  card.innerHTML = "";
+  const label = s.kind === "eval" ? "evaluation" : s.kind === "planned" ? "planned" : "pipeline step";
+  card.append(h("header", {},
+    h("div", { class: "crumb" }, (s.kind === "eval" ? "evaluation " : "step ") + s.n),
+    h("h2", {}, s.title, h("span", { class: "pill " + s.kind }, label)),
+    h("p", { class: "sum" }, s.sum)));
+  const body = h("div", { class: "body" });
+  if (s.facts) body.append(sec("Result", h("div", { class: "facts" }, s.facts.map(([b, t]) => h("div", { class: "fact" }, h("b", {}, b), h("span", {}, t))))));
+  if (s.tables) body.append(sec(s.facts ? "Details" : "Results", h("div", { style: "display:grid;gap:14px" }, s.tables.map(tableEl))));
+  if (s.notes) body.append(sec(s.kind === "planned" ? "Known open issues" : "What it showed", h("ul", { class: "notes" }, s.notes.map((n) => h("li", {}, n)))));
+  if (s.cmd) {
+    const pre = h("pre", {}, s.cmd);
+    const btn = h("button", { class: "copy", type: "button", onclick: async () => {
+      try { await navigator.clipboard.writeText(s.cmd); btn.textContent = "copied"; }
+      catch (e) { const r = document.createRange(); r.selectNodeContents(pre); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); btn.textContent = "selected"; }
+      setTimeout(() => { btn.textContent = "copy"; }, 1400);
+    } }, "copy");
+    body.append(sec(s.kind === "eval" ? "Run it" : "Started with", h("div", { class: "cmd" }, pre, btn)));
+  }
+  if (s.chain) body.append(sec("Call chain", h("div", { class: "chain" }, s.chain.flatMap((c, i) => [i ? h("i", {}, "→") : null, h("span", {}, c)]))));
+  if (s.where) body.append(sec("Where the evaluation is done", h("ol", { class: "stages" }, s.where.map(stageItem))));
+  if (s.stages) body.append(sec(s.kind === "planned" ? "Planned" : "Stages, in order", h("ol", { class: "stages" }, s.stages.map(stageItem))));
+  if (s.saved) body.append(sec("What is saved", h("pre", { class: "tree", html: s.saved })));
+  if (s.next && s.next.length) body.append(sec("Goes on to", h("div", { class: "next" }, s.next.map((n) =>
+    h("button", { class: "jump " + byId[n].kind, type: "button", onclick: () => select(n, true) }, (byId[n].kind === "eval" ? "◆ " : "→ ") + byId[n].title)))));
+  card.append(body);
+}
+
+function select(id, scroll) {
+  render(id);
+  try { history.replaceState(null, "", "#" + id); } catch (e) { /* hash is a convenience */ }
+  if (scroll) document.getElementById("card").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const rail = document.getElementById("rail");
+for (const s of STEPS) {
+  rail.append(h("li", {}, h("button", { class: "node " + s.kind, type: "button", "data-id": s.id, onclick: () => select(s.id, matchMedia("(max-width: 900px)").matches) },
+    h("span", { class: "dot" }), h("span", {}, h("span", { class: "t" }, s.n + "  " + s.title), h("span", { class: "d" }, s.short)))));
+}
+render((location.hash || "").slice(1) || "ingest");
+</script>
+
+</body>
+</html>

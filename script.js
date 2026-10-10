@@ -112,7 +112,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
 /* ── PROJECT SIDEBAR + MATRIX RAIN ── */
 (function() {
   const projectOrder = [
-    'trainstop', 'financial10k', 'gptscratch', 'dataflow',
+    'trainstop', 'graphrag', 'finsight', 'financial10k', 'gptscratch', 'dataflow',
     'bigquery', 'entailment', 'forecast', 'mlnotes',
     'volleyball', 'teacherrag', 'healthcare', 'financialextract'
   ];
@@ -179,6 +179,16 @@ document.querySelectorAll('.flip-card').forEach(card => {
       chars: 'SEC10KAppleMicrosoftTeslaRevenueNetIncomeAssetsCashFlowMiniLM01',
       color: '#F472B6', glow: 'rgba(244,114,182,', icon: '💹'
     },
+    graphrag: {
+      label: '> graphrag_math.py', file: 'graphrag_math.py',
+      chars: 'GraphRAGNeo4jQdrantOllamaQwen3VLTheoremExampleConceptCitation01',
+      color: '#A3E635', glow: 'rgba(163,230,53,', icon: '🕸️'
+    },
+    finsight: {
+      label: '> finsight_rag.ts', file: 'finsight_rag.ts',
+      chars: 'FinSight10KRayfinFabricSQLJudgeGoldenSetFaithfulnessHitAtK01',
+      color: '#818CF8', glow: 'rgba(129,140,248,', icon: '💬'
+    },
     volleyball: {
       label: '> volleyball_tracker.py', file: 'volleyball_tracker.py',
       chars: 'VolleyballYOLOTrackingPoseCourtRallyOpenCVByteTrack01',
@@ -195,7 +205,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
       color: '#38BDF8', glow: 'rgba(56,189,248,', icon: '🏥'
     },
     financialextract: {
-      label: '> 10k_ingestion.py', file: '10k_ingestion.py',
+      label: '> 10k_powerbi.py', file: '10k_powerbi.py',
       chars: 'SEC10KPostgresPowerBIRAGTablesImagesEmbeddingsFlask01',
       color: '#F472B6', glow: 'rgba(244,114,182,', icon: '📈'
     }

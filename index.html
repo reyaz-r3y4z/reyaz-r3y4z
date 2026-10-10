@@ -112,7 +112,7 @@
       <div class="term-body">
         <div class="tl"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> python reyaz.py</div>
         <div class="tl to">Initialising <span class="tg">MohammadReyaz</span><span class="tb2">...</span></div>
-        <div class="tl to module-line"><span>Loading modules:</span> <span class="tpurp">machine_learning</span>, <span class="tb2">computer_vision</span>, <span class="tpurp">RAG</span>, <span class="torange">healthcare_ai</span>, <span class="tb2">financial_data</span>, <span class="tb2">cloud</span></div>
+        <div class="tl to module-line"><span>Loading modules:</span> <span class="tpurp">machine_learning</span>, <span class="tb2">computer_vision</span>, <span class="tpurp">RAG</span>, <span class="tb2">graph_rag</span>, <span class="torange">healthcare_ai</span>, <span class="tb2">financial_data</span>, <span class="tb2">cloud</span></div>
         <div class="tl to term-row"><span class="term-key">Degree</span><span class="term-sep">:</span><span class="term-val"><span class="tpurp">MSc Data Science</span> · RMIT University</span></div>
         <div class="tl to term-row"><span class="term-key">Experience</span><span class="term-sep">:</span><span class="term-val"><span class="tg">3.5 yrs</span> @ TCS · System Engineer / Business Analyst</span></div>
         <div class="tl to term-row"><span class="term-key">Internship</span><span class="term-sep">:</span><span class="term-val"><span class="tg">Trainstop</span> · Data Scientist · Computer Vision</span></div>
@@ -126,7 +126,7 @@
         <div class="tl">&nbsp;</div>
         <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">unlock more → type: </span><span class="t-hint-pulse" style="color:#00FF94">Research Reyaz</span><span style="color:#3A4468"> ↵</span></div>
         <div class="tl t-hint project-hint"><span class="hint-label"># active builds →</span><span class="t-hint-pulse" style="color:#00FF94">volleyball</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#A78BFA">teacher rag</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#38BDF8">healthcare ai</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#F472B6">financial extraction</span><span class="hint-label"> ↵</span></div>
-        <div class="tl t-hint project-hint"><span class="hint-label"># shipped →</span><span class="t-hint-pulse" style="color:#FF6B35">gpt scratch</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#57E3D1">dataflow</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#00FF94">trainstop</span></div>
+        <div class="tl t-hint project-hint"><span class="hint-label"># shipped →</span><span class="t-hint-pulse" style="color:#A3E635">graph rag</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#818CF8">finsight</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#FF6B35">gpt scratch</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#57E3D1">dataflow</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#00FF94">trainstop</span></div>
         <div id="termCliOutput" class="term-cli-output" hidden aria-live="polite"></div>
         <div class="tl" id="termInputLine"><span id="termPrompt"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> </span><span id="termTyped"></span><span class="cursor-blink" id="termCursor">█</span></div>
         <input id="termHiddenInput"tabindex="-1" autocomplete="off" autocorrect="off" spellcheck="false"
@@ -210,13 +210,16 @@
             <span class="cstr">"Python"</span><span class="cpu">,</span> <span class="cstr">"TensorFlow"</span><span class="cpu">,</span> <span class="cstr">"PyTorch"</span><span class="cpu">,</span>
             <span class="cstr">"YOLOv8"</span><span class="cpu">,</span>  <span class="cstr">"RF-DETR"</span><span class="cpu">,</span>   <span class="cstr">"RTMPose"</span><span class="cpu">,</span>
             <span class="cstr">"OpenCV"</span><span class="cpu">,</span>  <span class="cstr">"ByteTrack"</span><span class="cpu">,</span> <span class="cstr">"BoT-SORT"</span><span class="cpu">,</span>
-            <span class="cstr">"XGBoost"</span><span class="cpu">,</span> <span class="cstr">"AWS"</span><span class="cpu">,</span>       <span class="cstr">"Docker"</span><span class="cpu">,</span> <span class="cstr">"SQL"</span>
+            <span class="cstr">"XGBoost"</span><span class="cpu">,</span> <span class="cstr">"AWS"</span><span class="cpu">,</span>       <span class="cstr">"Docker"</span><span class="cpu">,</span> <span class="cstr">"SQL"</span><span class="cpu">,</span>
+            <span class="cstr">"RAG"</span><span class="cpu">,</span>     <span class="cstr">"GraphRAG"</span><span class="cpu">,</span>  <span class="cstr">"LLM Evaluation"</span><span class="cpu">,</span>
+            <span class="cstr">"Neo4j"</span><span class="cpu">,</span>   <span class="cstr">"Qdrant"</span><span class="cpu">,</span>    <span class="cstr">"Ollama"</span>
         <span class="cpu">]</span>
 
         <span class="cvar">self</span><span class="cpu">.</span><span class="cprop">learning</span> <span class="cop">=</span> <span class="cpu">[</span>
-            <span class="cstr">"Transformer Vision Models (ViT, DINO, SAM2)"</span><span class="cpu">,</span>
-            <span class="cstr">"MLOps &amp; Model Serving at Scale"</span><span class="cpu">,</span>
-            <span class="cstr">"LLM Fine-Tuning (LoRA, QLoRA, RAG)"</span>
+            <span class="cstr">"GraphRAG &amp; Knowledge Graphs (Neo4j, Qdrant)"</span><span class="cpu">,</span>
+            <span class="cstr">"Vision-Language Models for Document Ingestion"</span><span class="cpu">,</span>
+            <span class="cstr">"LLM Evaluation (LLM judges, citation checks)"</span><span class="cpu">,</span>
+            <span class="cstr">"MLOps &amp; Model Serving at Scale"</span>
         <span class="cpu">]</span>
 
     <span class="ck">def</span> <span class="cfn">fun_fact</span><span class="cpu">(</span><span class="cvar">self</span><span class="cpu">):</span>
@@ -294,7 +297,16 @@
           <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy"/>
           <img src="https://img.shields.io/badge/Statsmodels-3B4D98?style=flat-square&logo=python&logoColor=white" alt="Statsmodels"/>
         </div></div>
-        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">03</span>Computer Vision Specialist Tools</h3><div class="bw-b">
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">03</span>LLM, RAG &amp; Evaluation</h3><div class="bw-b">
+          <img src="https://img.shields.io/badge/RAG-70A5FD?style=flat-square" alt="RAG"/>
+          <img src="https://img.shields.io/badge/GraphRAG-BF91F3?style=flat-square" alt="GraphRAG"/>
+          <img src="https://img.shields.io/badge/Vision--Language%20Models-38BDAE?style=flat-square" alt="Vision-Language Models"/>
+          <img src="https://img.shields.io/badge/LLM%20Evaluation-FF6D00?style=flat-square" alt="LLM Evaluation"/>
+          <img src="https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white" alt="Ollama"/>
+          <img src="https://img.shields.io/badge/OpenAI%20API-412991?style=flat-square" alt="OpenAI API"/>
+          <img src="https://img.shields.io/badge/pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white" alt="pytest"/>
+        </div></div>
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">04</span>Computer Vision Specialist Tools</h3><div class="bw-b">
           <img src="https://img.shields.io/badge/YOLOv8-00FFFF?style=flat-square&logo=yolo&logoColor=black" alt="YOLOv8"/>
           <img src="https://img.shields.io/badge/RF--DETR-BF91F3?style=flat-square&logo=python&logoColor=white" alt="RF-DETR"/>
           <img src="https://img.shields.io/badge/RTMPose-38BDAE?style=flat-square&logo=python&logoColor=white" alt="RTMPose"/>
@@ -303,7 +315,7 @@
           <img src="https://img.shields.io/badge/Roboflow-6706CE?style=flat-square&logo=roboflow&logoColor=white" alt="Roboflow"/>
           <img src="https://img.shields.io/badge/CVAT-FF6D00?style=flat-square&logo=opencv&logoColor=white" alt="CVAT"/>
         </div></div>
-        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">04</span>Cloud &amp; DevOps</h3><div class="bw-b">
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">05</span>Cloud &amp; DevOps</h3><div class="bw-b">
           <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white" alt="AWS"/>
           <img src="https://img.shields.io/badge/S3-569A31?style=flat-square&logo=amazons3&logoColor=white" alt="S3"/>
           <img src="https://img.shields.io/badge/Lambda-FF9900?style=flat-square&logo=awslambda&logoColor=white" alt="Lambda"/>
@@ -311,12 +323,15 @@
           <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker"/>
           <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git"/>
         </div></div>
-        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">05</span>Databases &amp; Big Data</h3><div class="bw-b">
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">06</span>Databases &amp; Big Data</h3><div class="bw-b">
+          <img src="https://img.shields.io/badge/Neo4j-4581C3?style=flat-square&logo=neo4j&logoColor=white" alt="Neo4j"/>
+          <img src="https://img.shields.io/badge/Qdrant-DC244C?style=flat-square&logo=qdrant&logoColor=white" alt="Qdrant"/>
+          <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
           <img src="https://img.shields.io/badge/DynamoDB-4053D6?style=flat-square&logo=amazondynamodb&logoColor=white" alt="DynamoDB"/>
           <img src="https://img.shields.io/badge/Hadoop-66CCFF?style=flat-square&logo=apachehadoop&logoColor=black" alt="Hadoop"/>
           <img src="https://img.shields.io/badge/Apache%20Pig-CC0200?style=flat-square&logo=apache&logoColor=white" alt="Apache Pig"/>
         </div></div>
-        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">06</span>Tools &amp; Workflow</h3><div class="bw-b">
+        <div class="bw-g"><h3 class="bw-cat"><span class="cat-n">07</span>Tools &amp; Workflow</h3><div class="bw-b">
           <img src="https://img.shields.io/badge/Jira-0052CC?style=flat-square&logo=jira&logoColor=white" alt="Jira"/>
           <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white" alt="Jupyter"/>
           <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white" alt="VS Code"/>
@@ -336,6 +351,8 @@
         <div class="psb-tree">
           <div class="psb-folder open"><span class="psb-chev">▾</span><span>📁</span> featured/</div>
           <button class="psb-file proj-tab active" data-proj="trainstop"><span>🏀</span><span class="psb-fname">trainstop.py</span><span class="psb-dot cv-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="graphrag"><span>🕸️</span><span class="psb-fname">graphrag_math.py</span><span class="psb-dot graph-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="finsight"><span>💬</span><span class="psb-fname">finsight_rag.ts</span><span class="psb-dot eval-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="financial10k"><span>💹</span><span class="psb-fname">financial_analyser.py</span><span class="psb-dot fin-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="gptscratch"><span>🤖</span><span class="psb-fname">gpt_from_scratch.py</span><span class="psb-dot gpt-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="dataflow"><span>🌊</span><span class="psb-fname">dataflow_lab.py</span><span class="psb-dot bq-dot"></span></button>
@@ -347,12 +364,12 @@
           <button class="psb-file proj-tab" data-proj="volleyball"><span>🏐</span><span class="psb-fname">volleyball_tracker.py</span><span class="psb-dot cv-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="teacherrag"><span>📖</span><span class="psb-fname">teacher_rag.py</span><span class="psb-dot mm-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="healthcare"><span>🏥</span><span class="psb-fname">care_navigation.py</span><span class="psb-dot bq-dot"></span></button>
-          <button class="psb-file proj-tab" data-proj="financialextract"><span>📈</span><span class="psb-fname">10k_ingestion.py</span><span class="psb-dot fin-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="financialextract"><span>📈</span><span class="psb-fname">10k_powerbi.py</span><span class="psb-dot fin-dot"></span></button>
           <div class="psb-folder"><span class="psb-chev">▸</span><span>📁</span> more/</div>
           <div class="psb-sub"><span>⚕️</span> wbc_classifier.py</div>
           <div class="psb-sub"><span>☁️</span> hadoop_emr.java</div>
         </div>
-        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>12 projects</span></div>
+        <div class="psb-status"><span class="psb-branch">⎇ main</span><span>14 projects</span></div>
       </div>
       <!-- MAIN -->
       <div class="proj-main">
@@ -453,7 +470,7 @@
             <div class="proj-wrap">
               <div class="flip-card" id="fc2">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">06</span><span class="fc-badge mm">Multimodal AI</span></div>
+                  <div class="fc-hd"><span class="fc-idx">08</span><span class="fc-badge mm">Multimodal AI</span></div>
                   <h3 class="fc-title">Visual Entailment System</h3>
                   <p class="fc-org">RMIT University · 2025</p>
                   <div class="fc-kpis">
@@ -505,7 +522,7 @@
             <div class="proj-wrap">
               <div class="flip-card" id="fc3">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">07</span><span class="fc-badge ts">Time-Series</span></div>
+                  <div class="fc-hd"><span class="fc-idx">09</span><span class="fc-badge ts">Time-Series</span></div>
                   <h3 class="fc-title">Generic Drug Sales Forecasting</h3>
                   <p class="fc-org">Novartis Datathon 2024</p>
                   <div class="fc-kpis">
@@ -568,7 +585,7 @@ model.fit(X_train, y_train)</pre></div>
             <div class="proj-wrap">
               <div class="flip-card" id="fc4">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">03</span><span class="fc-badge llm">Language Model</span></div>
+                  <div class="fc-hd"><span class="fc-idx">05</span><span class="fc-badge llm">Language Model</span></div>
                   <h3 class="fc-title">GPT-2-Scale Transformer, From Scratch</h3>
                   <p class="fc-org">Personal Project · nanoGPT-style architecture</p>
                   <div class="fc-kpis">
@@ -625,7 +642,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             <div class="proj-wrap">
               <div class="flip-card" id="fc5">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">08</span><span class="fc-badge ref">Reference Site</span></div>
+                  <div class="fc-hd"><span class="fc-idx">10</span><span class="fc-badge ref">Reference Site</span></div>
                   <h3 class="fc-title">all_about_ML — ML Concepts Reference</h3>
                   <p class="fc-org">Personal Project · self-authored study notes as a web reference</p>
                   <div class="fc-kpis">
@@ -665,7 +682,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             <div class="proj-wrap">
               <div class="flip-card" id="fc6">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">05</span><span class="fc-badge bqml">BigQuery ML</span></div>
+                  <div class="fc-hd"><span class="fc-idx">07</span><span class="fc-badge bqml">BigQuery ML</span></div>
                   <h3 class="fc-title">NYC Taxi Fare Prediction with BigQuery ML</h3>
                   <p class="fc-org">Google Cloud &middot; End-to-end SQL machine learning</p>
                   <div class="fc-kpis">
@@ -730,7 +747,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             <div class="proj-wrap">
               <div class="flip-card" id="fc7">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">04</span><span class="fc-badge bqml">Data Engineering</span></div>
+                  <div class="fc-hd"><span class="fc-idx">06</span><span class="fc-badge bqml">Data Engineering</span></div>
                   <h3 class="fc-title">Google Cloud Dataflow Learning Lab</h3>
                   <p class="fc-org">Google Cloud &middot; Apache Beam &middot; Hands-on engineering workbook</p>
                   <div class="fc-kpis">
@@ -782,7 +799,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             <div class="proj-wrap">
               <div class="flip-card" id="fc8">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">02</span><span class="fc-badge fin">Financial NLP</span></div>
+                  <div class="fc-hd"><span class="fc-idx">04</span><span class="fc-badge fin">Financial NLP</span></div>
                   <h3 class="fc-title">Financial Analyser</h3>
                   <p class="fc-org">BCG portfolio task &middot; SEC filings &middot; Semantic CLI</p>
                   <div class="fc-kpis">
@@ -833,10 +850,135 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
             </div>
           </div>
 
+          <!-- PROJECT 9: GRAPHRAG -->
+          <div class="proj-panel" data-proj="graphrag">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc9">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">02</span><span class="fc-badge graph">GraphRAG</span></div>
+                  <h3 class="fc-title">GraphRAG over Math Textbooks</h3>
+                  <p class="fc-org">Personal project &middot; NCERT Class 10 Maths &middot; private repository</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">84%</span><span class="kl">GraphRAG Retrieval</span></div>
+                    <div class="kpi"><span class="kv">36%</span><span class="kl">Vector Search</span></div>
+                    <div class="kpi"><span class="kv">645</span><span class="kl">Graph Units</span></div>
+                    <div class="kpi"><span class="kv">217</span><span class="kl">Pages</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">&rarr;</span>Local ingestion to Markdown with LaTeX; each page checked against the PDF text layer</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Chunking by textbook unit: top-1 retrieval 60% to 85% over fixed-window RAG</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Neo4j graph: 645 units, 511 concepts, 276 evidence-backed links</div>
+                    <div class="hli"><span class="hla">&rarr;</span>All required units retrieved for 84% of cross-reference questions</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Textbook-only answers with refusal reasons and a deterministic citation check</div>
+                  </div>
+                  <div class="fc-tags"><span>Python</span><span>PyMuPDF</span><span>Ollama</span><span>Qwen3-VL</span><span>OpenAI API</span><span>Qdrant</span><span>Neo4j</span></div>
+                  <div class="fc-hint">flip for full breakdown &rarr;</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">How it works</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Ingest</strong> &mdash; A local vision model (Qwen3-VL 8B, 8 GB GPU) transcribes each page, checked against the PDF text layer (Tesseract OCR for scans). 97% of 217 pages passed the automatic checks.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Chunk</strong> &mdash; Pages are split by textbook unit (theorem with proof, example with solution) and embedded into Qdrant.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Graph</strong> &mdash; Links and concepts are kept only when the unit's text contains the evidence, then loaded into Neo4j.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Retrieve</strong> &mdash; Vector and label matches are expanded through the graph, so linked units arrive together.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Evaluate</strong> &mdash; A separate GPT-4o judge: answer score 55% to 84%. Small sets (25 + 10 cross-reference, 8 policy), one run each; 56 pytest tests.</div></div>
+                  </div>
+                  <div class="fcb-links"><a href="projects/graphrag-architecture.html" class="btn-g sm" target="_blank" rel="noopener">Architecture page &nearr;</a></div>
+                  <div class="fc-hint" style="color:var(--green)">&larr; flip back</div>
+                </div>
+              </div>
+              <div class="pmp cmp-preview graphrag-preview">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">python -m bench.eval_crossref report</span></div>
+                <div class="cmp-body">
+                  <div class="cmp-row">
+                    <div class="cmp-label">All required units retrieved &middot; main set (25 questions)</div>
+                    <div class="cmp-bar"><span>vector</span><i><b style="width:36%"></b></i><em>36%</em></div>
+                    <div class="cmp-bar win"><span>graph</span><i><b style="width:84%"></b></i><em>84%</em></div>
+                  </div>
+                  <div class="cmp-row">
+                    <div class="cmp-label">All required units retrieved &middot; held-out set (10 questions)</div>
+                    <div class="cmp-bar"><span>vector</span><i><b style="width:60%"></b></i><em>60%</em></div>
+                    <div class="cmp-bar win"><span>graph</span><i><b style="width:100%"></b></i><em>100%</em></div>
+                  </div>
+                  <div class="cmp-row">
+                    <div class="cmp-label">Answer rubric score &middot; main set</div>
+                    <div class="cmp-bar"><span>vector</span><i><b style="width:55%"></b></i><em>55%</em></div>
+                    <div class="cmp-bar win"><span>graph</span><i><b style="width:84%"></b></i><em>84%</em></div>
+                  </div>
+                  <div class="cmp-row">
+                    <div class="cmp-label">Grounded answers &middot; policy questions (8)</div>
+                    <div class="cmp-bar"><span>open</span><i><b style="width:38%"></b></i><em>38%</em></div>
+                    <div class="cmp-bar win"><span>grounded</span><i><b style="width:100%"></b></i><em>100%</em></div>
+                  </div>
+                </div>
+                <div class="pmp-hint">Small question sets, one run each, scored by a separate GPT-4o judge. <a href="projects/graphrag-architecture.html" target="_blank" rel="noopener">Open the architecture page &nearr;</a></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROJECT 10: FINSIGHT 10-K -->
+          <div class="proj-panel" data-proj="finsight">
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc10">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">03</span><span class="fc-badge eval">RAG Evaluation</span></div>
+                  <h3 class="fc-title">FinSight 10-K RAG on Fabric</h3>
+                  <p class="fc-org">Personal project &middot; Microsoft Rayfin + Fabric &middot; private repository</p>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">93</span><span class="kl">Correctness (was 71)</span></div>
+                    <div class="kpi"><span class="kv">100</span><span class="kl">Faithfulness</span></div>
+                    <div class="kpi"><span class="kv">17</span><span class="kl">Golden Questions</span></div>
+                    <div class="kpi"><span class="kv">3,497</span><span class="kl">Chunks</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">&rarr;</span>Cited answers over Apple, Microsoft and Tesla 10-Ks (fiscal 2023&ndash;2025)</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Hybrid retrieval over 3,497 chunks with company, year and keyword boosts</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Exact figures come from 369 audited-statement facts in Fabric SQL</div>
+                    <div class="hli"><span class="hla">&rarr;</span>17 hand-verified questions scored by an LLM judge</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Runs are stored in Fabric; a drop of 5 or more points is flagged</div>
+                  </div>
+                  <div class="fc-tags"><span>TypeScript</span><span>React</span><span>Microsoft Rayfin</span><span>Microsoft Fabric</span><span>OpenAI API</span><span>LLM-as-judge</span></div>
+                  <div class="fc-hint">flip for full breakdown &rarr;</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">Query and evaluation path</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Ingest</strong> &mdash; The Python pipeline from the 10-K ingestion project extracts text, tables and financial facts from 9 PDFs.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Index</strong> &mdash; Chunks are embedded with OpenAI embeddings at 256 dimensions and bundled with the function, so no vector database is needed.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Ask</strong> &mdash; A Rayfin function runs hybrid search, adds matching FinancialFact rows and calls OpenAI with the key held as a Rayfin secret.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Log</strong> &mdash; Every question is stored in Fabric SQL. Sign-in uses Entra ID and app records are owner-scoped by row-level policies.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Evaluate</strong> &mdash; An LLM judge scores each golden question. Correctness went from 71 to 93 across the changes, with faithfulness at 100 (gpt-4o-mini, k=5).</div></div>
+                  </div>
+                  <div class="fc-hint" style="color:var(--green)">&larr; flip back</div>
+                </div>
+              </div>
+              <div class="pmp cmp-preview finsight-preview">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">Evaluation tab &middot; gpt-4o-mini, k=5</span></div>
+                <div class="cmp-body">
+                  <div class="cmp-row">
+                    <div class="cmp-label">Correctness &middot; 17 golden questions</div>
+                    <div class="cmp-bar"><span>first run</span><i><b style="width:71%"></b></i><em>71</em></div>
+                    <div class="cmp-bar win"><span>latest</span><i><b style="width:93%"></b></i><em>93</em></div>
+                  </div>
+                  <div class="cmp-row">
+                    <div class="cmp-label">Faithfulness &middot; every claim supported by the retrieved context</div>
+                    <div class="cmp-bar"><span>first run</span><i><b style="width:91%"></b></i><em>91</em></div>
+                    <div class="cmp-bar win"><span>latest</span><i><b style="width:100%"></b></i><em>100</em></div>
+                  </div>
+                  <div class="cmp-facts">
+                    <div><strong>4 scores</strong><span>correctness, faithfulness, relevance, retrieval hit@k</span></div>
+                    <div><strong>5+ points</strong><span>drop between runs is flagged as a regression</span></div>
+                  </div>
+                </div>
+                <div class="pmp-hint">Scored by an LLM judge against hand-verified answers. Scoring retrieval separately shows whether a miss came from search or from the answer.</div>
+              </div>
+            </div>
+          </div>
+
           <!-- ACTIVE BUILD: VOLLEYBALL -->
           <div class="proj-panel" data-proj="volleyball" data-repo="volleyball-sport-analysis-tracker">
             <div class="proj-wrap"><div class="flip-card"><div class="fc-front">
-              <div class="fc-hd"><span class="fc-idx">09</span><span class="fc-badge cv">Active build</span></div>
+              <div class="fc-hd"><span class="fc-idx">11</span><span class="fc-badge cv">Active build</span></div>
               <h3 class="fc-title">Volleyball Match Analysis &amp; Tracking</h3>
               <p class="fc-org">Computer vision · private development repository</p>
               <div class="project-live" data-live-status><span class="live-state">IN PROGRESS</span><span class="live-progress">15%</span></div>
@@ -850,7 +992,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
           <!-- ACTIVE BUILD: TEACHER RAG -->
           <div class="proj-panel" data-proj="teacherrag" data-repo="project-teacher-ingestion">
             <div class="proj-wrap"><div class="flip-card"><div class="fc-front">
-              <div class="fc-hd"><span class="fc-idx">10</span><span class="fc-badge mm">RAG / Education</span></div>
+              <div class="fc-hd"><span class="fc-idx">12</span><span class="fc-badge mm">RAG / Education</span></div>
               <h3 class="fc-title">Project Teacher — Traceable RAG Ingestion</h3>
               <p class="fc-org">Explainable textbook ingestion · private development repository</p>
               <div class="project-live" data-live-status><span class="live-state">IN PROGRESS</span><span class="live-progress">80%</span></div>
@@ -864,7 +1006,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
           <!-- ACTIVE BUILD: HEALTHCARE AI -->
           <div class="proj-panel" data-proj="healthcare" data-repo="pt-zero-care-navigation">
             <div class="proj-wrap"><div class="flip-card"><div class="fc-front">
-              <div class="fc-hd"><span class="fc-idx">11</span><span class="fc-badge bq">Healthcare AI</span></div>
+              <div class="fc-hd"><span class="fc-idx">13</span><span class="fc-badge bq">Healthcare AI</span></div>
               <h3 class="fc-title">PT Zero — Explainable Care Navigation</h3>
               <p class="fc-org">Synthetic-only multi-agent operations MVP · public repository</p>
               <div class="project-live" data-live-status><span class="live-state">MVP LIVE</span><span class="live-progress">90%</span></div>
@@ -878,16 +1020,67 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
 
           <!-- ACTIVE BUILD: FINANCIAL EXTRACTION -->
           <div class="proj-panel" data-proj="financialextract" data-repo="financial-10k-ingestion-powerbi">
-            <div class="proj-wrap"><div class="flip-card"><div class="fc-front">
-              <div class="fc-hd"><span class="fc-idx">12</span><span class="fc-badge fin">Financial Data</span></div>
-              <h3 class="fc-title">10-K Ingestion, RAG &amp; Power BI</h3>
-              <p class="fc-org">Apple · Microsoft · Tesla · private development repository</p>
-              <div class="project-live" data-live-status><span class="live-state">IN PROGRESS</span><span class="live-progress">90%</span></div>
-              <div class="progress-track"><i data-progress-bar style="width:90%"></i></div>
-              <div class="fc-hl"><div class="hli"><span class="hla">→</span>Extracts text, tables and images from SEC 10-K filings</div><div class="hli"><span class="hla">→</span>PostgreSQL facts + JSONL chunks + local embeddings</div><div class="hli"><span class="hla">→</span>Flask ingestion console and Power BI financial dashboard</div></div>
-              <div class="fc-tags"><span>Python</span><span>PostgreSQL</span><span>RAG</span><span>Flask</span><span>Power BI</span></div>
-              <div class="repo-update" data-repo-update>Repository activity loading…</div>
-            </div></div></div>
+            <div class="proj-wrap">
+              <div class="flip-card" id="fc11">
+                <div class="fc-front">
+                  <div class="fc-hd"><span class="fc-idx">14</span><span class="fc-badge fin">Financial Data</span></div>
+                  <h3 class="fc-title">10-K Ingestion, RAG &amp; Power BI Dashboard</h3>
+                  <p class="fc-org">Apple &middot; Microsoft &middot; Tesla &middot; private development repository</p>
+                  <div class="project-live" data-live-status><span class="live-state">IN PROGRESS</span><span class="live-progress">90%</span></div>
+                  <div class="progress-track"><i data-progress-bar style="width:90%"></i></div>
+                  <div class="fc-kpis">
+                    <div class="kpi"><span class="kv g">9</span><span class="kl">10-K Filings</span></div>
+                    <div class="kpi"><span class="kv">3</span><span class="kl">Companies</span></div>
+                    <div class="kpi"><span class="kv">3</span><span class="kl">Storage Formats</span></div>
+                    <div class="kpi"><span class="kv">20</span><span class="kl">DAX Measures</span></div>
+                  </div>
+                  <div class="fc-hl">
+                    <div class="hli"><span class="hla">&rarr;</span>Text, tables and images extracted from SEC 10-K PDFs</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Facts come only from the three primary statements; fiscal year is read from the statement headings</div>
+                    <div class="hli"><span class="hla">&rarr;</span>PostgreSQL views feed Power BI; JSONL chunks with local embeddings feed retrieval</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Flask ingestion console with live progress and a Data Explorer</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Power BI: latest-year KPI cards, revenue and margin trends, company comparison</div>
+                  </div>
+                  <div class="fc-tags"><span>Python</span><span>pdfplumber</span><span>PostgreSQL</span><span>Flask</span><span>Power BI</span><span>DAX</span></div>
+                  <div class="repo-update" data-repo-update>Repository activity loading&hellip;</div>
+                  <div class="fc-hint">flip for full breakdown &rarr;</div>
+                </div>
+                <div class="fc-back">
+                  <h3 class="fcb-title">From PDF to dashboard</h3>
+                  <div class="fcb-steps">
+                    <div class="fcb-step"><span class="sn">01</span><div><strong>Extract</strong> &mdash; pdfplumber reads page text and tables; PyMuPDF pulls embedded images with their surrounding text.</div></div>
+                    <div class="fcb-step"><span class="sn">02</span><div><strong>Clean</strong> &mdash; Lone $, % and bracket cells are joined to their numbers, spacer columns are merged, and statements split into one-row tables are rebuilt from text lines.</div></div>
+                    <div class="fcb-step"><span class="sn">03</span><div><strong>Store</strong> &mdash; Tables and facts go to PostgreSQL, body text to JSONL with local embeddings, images to files with metadata in Postgres.</div></div>
+                    <div class="fcb-step"><span class="sn">04</span><div><strong>Model</strong> &mdash; A SQL view gives one row per company and fiscal year for Power BI import.</div></div>
+                    <div class="fcb-step"><span class="sn">05</span><div><strong>Report</strong> &mdash; DAX measures cover totals, margins, year-over-year growth and latest-year KPI cards.</div></div>
+                  </div>
+                  <div class="fc-hint" style="color:var(--green)">&larr; flip back</div>
+                </div>
+              </div>
+              <div class="pmp powerbi-preview">
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">powerbi/measures.dax</span></div>
+                <div class="pmp-code"><pre><span class="ccm">// ratios of sums stay correct at any grouping</span>
+<span class="cvar">Total Revenue</span> <span class="cop">=</span> <span class="cfn">SUM</span> ( Financials[revenue] )
+<span class="cvar">Operating Margin %</span> <span class="cop">=</span>
+    <span class="cfn">DIVIDE</span> ( [Operating Income], [Total Revenue] )
+
+<span class="ccm">// fiscal_year is a whole number</span>
+<span class="cvar">Revenue Prior Year</span> <span class="cop">=</span>
+<span class="ck">VAR</span> y <span class="cop">=</span> [Selected FY]
+<span class="ck">RETURN</span> <span class="cfn">CALCULATE</span> ( [Total Revenue],
+    Financials[fiscal_year] <span class="cop">=</span> y <span class="cop">-</span> <span class="cstr">1</span> )
+
+<span class="cvar">Revenue YoY %</span> <span class="cop">=</span>
+    <span class="cfn">DIVIDE</span> ( [Total Revenue] <span class="cop">-</span> [Revenue Prior Year],
+             [Revenue Prior Year] )
+
+<span class="ccm">// KPI cards: each company's newest year</span>
+<span class="cvar">Latest FY</span> <span class="cop">=</span>
+    <span class="cfn">CALCULATE</span> ( <span class="cfn">MAX</span> ( Financials[fiscal_year] ),
+        <span class="cfn">ALLEXCEPT</span> ( Financials, Financials[company] ) )</pre></div>
+                <div class="pmp-hint">Loaded from <code>vw_financials_wide</code>: one row per company and fiscal year, amounts in $ millions.</div>
+              </div>
+            </div>
           </div>
 
         </div><!-- /proj-panels -->
@@ -1135,7 +1328,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
   if (!termBlock || !termBody || !typedEl || !promptEl || !cliOutput || !inputLine) return;
 
   // project commands → matched against data-proj on the existing .proj-panel elements
-  const PROJECTS = ['trainstop', 'financial10k', 'gptscratch', 'dataflow', 'bigquery', 'entailment', 'forecast', 'mlnotes', 'volleyball', 'teacherrag', 'healthcare', 'financialextract'];
+  const PROJECTS = ['trainstop', 'graphrag', 'finsight', 'financial10k', 'gptscratch', 'dataflow', 'bigquery', 'entailment', 'forecast', 'mlnotes', 'volleyball', 'teacherrag', 'healthcare', 'financialextract'];
   const PROJECT_ALIASES = {
     'train stop': 'trainstop',
     'financial analyser': 'financial10k', 'financial analyzer': 'financial10k',
@@ -1151,6 +1344,9 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
     , 'teacher rag': 'teacherrag', 'project teacher': 'teacherrag', teacher: 'teacherrag'
     , 'healthcare ai': 'healthcare', 'health ai': 'healthcare', 'pt zero': 'healthcare'
     , 'financial extraction': 'financialextract', '10k ingestion': 'financialextract', '10-k ingestion': 'financialextract'
+    , 'power bi': 'financialextract', powerbi: 'financialextract'
+    , 'graph rag': 'graphrag', 'graph-rag': 'graphrag', 'math rag': 'graphrag'
+    , 'fin sight': 'finsight', 'finsight rag': 'finsight', rayfin: 'finsight'
   };
   const heroDefault = document.getElementById('heroRightDefault');
   const heroProject = document.getElementById('heroRightProject');

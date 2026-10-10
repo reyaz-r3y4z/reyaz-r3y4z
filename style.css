@@ -309,6 +309,29 @@ ul{list-style:none;padding:0}
 .pmp-code{background:#0A0D17;padding:18px 16px;overflow-x:auto;max-height:340px}
 .pmp-code pre{font-family:var(--mono);font-size:12px;line-height:1.8;white-space:pre}
 .financial-preview{border-color:rgba(244,114,182,.22)}
+.fc-badge.graph{color:#BEF264;background:rgba(163,230,53,.1);border:1px solid rgba(163,230,53,.35)}
+.fc-badge.eval{color:#A5B4FC;background:rgba(129,140,248,.12);border:1px solid rgba(129,140,248,.4)}
+.graph-dot{background:#A3E635;box-shadow:0 0 8px rgba(163,230,53,.6)}
+.eval-dot{background:#818CF8;box-shadow:0 0 8px rgba(129,140,248,.65)}
+.cmp-preview{--acc:#A3E635;--acc-soft:rgba(163,230,53,.22)}
+.graphrag-preview{border-color:rgba(163,230,53,.22)}
+.finsight-preview{--acc:#818CF8;--acc-soft:rgba(129,140,248,.28);border-color:rgba(129,140,248,.25)}
+.powerbi-preview{border-color:rgba(244,114,182,.22)}
+.powerbi-preview .pmp-code{max-height:430px}
+.cmp-body{background:#0A0D17;padding:18px 16px;display:flex;flex-direction:column;gap:16px}
+.cmp-label{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:7px;line-height:1.5}
+.cmp-bar{display:grid;grid-template-columns:70px 1fr 42px;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:5px}
+.cmp-bar i{display:block;height:9px;border:1px solid var(--border);background:rgba(255,255,255,.025);overflow:hidden}
+.cmp-bar b{display:block;height:100%;background:rgba(148,163,184,.4)}
+.cmp-bar em{font-style:normal;text-align:right;color:var(--muted)}
+.cmp-bar.win{color:var(--acc)}
+.cmp-bar.win b{background:var(--acc);box-shadow:0 0 10px var(--acc-soft)}
+.cmp-bar.win em{color:var(--acc);font-weight:700}
+.cmp-facts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp-facts div{border:1px solid var(--border);padding:10px 12px}
+.cmp-facts strong{display:block;font-family:var(--mono);font-size:13px;color:var(--acc)}
+.cmp-facts span{display:block;font-size:11px;color:var(--muted);line-height:1.5;margin-top:3px}
+.pmp-hint a{color:var(--green)}
 .financial-preview .pmp-code{max-height:430px;background:radial-gradient(circle at 95% 0,rgba(244,114,182,.07),transparent 35%),#0A0D17}
 .fin-cli-title{color:#F472B6;font-weight:700}
 
@@ -377,6 +400,7 @@ ul{list-style:none;padding:0}
 .progress-track i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));box-shadow:0 0 12px rgba(0,255,148,.35);transition:width .6s ease}
 .repo-update{margin-top:14px;padding-top:10px;border-top:1px solid var(--border);font-family:var(--mono);font-size:10px;line-height:1.5;color:var(--muted)}
 .proj-panel[data-repo] .flip-card{grid-column:1/-1}
+.proj-panel[data-repo] .flip-card:has(+ .pmp){grid-column:auto;min-height:640px}
 .build-radar{padding:28px 36px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(0,255,148,.025),rgba(14,165,233,.025))}
 .build-radar-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
 .build-radar-card{display:grid;grid-template-columns:1fr auto;gap:9px 14px;padding:15px;border:1px solid var(--border);background:rgba(5,8,18,.66);text-decoration:none;transition:.2s ease}
