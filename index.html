@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Mohammad Reyaz | Data Scientist · ML · Computer Vision</title>
-  <meta name="description" content="Portfolio of Mohammad Reyaz — ML Engineer, Computer Vision Specialist, RMIT MSc Data Science."/>
+  <title>Mohammad Reyaz | ML / AI Engineer · RAG · Computer Vision</title>
+  <meta name="description" content="Portfolio of Mohammad Reyaz — ML / AI Engineer: RAG, GraphRAG and computer vision. Master of Data Science, RMIT."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
@@ -168,7 +168,7 @@
           <div class="m-card"><span class="m-viz m-ring" style="--p:95"></span><span class="mv">95%</span><span class="ml">mAP@50</span></div>
           <div class="m-card"><span class="m-viz m-bars"><i></i><i></i><i></i><i></i></span><span class="mv">4K+</span><span class="ml">Annotations</span></div>
           <div class="m-card"><span class="m-viz m-timeline"><i></i></span><span class="mv">3.5yr</span><span class="ml">TCS XP</span></div>
-          <div class="m-card"><span class="m-viz m-dots"><i></i><i></i><i></i><i></i><i></i></span><span class="mv">12+</span><span class="ml">AI Projects</span></div>
+          <div class="m-card"><span class="m-viz m-dots"><i></i><i></i><i></i><i></i><i></i></span><span class="mv">14+</span><span class="ml">AI Projects</span></div>
         </div>
         <div class="focus-signal">
           <span class="focus-pulse"></span>
@@ -953,24 +953,34 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
                 </div>
               </div>
               <div class="pmp cmp-preview finsight-preview">
-                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">Evaluation tab &middot; gpt-4o-mini, k=5</span></div>
+                <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">FinSight 10-K &middot; dashboard snapshot</span></div>
                 <div class="cmp-body">
-                  <div class="cmp-row">
-                    <div class="cmp-label">Correctness &middot; 17 golden questions</div>
-                    <div class="cmp-bar"><span>first run</span><i><b style="width:71%"></b></i><em>71</em></div>
-                    <div class="cmp-bar win"><span>latest</span><i><b style="width:93%"></b></i><em>93</em></div>
+                  <div class="dash-tiles">
+                    <div><strong>9</strong><span>filings</span></div>
+                    <div><strong>915</strong><span>pages</span></div>
+                    <div><strong>475</strong><span>tables</span></div>
+                    <div><strong>369</strong><span>facts</span></div>
+                    <div><strong>3,497</strong><span>chunks</span></div>
                   </div>
                   <div class="cmp-row">
-                    <div class="cmp-label">Faithfulness &middot; every claim supported by the retrieved context</div>
-                    <div class="cmp-bar"><span>first run</span><i><b style="width:91%"></b></i><em>91</em></div>
-                    <div class="cmp-bar win"><span>latest</span><i><b style="width:100%"></b></i><em>100</em></div>
+                    <div class="cmp-label">Revenue by filing ($ millions) &middot; FinancialFact table</div>
+                    <div class="cmp-bar dash a"><span>Apple FY23</span><i><b style="width:92.1%"></b></i><em>383,285</em></div>
+                    <div class="cmp-bar dash a"><span>Apple FY24</span><i><b style="width:94.0%"></b></i><em>391,035</em></div>
+                    <div class="cmp-bar dash a"><span>Apple FY25</span><i><b style="width:100.0%"></b></i><em>416,161</em></div>
+                    <div class="cmp-bar dash m"><span>Microsoft FY23</span><i><b style="width:50.9%"></b></i><em>211,915</em></div>
+                    <div class="cmp-bar dash m"><span>Microsoft FY24</span><i><b style="width:58.9%"></b></i><em>245,122</em></div>
+                    <div class="cmp-bar dash m"><span>Microsoft FY25</span><i><b style="width:67.7%"></b></i><em>281,724</em></div>
+                    <div class="cmp-bar dash t"><span>Tesla FY23</span><i><b style="width:23.3%"></b></i><em>96,773</em></div>
+                    <div class="cmp-bar dash t"><span>Tesla FY24</span><i><b style="width:23.5%"></b></i><em>97,690</em></div>
+                    <div class="cmp-bar dash t"><span>Tesla FY25</span><i><b style="width:22.8%"></b></i><em>94,827</em></div>
                   </div>
-                  <div class="cmp-facts">
-                    <div><strong>4 scores</strong><span>correctness, faithfulness, relevance, retrieval hit@k</span></div>
-                    <div><strong>5+ points</strong><span>drop between runs is flagged as a regression</span></div>
+                  <div class="cmp-row">
+                    <div class="cmp-label">Evaluation &middot; 17 golden questions, gpt-4o-mini, k=5 &middot; first run &rarr; latest</div>
+                    <div class="cmp-bar dash win"><span>Correctness</span><i><b style="width:93%"></b></i><em>71 &rarr; 93</em></div>
+                    <div class="cmp-bar dash win"><span>Faithfulness</span><i><b style="width:100%"></b></i><em>91 &rarr; 100</em></div>
                   </div>
                 </div>
-                <div class="pmp-hint">Scored by an LLM judge against hand-verified answers. Scoring retrieval separately shows whether a miss came from search or from the answer.</div>
+                <div class="pmp-hint">Static snapshot built from the project's exported data. The live app runs inside Microsoft Fabric with Entra ID sign-in, so it is not hosted on this site.</div>
               </div>
             </div>
           </div>

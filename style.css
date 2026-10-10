@@ -264,6 +264,9 @@ ul{list-style:none;padding:0}
 .fc-back{transform:rotateY(180deg);background:linear-gradient(135deg,var(--panel2),var(--panel));border-color:var(--green)}
 .flip-card.flipped .fc-front{transform:rotateY(-180deg)}
 .flip-card.flipped .fc-back{transform:rotateY(0)}
+/* both faces share one grid cell, so the card grows with its text instead of overflowing */
+.flip-card{display:grid}
+.fc-front,.fc-back{position:relative;inset:auto;grid-area:1/1}
 .fc-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .fc-idx{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:2px}
 .fc-badge{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:999px}
@@ -331,6 +334,13 @@ ul{list-style:none;padding:0}
 .cmp-facts div{border:1px solid var(--border);padding:10px 12px}
 .cmp-facts strong{display:block;font-family:var(--mono);font-size:13px;color:var(--acc)}
 .cmp-facts span{display:block;font-size:11px;color:var(--muted);line-height:1.5;margin-top:3px}
+.dash-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(62px,1fr));gap:6px}
+.dash-tiles div{border:1px solid var(--border);padding:8px 6px;text-align:center}
+.dash-tiles strong{display:block;font-family:var(--mono);font-size:14px;color:var(--acc)}
+.dash-tiles span{display:block;font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:3px}
+.cmp-bar.dash{grid-template-columns:96px 1fr 64px;margin-top:3px;font-size:10px}
+.cmp-bar.dash i{height:7px}
+.cmp-bar.dash.a b{background:#818CF8}.cmp-bar.dash.m b{background:#38BDF8}.cmp-bar.dash.t b{background:#F472B6}
 .pmp-hint a{color:var(--green)}
 .financial-preview .pmp-code{max-height:430px;background:radial-gradient(circle at 95% 0,rgba(244,114,182,.07),transparent 35%),#0A0D17}
 .fin-cli-title{color:#F472B6;font-weight:700}
