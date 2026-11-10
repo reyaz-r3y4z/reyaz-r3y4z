@@ -1,8 +1,8 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Mohammad%20Reyaz&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=Data%20Scientist%20%7C%20AI%20%26%20NLP%20%7C%20Machine%20Learning&descAlignY=62&descSize=16" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Mohammad%20Reyaz&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=32&desc=AI%20Engineer%20%7C%20LLM%20Agents%20%7C%20RAG%20%26%20Knowledge%20Graphs&descAlignY=62&descSize=16" width="100%"/>
 
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&duration=3000&pause=1000&color=70A5FD&center=true&vCenter=true&width=750&lines=Data+Scientist+%7C+ML+Engineer;AI%2C+NLP+%26+Computer+Vision;Master+of+Data+Science+%40+RMIT;Building+responsible+AI+systems" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&duration=3000&pause=1000&color=70A5FD&center=true&vCenter=true&width=750&lines=AI+Engineer+%7C+LLM+Agents;RAG+%26+Knowledge+Graphs;Multi-Agent+AI+Tutor+%7C+MCP;Master+of+Data+Science+%40+RMIT;Building+responsible+AI+systems" alt="Typing SVG" />
   </a>
 </div>
 
@@ -17,6 +17,9 @@
     <img src="https://img.shields.io/badge/Email-reyazrmr%40gmail.com-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email"/>
   </a>
   <img src="https://img.shields.io/badge/Location-Melbourne%2C%20VIC%20🇦🇺-38BDAE?style=flat-square" alt="Location"/>
+  <a href="https://reyaz-r3y4z.github.io/reyaz-r3y4z/#demo-vmath">
+    <img src="https://img.shields.io/badge/Portfolio-working%20demos-00FF94?style=flat-square&logo=githubpages&logoColor=white" alt="Portfolio with working demos"/>
+  </a>
 </div>
 
 ---
@@ -208,7 +211,8 @@ class MohammadReyaz:
 
 | Project | Stack | Highlights |
 |:--------|:------|:-----------|
-| 🕸️ **GraphRAG over Math Textbooks** *(private)* | Python · PyMuPDF · Tesseract OCR · Ollama (Qwen3-VL 8B) · OpenAI API · Qdrant · Neo4j · pytest | Cited question answering over NCERT Class 10 Maths (14 chapters, 217 pages). Local PDF ingestion verified against the text layer, a Neo4j knowledge graph, and GraphRAG that retrieved every required unit for **84%** of cross-reference questions against 36% for vector search. Measured results below the table |
+| 🧮 **V_Math_AI: Multi-Agent AI Maths Tutor** *(private)* · [▶ demo](https://reyaz-r3y4z.github.io/reyaz-r3y4z/#demo-vmath) · [TEAiCH](https://reyaz-r3y4z.github.io/teaich/) | Python · gpt-4o · Claude · Qwen3-VL · Ollama · Neo4j · MCP · FastAPI | A maths tutor that answers only from the NCERT Class 9 and 10 textbooks. A classification agent turns 28 chapters into **3,151 knowledge items at 94.7% accuracy**, and graph retrieval finds every needed source for **92%** of cross-reference questions against 64% for a standard hybrid RAG. Three cooperating agents (a solver checked by code, a teaching agent and a figure agent) teach on a pen whiteboard, and every exercise is solved step by step through MCP tools (Claude Sonnet: **27 of 29 clean** at US$0.03 each). Measured results below the table |
+| 🕸️ **GraphRAG over Math Textbooks** *(private · predecessor of V_Math_AI)* | Python · PyMuPDF · Tesseract OCR · Ollama (Qwen3-VL 8B) · OpenAI API · Qdrant · Neo4j · pytest | Cited question answering over NCERT Class 10 Maths (14 chapters, 217 pages). Local PDF ingestion verified against the text layer, a Neo4j knowledge graph, and GraphRAG that retrieved every required unit for **84%** of cross-reference questions against 36% for vector search. Measured results below the table |
 | 🏀 **Trainstop Sports CV Analytics Pipeline** | YOLOv8 · RF-DETR · BoT-SORT · ByteTrack · OpenCV | Enterprise internship project: **95% mAP@50**, 4,000+ verified annotations, and multi-object basketball tracking |
 | 💹 [**Financial Analyser**](https://github.com/reyaz-r3y4z/bcg-financial-scraper) | Python · Pandas · pdfplumber · pypdf · Sentence Transformers | Extracts and standardises Apple, Microsoft, and Tesla 10-K financials for FY2023-2025; answers lookup, growth, trend, comparison, highest, lowest, and summary questions through an interactive semantic CLI |
 | 🧠 [**GPT-Style Language Model From Scratch**](https://github.com/reyaz-r3y4z/from_scratch_GPT_like) | PyTorch · Transformers · Hugging Face data · Python | Trained a 124M-parameter GPT-2-scale model from scratch on a consumer GPU; documented architecture, training runs, evaluation, and generation |
@@ -224,6 +228,52 @@ class MohammadReyaz:
 | 💬 **FinSight 10-K — RAG on Microsoft Fabric** *(private)* | TypeScript · React · Microsoft Rayfin · Fabric SQL · OpenAI API | Cited answers over Apple, Microsoft, and Tesla 10-Ks (FY2023-2025) with a 17-question hand-verified golden set scored by an LLM judge; correctness rose from 71 to 93 with faithfulness at 100 |
 
 </div>
+
+<details>
+<summary><b>🧮 V_Math_AI — measured results</b></summary>
+
+<br/>
+
+Every goal closes only after an evaluation on a golden set, and only then does the next goal build on it. Pitch and product idea: [TEAiCH](https://reyaz-r3y4z.github.io/teaich/).
+
+| # | Goal | Status |
+|:-:|:-----|:-------|
+| 1 | Ingestion: textbook pages into typed knowledge items (OKF) | ✅ evaluated, 94.7% |
+| 2 | Knowledge graph and fast retrieval | ✅ done: graph 100% vs hybrid RAG 94% on fresh questions |
+| 3 | Template answers and solved exercises, every slot checked by code | ✅ built · 27/29 clean on the Chapter 6 pilot |
+| 4 | Teaching agent and figure agent on a pen whiteboard | ✅ built · evaluation next |
+| 5 | Checking agents, calibrated against people | planned |
+| 6 | Learning platform | planned |
+
+**Goal 1: ingestion and classification**
+- Two NCERT books (Class 9 and 10, 28 chapters, 581 pages) into **3,151 typed knowledge items**: theorems, proofs, definitions, formulae, examples and more, with statements checked word for word against the page.
+- Classification agent (gpt-4o), judged by a person on a fresh 150-item sample: **94.7%** (95% CI 89.8–97.3%), up from 73% on the first run after prompt and code fixes. A second blind judge agreed on 47 of 50 (kappa 0.92). An LLM judge agreed 81% of the time, so it is used only as advice.
+- Linking agent: **2,405 typed links** across both classes, each backed by a quoted sentence, for US$10.93. Graph in Neo4j: 3,179 nodes, 6,124 relationships.
+
+**Goal 2: graph retrieval against a standard hybrid RAG** (BM25, embeddings, RRF, reranking), share of questions where every needed unit was found:
+
+| Question set | Graph | Best hybrid |
+|:-------------|:-----:|:-----------:|
+| Cross-reference questions (25) | **92%** | 64% |
+| Held-out questions (10) | **90%** | 70% |
+| Student "solve / find / prove" questions (18) | 78% | **89%** |
+| Fresh student questions written after the fix (16), run once | **100%** | 94% |
+| Class 9 and cross-class questions (13), run once | **85%** | 62% |
+
+- A precomputed context pack per item means answering is lookups, not graph searches: **0.4 ms** when a question names its units, about 1.6 s median when it names nothing and enters through the hybrid.
+- Where it lost: student questions that name nothing gave the graph no starting point. I added a hybrid entry point and tested it on a new set written afterwards.
+- The Class 9 set was drafted from the book's stated links, so it favours the graph.
+
+**Goals 3 and 4: the teaching side (in progress, not yet evaluated)**
+- Three agents on one page: one fills a typed answer template (question understood, textbook concepts with citations, steps, answer, check), one plans the lesson turn by turn, and one describes a figure that code draws to scale.
+- Code checks every slot: citations must be real item ids, each step's value must follow from its working, and hints must not give the answer away.
+- The student writes each step with a pen; the lesson checks the value before showing the working. Runs on local Qwen models through Ollama or on OpenAI models.
+
+**Engineering and governance**
+- 146 pytest tests; an AI inventory of 11 systems, a risk register of 19 risks and data lineage from every answer back to its page.
+- Limits: small question sets (10–25 per set), mostly run once. Out-of-syllabus questions are not handled well yet (the answer model declined only 5 of 10).
+
+</details>
 
 <details>
 <summary><b>🕸️ GraphRAG over Math Textbooks — measured results</b></summary>

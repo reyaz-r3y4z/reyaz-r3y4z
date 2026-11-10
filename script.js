@@ -112,7 +112,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
 /* ── PROJECT SIDEBAR + MATRIX RAIN ── */
 (function() {
   const projectOrder = [
-    'trainstop', 'graphrag', 'finsight', 'financial10k', 'gptscratch', 'dataflow',
+    'trainstop', 'vmath', 'graphrag', 'finsight', 'financial10k', 'gptscratch', 'dataflow',
     'bigquery', 'entailment', 'forecast', 'mlnotes',
     'volleyball', 'teacherrag', 'healthcare', 'financialextract'
   ];
@@ -178,6 +178,11 @@ document.querySelectorAll('.flip-card').forEach(card => {
       label: '> financial_analyser.py', file: 'financial_analyser.py',
       chars: 'SEC10KAppleMicrosoftTeslaRevenueNetIncomeAssetsCashFlowMiniLM01',
       color: '#F472B6', glow: 'rgba(244,114,182,', icon: '💹'
+    },
+    vmath: {
+      label: '> v_math_ai.py', file: 'v_math_ai.py',
+      chars: 'TheoremDefinitionFormulaExampleProofNeo4jBM25ContextPackOKFTutor01',
+      color: '#A3E635', glow: 'rgba(163,230,53,', icon: '🧮'
     },
     graphrag: {
       label: '> graphrag_math.py', file: 'graphrag_math.py',
