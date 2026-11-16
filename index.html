@@ -127,7 +127,7 @@
         <div class="tl">&nbsp;</div>
         <div class="tl t-hint"><span style="color:#3A4468"># </span><span style="color:#3A4468">unlock more → type: </span><span class="t-hint-pulse" style="color:#00FF94">Research Reyaz</span><span style="color:#3A4468"> ↵</span></div>
         <div class="tl t-hint project-hint"><span class="hint-label"># active builds →</span><span class="t-hint-pulse" style="color:#00FF94">volleyball</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#A78BFA">teacher rag</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#38BDF8">healthcare ai</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#F472B6">financial extraction</span><span class="hint-label"> ↵</span></div>
-        <div class="tl t-hint project-hint"><span class="hint-label"># shipped →</span><span class="t-hint-pulse" style="color:#A3E635">v math</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#A3E635">graph rag</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#818CF8">finsight</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#FF6B35">gpt scratch</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#57E3D1">dataflow</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#00FF94">trainstop</span></div>
+        <div class="tl t-hint project-hint"><span class="hint-label"># shipped →</span><span class="t-hint-pulse" style="color:#A3E635">teaich</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#A3E635">graph rag</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#818CF8">finsight</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#FF6B35">gpt scratch</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#57E3D1">dataflow</span><span class="hint-comma">,</span> <span class="t-hint-pulse" style="color:#00FF94">trainstop</span></div>
         <div id="termCliOutput" class="term-cli-output" hidden aria-live="polite"></div>
         <div class="tl" id="termInputLine"><span id="termPrompt"><span class="tp">reyaz@ml</span><span class="ta">:</span><span class="tpath">~/portfolio</span><span class="ts2">$</span> </span><span id="termTyped"></span><span class="cursor-blink" id="termCursor">█</span></div>
         <input id="termHiddenInput"tabindex="-1" autocomplete="off" autocorrect="off" spellcheck="false"
@@ -352,8 +352,8 @@
         <div class="psb-title"><span class="psb-chev">▾</span> PROJECTS</div>
         <div class="psb-tree">
           <div class="psb-folder open"><span class="psb-chev">▾</span><span>📁</span> featured/</div>
-          <button class="psb-file proj-tab active" data-proj="trainstop"><span>🏀</span><span class="psb-fname">trainstop.py</span><span class="psb-dot cv-dot"></span></button>
-          <button class="psb-file proj-tab" data-proj="vmath"><span>🧮</span><span class="psb-fname">teaich.py</span><span class="psb-dot graph-dot"></span></button>
+          <button class="psb-file proj-tab active" data-proj="vmath"><span>🧮</span><span class="psb-fname">teaich.py</span><span class="psb-dot graph-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="trainstop"><span>🏀</span><span class="psb-fname">trainstop.py</span><span class="psb-dot cv-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="graphrag"><span>🕸️</span><span class="psb-fname">graphrag_math.py</span><span class="psb-dot graph-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="finsight"><span>💬</span><span class="psb-fname">finsight_rag.ts</span><span class="psb-dot eval-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="financial10k"><span>💹</span><span class="psb-fname">financial_analyser.py</span><span class="psb-dot fin-dot"></span></button>
@@ -377,7 +377,7 @@
       <!-- MAIN -->
       <div class="proj-main">
         <div class="proj-editor-tabs" id="projEditorTabs">
-          <div class="pet active">🏀 trainstop.py <span class="pet-x">×</span></div>
+          <div class="pet active">🧮 teaich.py <span class="pet-x">×</span></div>
         </div>
         <!-- MATRIX RAIN -->
         <div class="matrix-stage" id="matrixStage">
@@ -389,11 +389,11 @@
         <div class="proj-panels">
 
           <!-- PROJECT 1 -->
-          <div class="proj-panel active" data-proj="trainstop">
+          <div class="proj-panel" data-proj="trainstop">
             <div class="proj-wrap">
               <div class="flip-card" id="fc1">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">01</span><span class="fc-badge cv">Computer Vision</span></div>
+                  <div class="fc-hd"><span class="fc-idx">02</span><span class="fc-badge cv">Computer Vision</span></div>
                   <h3 class="fc-title">Basketball Player &amp; Ball Tracking</h3>
                   <p class="fc-org">Trainstop / Superstat · Jul–Dec 2025</p>
                   <div class="fc-demo-row"><button class="btn-demo" type="button" data-demo="trainstop"><span class="pl"></span>Watch the demo</button></div>
@@ -855,11 +855,11 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
           </div>
 
           <!-- PROJECT 11: V_MATH_AI -->
-          <div class="proj-panel" data-proj="vmath">
+          <div class="proj-panel active" data-proj="vmath">
             <div class="proj-wrap">
               <div class="flip-card" id="fc12">
                 <div class="fc-front">
-                  <div class="fc-hd"><span class="fc-idx">02</span><span class="fc-badge graph">AI Tutor</span></div>
+                  <div class="fc-hd"><span class="fc-idx">01</span><span class="fc-badge graph">AI Tutor</span></div>
                   <h3 class="fc-title">TEAiCH: Multi-Agent Notebook Maths Tutor</h3>
                   <p class="fc-org">Personal product &middot; NCERT Class 9 &amp; 10 Maths &middot; built as V_Math_AI</p>
                   <div class="fc-demo-row"><button class="btn-demo" type="button" data-demo="vmath"><span class="pl"></span>See it working</button></div>
@@ -1431,7 +1431,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
   if (!termBlock || !termBody || !typedEl || !promptEl || !cliOutput || !inputLine) return;
 
   // project commands → matched against data-proj on the existing .proj-panel elements
-  const PROJECTS = ['trainstop', 'vmath', 'graphrag', 'finsight', 'financial10k', 'gptscratch', 'dataflow', 'bigquery', 'entailment', 'forecast', 'mlnotes', 'volleyball', 'teacherrag', 'healthcare', 'financialextract'];
+  const PROJECTS = ['vmath', 'trainstop', 'graphrag', 'finsight', 'financial10k', 'gptscratch', 'dataflow', 'bigquery', 'entailment', 'forecast', 'mlnotes', 'volleyball', 'teacherrag', 'healthcare', 'financialextract'];
   const PROJECT_ALIASES = {
     'train stop': 'trainstop',
     'financial analyser': 'financial10k', 'financial analyzer': 'financial10k',

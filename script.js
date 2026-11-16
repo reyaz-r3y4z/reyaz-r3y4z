@@ -112,7 +112,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
 /* ── PROJECT SIDEBAR + MATRIX RAIN ── */
 (function() {
   const projectOrder = [
-    'trainstop', 'vmath', 'graphrag', 'finsight', 'financial10k', 'gptscratch', 'dataflow',
+    'vmath', 'trainstop', 'graphrag', 'finsight', 'financial10k', 'gptscratch', 'dataflow',
     'bigquery', 'entailment', 'forecast', 'mlnotes',
     'volleyball', 'teacherrag', 'healthcare', 'financialextract'
   ];
@@ -257,7 +257,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
     if (!edTabs) return;
     const c = cfg[proj];
     edTabs.innerHTML = '<div class="pet active">' + c.icon + ' ' + c.file + ' <span class="pet-x">×</span></div>';
-    edTabs.querySelector('.pet-x').addEventListener('click', e => { e.stopPropagation(); activate('trainstop', { scroll: true }); });
+    edTabs.querySelector('.pet-x').addEventListener('click', e => { e.stopPropagation(); activate('vmath', { scroll: true }); });
   }
 
   // scroll defaults to false so silent/initial setup calls never move the page —
@@ -284,7 +284,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
   }, { passive: true });
 
   // silent initial setup only — no scroll, so the page always loads on the hero section
-  activate('trainstop');
+  activate('vmath');
 })();
 
 /* ── LIVE PROJECT STATUS ── */
