@@ -67,3 +67,18 @@
     })
     .catch(() => { /* the plan still reads without states */ });
 })();
+
+/* Graph vs hybrid chart: click (or Enter) on a result opens why it came out that way. */
+(function () {
+  document.querySelectorAll('.cmp-row[role=button]').forEach(row => {
+    const why = row.querySelector('.cmp-why');
+    if (!why) return;
+    const toggle = () => {
+      const open = row.getAttribute('aria-expanded') !== 'true';
+      row.setAttribute('aria-expanded', open ? 'true' : 'false');
+      why.hidden = !open;
+    };
+    row.addEventListener('click', e => { if (!e.target.closest('a')) toggle(); });
+    row.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
+})();

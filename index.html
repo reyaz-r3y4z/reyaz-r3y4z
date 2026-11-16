@@ -897,25 +897,30 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
               <div class="pmp cmp-preview graphrag-preview">
                 <div class="pmp-hd"><span class="pd r"></span><span class="pd y"></span><span class="pd g"></span><span class="pmp-title">graph vs standard hybrid RAG</span></div>
                 <div class="cmp-body">
-                  <div class="cmp-row">
-                    <div class="cmp-label">All needed units found &middot; cross-reference (25)</div>
+                  <div class="cmp-tip">Click a result to see why</div>
+                  <div class="cmp-row" tabindex="0" role="button" aria-expanded="false">
+                    <div class="cmp-label">All needed units found &middot; cross-reference (25)<span class="cmp-more">why?</span></div>
                     <div class="cmp-bar"><span>hybrid</span><i><b style="width:64%"></b></i><em>64%</em></div>
                     <div class="cmp-bar win"><span>graph</span><i><b style="width:92%"></b></i><em>92%</em></div>
+                    <div class="cmp-why" hidden><p><b>What it asks:</b> where a result is used, what it relies on, its converse, links across chapters. &ldquo;All needed units&rdquo; means every source an answer needs is among the 8 retrieved.</p><p><b>Why the graph wins:</b> it follows the book&rsquo;s typed links (uses, needed by, converse) and each item&rsquo;s precomputed context pack. Fixed-size chunks cut those links apart, so even the best hybrid (PDF chunks with model-written context) found every source for only 16 of 25.</p><p><b>Cost:</b> the graph needs no model call here (median 0.44 ms); each hybrid search needs an embedding and a rerank (~1 s).</p><p><b>Caveat:</b> the graph&rsquo;s settings were tuned on this set, which is why the next two results were run once on fresh sets.</p></div>
                   </div>
-                  <div class="cmp-row">
-                    <div class="cmp-label">Fresh solve / find / prove questions (16), run once</div>
+                  <div class="cmp-row" tabindex="0" role="button" aria-expanded="false">
+                    <div class="cmp-label">Fresh solve / find / prove questions (16), run once<span class="cmp-more">why?</span></div>
                     <div class="cmp-bar"><span>hybrid</span><i><b style="width:94%"></b></i><em>94%</em></div>
                     <div class="cmp-bar win"><span>graph</span><i><b style="width:100%"></b></i><em>100%</em></div>
+                    <div class="cmp-why" hidden><p><b>What it asks:</b> 16 new solve / find / prove questions, written after the last change, checked by a person and run once.</p><p><b>Why the graph wins:</b> the one question every hybrid missed (T09, a kite on a 60 m string at 30&deg;) needs the value of sin 30&deg;. The graph reached the table through the packs of the heights-and-distances examples it entered at.</p><p><b>Answers:</b> a blind judge found all 16 answers complete and correct for both methods, with the graph&rsquo;s better supported on T09.</p><p><b>Cost:</b> these questions name nothing, so the graph enters through a hybrid search first: median 1.6 s against ~1.2 s for the hybrids.</p></div>
                   </div>
-                  <div class="cmp-row">
-                    <div class="cmp-label">Class 9 and cross-class (13), run once</div>
+                  <div class="cmp-row" tabindex="0" role="button" aria-expanded="false">
+                    <div class="cmp-label">Class 9 and cross-class (13), run once<span class="cmp-more">why?</span></div>
                     <div class="cmp-bar"><span>hybrid</span><i><b style="width:62%"></b></i><em>62%</em></div>
                     <div class="cmp-bar win"><span>graph</span><i><b style="width:85%"></b></i><em>85%</em></div>
+                    <div class="cmp-why" hidden><p><b>What it asks:</b> converse, uses, used-by and Class 10 to Class 9 questions, checked by a person and run once.</p><p><b>Why the graph wins:</b> links between the two books are edges in the graph; a chunk search has to find both ends by their words. The best hybrid (chunks of the book&rsquo;s text) scored 62%.</p><p><b>Caveat:</b> the set was drafted from links the book states, so it favours the graph.</p><p><b>Its 2 misses:</b> N9 named a chapter by its title, which retrieval does not read; in N11, the words &ldquo;Class 9&rdquo; set the class of every label in the question. Both are fixes for later, to be measured on a fresh set.</p></div>
                   </div>
-                  <div class="cmp-row">
-                    <div class="cmp-label">Where it lost: student questions naming nothing (18)</div>
+                  <div class="cmp-row" tabindex="0" role="button" aria-expanded="false">
+                    <div class="cmp-label">Where it lost: student questions naming nothing (18)<span class="cmp-more">why?</span></div>
                     <div class="cmp-bar win"><span>hybrid</span><i><b style="width:89%"></b></i><em>89%</em></div>
                     <div class="cmp-bar"><span>graph</span><i><b style="width:78%"></b></i><em>78%</em></div>
+                    <div class="cmp-why" hidden><p><b>What it asks:</b> questions as a student writes them (&ldquo;Solve 2x&sup2; &minus; 7x + 3 = 0&rdquo;), naming no theorem or chapter.</p><p><b>Why the graph lost:</b> it chose where to start from the question&rsquo;s words. &ldquo;Solve&rdquo; led to Chapter 3 (linear equations), not quadratics; &ldquo;how far apart&rdquo; never says &ldquo;distance&rdquo;, so the distance formula was not reached. The links were fine; the entry point was wrong.</p><p><b>The fix:</b> a question that names nothing now enters the graph at the hybrid&rsquo;s best 4 results, then follows their packs. That brought this set to 89% (tuning, not a test), and the fresh set above, run once, to 100%.</p></div>
                   </div>
                 </div>
                 <div class="demo-strip-hd"><span>WORKING PRODUCT</span><button class="btn-demo" type="button" data-demo="vmath"><span class="pl"></span>Open demo</button></div>
