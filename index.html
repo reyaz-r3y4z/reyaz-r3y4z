@@ -1200,19 +1200,21 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
       <section class="build-radar" aria-labelledby="build-radar-title">
         <div class="wip-block-title"><span>00</span><div><strong id="build-radar-title">LIVE BUILD RADAR</strong><small>TEAiCH from its version 3 task list; the others from GitHub repository milestones and latest commits</small></div></div>
         <div class="build-radar-grid">
-          <a class="build-radar-card" href="#wip-teaich"><span>🧮 TEAiCH v3</span><strong>22%</strong><i><b style="width:22%"></b></i><small>16 of 74 version 3 tasks done · step checker live, MCP servers next</small></a>
-          <a class="build-radar-card" href="#projects" data-open-project="volleyball" data-repo="volleyball-sport-analysis-tracker"><span>🏐 VOLLEYBALL CV</span><strong data-progress-text>15%</strong><i><b data-progress-bar style="width:15%"></b></i><small data-repo-update>Loading repository activity…</small></a>
-          <a class="build-radar-card" href="#projects" data-open-project="teacherrag" data-repo="project-teacher-ingestion"><span>📖 TEACHER RAG</span><strong data-progress-text>80%</strong><i><b data-progress-bar style="width:80%"></b></i><small data-repo-update>Loading repository activity…</small></a>
-          <a class="build-radar-card" href="#projects" data-open-project="healthcare" data-repo="pt-zero-care-navigation"><span>🏥 HEALTHCARE AI</span><strong data-progress-text>90%</strong><i><b data-progress-bar style="width:90%"></b></i><small data-repo-update>Loading repository activity…</small></a>
-          <a class="build-radar-card" href="#projects" data-open-project="financialextract" data-repo="financial-10k-ingestion-powerbi"><span>📈 FINANCIAL EXTRACTION</span><strong data-progress-text>90%</strong><i><b data-progress-bar style="width:90%"></b></i><small data-repo-update>Loading repository activity…</small></a>
+          <a class="build-radar-card on" href="#wip-teaich" data-wip="teaich"><span>🧮 TEAiCH v3</span><strong>22%</strong><i><b style="width:22%"></b></i><small>16 of 74 version 3 tasks done · step checker live, MCP servers next</small></a>
+          <a class="build-radar-card" href="#wip-volleyball" data-wip="volleyball" data-repo="volleyball-sport-analysis-tracker"><span>🏐 VOLLEYBALL CV</span><strong data-progress-text>15%</strong><i><b data-progress-bar style="width:15%"></b></i><small data-repo-update>Loading repository activity…</small></a>
+          <a class="build-radar-card" href="#wip-teacherrag" data-wip="teacherrag" data-repo="project-teacher-ingestion"><span>📖 TEACHER RAG</span><strong data-progress-text>80%</strong><i><b data-progress-bar style="width:80%"></b></i><small data-repo-update>Loading repository activity…</small></a>
+          <a class="build-radar-card" href="#wip-healthcare" data-wip="healthcare" data-repo="pt-zero-care-navigation"><span>🏥 HEALTHCARE AI</span><strong data-progress-text>90%</strong><i><b data-progress-bar style="width:90%"></b></i><small data-repo-update>Loading repository activity…</small></a>
+          <a class="build-radar-card" href="#wip-financial" data-wip="financial" data-repo="financial-10k-ingestion-powerbi"><span>📈 FINANCIAL EXTRACTION</span><strong data-progress-text>90%</strong><i><b data-progress-bar style="width:90%"></b></i><small data-repo-update>Loading repository activity…</small></a>
         </div>
-        <p class="build-radar-note">Progress is calculated from delivered repository milestones; activity and latest-commit details refresh automatically.</p>
+        <p class="build-radar-note">Click a build to see its plan below. Repository progress is calculated from delivered milestones; activity and latest-commit details refresh automatically.</p>
       </section>
-      <header class="wip-hero" id="wip-teaich">
+    <div class="wip-panel" data-wip-panel="teaich" id="wip-teaich">
+      <header class="wip-hero">
         <div class="wip-copy">
           <div class="wip-kicker"><span class="wip-live"><i></i> ACTIVE BUILD</span><span>VERSION 3 · STARTED NOV 2026</span></div>
           <h2>TEAiCH v3<br><span>&amp; the notebook tutor, made production-ready</span></h2>
           <p>Version 2 proved the knowledge graph and the agents: the platform already checks a student's steps, tutors from the book and reports to the teacher (<a href="#demo-teaich" data-demo="vmath">watch the video</a>). Version 3 turns it into something a classroom can rely on: every tool behind an MCP server, the step checker measured against a teacher, containers and tracing, and a governance gate before any student uses it.</p>
+          <p class="wip-open"><a href="#projects" data-open-project="vmath">Open the project card &rarr;</a></p>
         </div>
         <aside class="wip-phase-card">
           <span class="wpc-label">CURRENT_PHASE</span>
@@ -1280,12 +1282,14 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
           </section>
         </aside>
       </div>
-
-      <header class="wip-hero" style="border-top:1px solid var(--border)">
+    </div>
+    <div class="wip-panel" data-wip-panel="volleyball" id="wip-volleyball" data-repo="volleyball-sport-analysis-tracker" hidden>
+      <header class="wip-hero">
         <div class="wip-copy">
           <div class="wip-kicker"><span class="wip-live"><i></i> ACTIVE BUILD</span><span>STARTED AUG 2026</span></div>
           <h2>Volleyball Match Analysis<br><span>&amp; Player Tracking</span></h2>
           <p>I am designing an end-to-end computer-vision system that turns raw volleyball match footage into structured, reviewable performance data. The goal is to follow players and the ball through rallies, understand where actions happen on court, and surface insights that are useful to coaches rather than producing detection boxes alone.</p>
+          <p class="wip-open"><a href="#projects" data-open-project="volleyball">Open the project card &rarr;</a></p>
         </div>
         <aside class="wip-phase-card">
           <span class="wpc-label">CURRENT_PHASE</span>
@@ -1349,6 +1353,221 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
           </section>
         </aside>
       </div>
+    </div>
+    <div class="wip-panel" data-wip-panel="teacherrag" id="wip-teacherrag" data-repo="project-teacher-ingestion" hidden>
+      <header class="wip-hero">
+        <div class="wip-copy">
+          <div class="wip-kicker"><span class="wip-live"><i></i> <span class="live-state">ACTIVE BUILD</span></span><span>REPO &middot; project-teacher-ingestion</span></div>
+          <h2>Project Teacher<br><span>&amp; traceable textbook ingestion</span></h2>
+          <p>An ingestion service that turns textbook PDFs into items a retrieval system can cite: definitions, theorems, examples, exercises and diagrams, each traced back to its page. Layout is read from the PDF, with an OCR fallback and repair for broken maths.</p>
+          <p class="wip-open"><a href="#projects" data-open-project="teacherrag">Open the project card &rarr;</a></p>
+        </div>
+        <aside class="wip-phase-card">
+          <span class="wpc-label">CURRENT_PHASE</span>
+          <strong><span>05</span> Hardening on real books</strong>
+          <p>The five milestones are delivered. Current work is the edge cases real textbooks throw up, such as PageMaker geometry symbol glyphs.</p>
+          <div class="wpc-meter"><i data-progress-bar></i></div>
+          <div class="wpc-meta"><span><b data-progress-text></b> OF MILESTONES</span><span>LIVE FROM GITHUB</span></div>
+          <p class="wpc-update" data-repo-update>Loading repository activity…</p>
+        </aside>
+      </header>
+
+      <div class="wip-grid">
+        <section class="wip-plan">
+          <div class="wip-block-title"><span>01</span><div><strong>BUILD PLAN</strong><small>From PDF to retrieval-ready artifacts &middot; each step is a repository milestone</small></div></div>
+          <ol class="wip-roadmap">
+            <li data-milestone="README.md">
+              <span class="wr-index">01</span>
+              <div><strong>Scope &amp; design</strong><p>What is ingested, the item types, the artifact formats and how to run it.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="app">
+              <span class="wr-index">02</span>
+              <div><strong>Ingestion service</strong><p>FastAPI app: PyMuPDF layout extraction, OCR fallback for scanned pages, maths repair, and items written with their page references.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="tests">
+              <span class="wr-index">03</span>
+              <div><strong>Tests</strong><p>Automated tests on extraction and on the artifacts it writes, so a fix for one book does not break another.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="docs">
+              <span class="wr-index">04</span>
+              <div><strong>Documentation</strong><p>How the pipeline works and how each artifact is structured.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="Dockerfile">
+              <span class="wr-index">05</span>
+              <div><strong>Container</strong><p>One image to run the service anywhere.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+          </ol>
+        </section>
+
+        <aside class="wip-sidebar">
+          <section class="wip-expect">
+            <div class="wip-block-title"><span>02</span><div><strong>WHAT IT DELIVERS</strong><small>Outputs</small></div></div>
+            <ul>
+              <li><i>ITEMS</i><span>Definitions, theorems, examples, exercises and diagrams, typed</span></li>
+              <li><i>TRACE</i><span>Every item linked to the page it came from</span></li>
+              <li><i>STORE</i><span>SQLite plus JSON/JSONL, ready for vector retrieval</span></li>
+              <li><i>API</i><span>A FastAPI service to run ingestion</span></li>
+            </ul>
+          </section>
+          <section class="wip-stack">
+            <div class="wip-block-title"><span>03</span><div><strong>STACK</strong><small>In use</small></div></div>
+            <div class="wip-tags"><span>Python</span><span>FastAPI</span><span>PyMuPDF</span><span>OCR</span><span>SQLite</span><span>JSONL</span><span>Docker</span></div>
+          </section>
+          <section class="wip-note">
+            <span>// BUILD PRINCIPLE</span>
+            <p>If an item cannot be traced to its page, it is not trusted. Retrieval quality starts at ingestion.</p>
+          </section>
+        </aside>
+      </div>
+    </div>
+    <div class="wip-panel" data-wip-panel="healthcare" id="wip-healthcare" data-repo="pt-zero-care-navigation" hidden>
+      <header class="wip-hero">
+        <div class="wip-copy">
+          <div class="wip-kicker"><span class="wip-live"><i></i> <span class="live-state">MVP LIVE</span></span><span>REPO &middot; pt-zero-care-navigation</span></div>
+          <h2>PT Zero<br><span>&amp; explainable care navigation</span></h2>
+          <p>A synthetic-data multi-agent service that routes a patient request to the right care. Seven narrow agents hand work to each other behind a deterministic safety gate, with local RAG, citations and a full trace of every decision.</p>
+          <p class="wip-open"><a href="https://pt-zero-care-navigation.onrender.com" target="_blank" rel="noopener">Open the live demo &nearr;</a> &nbsp; <a href="https://github.com/reyaz-r3y4z/pt-zero-care-navigation" target="_blank" rel="noopener">Code on GitHub &nearr;</a></p>
+          <p class="wip-open"><a href="#projects" data-open-project="healthcare">Open the project card &rarr;</a></p>
+        </div>
+        <aside class="wip-phase-card">
+          <span class="wpc-label">CURRENT_PHASE</span>
+          <strong><span>05</span> Live MVP, operations platform</strong>
+          <p>Deployed as a live demo with fictional accounts. Latest work adds a synthetic healthcare operations and audit platform.</p>
+          <div class="wpc-meter"><i data-progress-bar></i></div>
+          <div class="wpc-meta"><span><b data-progress-text></b> OF MILESTONES</span><span>LIVE FROM GITHUB</span></div>
+          <p class="wpc-update" data-repo-update>Loading repository activity…</p>
+        </aside>
+      </header>
+
+      <div class="wip-grid">
+        <section class="wip-plan">
+          <div class="wip-block-title"><span>01</span><div><strong>BUILD PLAN</strong><small>From agents to a deployed, audited service &middot; each step is a repository milestone</small></div></div>
+          <ol class="wip-roadmap">
+            <li data-milestone="README.md">
+              <span class="wr-index">01</span>
+              <div><strong>Scope &amp; safety design</strong><p>What the agents may and may not do, and why the safety gate is deterministic code, not a model.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="app">
+              <span class="wr-index">02</span>
+              <div><strong>Agents &amp; API</strong><p>Seven agents behind the gate; local RAG with citations; transparent provider ranking; authentication, CSRF protection and an audit log.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="tests">
+              <span class="wr-index">03</span>
+              <div><strong>Tests &amp; benchmark</strong><p>pytest suite plus a 250-case benchmark: 100% routing accuracy and 100% emergency-stop recall.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="Dockerfile">
+              <span class="wr-index">04</span>
+              <div><strong>Container</strong><p>The service as one image, used for the live deployment.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone=".github/workflows">
+              <span class="wr-index">05</span>
+              <div><strong>CI</strong><p>GitHub Actions run the tests on every push.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+          </ol>
+        </section>
+
+        <aside class="wip-sidebar">
+          <section class="wip-expect">
+            <div class="wip-block-title"><span>02</span><div><strong>WHAT IT DELIVERS</strong><small>Outputs</small></div></div>
+            <ul>
+              <li><i>DEMO</i><span>A live app with fictional accounts</span></li>
+              <li><i>SAFETY</i><span>A deterministic gate that stops emergencies</span></li>
+              <li><i>TRACE</i><span>An audit log of every agent decision</span></li>
+              <li><i>EVAL</i><span>A 250-case routing benchmark</span></li>
+            </ul>
+          </section>
+          <section class="wip-stack">
+            <div class="wip-block-title"><span>03</span><div><strong>STACK</strong><small>In use</small></div></div>
+            <div class="wip-tags"><span>Python</span><span>FastAPI</span><span>Multi-agent</span><span>RAG</span><span>SQLite</span><span>Docker</span><span>GitHub Actions</span></div>
+          </section>
+          <section class="wip-note">
+            <span>// BUILD PRINCIPLE</span>
+            <p>Synthetic data only. The model suggests; code decides anything that touches safety.</p>
+          </section>
+        </aside>
+      </div>
+    </div>
+    <div class="wip-panel" data-wip-panel="financial" id="wip-financial" data-repo="financial-10k-ingestion-powerbi" hidden>
+      <header class="wip-hero">
+        <div class="wip-copy">
+          <div class="wip-kicker"><span class="wip-live"><i></i> <span class="live-state">ACTIVE BUILD</span></span><span>REPO &middot; financial-10k-ingestion-powerbi</span></div>
+          <h2>10-K Ingestion<br><span>&amp; Power BI dashboard</span></h2>
+          <p>Nine SEC 10-K filings from Apple, Microsoft and Tesla, turned into clean financial facts, retrieval-ready text and a Power BI report. Facts come only from the three primary statements, and the fiscal year is read from the statement headings.</p>
+          <p class="wip-open"><a href="#projects" data-open-project="financialextract">Open the project card &rarr;</a></p>
+        </div>
+        <aside class="wip-phase-card">
+          <span class="wpc-label">CURRENT_PHASE</span>
+          <strong><span>05</span> Power BI report</strong>
+          <p>The pipeline, database and ingestion console are delivered. The report is being finished: 20 DAX measures for totals, margins, year-over-year growth and latest-year KPI cards.</p>
+          <div class="wpc-meter"><i data-progress-bar></i></div>
+          <div class="wpc-meta"><span><b data-progress-text></b> OF MILESTONES</span><span>LIVE FROM GITHUB</span></div>
+          <p class="wpc-update" data-repo-update>Loading repository activity…</p>
+        </aside>
+      </header>
+
+      <div class="wip-grid">
+        <section class="wip-plan">
+          <div class="wip-block-title"><span>01</span><div><strong>BUILD PLAN</strong><small>From PDF filings to a dashboard &middot; each step is a repository milestone</small></div></div>
+          <ol class="wip-roadmap">
+            <li data-milestone="README.md">
+              <span class="wr-index">01</span>
+              <div><strong>Scope &amp; data rules</strong><p>Which filings, which statements, and the rules that keep every number traceable.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="pipeline">
+              <span class="wr-index">02</span>
+              <div><strong>Extract &amp; clean</strong><p>pdfplumber reads text and tables, PyMuPDF pulls images; lone $, % and bracket cells are joined to their numbers and split statements rebuilt.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="db">
+              <span class="wr-index">03</span>
+              <div><strong>Store &amp; model</strong><p>Tables and facts in PostgreSQL, text in JSONL with local embeddings, and a SQL view with one row per company and fiscal year.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="web">
+              <span class="wr-index">04</span>
+              <div><strong>Ingestion console</strong><p>A Flask console with live progress and a Data Explorer.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li data-milestone="PowerBI">
+              <span class="wr-index">05</span>
+              <div><strong>Power BI report</strong><p>KPI cards, revenue and margin trends, and a company comparison on 20 DAX measures.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+          </ol>
+        </section>
+
+        <aside class="wip-sidebar">
+          <section class="wip-expect">
+            <div class="wip-block-title"><span>02</span><div><strong>WHAT IT DELIVERS</strong><small>Outputs</small></div></div>
+            <ul>
+              <li><i>DATA</i><span>9 filings, 3 companies, 3 storage formats</span></li>
+              <li><i>SQL</i><span>A wide view ready for Power BI import</span></li>
+              <li><i>RAG</i><span>JSONL chunks with local embeddings</span></li>
+              <li><i>BI</i><span>A Power BI report with 20 DAX measures</span></li>
+            </ul>
+          </section>
+          <section class="wip-stack">
+            <div class="wip-block-title"><span>03</span><div><strong>STACK</strong><small>In use</small></div></div>
+            <div class="wip-tags"><span>Python</span><span>pdfplumber</span><span>PyMuPDF</span><span>PostgreSQL</span><span>Flask</span><span>Power BI</span><span>DAX</span></div>
+          </section>
+          <section class="wip-note">
+            <span>// BUILD PRINCIPLE</span>
+            <p>Every number on the dashboard comes from a primary statement in the filing, never from a model.</p>
+          </section>
+        </aside>
+      </div>
+    </div>
     </article>
   </div>
 </section>
@@ -1480,6 +1699,7 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
 <script src="script.js"></script>
 <script src="demos.js"></script>
 <script src="tour.js"></script>
+<script src="wip.js"></script>
 
 <!-- ══ RESEARCH REYAZ OVERLAY ══ -->
 <div id="researchOverlay">

@@ -566,3 +566,19 @@ ul{list-style:none;padding:0}
 #tourPill.show{display:flex}#tourPill:hover{border-color:var(--green)}
 @media (max-width:600px){#tour{right:16px;left:16px;bottom:16px;width:auto}#tourPill{right:16px;bottom:16px}}
 @media (prefers-reduced-motion:reduce){#tour,.tour-item{transition:none}}
+
+/* ══ WORK IN PROGRESS: one panel per build (wip.js) ══ */
+.build-radar-card{cursor:pointer;position:relative}
+.build-radar-card.on{border-color:var(--green);background:rgba(0,255,148,.06);box-shadow:0 0 0 1px rgba(0,255,148,.25),0 12px 32px rgba(0,0,0,.25)}
+.build-radar-card.on::after{content:'';position:absolute;left:50%;bottom:-8px;width:12px;height:12px;background:inherit;border-right:1px solid var(--green);border-bottom:1px solid var(--green);transform:translateX(-50%) rotate(45deg);background:#0b1a17}
+.wip-panel{animation:wipIn .35s ease}
+.wip-panel[hidden]{display:none}
+@keyframes wipIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.wip-open{margin-top:14px;font-family:var(--mono);font-size:12px}
+.wip-open a{color:var(--green);text-decoration:none;border-bottom:1px dashed rgba(0,255,148,.4);margin-right:6px}
+.wip-open a:hover{border-bottom-style:solid}
+.wpc-update{margin-top:10px;font:10px/1.5 var(--mono);color:var(--muted)}
+.wip-roadmap li.done .wr-index{border-color:rgba(0,255,148,.45);background:rgba(0,255,148,.12);color:var(--green)}
+.wip-roadmap li.done .wr-state{border-color:rgba(0,255,148,.2);color:var(--green)}
+@media (prefers-reduced-motion:reduce){.wip-panel{animation:none}}
+@media (max-width:600px){.build-radar-card.on::after{display:none}}
