@@ -1198,8 +1198,9 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
     <div class="file-tab-row"><div class="file-tab active"><span class="ft-ic">&#9881;</span>work_in_progress.md</div></div>
     <article class="wip-shell">
       <section class="build-radar" aria-labelledby="build-radar-title">
-        <div class="wip-block-title"><span>00</span><div><strong id="build-radar-title">LIVE BUILD RADAR</strong><small>Generated from GitHub repository milestones and latest commits</small></div></div>
+        <div class="wip-block-title"><span>00</span><div><strong id="build-radar-title">LIVE BUILD RADAR</strong><small>TEAiCH from its version 3 task list; the others from GitHub repository milestones and latest commits</small></div></div>
         <div class="build-radar-grid">
+          <a class="build-radar-card" href="#wip-teaich"><span>🧮 TEAiCH v3</span><strong>22%</strong><i><b style="width:22%"></b></i><small>16 of 74 version 3 tasks done · step checker live, MCP servers next</small></a>
           <a class="build-radar-card" href="#projects" data-open-project="volleyball" data-repo="volleyball-sport-analysis-tracker"><span>🏐 VOLLEYBALL CV</span><strong data-progress-text>15%</strong><i><b data-progress-bar style="width:15%"></b></i><small data-repo-update>Loading repository activity…</small></a>
           <a class="build-radar-card" href="#projects" data-open-project="teacherrag" data-repo="project-teacher-ingestion"><span>📖 TEACHER RAG</span><strong data-progress-text>80%</strong><i><b data-progress-bar style="width:80%"></b></i><small data-repo-update>Loading repository activity…</small></a>
           <a class="build-radar-card" href="#projects" data-open-project="healthcare" data-repo="pt-zero-care-navigation"><span>🏥 HEALTHCARE AI</span><strong data-progress-text>90%</strong><i><b data-progress-bar style="width:90%"></b></i><small data-repo-update>Loading repository activity…</small></a>
@@ -1207,7 +1208,80 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
         </div>
         <p class="build-radar-note">Progress is calculated from delivered repository milestones; activity and latest-commit details refresh automatically.</p>
       </section>
-      <header class="wip-hero">
+      <header class="wip-hero" id="wip-teaich">
+        <div class="wip-copy">
+          <div class="wip-kicker"><span class="wip-live"><i></i> ACTIVE BUILD</span><span>VERSION 3 · STARTED NOV 2026</span></div>
+          <h2>TEAiCH v3<br><span>&amp; the notebook tutor, made production-ready</span></h2>
+          <p>Version 2 proved the knowledge graph and the agents: the platform already checks a student's steps, tutors from the book and reports to the teacher (<a href="#demo-teaich" data-demo="vmath">watch the video</a>). Version 3 turns it into something a classroom can rely on: every tool behind an MCP server, the step checker measured against a teacher, containers and tracing, and a governance gate before any student uses it.</p>
+        </div>
+        <aside class="wip-phase-card">
+          <span class="wpc-label">CURRENT_PHASE</span>
+          <strong><span>03</span> MCP tool servers</strong>
+          <p>CI is in place. Next: one model gateway, then the graph, check and tutor tools as MCP servers, with contract and parity tests so behaviour stays the same.</p>
+          <div class="wpc-meter"><i style="width:22%"></i></div>
+          <div class="wpc-meta"><span>16 / 74 TASKS</span><span>VERSION 3</span></div>
+        </aside>
+      </header>
+
+      <div class="wip-grid">
+        <section class="wip-plan">
+          <div class="wip-block-title"><span>01</span><div><strong>BUILD PLAN</strong><small>From a working platform to a product a school can trust</small></div></div>
+          <ol class="wip-roadmap">
+            <li>
+              <span class="wr-index">01</span>
+              <div><strong>Freeze v2 &amp; record the baseline</strong><p>Version 2 committed in pieces; every earlier evaluation number recorded in one baseline file, so any later change is compared against it.</p></div>
+              <span class="wr-state">DONE</span>
+            </li>
+            <li>
+              <span class="wr-index">02</span>
+              <div><strong>CI</strong><p>Ruff, pytest, secret scanning, a data guard that keeps the textbook out of git, KaTeX checks on prompts, and an evaluation gate against the baseline.</p></div>
+              <span class="wr-state">DONE</span>
+            </li>
+            <li class="active">
+              <span class="wr-index">03</span>
+              <div><strong>MCP tool servers</strong><p>A model gateway with budgets, then graph, check, tutor, ink and evaluation servers, each with contract tests and a parity test against the old code.</p></div>
+              <span class="wr-state">IN PROGRESS</span>
+            </li>
+            <li class="active">
+              <span class="wr-index">04</span>
+              <div><strong>Step checker against a teacher (G9)</strong><p>The first version is live on the platform. Next: 200+ real student steps marked by a teacher, and the checker's verdict and mistake kind measured against them.</p></div>
+              <span class="wr-state">FIRST VERSION</span>
+            </li>
+            <li>
+              <span class="wr-index">05</span>
+              <div><strong>ReAct agents, evaluated</strong><p>The solver, teacher and illustrator agents as tool-using loops, run on golden question sets with held-out sets checked by a person and run once.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+            <li>
+              <span class="wr-index">06</span>
+              <div><strong>CD &amp; monitoring</strong><p>Docker images, releases on tag, smoke tests, OpenTelemetry traces with Grafana, and a runbook for roll-back and key rotation.</p></div>
+              <span class="wr-state">PLANNED</span>
+            </li>
+          </ol>
+        </section>
+
+        <aside class="wip-sidebar">
+          <section class="wip-expect">
+            <div class="wip-block-title"><span>02</span><div><strong>WHAT TO EXPECT</strong><small>Version 3 outputs</small></div></div>
+            <ul>
+              <li><i>EVAL</i><span>Step checker vs a teacher: agreement on verdict and mistake kind</span></li>
+              <li><i>MCP</i><span>Graph, check and tutor tools usable by any agent or client</span></li>
+              <li><i>OPS</i><span>Containers, traces and dashboards for every agent call</span></li>
+              <li><i>GOV</i><span>A decision on minors' data before any student uses it</span></li>
+            </ul>
+          </section>
+          <section class="wip-stack">
+            <div class="wip-block-title"><span>03</span><div><strong>STACK</strong><small>In use and planned</small></div></div>
+            <div class="wip-tags"><span>Python</span><span>FastAPI</span><span>Neo4j</span><span>MCP</span><span>Ollama</span><span>Qwen3-VL</span><span>GPT-4o</span><span>Claude</span><span>GitHub Actions</span><span>Docker</span><span>OpenTelemetry</span></div>
+          </section>
+          <section class="wip-note">
+            <span>// BUILD PRINCIPLE</span>
+            <p>Nothing is called done until its evaluation runs. Numbers appear here only after they are measured on a fresh set.</p>
+          </section>
+        </aside>
+      </div>
+
+      <header class="wip-hero" style="border-top:1px solid var(--border)">
         <div class="wip-copy">
           <div class="wip-kicker"><span class="wip-live"><i></i> ACTIVE BUILD</span><span>STARTED AUG 2026</span></div>
           <h2>Volleyball Match Analysis<br><span>&amp; Player Tracking</span></h2>

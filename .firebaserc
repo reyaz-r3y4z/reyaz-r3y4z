@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "fins-star"
+  },
+  "targets": {
+    "fins-star": {
+      "hosting": {
+        "portfolio": [
+          "portfolio-reyaz"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
