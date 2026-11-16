@@ -180,7 +180,7 @@ document.querySelectorAll('.flip-card').forEach(card => {
       color: '#F472B6', glow: 'rgba(244,114,182,', icon: '💹'
     },
     vmath: {
-      label: '> v_math_ai.py', file: 'v_math_ai.py',
+      label: '> teaich.py', file: 'teaich.py',
       chars: 'TheoremDefinitionFormulaExampleProofNeo4jBM25ContextPackOKFTutor01',
       color: '#A3E635', glow: 'rgba(163,230,53,', icon: '🧮'
     },

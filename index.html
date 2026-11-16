@@ -115,7 +115,7 @@
         <div class="tl to module-line"><span>Loading modules:</span> <span class="tpurp">machine_learning</span>, <span class="tb2">computer_vision</span>, <span class="tpurp">RAG</span>, <span class="tb2">graph_rag</span>, <span class="torange">healthcare_ai</span>, <span class="tb2">financial_data</span>, <span class="tb2">cloud</span></div>
         <div class="tl to term-row"><span class="term-key">Degree</span><span class="term-sep">:</span><span class="term-val"><span class="tpurp">MSc Data Science</span> · RMIT University</span></div>
         <div class="tl to term-row"><span class="term-key">Experience</span><span class="term-sep">:</span><span class="term-val"><span class="tg">4 yrs</span> @ TCS · System Engineer / Business Analyst</span></div>
-        <div class="tl to term-row"><span class="term-key">Building</span><span class="term-sep">:</span><span class="term-val"><span class="tg">V_Math_AI</span> · 3-agent AI maths tutor</span></div>
+        <div class="tl to term-row"><span class="term-key">Building</span><span class="term-sep">:</span><span class="term-val"><span class="tg">TEAiCH</span> · multi-agent notebook tutor</span></div>
         <div class="tl to term-row"><span class="term-key">Internship</span><span class="term-sep">:</span><span class="term-val"><span class="tg">Trainstop</span> · Data Scientist · Computer Vision</span></div>
         <div class="tl to term-row"><span class="term-key">Best model</span><span class="term-sep">:</span><span class="term-val"><span class="tg">95% mAP@50</span> · sports CV pipeline</span></div>
         <div class="tl to term-row"><span class="term-key">Annotations</span><span class="term-sep">:</span><span class="term-val"><span class="tg">4,000+</span> bounding boxes curated</span></div>
@@ -175,7 +175,7 @@
         <div class="focus-signal">
           <span class="focus-pulse"></span>
           <span class="focus-label">CURRENTLY_BUILDING</span>
-          <strong>V_Math_AI three-agent tutor · Volleyball CV · Healthcare AI</strong>
+          <strong>TEAiCH notebook tutor · Volleyball CV · Healthcare AI</strong>
           <span class="focus-tech">agents / knowledge graphs / MCP / vision</span>
           <a href="#projects" aria-label="Explore current projects">explore &darr;</a>
         </div>
@@ -353,7 +353,7 @@
         <div class="psb-tree">
           <div class="psb-folder open"><span class="psb-chev">▾</span><span>📁</span> featured/</div>
           <button class="psb-file proj-tab active" data-proj="trainstop"><span>🏀</span><span class="psb-fname">trainstop.py</span><span class="psb-dot cv-dot"></span></button>
-          <button class="psb-file proj-tab" data-proj="vmath"><span>🧮</span><span class="psb-fname">v_math_ai.py</span><span class="psb-dot graph-dot"></span></button>
+          <button class="psb-file proj-tab" data-proj="vmath"><span>🧮</span><span class="psb-fname">teaich.py</span><span class="psb-dot graph-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="graphrag"><span>🕸️</span><span class="psb-fname">graphrag_math.py</span><span class="psb-dot graph-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="finsight"><span>💬</span><span class="psb-fname">finsight_rag.ts</span><span class="psb-dot eval-dot"></span></button>
           <button class="psb-file proj-tab" data-proj="financial10k"><span>💹</span><span class="psb-fname">financial_analyser.py</span><span class="psb-dot fin-dot"></span></button>
@@ -860,23 +860,23 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
               <div class="flip-card" id="fc12">
                 <div class="fc-front">
                   <div class="fc-hd"><span class="fc-idx">02</span><span class="fc-badge graph">AI Tutor</span></div>
-                  <h3 class="fc-title">V_Math_AI: Multi-Agent AI Maths Tutor</h3>
-                  <p class="fc-org">Personal project &middot; NCERT Class 9 &amp; 10 Maths &middot; product name TEAiCH</p>
+                  <h3 class="fc-title">TEAiCH: Multi-Agent Notebook Maths Tutor</h3>
+                  <p class="fc-org">Personal product &middot; NCERT Class 9 &amp; 10 Maths &middot; built as V_Math_AI</p>
                   <div class="fc-demo-row"><button class="btn-demo" type="button" data-demo="vmath"><span class="pl"></span>See it working</button></div>
                   <div class="fc-kpis">
                     <div class="kpi"><span class="kv g">94.7%</span><span class="kl">Classifier Accuracy</span></div>
                     <div class="kpi"><span class="kv">100%</span><span class="kl">Held-Out (hybrid: 94%)</span></div>
-                    <div class="kpi"><span class="kv">3</span><span class="kl">Cooperating Agents</span></div>
-                    <div class="kpi"><span class="kv">27/29</span><span class="kl">Exercises Solved Clean</span></div>
+                    <div class="kpi"><span class="kv">4</span><span class="kl">Cooperating Agents</span></div>
+                    <div class="kpi"><span class="kv">27/29</span><span class="kl">Solutions Judged Right</span></div>
                   </div>
                   <div class="fc-hl">
-                    <div class="hli"><span class="hla">&rarr;</span>Answers only from the textbook; six milestones, each closed by an evaluation</div>
-                    <div class="hli"><span class="hla">&rarr;</span>gpt-4o classification agent: 3,151 knowledge items at 94.7%, confirmed by a second judge (kappa 0.92)</div>
-                    <div class="hli"><span class="hla">&rarr;</span>Knowledge graph in Neo4j beats hybrid RAG: 92% vs 64% cross-reference, 100% vs 94% held-out</div>
-                    <div class="hli"><span class="hla">&rarr;</span>Three agents on local models: solver checked by code, teaching agent, figure agent</div>
-                    <div class="hli"><span class="hla">&rarr;</span>Step-by-step solutions served as MCP tools; Claude Sonnet 27/29 clean at US$0.03 each</div>
+                    <div class="hli"><span class="hla">&rarr;</span>The student writes each step; the tutor checks it against a verified solution from the book</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Step checker names the mistake: value misread, wrong formula, calculation or missing reason</div>
+                    <div class="hli"><span class="hla">&rarr;</span>ReAct tutor over the knowledge graph cites its sources and never gives the step away</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Teacher's assistant reports mastery by concept; student data stays on the device</div>
+                    <div class="hli"><span class="hla">&rarr;</span>Neo4j graph beats hybrid RAG: 92% vs 64% cross-reference, 100% vs 94% held-out</div>
                   </div>
-                  <div class="fc-tags"><span>Python</span><span>gpt-4o</span><span>Claude</span><span>Qwen3-VL</span><span>Ollama</span><span>Neo4j</span><span>MCP</span><span>FastAPI</span></div>
+                  <div class="fc-tags"><span>Python</span><span>gpt-4o</span><span>Claude</span><span>Qwen3-VL</span><span>Ollama</span><span>Neo4j</span><span>MCP</span><span>FastAPI</span><span>CI</span></div>
                   <div class="fc-hint">flip for full breakdown &rarr;</div>
                 </div>
                 <div class="fc-back">
@@ -887,7 +887,8 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
                     <div class="fcb-step"><span class="sn">03</span><div><strong>Pack</strong> &mdash; Each of the 3,151 items gets a context pack, computed once: what it needs, what uses it, its formulae.</div></div>
                     <div class="fcb-step"><span class="sn">04</span><div><strong>Retrieve</strong> &mdash; Labels, names and BM25 find the items, then one lookup each; a hybrid entry point handles questions that name nothing.</div></div>
                     <div class="fcb-step"><span class="sn">05</span><div><strong>Teach</strong> &mdash; Three agents on local models: a solver whose every slot is checked by code (real citations, true arithmetic, safe SVG), a teaching agent that asks for one value per step and catches typical mistakes instantly, and a figure agent whose drawings code renders to scale, all on a pen whiteboard.</div></div>
-                    <div class="fcb-step"><span class="sn">06</span><div><strong>Solve</strong> &mdash; Every exercise in an eight-step template, served as MCP tools. On 29 exercises Claude Sonnet gave 27 clean solutions with every answer-key value right, at about 10 s and US$0.03 each.</div></div>
+                    <div class="fcb-step"><span class="sn">06</span><div><strong>Verify</strong> &mdash; Every exercise solved step by step through MCP tools, then judged blind by a model of another family: Claude Sonnet 27 of 29 right, Gemma 4 31B 19. Students are marked only against verified solutions.</div></div>
+                    <div class="fcb-step"><span class="sn">07</span><div><strong>Platform</strong> &mdash; Textbook, chapter graphs, solved examples and a Solve page: the step checker (code first, then a local model), a ReAct tutor agent, handwriting read by a local vision model, and a teacher's-assistant agent. CI with tests, secret scanning, a no-textbook data guard and an evaluation gate.</div></div>
                   </div>
                   <div class="fcb-links"><a href="https://reyaz-r3y4z.github.io/teaich/" class="btn-g sm" target="_blank" rel="noopener">TEAiCH pitch page &nearr;</a></div>
                   <div class="fc-hint" style="color:var(--green)">&larr; flip back</div>
@@ -919,9 +920,9 @@ optimizer <span class="cop">=</span> torch.optim.<span class="cfn">AdamW</span>(
                 </div>
                 <div class="demo-strip-hd"><span>WORKING PRODUCT</span><button class="btn-demo" type="button" data-demo="vmath"><span class="pl"></span>Open demo</button></div>
                 <div class="demo-strip">
-                  <button type="button" data-demo="vmath" data-slide="0"><img src="assets/demos/vmath/whiteboard.png" alt="Pen whiteboard" loading="lazy"><span>pen whiteboard</span></button>
-                  <button type="button" data-demo="vmath" data-slide="2"><img src="assets/demos/vmath/graph-vs-hybrid.png" alt="Graph vs hybrid RAG answers" loading="lazy"><span>graph vs hybrid</span></button>
-                  <button type="button" data-demo="vmath" data-slide="4"><img src="assets/demos/vmath/graph-explorer.png" alt="Knowledge graph explorer" loading="lazy"><span>knowledge graph</span></button>
+                  <button type="button" data-demo="vmath" data-slide="1"><img src="assets/demos/teaich/step-checker.jpg" alt="Step checker" loading="lazy"><span>step checker</span></button>
+                  <button type="button" data-demo="vmath" data-slide="2"><img src="assets/demos/teaich/tutor-agent.jpg" alt="Tutor agent" loading="lazy"><span>tutor agent</span></button>
+                  <button type="button" data-demo="vmath" data-slide="4"><img src="assets/demos/teaich/teacher-report.jpg" alt="Teacher's report" loading="lazy"><span>teacher's report</span></button>
                 </div>
                 <div class="pmp-hint">Question sets are small and the fresh ones were run once. A loss on student questions led to a new entry point, which then scored 100% on a new set. <a href="https://reyaz-r3y4z.github.io/teaich/" target="_blank" rel="noopener">TEAiCH product page &nearr;</a></div>
               </div>

@@ -6,10 +6,22 @@
 (function () {
   const DEMOS = {
     vmath: {
-      title: 'V_Math_AI · TEAiCH',
-      tag: 'Multi-agent AI maths tutor',
+      title: 'TEAiCH',
+      tag: 'Multi-agent notebook tutor (V_Math_AI)',
       links: [{ label: 'TEAiCH product page', href: 'https://reyaz-r3y4z.github.io/teaich/' }],
       slides: [
+        { src: 'assets/demos/teaich/home.jpg', title: 'TEAiCH teaches from your book',
+          text: 'The textbook is the source of truth. The student picks a class and chapter; the tutor agent sits beside every page and runs on a local model, so a student\'s work stays on the computer.' },
+        { src: 'assets/demos/teaich/step-checker.jpg', title: 'The step checker at work',
+          text: 'The student writes what the question gives and each step. Code checks first, then a local model: right lines are ticked, a misread value is flagged without revealing it, and a wrong formula is sent back to Theorem 6.1 in the book.' },
+        { src: 'assets/demos/teaich/tutor-agent.jpg', title: 'A tutor agent that never gives the step away',
+          text: 'A ReAct agent searches the knowledge graph, reads what it needs and cites five textbook units. Mid-exercise it points to the right theorems and refuses to write the step for the student. Qwen3-VL 8B, on this computer, 18.7 s.' },
+        { src: 'assets/demos/teaich/chapter-graph.jpg', title: 'Every chapter as a knowledge graph',
+          text: '91 items and 245 links in Triangles alone, with the chapters it builds on in Class 9 and the ones that use it in Class 10. Every item opens in the book or in Solve.' },
+        { src: 'assets/demos/teaich/teacher-report.jpg', title: 'The teacher\'s assistant',
+          text: 'Agent 4 reports each student\'s mistakes by kind and by concept, what they find hard and what to practise next. The teacher can guide how the tutor teaches that student.' },
+        { src: 'assets/demos/teaich/teacher-students.jpg', title: 'A class at a glance',
+          text: 'Exercises solved and tried, right steps, mistakes and the most common mistake kind for every student, counted by code from their record.' },
         { src: 'assets/demos/vmath/whiteboard.png', title: 'Pen whiteboard',
           text: 'The student writes on the right with a pen; the reader turns handwriting, figures and maths into clean digital text on the left, live.' },
         { src: 'assets/demos/vmath/lesson-step.png', title: 'Lesson mode, one step at a time',
@@ -67,6 +79,8 @@
       slides: [],
     },
   };
+
+  DEMOS.teaich = DEMOS.vmath;   // #demo-teaich is the same demo
 
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -183,7 +197,8 @@
   function fromHash() {
     const m = location.hash.match(/^#demo-([\w-]+)$/);
     if (!m || !DEMOS[m[1]]) return;
-    const tab = document.querySelector(`.proj-tab[data-proj="${m[1]}"]`);
+    const proj = m[1] === 'teaich' ? 'vmath' : m[1];
+    const tab = document.querySelector(`.proj-tab[data-proj="${proj}"]`);
     if (tab) tab.click();
     open(m[1]);
   }
