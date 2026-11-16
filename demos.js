@@ -10,6 +10,12 @@
       tag: 'Multi-agent notebook tutor (V_Math_AI)',
       links: [{ label: 'TEAiCH product page', href: 'https://reyaz-r3y4z.github.io/teaich/' }],
       slides: [
+        { video: 'assets/demos/teaich/teaich-demo.mp4', src: 'assets/demos/teaich/teaich-demo-poster.jpg',
+          title: 'Video: a full walkthrough of the platform',
+          text: 'Recorded on the running platform with the local model (Qwen, on this computer): pick a chapter, solve Exercise 5.2 Q4 step by step with a mistake made on purpose, ask the tutor agent, then the teacher’s view of the student. 3 min 42 s.' },
+        { video: 'assets/demos/teaich/teaich-handwriting.mp4', src: 'assets/demos/teaich/teaich-handwriting-poster.jpg',
+          title: 'Video: solving by hand with a pen',
+          text: 'The same exercise written by hand. Each line is read on this computer and checked against the verified solution; a calculation slip is named by its kind and fixed on a new line, until the answer n = 16. 4 min 52 s.' },
         { src: 'assets/demos/teaich/home.jpg', title: 'TEAiCH teaches from your book',
           text: 'The textbook is the source of truth. The student picks a class and chapter; the tutor agent sits beside every page and runs on a local model, so a student\'s work stays on the computer.' },
         { src: 'assets/demos/teaich/step-checker.jpg', title: 'The step checker at work',
@@ -120,7 +126,7 @@
       $('.dv-text').textContent = 'Synthetic data only. A 250-case benchmark showed 100% routing accuracy and 100% emergency-stop recall.';
     } else {
       $('.dv-media').innerHTML = s.video
-        ? `<video controls playsinline autoplay muted src="${esc(s.video)}"></video>`
+        ? `<video controls playsinline autoplay muted${s.src ? ` poster="${esc(s.src)}"` : ''} src="${esc(s.video)}"></video>`
         : `<img src="${esc(s.src)}" alt="${esc(s.title)}">`;
       $('.dv-stitle').textContent = s.title;
       $('.dv-text').textContent = s.text;
